@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Dish Extra Information Dishes FK" directorySegmentName="seg_0" id="261737D4-CE7E-D8F9-1DC3-B340B9C260D9">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:50:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useSurrogateKey>true</useSurrogateKey>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>D6FC8613-58D3-6D40-ED4E-F9B6BD4C657D</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>A8D0F94C-3802-C73D-4D69-2BB823847457</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

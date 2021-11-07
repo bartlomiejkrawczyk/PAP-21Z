@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="56F2A739-9458-AC43-4360-99783F99FE41" name="Ingredient_Categories">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>2CEF258B-60DB-90BC-CF9C-9A998C12BDB0</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="6C973C83-BF30-10A7-10E7-40A4663CBCE6">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isSurrogateColumn>true</isSurrogateColumn>
+</Column>
+<Column name="name" id="4D8FE449-F2B2-1C6C-713A-6BD760AE8AB2">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>2B791012-EBD5-B77C-2B41-BE4F5DA3C02E</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>63 BYTE</dataTypeSize>
+<ownDataTypeParameters>63 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="856F07EB-085C-CCEE-2E3D-F5288C1FF26D" name="Ingredient_Categories_PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<indexColumnUsage>
+<colUsage columnID="6C973C83-BF30-10A7-10E7-40A4663CBCE6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

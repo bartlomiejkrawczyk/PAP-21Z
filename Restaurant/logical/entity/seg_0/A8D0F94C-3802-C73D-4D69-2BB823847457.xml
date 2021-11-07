@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A8D0F94C-3802-C73D-4D69-2BB823847457" name="Dish Extra Information">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:31:17 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="recipe" id="C7117AF5-6877-F601-2EA0-CE780CE91213">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:31:33 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="DF7628B2-7119-2AE3-4178-B719D0AB63A9" name="Dish Extra Information PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:05:32 UTC</createdTime>
+<generatorID>720A1032-B609-73F4-0221-55E3516DDFFA</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<pk>true</pk>
+</identifier>
+</identifiers>
+</Entity>

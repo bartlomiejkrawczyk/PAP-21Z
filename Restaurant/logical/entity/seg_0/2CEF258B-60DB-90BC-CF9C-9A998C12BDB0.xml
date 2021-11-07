@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2CEF258B-60DB-90BC-CF9C-9A998C12BDB0" name="Ingredient Categories">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:37:54 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="name" id="2B791012-EBD5-B77C-2B41-BE4F5DA3C02E">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:38:05 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>63 BYTE</dataTypeSize>
+<ownDataTypeParameters>63 BYTE,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="55273AA8-7CA5-97D3-3DD0-44C4ACA3EBD1" name="Dish_Extra_Information">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>A8D0F94C-3802-C73D-4D69-2BB823847457</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="dish_id" id="18C58769-C415-3B4A-249A-CDC3AE80DEB0">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="83214082-98D0-56B9-E280-5ACFE58F0A54" referredColumn="2EBA8BFB-047F-EB5B-298A-87A164CEACB2"/>
+</associations>
+</Column>
+<Column name="recipe" id="E88B2415-587C-F623-1168-E75DC49F1F3C">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>C7117AF5-6877-F601-2EA0-CE780CE91213</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="720A1032-B609-73F4-0221-55E3516DDFFA" name="Dish_Extra_Information_PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:04:56 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="18C58769-C415-3B4A-249A-CDC3AE80DEB0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="533CCC8B-4729-21A8-F4B9-ADCEB439401C" name="Dish_Extra_Information__IDX">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>261737D4-CE7E-D8F9-1DC3-B340B9C260D9</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="18C58769-C415-3B4A-249A-CDC3AE80DEB0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D126593D-F495-CCAF-8B9B-EA47E31FE36C" name="Dish_Extra_Information_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>261737D4-CE7E-D8F9-1DC3-B340B9C260D9</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="18C58769-C415-3B4A-249A-CDC3AE80DEB0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
