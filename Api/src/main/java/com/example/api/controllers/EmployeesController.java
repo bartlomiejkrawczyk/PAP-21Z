@@ -5,10 +5,12 @@ import com.example.api.repositories.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RequestMapping("/employees")
+@RestController
 public class EmployeesController {
     private final EmployeesRepository repository;
 
