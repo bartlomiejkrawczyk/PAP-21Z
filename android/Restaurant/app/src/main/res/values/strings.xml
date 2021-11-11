@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Restaurant</string>
+
+    // Internet
+    <string name="base_url" translatable="false">https://taskeeapp.com:8443/</string>
+
+
 </resources>
