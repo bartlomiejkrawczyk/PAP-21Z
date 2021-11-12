@@ -1,16 +1,17 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="86D3BC4E-D45A-5C1A-8C94-DF70C367C2D4" name="Special_Requests">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F04AE37B-D5AF-BBB2-0613-CBDA8DA00520" name="Special_Requests">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:07:36 UTC</createdTime>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
 <generatorID>2938EE90-3B70-0FBE-8E1C-78B7D22FA008</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="id" id="B4617D2A-ED10-59FD-D325-FB7C4577D7A8">
+<Column name="id" id="C472DA3B-97D9-721F-9595-EAC8E28D404C">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:09:00 UTC</createdTime>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
+<generatorID>68B22CDF-7E85-E6CE-5A25-F7D0DC201863</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -18,9 +19,9 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="request" id="DDA3319D-E26A-D947-46BF-D42B5D46BAC0">
+<Column name="request" id="DF048D27-A950-2D3D-23EB-0DF5144F13C5">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:07:36 UTC</createdTime>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
 <generatorID>64C0C0BF-7ED4-C86D-AB97-FE38E4CAD94F</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -30,9 +31,9 @@
 <ownDataTypeParameters>60 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="order_id" id="8188394B-96CD-8564-8888-290CC411C1AD">
+<Column name="order_id" id="FA7AB74F-A893-2A3B-6A93-BF9B28EAD57D">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:07:36 UTC</createdTime>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -41,31 +42,32 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="61B6CAE1-78BE-F271-76CD-DBC7C3AA7E23" referredColumn="48382D95-CD0D-8BFB-47A2-57EA0D83DDEC"/>
+<colAssociation fkAssociation="12F12F1A-3DE8-6DBE-1C8C-D22AAC4058B5" referredColumn="8259D5D3-55B5-4AC8-DDE4-20B2AA95F0A4"/>
 </associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="9A1E86E8-E69A-379E-5CCE-F095D3D24345" name="Special_Requests_PK">
+<ind_PK_UK id="5A5890F2-2FFE-FF3B-6977-3FEAFA797431" name="Special_Requests_PK">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:09:00 UTC</createdTime>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
+<generatorID>23811A51-1A8B-4259-F433-25C6EA395BAF</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="B4617D2A-ED10-59FD-D325-FB7C4577D7A8"/>
+<colUsage columnID="C472DA3B-97D9-721F-9595-EAC8E28D404C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="7E1F1330-924C-C544-73FC-4AA3500F2EE4" name="Special_Requests_Orders_FK">
+<ind_PK_UK id="B21481C1-49B3-7D3C-743E-FF9E0AEA2CCB" name="Special_Requests_Orders_FK">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:07:36 UTC</createdTime>
-<generatorID>736B331D-0170-AD76-5211-D50E179DFED8</generatorID>
+<createdTime>2021-11-12 22:56:16 UTC</createdTime>
+<generatorID>A4FFB7FF-C667-356A-7FFF-131AA700764E</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="8188394B-96CD-8564-8888-290CC411C1AD"/>
+<colUsage columnID="FA7AB74F-A893-2A3B-6A93-BF9B28EAD57D"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

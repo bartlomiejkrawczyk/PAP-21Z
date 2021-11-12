@@ -1,12 +1,13 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Special Requests Orders FK" directorySegmentName="seg_0" id="736B331D-0170-AD76-5211-D50E179DFED8">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_Order_Requests" directorySegmentName="seg_0" id="A4FFB7FF-C667-356A-7FFF-131AA700764E">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-12 12:06:49 UTC</createdTime>
+<createdTime>2021-11-12 22:56:00 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <engineerTo>
 <item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
 </engineerTo>
 <useSurrogateKey>true</useSurrogateKey>
+<sourcePk>97DBBA4D-DC6D-E666-52BB-47E99075454C</sourcePk>
 <identifying>false</identifying>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>

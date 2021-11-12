@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Employees Employee Kind FK" directorySegmentName="seg_0" id="9A48644C-D6B1-4E3F-FC27-DE6CC127B9B8">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Employees Employee Kinds FK" directorySegmentName="seg_0" id="9A48644C-D6B1-4E3F-FC27-DE6CC127B9B8">
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-06 21:42:40 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>

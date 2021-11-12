@@ -1,6 +1,6 @@
 from typing import List, Callable, Dict, Tuple
-from random import randint, choice
-
+from random import randint, choice, sample
+import lorem
 
 EMPLOYEE_KINDS = ['waiter', 'cook']
 
@@ -35,6 +35,7 @@ def insert_tables() -> List[str]:
             for i, name in enumerate(TABLES, start=1)]
 
 
+PRODUCTS_LEN = 12
 PRODUCTS: Dict[str, List[Tuple[str, int, int, str]]] = {
     'Drinks': [
         ('Coca-Cola 500ml', 0, 100, 'bottle'),
@@ -69,25 +70,62 @@ def insert_products() -> List[str]:
     lines = []
     for i, products in enumerate(PRODUCTS.values(), start=1):
         lines += ['INSERT INTO products VALUES '
-                  f'({i * 10 + idx}, {product[2]}, \'{product[0]}\', {product[1]}, \'{product[3]}\', {i});\n'
+                  f'({i * 10 + idx}, \'{product[0]}\', {product[1]}, {product[2]}, \'{product[3]}\', {i});\n'
                   for idx, product in enumerate(products)]
     return lines
 
 
+TEMP = [p for p in PRODUCTS.values()]
+INGREDIENTS = []
+for t in TEMP:
+    INGREDIENTS += t
+DISHES = {
+    'Soups': [
+        ('Tomato', sample(range(1, PRODUCTS_LEN), k=randint(1, 10))),
+        ('Chicken', sample(range(1, PRODUCTS_LEN), k=randint(1, 10))),
+    ],
+    'Main Course': [
+        ('Beef', sample(range(1, PRODUCTS_LEN), k=randint(1, 10))),
+    ],
+    'Drinks': [
+        ('A drink', [randint(1, 3)]),
+    ]
+}
+
+
 def insert_dish_categories() -> List[str]:
-    return []
+    return ['INSERT INTO dish_categories VALUES '
+            f'({i}, \'{name}\', NULL);\n'
+            for i, name in enumerate(DISHES.keys(), start=1)]
 
 
 def insert_dishes() -> List[str]:
-    return []
+    lines = []
+    for i, dishes in enumerate(DISHES.values(), start=1):
+        lines += ['INSERT INTO dishes VALUES '
+                  f'({i * 10 + idx}, \'{dish[0]}\', NULL, {randint(99, 10000)}, {i});\n'
+                  for idx, dish in enumerate(dishes, start=1)]
+    return lines
 
 
 def insert_ingredients() -> List[str]:
-    return []
+    lines = []
+    for i, dishes in enumerate(DISHES.values(), start=1):
+        for idx, dish in enumerate(dishes, start=1):
+            lines += ['INSERT INTO ingredients VALUES '
+                      f'({i * 100 + idx * 10 + index}, {randint(1, 100)}, {i * 10 + idx}, {ingredient});\n'
+                      for index, ingredient in enumerate(dish[1], start=1)]
+    return lines
 
 
 def insert_recipes() -> List[str]:
-    return []
+    lines = []
+    for i, dishes in enumerate(DISHES.values(), start=1):
+        for idx, dish in enumerate(dishes, start=1):
+            lines += ['INSERT INTO recipes VALUES '
+                      f'({step}, \'{lorem.sentence()}\', {i * 10 + idx});\n'
+                      for step in range(1, randint(1, 10))]
+    return lines
 
 
 def insert_receipts() -> List[str]:

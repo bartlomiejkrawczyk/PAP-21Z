@@ -60,7 +60,7 @@
 <colUsage columnID="A7FD792D-0688-538D-7E55-EEE5A6328CD5"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="567A6EA2-E53C-72A9-0E06-0DEEEEB69024" name="Recipe_Dishes_FK">
+<ind_PK_UK id="567A6EA2-E53C-72A9-0E06-0DEEEEB69024" name="Recipes_Dishes_FK">
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-12 11:53:16 UTC</createdTime>
 <generatorID>BB2FD198-66E1-4CDA-0953-FDC6ED193F3F</generatorID>
