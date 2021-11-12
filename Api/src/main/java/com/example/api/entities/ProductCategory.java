@@ -9,21 +9,20 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name = "EMPLOYEE_KINDS")
+@Table(name = "PRODUCT_CATEGORIES")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeKind {
+public class ProductCategory {
     @Id
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME", nullable = false, length = 63)
     private String name;
 
-    @OneToMany(mappedBy = "employeeKindId")
-    private List<Employee> employees;
-
+    @OneToMany(mappedBy = "productCategoryId")
+    private List<Product> products;
 }

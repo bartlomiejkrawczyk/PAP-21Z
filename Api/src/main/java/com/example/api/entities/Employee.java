@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "EMPLOYEES")
@@ -26,8 +28,11 @@ public class Employee {
     @Column(name = "FAMILY_NAME", nullable = false)
     private String familyName;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "EMPLOYEE_KIND_ID", nullable = false)
-    private EmployeeKind employeeKind;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "EMPLOYEE_KIND_ID", nullable = false)
+//    private EmployeeKind employeeKind;
+
+    @Column(name = "EMPLOYEE_KIND_ID", nullable = false)
+    private Long employeeKindId;
 
 }

@@ -3,9 +3,7 @@ package com.example.api.controllers;
 import com.example.api.entities.Receipt;
 import com.example.api.repositories.ReceiptsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,35 @@ public class ReceiptsController {
     @GetMapping("all")
     public List<Receipt> findAll() {
         return (List<Receipt>) repository.findAll();
+    }
+
+    @GetMapping("/employee/{employee}")
+    public List<Receipt> findReceiptsByEmployee(@PathVariable Long employee) {
+        return repository.findReceiptsByEmployeeId(employee);
+    }
+
+    @PostMapping
+    public Receipt saveReceipt(@RequestBody Receipt receipt) {
+        return repository.save(receipt);
+    }
+
+    @PutMapping("/{id}")
+    public Receipt updateReceipt(@RequestBody Receipt newReceipt, @PathVariable Long id) {
+        return repository.findById(id)
+                .map(receipt -> {
+                    receipt.setTable(newReceipt.getTable());
+                    receipt.setPayment(newReceipt.getPayment());
+                    receipt.setEmployee(newReceipt.getEmployee());
+                    return repository.save(receipt);
+                })
+                .orElseGet(() -> {
+                    newReceipt.setId(id);
+                    return repository.save(newReceipt);
+                });
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteReceipt(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }

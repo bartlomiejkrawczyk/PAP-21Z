@@ -9,28 +9,28 @@ import javax.persistence.Table;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "INGREDIENTS")
+@Table(name = "RECIPES")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ingredient {
+@IdClass(RecipeId.class)
+public class Recipe {
+
     @Id
-    @Column(name = "ID", nullable = false)
-    private Long id;
+    @Column(name = "STEP", nullable = false)
+    private Long step;
 
-    @Column(name = "QUANTITY", nullable = false)
-    private Long quantity;
-
+//    @Id
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "DISH_ID", nullable = false)
 //    private Dish dish;
 
+    @Id
     @Column(name = "DISH_ID", nullable = false)
     private Long dishId;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Product product;
+    @Column(name = "RECIPE")
+    private String recipe;
 
 }

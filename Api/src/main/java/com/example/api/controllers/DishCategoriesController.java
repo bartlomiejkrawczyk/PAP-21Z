@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
-@RequestMapping("/dish_categories")
+@RequestMapping("/dishCategories")
 @RestController
 public class DishCategoriesController {
     private final DishCategoriesRepository repository;
@@ -25,7 +26,7 @@ public class DishCategoriesController {
     }
 
     @GetMapping("example")
-    public DishCategory findNone() {
-        return new DishCategory(1L, "Kategoria", "img/kkn.gif");
+    public DishCategory getExample() {
+        return new DishCategory(1L, "Kategoria", "img/kkn.gif", Collections.emptyList());
     }
 }

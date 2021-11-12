@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "DISHES")
@@ -28,8 +29,16 @@ public class Dish {
     @Column(name = "PRICE", nullable = false)
     private Long price;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "DISH_CATEGORY_ID", nullable = false)
-    private DishCategory dishCategory;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "DISH_CATEGORY_ID", nullable = false)
+//    private DishCategory dishCategory;
 
+    @Column(name = "DISH_CATEGORY_ID", nullable = false)
+    private Long dishCategoryId;
+
+    @OneToMany(mappedBy = "dishId")
+    private List<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "dishId")
+    private List<Recipe> recipes;
 }

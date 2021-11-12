@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "ORDERS")
 @Entity
@@ -27,8 +28,15 @@ public class Order {
     @JoinColumn(name = "DISH_ID", nullable = false)
     private Dish dish;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "RECEIPT_ID", nullable = false)
-    private Receipt receipt;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "RECEIPT_ID", nullable = false)
+//    private Receipt receipt;
+
+    @Column(name = "RECEIPT_ID", nullable = false)
+    private Long receiptId;
+
+    @OneToMany(mappedBy = "orderId")
+    private List<SpecialRequest> requests;
+
 
 }

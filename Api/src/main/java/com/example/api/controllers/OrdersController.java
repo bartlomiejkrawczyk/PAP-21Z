@@ -3,9 +3,7 @@ package com.example.api.controllers;
 import com.example.api.entities.Order;
 import com.example.api.repositories.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +21,35 @@ public class OrdersController {
     public List<Order> findAll() {
         return (List<Order>) repository.findAll();
     }
+
+    @GetMapping("/receipt/{receipt}")
+    public List<Order> findOrdersByReceipt(@PathVariable Long receipt) {
+        return repository.findOrdersByReceiptId(receipt);
+    }
+
+    @PostMapping
+    public Order saveOrder(@RequestBody Order order) {
+        return repository.save(order);
+    }
+
+    @PutMapping("/{id}")
+    public Order updateOrder(@RequestBody Order newOrder, @PathVariable Long id) {
+        return repository.findById(id)
+                .map(order -> {
+                    order.setDate(null);
+                    order.setReceiptId(newOrder.getReceiptId());
+                    order.setDish(newOrder.getDish());
+                    return repository.save(order);
+                }).orElseGet(() -> {
+                    newOrder.setId(id);
+                    return repository.save(newOrder);
+                });
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOrder(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+
+
 }

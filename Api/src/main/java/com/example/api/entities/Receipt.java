@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "RECEIPTS")
 @Entity
@@ -29,5 +30,8 @@ public class Receipt {
     @ManyToOne(optional = false)
     @JoinColumn(name = "TABLE_ID", nullable = false)
     private com.example.api.entities.Table table;
+
+    @OneToMany(mappedBy = "receiptId")
+    private List<Order> orders;
 
 }
