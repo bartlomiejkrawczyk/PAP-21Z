@@ -1,10 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="46D39F2E-B1BF-80D1-0833-AADD38938A3B" containerWithKeyObject="6EB528D9-4A33-67B7-51DC-6651BD76ECB7" localFKIndex="1AA6C4E0-538F-9B19-648E-86B6FB5A2042" name="Employees_Employee_Kind_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="46D39F2E-B1BF-80D1-0833-AADD38938A3B" containerWithKeyObject="6EB528D9-4A33-67B7-51DC-6651BD76ECB7" localFKIndex="1AA6C4E0-538F-9B19-648E-86B6FB5A2042" name="Employees_Employee_Kinds_FK">
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-06 21:54:07 UTC</createdTime>
 <generatorID>9A48644C-D6B1-4E3F-FC27-DE6CC127B9B8</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
-<referredTableLongName>Employee_Kind</referredTableLongName>
+<referredTableLongName>Employee_Kinds</referredTableLongName>
 <deleteRule>NO ACTION</deleteRule>
 <referredTableID>065CD4AB-F815-104E-E7AD-E35BAA1470D7</referredTableID>
 <keyObject>F66737A0-C1FF-73AC-5E65-DC460C8E8A1F</keyObject>

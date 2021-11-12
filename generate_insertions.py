@@ -8,7 +8,7 @@ EMPLOYEE_KINDS = ['waiter', 'cook']
 def insert_employee_kinds() -> List[str]:
 
     return ['INSERT INTO employee_kinds VALUES '
-            f'({i}, {kind});\n'
+            f'({i}, \'{kind}\');\n'
             for i, kind in enumerate(EMPLOYEE_KINDS, start=1)]
 
 
@@ -21,7 +21,7 @@ LAST_NAMES = ['Krawczyk', 'Sudol', 'Sulkowski', 'Rogozinski']
 def insert_employees() -> List[str]:
 
     return ['INSERT INTO employees VALUES '
-            f'({i}, {choice(FIRST_NAMES)}, {choice(LAST_NAMES)}, {randint(1, len(EMPLOYEE_KINDS))});\n'
+            f'({i}, \'{choice(FIRST_NAMES)}\', \'{choice(LAST_NAMES)}\', {randint(1, len(EMPLOYEE_KINDS))});\n'
             for i in range(1, EMPLOYEES + 1)]
 
 
@@ -31,7 +31,7 @@ TABLES = ['pod oknem', 'przy drzwiach', 'przy barze']
 def insert_tables() -> List[str]:
 
     return ['INSERT INTO tables VALUES '
-            f'({i}, {name});\n'
+            f'({i}, \'{name}\');\n'
             for i, name in enumerate(TABLES, start=1)]
 
 
@@ -61,7 +61,7 @@ PRODUCTS: Dict[str, List[Tuple[str, int, int, str]]] = {
 
 def insert_product_categories() -> List[str]:
     return ['INSERT INTO product_categories VALUES '
-            f'({i}, {name});\n'
+            f'({i}, \'{name}\');\n'
             for i, name in enumerate(PRODUCTS.keys(), start=1)]
 
 
@@ -69,8 +69,8 @@ def insert_products() -> List[str]:
     lines = []
     for i, products in enumerate(PRODUCTS.values(), start=1):
         lines += ['INSERT INTO products VALUES '
-                  f'({i}, {product[0]}, {product[1]}, {product[2]}, {product[3]});\n'
-                  for product in products]
+                  f'({i * 10 + idx}, {product[2]}, \'{product[0]}\', {product[1]}, \'{product[3]}\', {i});\n'
+                  for idx, product in enumerate(products)]
     return lines
 
 
