@@ -1,19 +1,19 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Ingredients Ingredient Categories FK" directorySegmentName="seg_0" id="846ADE56-033D-A9D0-8049-D61E54D5129E">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Recipe Dishes FK" directorySegmentName="seg_0" id="BB2FD198-66E1-4CDA-0953-FDC6ED193F3F">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:52:01 UTC</createdTime>
+<createdTime>2021-11-12 11:07:49 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <engineerTo>
 <item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
 </engineerTo>
 <useSurrogateKey>true</useSurrogateKey>
-<identifying>false</identifying>
+<identifying>true</identifying>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
-<sourceEntity>2CEF258B-60DB-90BC-CF9C-9A998C12BDB0</sourceEntity>
+<sourceEntity>D6FC8613-58D3-6D40-ED4E-F9B6BD4C657D</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
-<targetEntity>1C024AD4-072D-249A-C82F-AEE0C28C86A7</targetEntity>
+<targetEntity>229CE9DE-E048-B8A9-469F-7FBAFB630581</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

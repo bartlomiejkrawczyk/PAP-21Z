@@ -68,6 +68,20 @@
 <ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="product_category_id" id="F8F08FB1-48F9-8968-9988-2595EED56A21">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8C19C5DD-6710-059A-A14C-E0C55E7F0B5D" referredColumn="48B7FC9A-A9B4-C50B-9FBA-B35950383F76"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="F00997C9-8BD4-EA70-F9B8-3CD1F838EA60" name="Products_PK">
@@ -78,6 +92,17 @@
 <indexState>Primary Constraint</indexState>
 <indexColumnUsage>
 <colUsage columnID="2E0464C0-779F-33A7-F07A-50946046CF9E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CF15308A-8D8D-561B-4B0F-0647044C17DB" name="Products_Product_Categories_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<generatorID>B1D46B6B-132E-741A-8D80-E74EA983F06F</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F8F08FB1-48F9-8968-9988-2595EED56A21"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

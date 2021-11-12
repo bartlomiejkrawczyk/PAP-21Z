@@ -8,6 +8,19 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Orders_ID" id="48382D95-CD0D-8BFB-47A2-57EA0D83DDEC">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 12:07:36 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isSurrogateColumn>true</isSurrogateColumn>
+</Column>
 <Column name="id" id="8259D5D3-55B5-4AC8-DDE4-20B2AA95F0A4">
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-06 22:03:46 UTC</createdTime>
@@ -57,14 +70,49 @@
 <colAssociation fkAssociation="05A13483-3636-ECE9-F9AC-CCB606D06EDE" referredColumn="7E0595BD-BE3D-8E41-B73F-FF4C79CBE1B0"/>
 </associations>
 </Column>
+<Column name="status" id="7564D2D7-2D61-B54B-1370-51FEDF332BF2">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<generatorID>6B591222-22A3-154D-E399-248BA789AC25</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="employee_id" id="634D2A6B-4E75-F161-E5F0-FCADD7530B4C">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7577C43C-305F-52F3-273A-9F7023BC1461" referredColumn="BAA9C180-925C-6301-1282-7481D5AAE8B4"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="27EB2961-99B9-ED75-1992-F63CC248784C" name="Orders_PK">
+<ind_PK_UK id="70C6C243-7511-168A-DD4E-3871017E62A8" name="Orders_PK">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 22:03:46 UTC</createdTime>
+<createdTime>2021-11-12 12:07:36 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
+<indexColumnUsage>
+<colUsage columnID="48382D95-CD0D-8BFB-47A2-57EA0D83DDEC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="27EB2961-99B9-ED75-1992-F63CC248784C" name="Orders_id_UN">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:03:46 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Unique Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="8259D5D3-55B5-4AC8-DDE4-20B2AA95F0A4"/>
@@ -90,6 +138,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="1C477B19-4A34-77D6-45C8-ED274DB47D29"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="30DB0771-B193-2C5F-E136-14DB565EF3B0" name="Orders_Employees_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<generatorID>27B1C8E7-57AF-D030-F2E9-2E510A22026A</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="634D2A6B-4E75-F161-E5F0-FCADD7530B4C"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

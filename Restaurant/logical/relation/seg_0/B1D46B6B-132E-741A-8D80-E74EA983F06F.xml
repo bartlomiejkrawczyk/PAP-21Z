@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Dishes Dish Categories FK" directorySegmentName="seg_0" id="D5E28667-7953-A4CD-5BEB-323B7C6335EC">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Products Product Categories FK" directorySegmentName="seg_0" id="B1D46B6B-132E-741A-8D80-E74EA983F06F">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:51:14 UTC</createdTime>
+<createdTime>2021-11-12 11:11:49 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <engineerTo>
 <item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
@@ -11,9 +11,9 @@
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
-<sourceEntity>03A1DA37-50A3-96DA-75F3-FC11661F8F5C</sourceEntity>
+<sourceEntity>2CEF258B-60DB-90BC-CF9C-9A998C12BDB0</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
-<targetEntity>D6FC8613-58D3-6D40-ED4E-F9B6BD4C657D</targetEntity>
+<targetEntity>E4F43030-78F8-29F2-9BE1-C1991BBE002F</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

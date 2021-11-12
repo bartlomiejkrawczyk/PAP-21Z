@@ -43,20 +43,6 @@
 <colAssociation fkAssociation="E7CA1C02-A6C2-8DD1-AA15-29A8599DDCC1" referredColumn="2EBA8BFB-047F-EB5B-298A-87A164CEACB2"/>
 </associations>
 </Column>
-<Column name="ingredient_category_id" id="81E9D37D-15C3-CECC-A4D3-528582EDFD27">
-<createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
-<ownerDesignName>Restaurant</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="D2371398-44B5-7839-32F7-6ADC76AD29DE" referredColumn="6C973C83-BF30-10A7-10E7-40A4663CBCE6"/>
-</associations>
-</Column>
 <Column name="product_id" id="7A411DDC-AB38-3BD2-5404-C93F03A0C1E1">
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-06 21:54:07 UTC</createdTime>
@@ -93,17 +79,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="1FB2E268-21B2-B677-01E6-609383000014"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="F8CB6DCB-8B1F-53EA-4D21-50C29F26C327" name="Ingredient_Categories_FK">
-<createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
-<generatorID>846ADE56-033D-A9D0-8049-D61E54D5129E</generatorID>
-<ownerDesignName>Restaurant</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="81E9D37D-15C3-CECC-A4D3-528582EDFD27"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="284BC57D-704E-58A1-98F5-E3C9DCD8108A" name="Ingredients_Products_FK">

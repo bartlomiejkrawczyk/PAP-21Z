@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="56F2A739-9458-AC43-4360-99783F99FE41" name="Ingredient_Categories">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2382E9BE-BBE6-B76C-14D1-242805E8FE59" name="Product_Categories">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
 <generatorID>2CEF258B-60DB-90BC-CF9C-9A998C12BDB0</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="id" id="6C973C83-BF30-10A7-10E7-40A4663CBCE6">
+<Column name="id" id="48B7FC9A-A9B4-C50B-9FBA-B35950383F76">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -21,9 +21,9 @@
 <autoIncrementCycle>false</autoIncrementCycle>
 <isSurrogateColumn>true</isSurrogateColumn>
 </Column>
-<Column name="name" id="4D8FE449-F2B2-1C6C-713A-6BD760AE8AB2">
+<Column name="name" id="4B691905-2892-5037-DF7F-1F4C4029236D">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
 <generatorID>2B791012-EBD5-B77C-2B41-BE4F5DA3C02E</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
@@ -35,14 +35,14 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="856F07EB-085C-CCEE-2E3D-F5288C1FF26D" name="Ingredient_Categories_PK">
+<ind_PK_UK id="549358F2-79D3-4222-6779-1CCDB955AE64" name="Product_Categories_PK">
 <createdBy>bartek</createdBy>
-<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <indexColumnUsage>
-<colUsage columnID="6C973C83-BF30-10A7-10E7-40A4663CBCE6"/>
+<colUsage columnID="48B7FC9A-A9B4-C50B-9FBA-B35950383F76"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
