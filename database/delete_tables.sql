@@ -4,9 +4,9 @@ DECLARE
     TYPE namesarray IS VARRAY(15) OF VARCHAR2(20);
     names    namesarray;
 BEGIN
-    names := namesarray('dish_categories', 'dishes', 'employee_kinds', 'employees', 'ingredients',
+    names := namesarray('dish_categories', 'dishes', 'employee_kinds', 'employee_kind', 'employees', 'ingredients',
                        'orders', 'product_categories', 'products', 'receipts',
-                       'recipes', 'special_requests', 'tables');
+                       'recipes', 'recipe', 'special_requests', 'tables');
 
     FOR i IN 1..names.count LOOP
         v_name := names(i);
