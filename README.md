@@ -17,7 +17,7 @@ Planujemy projekt stworzyć w architekturze klient-serwer. Będziemy mieli jeden
 
 ## Aplikacja desktopowa
 
-Aplikacja desktopowa dla kucharzy napisana w języku Java z interfejsem graficznym napisanym przy użyciu biblioteki Swing
+Aplikacja desktopowa dla kucharzy napisana w języku Java z interfejsem graficznym napisanym przy użyciu biblioteki Swing lub JavaFX
 
 ### Funkcjonalność:
 
@@ -76,7 +76,7 @@ Centralna baza danych Oracle
 
 ## Aplikacja desktopowa
 
-Aplikacja desktopowa dla zaopatrzycieli i adminów napisana w języku Java z interfejsem graficznym napisanym przy użyciu biblioteki Swing
+Aplikacja desktopowa dla zaopatrzycieli i adminów napisana w języku Java z interfejsem graficznym napisanym przy użyciu biblioteki Swing lub JavaFX
 
 - do inwentarzu
 
