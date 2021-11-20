@@ -1,6 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.Employee;
+import com.example.api.projections.EmployeeNamesOnly;
 import com.example.api.repositories.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class EmployeesController {
     @GetMapping("/all")
     public List<Employee> findAll() {
         return (List<Employee>) repository.findAll();
+    }
+
+    @GetMapping("/names/{employeeKindId}")
+    public List<EmployeeNamesOnly> findNamesByEmployeeKindId(@PathVariable Long employeeKindId) {
+        return repository.findNamesUsingEmployeeKind(employeeKindId);
     }
 
     @GetMapping("/kind/{kind}")

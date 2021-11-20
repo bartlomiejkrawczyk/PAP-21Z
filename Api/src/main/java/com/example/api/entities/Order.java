@@ -38,5 +38,11 @@ public class Order {
     @OneToMany(mappedBy = "orderId")
     private List<SpecialRequest> requests;
 
+    @Column(name = "STATUS", nullable = false)
+    private Integer status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
 }

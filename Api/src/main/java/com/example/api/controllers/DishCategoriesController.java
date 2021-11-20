@@ -1,6 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.DishCategory;
+import com.example.api.projections.DishCategoryInfo;
 import com.example.api.repositories.DishCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,11 @@ public class DishCategoriesController {
     @GetMapping("all")
     public List<DishCategory> findAll() {
         return (List<DishCategory>) repository.findAll();
+    }
+
+    @GetMapping("mobile")
+    public List<DishCategoryInfo> findDishCategoriesInfo() {
+        return repository.findByNameNotNull();
     }
 
     @GetMapping("example")
