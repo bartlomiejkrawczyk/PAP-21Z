@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <PreferenceCategory app:title="@string/preference_category_employee">
+
+        <Preference
+            app:key="credentials"
+            tools:title="@string/preference_employee_title"
+            app:summary="@string/preference_employee_credentials"
+            app:selectable="false" />
+
+        <Preference
+            app:key="sign_out"
+            app:title="@string/preference_sign_out_title"
+            app:summary="@string/preference_sign_out_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

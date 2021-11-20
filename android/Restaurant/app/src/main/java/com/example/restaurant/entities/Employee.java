@@ -1,23 +1,20 @@
 package com.example.restaurant.entities;
 
+import androidx.annotation.NonNull;
+
 public class Employee {
 
     private Long id;
 
-    private String firstName;
+    private String name;
 
-    private String familyName;
-
-    private Long employeeKindId;
 
     public Employee() {
     }
 
-    public Employee(Long id, String firstName, String familyName, Long employeeKindId) {
+    public Employee(Long id, String name) {
         this.id = id;
-        this.firstName = firstName;
-        this.familyName = familyName;
-        this.employeeKindId = employeeKindId;
+        this.name = name;
     }
 
     public Long getId() {
@@ -28,27 +25,19 @@ public class Employee {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public Long getEmployeeKindId() {
-        return employeeKindId;
-    }
-
-    public void setEmployeeKindId(Long employeeKindId) {
-        this.employeeKindId = employeeKindId;
+    @NonNull
+    @Override
+    public String toString() {
+        if (name != null)
+            return name;
+        return "Employee";
     }
 }
