@@ -1,20 +1,30 @@
 package com.example.restaurant.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 
+@Entity(tableName = "categories")
 public class DishCategory {
 
+    @PrimaryKey
     private Long id;
 
     private String name;
 
+    @ColumnInfo(name = "image_path")
     private String imagePath;
 
+    @Ignore
     private List<Dish> dishes;
 
     public DishCategory() {
     }
 
+    @Ignore
     public DishCategory(Long id, String name, String imagePath, List<Dish> dishes) {
         this.id = id;
         this.name = name;

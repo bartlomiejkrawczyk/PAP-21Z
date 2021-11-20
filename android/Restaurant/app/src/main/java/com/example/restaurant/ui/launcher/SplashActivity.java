@@ -12,7 +12,7 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restaurant.R;
-import com.example.restaurant.ui.MainActivity;
+import com.example.restaurant.ui.dish.DishCategoriesActivity;
 import com.example.restaurant.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
             //TODO: create deciding method on which activity to open
             Intent intent;
             if (ifEmployeeIsLoggedIn())
-                intent = new Intent(SplashActivity.this, MainActivity.class);
+                intent = new Intent(SplashActivity.this, DishCategoriesActivity.class);
             else
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
 

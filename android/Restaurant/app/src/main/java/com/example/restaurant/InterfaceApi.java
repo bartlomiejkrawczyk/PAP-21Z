@@ -1,6 +1,7 @@
 package com.example.restaurant;
 
 
+import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Employee;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface InterfaceApi {
 
     @GET("api/employees/names/1")
     Call<List<Employee>> getWaiters();
+
+    @GET("api/dishCategories/mobile")
+    Call<List<DishCategory>> getDishes();
 }

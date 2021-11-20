@@ -2,6 +2,7 @@ package com.example.restaurant;
 
 import android.app.Application;
 
+import com.example.restaurant.utils.DishUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,6 +22,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         createNetworkSys();
+        updateData();
     }
 
     private void createNetworkSys() {
@@ -50,5 +52,9 @@ public class App extends Application {
                 .build();
 
         interfaceApi = retrofit.create(InterfaceApi.class);
+    }
+
+    private void updateData() {
+        new DishUtils(getApplicationContext()).downloadDishes();
     }
 }
