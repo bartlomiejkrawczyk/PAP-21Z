@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restaurant.R;
 import com.example.restaurant.db.AppDatabase;
 import com.example.restaurant.entities.DishCategory;
-import com.example.restaurant.ui.MainActivity;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class DishCategoriesActivity extends AppCompatActivity {
         adapter = new DishCategoriesRecyclerViewAdapter();
 
         adapter.setOnClickListener(category -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, DishesActivity.class);
             intent.putExtra(DISH_CATEGORY_ID_KEY, category.getId());
             startActivity(intent);
         });
@@ -52,7 +51,6 @@ public class DishCategoriesActivity extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void getDishCategories() {
-        // TODO: Retrieve dish categories
         AppDatabase db = AppDatabase.getAppDatabase(this);
         List<DishCategory> categories = db.dishCategoriesDao().getCategories();
         adapter.setCategories(categories);

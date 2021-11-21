@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Restaurant">
         <activity
+            android:name=".ui.dish.DishesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.dish.DishCategoriesActivity"
             android:exported="false" />
         <activity

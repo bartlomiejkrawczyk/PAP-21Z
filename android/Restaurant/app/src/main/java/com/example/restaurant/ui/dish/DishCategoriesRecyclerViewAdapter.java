@@ -1,6 +1,5 @@
 package com.example.restaurant.ui.dish;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ public class DishCategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Recy
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {
-        Log.e("abc", "Click listener set");
         this.onClickListener = onClickListener;
     }
 
@@ -71,7 +69,6 @@ public class DishCategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Recy
 
         @Override
         public void onClick(View view) {
-            Log.e("abc", "test on click");
             if (onClickListener != null)
                 onClickListener.onClick(categories.get(getLayoutPosition()));
         }
