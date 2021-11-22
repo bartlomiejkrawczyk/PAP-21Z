@@ -7,6 +7,7 @@
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/button_background_ripple.xml" value="0.5703125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.5703125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/ic_baseline_settings.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/rectangle_divider.xml" value="0.5615384615384615" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/recycler_item_background.xml" value="0.5703125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/recycler_item_background_ripple.xml" value="0.5703125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/drawable/recycler_view_item_background.xml" value="0.5703125" />
@@ -18,9 +19,14 @@
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/activity_dishes.xml" value="0.39947916666666666" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/activity_login.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/activity_receipts.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/activity_splash.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/list_item_receipts.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/rectangle_divider.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/recycler_item_dish_categories.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/recycler_item_dishes.xml" value="0.425" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/recycler_item_dishses.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/recycler_item_receipts.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/layout/settings_activity.xml" value="0.353125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/menu/settings.xml" value="0.353125" />
         <entry key="..\:/Users/bartek/Desktop/PAP/android/android/Restaurant/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5697916666666667" />

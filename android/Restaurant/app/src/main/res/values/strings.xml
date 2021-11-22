@@ -23,5 +23,12 @@
     <!-- Menu -->
     <string name="menu_settings">Settings</string>
 
+    <!-- Receipts Item -->
+    <string name="text_view_table_receipts_item">Table</string>
+    <string name="text_view_total_receipts_item">Total</string>
+
+
+    <string name="divider">Divider</string>
+
 
 </resources>
