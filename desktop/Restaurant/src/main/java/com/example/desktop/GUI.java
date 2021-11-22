@@ -1,4 +1,4 @@
-package com.example;
+package com.example.desktop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,19 +39,11 @@ public class GUI {
         new GUI();
     }
 
-    ActionListener exit = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
-    };
+    ActionListener exit = e -> System.exit(0);
 
-    ActionListener countHellos = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            greetingsButtonCounter++;
-            helloCounter.setText("Hellos: " + greetingsButtonCounter);
-        }
+    ActionListener countHellos = e -> {
+        greetingsButtonCounter++;
+        helloCounter.setText("Hellos: " + greetingsButtonCounter);
     };
 
 }
