@@ -1,7 +1,7 @@
 DECLARE
     v_count  INT;
     v_name VARCHAR2(20);
-    TYPE namesarray IS VARRAY(15) OF VARCHAR2(20);
+    TYPE namesarray IS VARRAY(14) OF VARCHAR2(20);
     names    namesarray;
 BEGIN
     names := namesarray('dish_categories', 'dishes', 'employee_kinds', 'employee_kind', 'employees', 'ingredients',
