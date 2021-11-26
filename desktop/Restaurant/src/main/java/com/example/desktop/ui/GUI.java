@@ -3,6 +3,7 @@ package com.example.desktop.ui;
 import com.example.desktop.App;
 import com.example.desktop.entities.Employee;
 import com.example.desktop.entities.Order;
+import com.example.desktop.entities.SpecialRequest;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,11 +20,9 @@ import java.util.Vector;
 
 public class GUI {
 
-
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final JPanel panelTop = new JPanel();
-
 
     public GUI() {
 
@@ -57,26 +56,26 @@ public class GUI {
 
         JPanel scrollablePanel = new JPanel();
         scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
-        Vector<JPanel> employees = new Vector<JPanel>();
+        Vector<JPanel> orders = new Vector<JPanel>();
 
         for (int i = 0; i < 4; ++i) {
-            for (Employee employee : App.getEmployeesFromApi()) {
-                JPanel employeePanel = new JPanel();
-                employeePanel.setBorder(blackline);
-                employeePanel.setPreferredSize(new Dimension(200, 30));
-                JLabel id = new JLabel(employee.getId().toString());
-                JLabel firstName = new JLabel(employee.getFirstName());
-                JLabel familyName = new JLabel(employee.getFamilyName());
-                JLabel employeeKindId = new JLabel(employee.getEmployeeKindId().toString());
-                employeePanel.add(id);
-                employeePanel.add(firstName);
-                employeePanel.add(familyName);
-                employeePanel.add(employeeKindId);
-                employees.add(employeePanel);
+            for (Order order : App.getOrdersFromApi()) {
+                JPanel orderPanel = new JPanel();
+                orderPanel.setBorder(blackline);
+                orderPanel.setPreferredSize(new Dimension(200, 30));
+                JLabel date = new JLabel(order.getDate().toString());
+                JLabel dish_name = new JLabel(order.getDish().getName());
+                JLabel receiptId = new JLabel(order.getReceiptId().toString());
+                orderPanel.add(date);
+                orderPanel.add(dish_name);
+                orderPanel.add(receiptId);
+                for (SpecialRequest request: order.getRequests())
+                    orderPanel.add(new JLabel(request.getRequest()));
+                orders.add(orderPanel);
             }
         }
 
-        for(JPanel employee: employees) scrollablePanel.add(employee);
+        for (JPanel order: orders) scrollablePanel.add(order);
 
         JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
         scrollablePanel.setAutoscrolls(true);
