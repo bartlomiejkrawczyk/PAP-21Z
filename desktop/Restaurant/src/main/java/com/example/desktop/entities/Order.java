@@ -7,7 +7,7 @@ public class Order {
 
     private Long id;
 
-    private LocalDate date;
+//    private LocalDate date;
 
     private Dish dish;
 
@@ -24,7 +24,7 @@ public class Order {
 
     public Order(Long id, LocalDate date, Dish dish, Long receiptId, List<SpecialRequest> requests, Integer status, Employee employee) {
         this.id = id;
-        this.date = date;
+//        this.date = date;
         this.dish = dish;
         this.receiptId = receiptId;
         this.requests = requests;
@@ -40,13 +40,13 @@ public class Order {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
+//    public LocalDate getDate() {
+//        return date;
+//    }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+//    public void setDate(LocalDate date) {
+//        this.date = date;
+//    }
 
     public Dish getDish() {
         return dish;
