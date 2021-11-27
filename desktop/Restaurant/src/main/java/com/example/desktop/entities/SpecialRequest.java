@@ -7,6 +7,9 @@ public class SpecialRequest {
 
     private Long orderId;
 
+    public SpecialRequest() {
+    }
+
     public SpecialRequest(Long id, String request, Long orderId) {
         this.id = id;
         this.request = request;

@@ -9,6 +9,9 @@ public class Dish {
     private Long price;
     private Long dishCategoryId;
 
+    public Dish() {
+    }
+
     public Dish(Long id, String name, String imagePath, Long price, Long dishCategoryId) {
         this.id = id;
         this.name = name;

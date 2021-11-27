@@ -23,6 +23,54 @@ public class GUI {
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final JPanel panelTop = new JPanel();
+    private final Border blackline = BorderFactory.createLineBorder(Color.black);
+
+    public void downloadOrders() {
+        Call<List<Order>> call = App.interfaceApi.getOrdersStatus1();
+        call.enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    addOrdersToLeftPanel(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    private void addOrdersToLeftPanel(Response<List<Order>> response) {
+        JPanel scrollablePanel = new JPanel();
+        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+        Vector<JPanel> orders = new Vector<JPanel>();
+
+        for (int i = 0; i < 4; ++i) {
+            for (Order order : response.body()) {
+                JPanel orderPanel = new JPanel();
+                orderPanel.setBorder(blackline);
+                orderPanel.setPreferredSize(new Dimension(200, 30));
+                JLabel date = new JLabel(order.getDate().toString());
+                JLabel dish_name = new JLabel(order.getDish().getName());
+                orderPanel.add(date);
+                orderPanel.add(dish_name);
+                for (SpecialRequest request: order.getRequests())
+                    orderPanel.add(new JLabel(request.getRequest()));
+                orders.add(orderPanel);
+            }
+        }
+
+        for (JPanel order: orders) scrollablePanel.add(order);
+
+        JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+        scrollablePanel.setAutoscrolls(true);
+        scrollFrame.setPreferredSize(new Dimension(400, 350));
+
+        panelLeft.add(scrollFrame);
+    }
+
 
     public GUI() {
 
@@ -30,8 +78,6 @@ public class GUI {
         frame.setMinimumSize(new Dimension(800, 450));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Border blackline = BorderFactory.createLineBorder(Color.black);
 
         panelLeft.setBorder(blackline);
         panelLeft.setPreferredSize(new Dimension(400, 150));
@@ -54,34 +100,36 @@ public class GUI {
         panelLeftTitle.add(panelLeftTitleText);
         panelLeft.add(panelLeftTitle);
 
-        JPanel scrollablePanel = new JPanel();
-        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
-        Vector<JPanel> orders = new Vector<JPanel>();
+        downloadOrders();
 
-        for (int i = 0; i < 4; ++i) {
-            for (Order order : App.getOrdersFromApi()) {
-                JPanel orderPanel = new JPanel();
-                orderPanel.setBorder(blackline);
-                orderPanel.setPreferredSize(new Dimension(200, 30));
-                JLabel date = new JLabel(order.getDate().toString());
-                JLabel dish_name = new JLabel(order.getDish().getName());
-                JLabel receiptId = new JLabel(order.getReceiptId().toString());
-                orderPanel.add(date);
-                orderPanel.add(dish_name);
-                orderPanel.add(receiptId);
-                for (SpecialRequest request: order.getRequests())
-                    orderPanel.add(new JLabel(request.getRequest()));
-                orders.add(orderPanel);
-            }
-        }
-
-        for (JPanel order: orders) scrollablePanel.add(order);
-
-        JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
-        scrollablePanel.setAutoscrolls(true);
-        scrollFrame.setPreferredSize(new Dimension(400, 350));
-
-        panelLeft.add(scrollFrame);
+//        JPanel scrollablePanel = new JPanel();
+//        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+//        Vector<JPanel> orders = new Vector<JPanel>();
+//
+//        for (int i = 0; i < 4; ++i) {
+//            for (Order order : App.getOrdersFromApi()) {
+//                JPanel orderPanel = new JPanel();
+//                orderPanel.setBorder(blackline);
+//                orderPanel.setPreferredSize(new Dimension(200, 30));
+//                JLabel date = new JLabel(order.getDate().toString());
+//                JLabel dish_name = new JLabel(order.getDish().getName());
+//                JLabel receiptId = new JLabel(order.getReceiptId().toString());
+//                orderPanel.add(date);
+//                orderPanel.add(dish_name);
+//                orderPanel.add(receiptId);
+//                for (SpecialRequest request: order.getRequests())
+//                    orderPanel.add(new JLabel(request.getRequest()));
+//                orders.add(orderPanel);
+//            }
+//        }
+//
+//        for (JPanel order: orders) scrollablePanel.add(order);
+//
+//        JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+//        scrollablePanel.setAutoscrolls(true);
+//        scrollFrame.setPreferredSize(new Dimension(400, 350));
+//
+//        panelLeft.add(scrollFrame);
 
         frame.add(panelLeft, BorderLayout.LINE_START);
         frame.add(panelRight, BorderLayout.LINE_END);

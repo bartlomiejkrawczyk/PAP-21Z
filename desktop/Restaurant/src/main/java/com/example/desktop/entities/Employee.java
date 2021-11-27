@@ -10,6 +10,9 @@ public class Employee {
 
     private Long employeeKindId;
 
+    public Employee() {
+    }
+
     public Employee(Long id, String firstName, String familyName, Long employeeKindId) {
         this.id = id;
         this.firstName = firstName;

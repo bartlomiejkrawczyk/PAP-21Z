@@ -16,9 +16,9 @@ public interface InterfaceApi {
     @GET("img/{file}")
     Call<ResponseBody> getImage(@Path("file") String filePath);
 
-    @GET("employees/all")
+    @GET("api/employees/all")
     Call<List<Employee>> getEmployees();
 
-    @GET("orders/all")
-    Call<List<Order>> getOrders();
+    @GET("api/orders/status/1")
+    Call<List<Order>> getOrdersStatus1();
 }

@@ -19,6 +19,9 @@ public class Order {
 
     private Employee employee;
 
+    public Order() {
+    }
+
     public Order(Long id, LocalDate date, Dish dish, Long receiptId, List<SpecialRequest> requests, Integer status, Employee employee) {
         this.id = id;
         this.date = date;
