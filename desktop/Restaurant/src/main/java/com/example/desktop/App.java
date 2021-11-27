@@ -72,12 +72,12 @@ public class App {
 
             line = line.substring(1, line.length() - 1);
 
-            Vector<String> objectsString = new Vector<String>();
+            Vector<String> objectsInStrings = new Vector<String>();
             int j = 0;
 
             for (int i = 0; i < line.length(); ++i) {
                 if (line.charAt(i) == '}') {
-                    objectsString.addElement(line.substring(j, i + 1));
+                    objectsInStrings.addElement(line.substring(j, i + 1));
                     j = i + 2;
                 }
             }
@@ -86,8 +86,8 @@ public class App {
 
             Gson g = new Gson();
             Employee e;
-            for (int i = 0; i < objectsString.size(); ++i) {
-                e = g.fromJson(objectsString.elementAt(i), Employee.class);
+            for (int i = 0; i < objectsInStrings.size(); ++i) {
+                e = g.fromJson(objectsInStrings.elementAt(i), Employee.class);
                 employees.addElement(e);
             }
             return employees;
@@ -113,12 +113,12 @@ public class App {
 
             line = line.substring(1, line.length() - 1);
 
-            Vector<String> objectsString = new Vector<String>();
+            Vector<String> objectsInStrings = new Vector<String>();
             int j = 0;
 
             for (int i = 0; i < line.length(); ++i) {
                 if (line.charAt(i) == '}') {
-                    objectsString.addElement(line.substring(j, i + 1));
+                    objectsInStrings.addElement(line.substring(j, i + 1));
                     j = i + 2;
                 }
             }
@@ -127,8 +127,8 @@ public class App {
 
             Gson g = new Gson();
             Order e;
-            for (int i = 0; i < objectsString.size(); ++i) {
-                e = g.fromJson(objectsString.elementAt(i), Order.class);
+            for (int i = 0; i < objectsInStrings.size(); ++i) {
+                e = g.fromJson(objectsInStrings.elementAt(i), Order.class);
                 orders.addElement(e);
             }
             return orders;
