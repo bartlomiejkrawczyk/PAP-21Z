@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="28dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/text_view_order_list_view_order_receipts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Coca-Cola x1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_price_list_view_order_receipts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="10.00 PLN"
+        app:layout_constraintEnd_toStartOf="@id/image_view_list_view_order_receipts"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_view_list_view_order_receipts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/ic_baseline_close"
+        android:contentDescription="@string/content_description_status" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

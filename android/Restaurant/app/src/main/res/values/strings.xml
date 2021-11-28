@@ -27,8 +27,11 @@
     <string name="text_view_table_receipts_item">Table</string>
     <string name="text_view_total_receipts_item">Total</string>
 
+    <string name="button_add_receipt_recycler_item_add_receipt">Add Receipt</string>
+
 
     <string name="divider">Divider</string>
+    <string name="content_description_status">Status</string>
 
 
 </resources>

@@ -3,6 +3,7 @@ package com.example.restaurant;
 
 import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Employee;
+import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public interface InterfaceApi {
     @GET("api/dishCategories/mobile")
     Call<List<DishCategory>> getDishes();
 
-    @GET("api/receipts/all")
-    Call<List<Receipt>> getReceipts();
+    @GET("api/receipts/employee/{employee}")
+    Call<List<Receipt>> getReceipts(@Path("employee") Long employeeId);
+
+    @GET("api/orders/receipt/{receipt}")
+    Call<List<Order>> getOrders(@Path("receipt") Long receiptId);
 }

@@ -10,16 +10,19 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.example.restaurant.R;
-import com.example.restaurant.ui.dish.DishCategoriesActivity;
 import com.example.restaurant.ui.login.LoginActivity;
+import com.example.restaurant.ui.receipt.ReceiptsActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         setContentView(R.layout.activity_splash);
 
         performSplash();
@@ -28,13 +31,9 @@ public class SplashActivity extends AppCompatActivity {
     //wait 1.5 seconds and open app
     private void performSplash() {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            //launch splash activity and
-            //decide what activity to open
-            //login or main
-            //TODO: create deciding method on which activity to open
             Intent intent;
             if (ifEmployeeIsLoggedIn())
-                intent = new Intent(SplashActivity.this, DishCategoriesActivity.class);
+                intent = new Intent(SplashActivity.this, ReceiptsActivity.class);
             else
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
 
