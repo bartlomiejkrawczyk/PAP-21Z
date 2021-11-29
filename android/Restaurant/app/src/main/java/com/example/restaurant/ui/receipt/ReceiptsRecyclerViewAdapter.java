@@ -68,6 +68,7 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             Receipt receipt = receipts.get(position);
             ((ReceiptsViewHolder) holder).textViewTable.setText(receipt.getTable().getName());
             int total = 0;
+            ((ReceiptsViewHolder) holder).linearLayout.removeAllViews();
             for (Order order : receipt.getOrders()) {
                 total += order.getDish().getPrice();
                 ((ReceiptsViewHolder) holder).linearLayout.addView(getOrderView(order, holder.itemView.getContext()));
