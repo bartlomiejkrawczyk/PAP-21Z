@@ -1,9 +1,10 @@
 package com.example.restaurant.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
 
     private Long id;
 

@@ -5,6 +5,7 @@ import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Employee;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
+import com.example.restaurant.entities.Table;
 
 import java.util.List;
 
@@ -31,4 +32,7 @@ public interface InterfaceApi {
 
     @GET("api/orders/receipt/{receipt}")
     Call<List<Order>> getOrders(@Path("receipt") Long receiptId);
+
+    @GET("api/tables/all")
+    Call<List<Table>> getTables();
 }

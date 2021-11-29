@@ -5,10 +5,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "categories")
-public class DishCategory {
+public class DishCategory implements Serializable {
 
     @PrimaryKey
     private Long id;

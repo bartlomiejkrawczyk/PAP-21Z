@@ -3,6 +3,7 @@ package com.example.restaurant;
 import android.app.Application;
 
 import com.example.restaurant.utils.DishUtils;
+import com.example.restaurant.utils.TableUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -56,5 +57,6 @@ public class App extends Application {
 
     private void updateData() {
         new DishUtils(getApplicationContext()).downloadDishes();
+        new TableUtils(getApplicationContext()).downloadTables();
     }
 }

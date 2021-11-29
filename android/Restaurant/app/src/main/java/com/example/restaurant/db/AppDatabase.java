@@ -8,8 +8,9 @@ import androidx.room.RoomDatabase;
 
 import com.example.restaurant.entities.Dish;
 import com.example.restaurant.entities.DishCategory;
+import com.example.restaurant.entities.Table;
 
-@Database(entities = {DishCategory.class, Dish.class}, version = 1, exportSchema = false)
+@Database(entities = {DishCategory.class, Dish.class, Table.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "RESTAURANT_DATABASE";
     private static AppDatabase db;
@@ -17,6 +18,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DishCategoriesDao dishCategoriesDao();
 
     public abstract DishesDao dishesDao();
+
+    public abstract TablesDao tablesDao();
 
     public static synchronized AppDatabase getAppDatabase(Context context) {
         if (db == null) {

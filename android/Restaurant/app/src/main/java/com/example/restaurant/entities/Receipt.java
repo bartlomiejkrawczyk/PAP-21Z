@@ -1,8 +1,9 @@
 package com.example.restaurant.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Receipt {
+public class Receipt implements Serializable {
 
     private Long id;
 

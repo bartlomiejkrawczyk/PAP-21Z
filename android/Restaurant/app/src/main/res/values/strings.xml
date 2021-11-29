@@ -32,6 +32,10 @@
 
     <string name="divider">Divider</string>
     <string name="content_description_status">Status</string>
+    <string name="text_view_table_receipt">Table</string>
+    <string name="text_view_orders_receipt">Orders</string>
+    <string name="button_add_order_receipt">Add Order</string>
+    <string name="content_description_delete_order_button">Delete Order Button</string>
 
 
 </resources>

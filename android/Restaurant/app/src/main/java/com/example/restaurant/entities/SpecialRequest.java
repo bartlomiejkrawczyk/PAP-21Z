@@ -1,6 +1,8 @@
 package com.example.restaurant.entities;
 
-public class SpecialRequest {
+import java.io.Serializable;
+
+public class SpecialRequest implements Serializable {
     private Long id;
 
     private String request;

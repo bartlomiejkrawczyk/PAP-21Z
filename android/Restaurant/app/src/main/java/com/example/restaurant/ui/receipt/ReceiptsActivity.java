@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,7 @@ import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
-import com.example.restaurant.ui.MainActivity;
-import com.example.restaurant.ui.dish.DishCategoriesActivity;
+import com.example.restaurant.ui.settings.SettingsActivity;
 
 import java.util.List;
 import java.util.Timer;
@@ -30,6 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReceiptsActivity extends AppCompatActivity {
+
+    public static final String RECEIPT = "receipt";
 
     private RecyclerView recyclerView;
     private ReceiptsRecyclerViewAdapter adapter;
@@ -42,6 +45,23 @@ public class ReceiptsActivity extends AppCompatActivity {
         initViews();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_view_receipts);
         recyclerView.setHasFixedSize(true);
@@ -52,12 +72,13 @@ public class ReceiptsActivity extends AppCompatActivity {
         adapter = new ReceiptsRecyclerViewAdapter();
 
         adapter.setOnClickListener(receipt -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ReceiptActivity.class);
+            intent.putExtra(RECEIPT, receipt);
             startActivity(intent);
         });
 
         adapter.setOnButtonClickListener(view -> {
-            Intent intent = new Intent(this, DishCategoriesActivity.class);
+            Intent intent = new Intent(this, ReceiptActivity.class);
             startActivity(intent);
         });
 

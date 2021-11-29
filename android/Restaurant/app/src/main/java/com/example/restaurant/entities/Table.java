@@ -1,7 +1,16 @@
 package com.example.restaurant.entities;
 
-public class Table {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(tableName = "tables")
+public class Table implements Serializable {
+
+    @PrimaryKey
     private Long id;
 
     private String name;
@@ -9,6 +18,7 @@ public class Table {
     public Table() {
     }
 
+    @Ignore
     public Table(Long id, String name) {
         this.id = id;
         this.name = name;
@@ -28,5 +38,13 @@ public class Table {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        if (name != null)
+            return String.valueOf(id); // + " - " + name; // TODO: Temporary replacement
+        return "Table";
     }
 }

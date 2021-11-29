@@ -4,8 +4,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "dishes")
-public class Dish {
+public class Dish implements Serializable {
     @PrimaryKey
     private Long id;
 

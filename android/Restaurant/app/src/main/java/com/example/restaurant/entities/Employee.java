@@ -2,7 +2,9 @@ package com.example.restaurant.entities;
 
 import androidx.annotation.NonNull;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
 
     private Long id;
 
