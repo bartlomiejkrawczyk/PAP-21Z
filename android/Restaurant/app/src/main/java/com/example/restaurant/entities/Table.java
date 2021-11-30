@@ -44,7 +44,7 @@ public class Table implements Serializable {
     @Override
     public String toString() {
         if (name != null)
-            return String.valueOf(id); // + " - " + name; // TODO: Temporary replacement
+            return id + " - " + name;
         return "Table";
     }
 }
