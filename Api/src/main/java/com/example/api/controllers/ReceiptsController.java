@@ -1,6 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.Receipt;
+import com.example.api.projections.ReceiptInfo;
 import com.example.api.repositories.ReceiptsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class ReceiptsController {
     }
 
     @GetMapping("/employee/{employee}")
-    public List<Receipt> findReceiptsByEmployee(@PathVariable Long employee) {
-        return repository.findReceiptsByEmployeeId(employee);
+    public List<ReceiptInfo> findReceiptsByEmployee(@PathVariable Long employee) {
+        return repository.findReceiptsByEmployeeIdAndPaymentEquals(employee, 0L);
     }
 
     @PostMapping
