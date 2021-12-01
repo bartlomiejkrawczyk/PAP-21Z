@@ -36,16 +36,31 @@ public class GUI {
         buttonCooks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addCook();
+                buttonCooksOnClick();
             }
         });
     }
 
-    public void addCook() {
+    public void buttonCooksOnClick() {
         JFrame frameCooks = new JFrame("Kitchen Cooks");
-        frameCooks.setMinimumSize(new Dimension(200, 200));
+        JPanel panelCooks = new JPanel();
+        JPanel panelOptions = new JPanel();
+
+        panelCooks.setBorder(blackline);
+        panelCooks.setPreferredSize(new Dimension(300, 275));
+
+        panelOptions.setBorder(blackline);
+        panelOptions.setPreferredSize(new Dimension(300, 25));
+        panelOptions.setBackground(Color.GRAY);
+        panelOptions.setLayout(null);
+
+        frameCooks.setMinimumSize(new Dimension(300, 300));
         frameCooks.setResizable(false);
-        frameCooks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameCooks.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frameCooks.add(panelOptions, BorderLayout.NORTH);
+        frameCooks.add(panelCooks, BorderLayout.SOUTH);
+
         frameCooks.pack();
         frameCooks.setLocationRelativeTo(null);
         frameCooks.setVisible(true);
