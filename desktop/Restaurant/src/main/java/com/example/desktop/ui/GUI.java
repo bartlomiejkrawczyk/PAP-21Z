@@ -176,22 +176,30 @@ public class GUI {
                         String stringCookId = textCookId.getText();
                         int cookId = 0;
                         int indexToRemove = 0;
+                        boolean remove = false;
                         try {
                             cookId = Integer.parseInt(stringCookId);
                         }
                         catch (NumberFormatException ex){
                             frameRemove.dispose();
-                            JOptionPane.showMessageDialog(frameRemove, "Not a valid value!");
+                            JOptionPane.showMessageDialog(frameRemove, "Its not a number!");
                             return;
                         }
 
                         for (Cook c : vecCooks){
                             if (c.getId() == cookId) {
                                 indexToRemove = vecCooks.indexOf(c);
+                                remove = true;
                                 break;
                             }
                         }
-                        vecCooks.remove(indexToRemove);
+                        if (remove == true)
+                            vecCooks.remove(indexToRemove);
+                        else {
+                            frameRemove.dispose();
+                            JOptionPane.showMessageDialog(frameRemove, "Idex not in list!");
+                            return;
+                        }
 
                         Vector<JPanel> cooks = new Vector<JPanel>();
 
