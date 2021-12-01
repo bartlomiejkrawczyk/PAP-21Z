@@ -130,7 +130,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Index:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Index: " + Integer.toString(c.getId()) + ".    Name: " +c.getName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -147,6 +147,77 @@ public class GUI {
                 frameAdd.pack();
                 frameAdd.setLocationRelativeTo(null);
                 frameAdd.setVisible(true);
+            }
+        });
+
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frameRemove = new JFrame("Remove cook");
+                JTextField textCookId = new JTextField("index");
+                JButton buttonRemoveCook = new JButton("Remove");
+
+                textCookId.setPreferredSize(new Dimension(130, 50));
+                textCookId.setBorder(blackline);
+
+                buttonRemoveCook.setPreferredSize(new Dimension(70, 50));
+                buttonRemoveCook.setBorder(blackline);
+
+                frameRemove.setPreferredSize(new Dimension(200, 50));
+                frameRemove.setResizable(false);
+                frameRemove.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                frameRemove.add(textCookId, BorderLayout.LINE_START);
+                frameRemove.add(buttonRemoveCook, BorderLayout.LINE_END);
+
+                buttonRemoveCook.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String stringCookId = textCookId.getText();
+                        int cookId = 0;
+                        int indexToRemove = 0;
+                        try {
+                            cookId = Integer.parseInt(stringCookId);
+                        }
+                        catch (NumberFormatException ex){
+                            frameRemove.dispose();
+                            JOptionPane.showMessageDialog(frameRemove, "Not a valid value!");
+                            return;
+                        }
+
+                        for (Cook c : vecCooks){
+                            if (c.getId() == cookId) {
+                                indexToRemove = vecCooks.indexOf(c);
+                                break;
+                            }
+                        }
+                        vecCooks.remove(indexToRemove);
+
+                        Vector<JPanel> cooks = new Vector<JPanel>();
+
+                        for (Cook c : vecCooks){
+                            JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+                            panelCook.setBorder(blackline);
+                            panelCook.setMinimumSize(new Dimension(300, 30));
+                            panelCook.setMaximumSize(new Dimension(300, 30));
+
+                            JLabel labelCookDescription = new JLabel("Index:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            panelCook.add(labelCookDescription);
+
+                            cooks.add(panelCook);
+                        }
+                        scrollableCooks.removeAll();
+                        for (JPanel ck : cooks) { scrollableCooks.add(ck); }
+
+                        panelCooks.updateUI();
+
+                        frameRemove.dispose();
+                    }
+                });
+
+                frameRemove.pack();
+                frameRemove.setLocationRelativeTo(null);
+                frameRemove.setVisible(true);
             }
         });
 
