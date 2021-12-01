@@ -10,6 +10,7 @@ import retrofit2.Response;
 import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.border.Border;
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
@@ -363,6 +364,21 @@ public class GUI {
                         JButton buttonCookDescription = new JButton("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
                         buttonCookDescription.setBounds(1, 1, 198, 28);
                         panelCook.add(buttonCookDescription);
+
+                        buttonCookDescription.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Employee emp = c;
+                                order.setEmployee(emp);
+                                try {
+                                    App.interfaceApi.updateOrders(order, order.getId()).execute();
+                                }
+                                catch (IOException exc) {
+                                    System.err.println(exc);
+                                }
+                                frameAssign.dispose();
+                            }
+                        });
 
                         cooks.add(panelCook);
                     }
