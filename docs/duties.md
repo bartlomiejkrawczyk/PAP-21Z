@@ -2,7 +2,7 @@
 
 ## Aplikacja Desktopowa
 
-<!-- TODO: divide duties -->
+Aplikacją desktopową zajmują się `Karol Rogoziński`, `Adam Sudoł` oraz `Kamil Sulkowski`. Do tej pory pracę podzieliliśmy na trzy części: kucharze, przepisy, zamówienia i odpowiednio się do nich przydzieliliśmy. W praktyce, przez dobrą współpracę, działaliśmy w systemie, w którym każdy robił to, co zasugerował poprzednik. Po skończeniu prac nad aplikacją dla kuchni, podzielimy się obowiązkami dotyczącymi aplikacji dla administratora oraz do kontroli zaopatrzenia restauracji.
 
 ## Aplikacja Mobilna
 
