@@ -115,7 +115,7 @@ public class GUI {
                         if (cooksNumber == 0)
                             cookId = 1;
                         else {
-                            int lastCookId = vecCooks.get(cooksNumber - 1).getId();
+                            int lastCookId = vecCooks.get(cooksNumber - 1).getIdInt();
                             cookId = lastCookId + 1;
                         }
                         String cookName = textCookName.getText();
@@ -130,7 +130,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -209,7 +209,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -240,7 +240,7 @@ public class GUI {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    addOrdersToLeftPanel(response);
+                    addOrdersToPanels(response);
                 }
             }
             @Override
@@ -249,9 +249,10 @@ public class GUI {
         });
     }
 
-    private void addOrdersToLeftPanel(Response<List<Order>> response) {
+    private void addOrdersToPanels(Response<List<Order>> response) {
 
         Vector<JPanel> orders = new Vector<JPanel>();
+        Vector<JPanel> ordersInProgress = new Vector<JPanel>();
 
         for (Order order : response.body()) {
             JPanel orderPanel = new JPanel();
@@ -262,22 +263,42 @@ public class GUI {
             JLabel dish_name = new JLabel(order.getDish().getName());
             dish_name.setBounds(25, 0, 250, 28);
 //                orderPanel.add(date);
+
+            String name = "Name";
+            if (order.getEmployee() != null)
+                name = order.getEmployee().getFirstName();
+
+            JLabel cooksName = new JLabel("Assigned to: " + name);
+            cooksName.setBounds(200, 0, 190, 28);
+
             JButton buttonAssign = new JButton("Assign");
-            buttonAssign.setBounds(290, 0, 90, 28);
-
             JButton buttonRecipe = new JButton("Recipe");
-            buttonRecipe.setBounds(200, 0, 90, 28);
 
-            orderPanel.add(buttonAssign);
-            orderPanel.add(buttonRecipe);
+            buttonAssign.setBounds(200, 0, 90, 28);
+            buttonRecipe.setBounds(290, 0, 90, 28);
+
             orderPanel.add(dish_name);
 
             for (SpecialRequest request: order.getRequests())
                 orderPanel.add(new JLabel(request.getRequest()));
-            orders.add(orderPanel);
+
+            if (order.getEmployee() == null) {
+                orderPanel.add(buttonAssign);
+                orderPanel.add(buttonRecipe);
+                orders.add(orderPanel);
+            }
+            else {
+                orderPanel.add(cooksName);
+                ordersInProgress.add(orderPanel);
+            }
         }
         scrollablePanel.removeAll();
-        for (JPanel order: orders) scrollablePanel.add(order);
+        scrollablePanelRight.removeAll();
+
+        for (JPanel order: orders)
+            scrollablePanel.add(order);
+        for (JPanel order : ordersInProgress)
+            scrollablePanelRight.add(order);
 
         panelLeft.updateUI();
     }
