@@ -191,7 +191,7 @@ public class GUI {
                                 break;
                             }
                         }
-                        if (remove == true)
+                        if (remove)
                             vecCooks.remove(indexToRemove);
                         else {
                             frameRemove.dispose();
@@ -247,25 +247,6 @@ public class GUI {
         });
     }
 
-    public List<Recipe> downloadAllRecipes(){
-        Call<List<Recipe>> call = App.interfaceApi.getRecipe();
-        try {
-            return call.execute().body();
-        } catch (IOException e) {}   //można dodać okienko, że nie udało się
-        return new ArrayList<>();
-    }
-
-
-    public Vector<String> getOneRecipe(int dishId, List<Recipe> allRecipes){
-        Vector<String> currentRecipe = new Vector<String>();
-        for (Recipe recipe: allRecipes){
-            if (recipe.getDishId() == dishId){
-                currentRecipe.add(recipe.getRecipe());
-            }
-        }
-        return currentRecipe;
-    }
-
     private void addOrdersToLeftPanel(Response<List<Order>> response) {
 
         Vector<JPanel> orders = new Vector<JPanel>();
@@ -289,8 +270,31 @@ public class GUI {
     }
 
 
+    public List<Recipe> downloadAllRecipes(){
+        Call<List<Recipe>> call = App.interfaceApi.getRecipe();
+        try {
+            return call.execute().body();
+        } catch (IOException e) {}   //można dodać okienko, że nie udało się
+        return new ArrayList<>();
+    }
+
+
+    public Vector<String> getOneRecipe(int dishId, List<Recipe> allRecipes){
+        Vector<String> currentRecipe = new Vector<String>();
+        for (Recipe recipe: allRecipes){
+            if (recipe.getDishId() == dishId){
+                currentRecipe.add(recipe.getRecipe());
+            }
+        }
+        return currentRecipe;
+    }
+
+
     public void run() {
         SwingUtilities.invokeLater(() -> {
+
+            List<Recipe> allRecipes = downloadAllRecipes();
+
             JFrame frame = new JFrame("Kitchen application");
             frame.setMinimumSize(new Dimension(800, 450));
             frame.setResizable(false);
