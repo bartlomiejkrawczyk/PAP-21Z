@@ -52,8 +52,9 @@ public class GUI {
         JPanel panelTitle = new JPanel();
         JLabel labelTitle = new JLabel("Current Cooks: ");
         JPanel scrollableCooks = new JPanel();
+        JScrollPane scrollCooks = new JScrollPane(scrollableCooks);
 
-        scrollableCooks.setPreferredSize(new Dimension(300, 240));
+        scrollCooks.setPreferredSize(new Dimension(300, 240));
         scrollableCooks.setLayout(new BoxLayout(scrollableCooks, BoxLayout.Y_AXIS));
         scrollableCooks.setAutoscrolls(true);
 
@@ -62,7 +63,7 @@ public class GUI {
         labelTitle.setForeground(Color.WHITE);
         panelTitle.add(labelTitle);
         panelCooks.add(panelTitle);
-        panelCooks.add(scrollableCooks);
+        panelCooks.add(scrollCooks);
 
         buttonAdd.setBounds(1, 1, 150, 24);
         panelOptions.add(buttonAdd);
@@ -106,6 +107,43 @@ public class GUI {
                 frameAdd.add(textCookName, BorderLayout.LINE_START);
                 frameAdd.add(buttonAddCook, BorderLayout.LINE_END);
 
+                buttonAddCook.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int cooksNumber = vecCooks.size();
+                        int cookId;
+                        if (cooksNumber == 0)
+                            cookId = 1;
+                        else {
+                            int lastCookId = vecCooks.get(cooksNumber - 1).getId();
+                            cookId = lastCookId + 1;
+                        }
+                        String cookName = textCookName.getText();
+                        Cook cook = new Cook(cookId, cookName);
+                        vecCooks.add(cook);
+
+                        Vector<JPanel> cooks = new Vector<JPanel>();
+
+                        for (Cook c : vecCooks){
+                            JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+                            panelCook.setBorder(blackline);
+                            panelCook.setMinimumSize(new Dimension(300, 30));
+                            panelCook.setMaximumSize(new Dimension(300, 30));
+
+                            JLabel labelCookDescription = new JLabel("Index:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            panelCook.add(labelCookDescription);
+
+                            cooks.add(panelCook);
+                        }
+                        scrollableCooks.removeAll();
+                        for (JPanel ck : cooks) { scrollableCooks.add(ck); }
+
+                        panelCooks.updateUI();
+
+                        frameAdd.dispose();
+                    }
+                });
+
                 frameAdd.pack();
                 frameAdd.setLocationRelativeTo(null);
                 frameAdd.setVisible(true);
@@ -128,7 +166,6 @@ public class GUI {
             }
             @Override
             public void onFailure(Call<List<Order>> call, Throwable throwable) {
-
             }
         });
     }
