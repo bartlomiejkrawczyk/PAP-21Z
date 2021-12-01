@@ -239,7 +239,7 @@ public class GUI {
                         }
 
                         for (Cook c : vecCooks){
-                            if (c.getId() == cookId) {
+                            if (c.getIdInt() == cookId) {
                                 indexToRemove = vecCooks.indexOf(c);
                                 remove = true;
                                 break;
