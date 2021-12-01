@@ -26,6 +26,7 @@ public class GUI {
     private final Border blackline = BorderFactory.createLineBorder(Color.black);
     private JPanel scrollablePanel = new JPanel();
     private JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+    private JButton buttonCooks = new JButton("Cooks");
 
     public void downloadOrders() {
         Call<List<Order>> call = App.interfaceApi.getOrdersStatus1();
@@ -83,6 +84,9 @@ public class GUI {
         panelTop.setBorder(blackline);
         panelTop.setPreferredSize(new Dimension(800, 25));
         panelTop.setBackground(Color.GRAY);
+        panelTop.setLayout(null);
+
+        buttonCooks.setBounds(1, 1, 100, 23);
 
         JPanel panelLeftTitle = new JPanel();
         panelLeftTitle.setBorder(blackline);
@@ -106,6 +110,9 @@ public class GUI {
         frame.add(panelLeft, BorderLayout.LINE_START);
         frame.add(panelRight, BorderLayout.LINE_END);
         frame.add(panelTop, BorderLayout.NORTH);
+
+        panelTop.add(buttonCooks);
+
         frame.pack();
         frame.setVisible(true);
     }
