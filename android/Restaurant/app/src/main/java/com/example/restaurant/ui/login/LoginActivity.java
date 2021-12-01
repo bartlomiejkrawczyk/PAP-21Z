@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Employee;
-import com.example.restaurant.ui.MainActivity;
+import com.example.restaurant.ui.receipt.ReceiptsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
         button.setOnClickListener(view -> {
             if (login()) {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, ReceiptsActivity.class);
                 startActivity(intent);
                 finish();
             } else {
