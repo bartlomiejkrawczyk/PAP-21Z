@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2938EE90-3B70-0FBE-8E1C-78B7D22FA008" name="Special Requests">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 12:05:32 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="68B22CDF-7E85-E6CE-5A25-F7D0DC201863">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 12:09:19 UTC</createdTime>
+<generatorID>B4617D2A-ED10-59FD-D325-FB7C4577D7A8</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="request" id="64C0C0BF-7ED4-C86D-AB97-FE38E4CAD94F">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 12:05:53 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>60 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="23811A51-1A8B-4259-F433-25C6EA395BAF" name="Special Requests PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 12:09:19 UTC</createdTime>
+<generatorID>9A1E86E8-E69A-379E-5CCE-F095D3D24345</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>68B22CDF-7E85-E6CE-5A25-F7D0DC201863</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
