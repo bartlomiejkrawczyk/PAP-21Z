@@ -28,6 +28,8 @@ public class GUI {
     private final Border blackline = BorderFactory.createLineBorder(Color.black);
     private JPanel scrollablePanel = new JPanel();
     private JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+    private JPanel scrollablePanelRight = new JPanel();
+    private JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
     private JButton buttonCooks = new JButton("Cooks");
 
     public void setButtonCooks(){
@@ -278,7 +280,6 @@ public class GUI {
         return new ArrayList<>();
     }
 
-
     public Vector<String> getOneRecipe(int dishId, List<Recipe> allRecipes){
         Vector<String> currentRecipe = new Vector<String>();
         for (Recipe recipe: allRecipes){
@@ -306,6 +307,7 @@ public class GUI {
 
             panelRight.setBorder(blackline);
             panelRight.setPreferredSize(new Dimension(400, 150));
+            panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
 
             panelTop.setBorder(blackline);
             panelTop.setPreferredSize(new Dimension(800, 25));
@@ -316,16 +318,31 @@ public class GUI {
             panelLeftTitle.setBorder(blackline);
             panelLeftTitle.setBackground(Color.DARK_GRAY);
 
+            JPanel panelRightTitle = new JPanel();
+            panelRightTitle.setBorder(blackline);
+            panelRightTitle.setBackground(Color.DARK_GRAY);
+
             JLabel panelLeftTitleText = new JLabel("Orders placed:");
             panelLeftTitleText.setForeground(Color.WHITE);
 
             panelLeftTitle.add(panelLeftTitleText);
             panelLeft.add(panelLeftTitle);
 
+            JLabel panelRightTitleText = new JLabel("Orders in progress:");
+            panelRightTitleText.setForeground(Color.WHITE);
+
+            panelRightTitle.add(panelRightTitleText);
+            panelRight.add(panelRightTitle);
+
             scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
             scrollablePanel.setAutoscrolls(true);
             scrollFrame.setPreferredSize(new Dimension(400, 350));
             panelLeft.add(scrollFrame);
+
+            scrollablePanelRight.setLayout(new BoxLayout(scrollablePanelRight, BoxLayout.Y_AXIS));
+            scrollablePanelRight.setAutoscrolls(true);
+            scrollFrameRight.setPreferredSize(new Dimension(400, 350));
+            panelRight.add(scrollFrameRight);
 
             downloadOrders();
             Timer t = new Timer(30_000, e -> downloadOrders());
