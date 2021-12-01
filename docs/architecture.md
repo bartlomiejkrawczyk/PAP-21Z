@@ -1,5 +1,31 @@
 # Aplikacja Mobilna
 
+```mermaid
+classDiagram
+    class App
+    class InterfaceApi
+    class Utils
+    class Entities
+    class UI
+    class Database
+    class Dao
+
+    App -- InterfaceApi
+    Utils <-- InterfaceApi
+    Utils --> Dao
+    Utils <--> PhoneMemory
+
+    Database <--> Entities
+    Dao <--> Entities
+
+    UI <--> Dao
+    UI <--> Utils
+    UI <--> InterfaceApi
+    App -- Utils
+
+    InterfaceApi <--> Server
+```
+
 W aplikacji mobilnej wyróżniamy kilka części:
 ### Kod java umieszczany w folderze java:
 
@@ -35,6 +61,25 @@ Wydzielamy kilka rodzajów plików xml, każdy definiuje inne dane:
 # Aplikacja Desktopowa
 
 # Serwer
+
+```mermaid
+classDiagram
+    class Entities
+    class Repositories
+    class Controllers
+    class Projections
+
+    OracleDatabase <--> Entities
+    Repositories <--> Entities
+    Controllers --> Repositories
+
+    Entities o-- Projections
+    OracleDatabase --> Projections
+    Repositories --> Projections
+
+    OtherApplication <--> Controllers
+
+```
 
 W głównym pakiecie aplikacji `com.example.api` znajdują się dwa pliki bazowe:
 - ApiApplication - jest to plik który uruchamia serwer
