@@ -42,12 +42,13 @@ public class GUI {
     }
 
     public void addCook() {
-        JFrame frame1 = new JFrame("Kitchen Cooks");
-        frame1.setMinimumSize(new Dimension(200, 200));
-        frame1.setResizable(false);
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame1.pack();
-        frame1.setVisible(true);
+        JFrame frameCooks = new JFrame("Kitchen Cooks");
+        frameCooks.setMinimumSize(new Dimension(200, 200));
+        frameCooks.setResizable(false);
+        frameCooks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameCooks.pack();
+        frameCooks.setLocationRelativeTo(null);
+        frameCooks.setVisible(true);
     }
 
     public void downloadOrders() {
@@ -133,6 +134,7 @@ public class GUI {
 
         setButtonCooks();
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
