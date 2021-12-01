@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Employees Employee Kinds FK" directorySegmentName="seg_0" id="9A48644C-D6B1-4E3F-FC27-DE6CC127B9B8">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:42:40 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useSurrogateKey>true</useSurrogateKey>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>96B23F64-43EA-5D4C-2B29-DF7CD9BEE515</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9B02CFD5-C229-7F81-1B02-DAA5A0EBF827</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

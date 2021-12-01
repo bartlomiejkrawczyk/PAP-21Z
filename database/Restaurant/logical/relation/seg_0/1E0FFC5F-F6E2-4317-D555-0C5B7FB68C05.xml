@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Receipts Tables FK" directorySegmentName="seg_0" id="1E0FFC5F-F6E2-4317-D555-0C5B7FB68C05">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:45:08 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useSurrogateKey>true</useSurrogateKey>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>5331DE1F-331A-C9A2-0C7F-F005EBA4AC1F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8A5CD578-8FC4-435A-8A11-1F74ABDC9189</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
