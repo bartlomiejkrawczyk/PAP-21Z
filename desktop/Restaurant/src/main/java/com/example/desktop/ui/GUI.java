@@ -2,7 +2,6 @@ package com.example.desktop.ui;
 
 import com.example.desktop.App;
 import com.example.desktop.entities.*;
-import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -10,9 +9,7 @@ import retrofit2.Response;
 import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.border.Border;
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -20,19 +17,19 @@ import java.util.*;
 import java.util.List;
 
 public class GUI {
-    private Vector<Cook> vecCooks = new Vector<Cook>();
+    private Vector<Cook> vecCooks = new Vector<>();
     private List<Recipe> allRecipes;
 
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final JPanel panelTop = new JPanel();
     private final Border blackline = BorderFactory.createLineBorder(Color.black);
-    private JPanel scrollablePanel = new JPanel();
-    private JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
-    private JPanel scrollablePanelRight = new JPanel();
-    private JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
-    private JButton buttonCooks = new JButton("Cooks");
-    private JButton buttonRecipes = new JButton("Recipes");
+    private final JPanel scrollablePanel = new JPanel();
+    private final JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+    private final JPanel scrollablePanelRight = new JPanel();
+    private final JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
+    private final JButton buttonCooks = new JButton("Cooks");
+    private final JButton buttonRecipes = new JButton("Recipes");
 
     public void setButtonCooks(){
         buttonCooks.setBounds(1, 1, 100, 23);
@@ -56,10 +53,8 @@ public class GUI {
         });
     }
 
-    public void displayAllRecipes(){                                //////////!!!!!!!!!!!!!!!!!!!!!!!!
+    public void displayAllRecipes(){
         JFrame frameAllRecipes = new JFrame("All recipes");
-        //JLabel labelTitle = new JLabel("Recipes");
-        //frameAllRecipes.add(labelTitle);
         JPanel panelRecipes = new JPanel();
         List<Recipe> undividedRecipes = getUndividedRecipes();
 
@@ -68,7 +63,7 @@ public class GUI {
             buttonDisplayRecipe.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JFrame frameCurrRecipe = new JFrame("Current recipe id: " + Integer.toString(recipe.getDishId()));
+                    JFrame frameCurrRecipe = new JFrame("Current recipe id: " + recipe.getDishId());
                     JTextField field = new JTextField();
                     field.setText(recipe.getRecipe());
 
@@ -174,7 +169,7 @@ public class GUI {
                         Cook cook = new Cook(cookId, cookName);
                         vecCooks.add(cook);
 
-                        Vector<JPanel> cooks = new Vector<JPanel>();
+                        Vector<JPanel> cooks = new Vector<>();
 
                         for (Cook c : vecCooks){
                             JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
@@ -182,7 +177,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
+                            JLabel labelCookDescription = new JLabel("Id: " + c.getIdInt() + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -253,7 +248,7 @@ public class GUI {
                             return;
                         }
 
-                        Vector<JPanel> cooks = new Vector<JPanel>();
+                        Vector<JPanel> cooks = new Vector<>();
 
                         for (Cook c : vecCooks){
                             JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
@@ -261,7 +256,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
+                            JLabel labelCookDescription = new JLabel("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -305,9 +300,10 @@ public class GUI {
         JPanel scrollableCooksAssign = new JPanel();
         JScrollPane scrollCooksAssign = new JScrollPane(scrollableCooksAssign);
 
-        Vector<JPanel> orders = new Vector<JPanel>();
-        Vector<JPanel> ordersInProgress = new Vector<JPanel>();
+        Vector<JPanel> orders = new Vector<>();
+        Vector<JPanel> ordersInProgress = new Vector<>();
 
+        assert response.body() != null;
         for (Order order : response.body()) {
             JPanel orderPanel = new JPanel();
             orderPanel.setBorder(blackline);
@@ -371,7 +367,7 @@ public class GUI {
                     panelAssign.add(scrollCooksAssign);
                     frameAssign.add(panelAssign);
 
-                    Vector<JPanel> cooks = new Vector<JPanel>();
+                    Vector<JPanel> cooks = new Vector<>();
 
                     for (Cook c : vecCooks){
                         JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
@@ -380,15 +376,14 @@ public class GUI {
                         panelCook.setMaximumSize(new Dimension(200, 30));
                         panelCook.setLayout(null);
 
-                        JButton buttonCookDescription = new JButton("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
+                        JButton buttonCookDescription = new JButton("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
                         buttonCookDescription.setBounds(1, 1, 198, 28);
                         panelCook.add(buttonCookDescription);
 
                         buttonCookDescription.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                Employee emp = c;
-                                order.setEmployee(emp);
+                                order.setEmployee(c);
                                 try {
                                     App.interfaceApi.updateOrders(order, order.getId()).execute();
                                 }
@@ -404,7 +399,7 @@ public class GUI {
                     scrollableCooksAssign.removeAll();
                     for (JPanel ck : cooks) { scrollableCooksAssign.add(ck); }
 
-                    panelAssign.updateUI();;
+                    panelAssign.updateUI();
 
                     frameAssign.pack();
                     frameAssign.setLocationRelativeTo(null);
@@ -441,7 +436,9 @@ public class GUI {
         Call<List<Recipe>> call = App.interfaceApi.getRecipe();
         try {
             return call.execute().body();
-        } catch (IOException e) {}   //można dodać okienko, że nie udało się
+        } catch (IOException e) {
+            System.out.println("Download not successful ");
+        }   //można dodać okienko, że nie udało się
         return new ArrayList<>();
     }
 
@@ -458,7 +455,7 @@ public class GUI {
 
     public List<Recipe> getUndividedRecipes(){
 
-        Set<Integer> dishIds = new HashSet<Integer>();
+        Set<Integer> dishIds = new HashSet<>();
         for (Recipe recipe: this.allRecipes){
             dishIds.add(recipe.getDishId());        //zbiór samych pojedynczych dishId
         }
