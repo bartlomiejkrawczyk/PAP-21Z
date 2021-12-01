@@ -12,6 +12,8 @@ import retrofit2.Response;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +29,26 @@ public class GUI {
     private JPanel scrollablePanel = new JPanel();
     private JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
     private JButton buttonCooks = new JButton("Cooks");
+
+    public void setButtonCooks(){
+        buttonCooks.setBounds(1, 1, 100, 23);
+        panelTop.add(buttonCooks);
+        buttonCooks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCook();
+            }
+        });
+    }
+
+    public void addCook() {
+        JFrame frame1 = new JFrame("Kitchen Cooks");
+        frame1.setMinimumSize(new Dimension(200, 200));
+        frame1.setResizable(false);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.pack();
+        frame1.setVisible(true);
+    }
 
     public void downloadOrders() {
         Call<List<Order>> call = App.interfaceApi.getOrdersStatus1();
@@ -86,8 +108,6 @@ public class GUI {
         panelTop.setBackground(Color.GRAY);
         panelTop.setLayout(null);
 
-        buttonCooks.setBounds(1, 1, 100, 23);
-
         JPanel panelLeftTitle = new JPanel();
         panelLeftTitle.setBorder(blackline);
         panelLeftTitle.setBackground(Color.DARK_GRAY);
@@ -111,8 +131,7 @@ public class GUI {
         frame.add(panelRight, BorderLayout.LINE_END);
         frame.add(panelTop, BorderLayout.NORTH);
 
-        panelTop.add(buttonCooks);
-
+        setButtonCooks();
         frame.pack();
         frame.setVisible(true);
     }
