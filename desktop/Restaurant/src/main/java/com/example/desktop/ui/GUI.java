@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -246,24 +247,16 @@ public class GUI {
         });
     }
 
-    public Vector<Recipe> downloadAllRecipes(){
+    public List<Recipe> downloadAllRecipes(){
         Call<List<Recipe>> call = App.interfaceApi.getRecipe();
-        Vector<Recipe> recipes = new Vector<Recipe>();
-        call.enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                if (response.isSuccessful() && response.body() != null){
-                    recipes.addAll(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable throwable) {}
-        });
-        return recipes;
+        try {
+            return call.execute().body();
+        } catch (IOException e) {}   //można dodać okienko, że nie udało się
+        return new ArrayList<>();
     }
 
-    public Vector<String> getOneRecipe(int dishId, Vector<Recipe> allRecipes){
+
+    public Vector<String> getOneRecipe(int dishId, List<Recipe> allRecipes){
         Vector<String> currentRecipe = new Vector<String>();
         for (Recipe recipe: allRecipes){
             if (recipe.getDishId() == dishId){
@@ -296,51 +289,52 @@ public class GUI {
     }
 
 
-    public GUI() {
+    public void run() {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Kitchen application");
+            frame.setMinimumSize(new Dimension(800, 450));
+            frame.setResizable(false);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JFrame frame = new JFrame("Kitchen application");
-        frame.setMinimumSize(new Dimension(800, 450));
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            panelLeft.setBorder(blackline);
+            panelLeft.setPreferredSize(new Dimension(400, 150));
+            panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
 
-        panelLeft.setBorder(blackline);
-        panelLeft.setPreferredSize(new Dimension(400, 150));
-        panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
+            panelRight.setBorder(blackline);
+            panelRight.setPreferredSize(new Dimension(400, 150));
 
-        panelRight.setBorder(blackline);
-        panelRight.setPreferredSize(new Dimension(400, 150));
+            panelTop.setBorder(blackline);
+            panelTop.setPreferredSize(new Dimension(800, 25));
+            panelTop.setBackground(Color.GRAY);
+            panelTop.setLayout(null);
 
-        panelTop.setBorder(blackline);
-        panelTop.setPreferredSize(new Dimension(800, 25));
-        panelTop.setBackground(Color.GRAY);
-        panelTop.setLayout(null);
+            JPanel panelLeftTitle = new JPanel();
+            panelLeftTitle.setBorder(blackline);
+            panelLeftTitle.setBackground(Color.DARK_GRAY);
 
-        JPanel panelLeftTitle = new JPanel();
-        panelLeftTitle.setBorder(blackline);
-        panelLeftTitle.setBackground(Color.DARK_GRAY);
+            JLabel panelLeftTitleText = new JLabel("Orders placed:");
+            panelLeftTitleText.setForeground(Color.WHITE);
 
-        JLabel panelLeftTitleText = new JLabel("Orders placed:");
-        panelLeftTitleText.setForeground(Color.WHITE);
+            panelLeftTitle.add(panelLeftTitleText);
+            panelLeft.add(panelLeftTitle);
 
-        panelLeftTitle.add(panelLeftTitleText);
-        panelLeft.add(panelLeftTitle);
+            scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+            scrollablePanel.setAutoscrolls(true);
+            scrollFrame.setPreferredSize(new Dimension(400, 350));
+            panelLeft.add(scrollFrame);
 
-        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
-        scrollablePanel.setAutoscrolls(true);
-        scrollFrame.setPreferredSize(new Dimension(400, 350));
-        panelLeft.add(scrollFrame);
+            downloadOrders();
+            Timer t = new Timer(30_000, e -> downloadOrders());
+            t.start();
 
-        downloadOrders();
-        Timer t = new Timer(30_000, e -> downloadOrders());
-        t.start();
+            frame.add(panelLeft, BorderLayout.LINE_START);
+            frame.add(panelRight, BorderLayout.LINE_END);
+            frame.add(panelTop, BorderLayout.NORTH);
 
-        frame.add(panelLeft, BorderLayout.LINE_START);
-        frame.add(panelRight, BorderLayout.LINE_END);
-        frame.add(panelTop, BorderLayout.NORTH);
-
-        setButtonCooks();
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+            setButtonCooks();
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }

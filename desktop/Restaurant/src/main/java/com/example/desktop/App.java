@@ -25,10 +25,10 @@ public class App {
 
     public static void main(String[] args) {
         createNetworkSys();
-        new GUI();
+        new GUI().run();
     }
 
-    private static void createNetworkSys() {
+    public static void createNetworkSys() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
