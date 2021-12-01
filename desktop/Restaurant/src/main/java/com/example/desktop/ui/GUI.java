@@ -256,11 +256,22 @@ public class GUI {
         for (Order order : response.body()) {
             JPanel orderPanel = new JPanel();
             orderPanel.setBorder(blackline);
-            orderPanel.setPreferredSize(new Dimension(200, 30));
+            orderPanel.setPreferredSize(new Dimension(200, 28));
+            orderPanel.setLayout(null);
 //                JLabel date = new JLabel(order.getDate().toString());
             JLabel dish_name = new JLabel(order.getDish().getName());
+            dish_name.setBounds(25, 0, 250, 28);
 //                orderPanel.add(date);
+            JButton buttonAssign = new JButton("Assign");
+            buttonAssign.setBounds(290, 0, 90, 28);
+
+            JButton buttonRecipe = new JButton("Recipe");
+            buttonRecipe.setBounds(200, 0, 90, 28);
+
+            orderPanel.add(buttonAssign);
+            orderPanel.add(buttonRecipe);
             orderPanel.add(dish_name);
+
             for (SpecialRequest request: order.getRequests())
                 orderPanel.add(new JLabel(request.getRequest()));
             orders.add(orderPanel);
