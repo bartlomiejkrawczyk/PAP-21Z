@@ -86,6 +86,32 @@ public class GUI {
         frameCooks.add(panelOptions, BorderLayout.NORTH);
         frameCooks.add(panelCooks, BorderLayout.LINE_START);
 
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frameAdd = new JFrame("Add cook");
+                JTextField textCookName = new JTextField("name");
+                JButton buttonAddCook = new JButton("Add");
+
+                textCookName.setPreferredSize(new Dimension(130, 50));
+                textCookName.setBorder(blackline);
+
+                buttonAddCook.setPreferredSize(new Dimension(70, 50));
+                buttonAddCook.setBorder(blackline);
+
+                frameAdd.setPreferredSize(new Dimension(200, 50));
+                frameAdd.setResizable(false);
+                frameAdd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                frameAdd.add(textCookName, BorderLayout.LINE_START);
+                frameAdd.add(buttonAddCook, BorderLayout.LINE_END);
+
+                frameAdd.pack();
+                frameAdd.setLocationRelativeTo(null);
+                frameAdd.setVisible(true);
+            }
+        });
+
         frameCooks.pack();
         frameCooks.setLocationRelativeTo(null);
         frameCooks.setVisible(true);
