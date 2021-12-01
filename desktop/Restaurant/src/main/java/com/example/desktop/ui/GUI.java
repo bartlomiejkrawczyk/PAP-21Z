@@ -130,7 +130,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Index: " + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getId()) + ".    Name: " +c.getName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -154,7 +154,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frameRemove = new JFrame("Remove cook");
-                JTextField textCookId = new JTextField("index");
+                JTextField textCookId = new JTextField("id");
                 JButton buttonRemoveCook = new JButton("Remove");
 
                 textCookId.setPreferredSize(new Dimension(130, 50));
@@ -197,7 +197,7 @@ public class GUI {
                             vecCooks.remove(indexToRemove);
                         else {
                             frameRemove.dispose();
-                            JOptionPane.showMessageDialog(frameRemove, "Idex not in list!");
+                            JOptionPane.showMessageDialog(frameRemove, "Id not in the list!");
                             return;
                         }
 
@@ -209,7 +209,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Index:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);

@@ -2,7 +2,7 @@ package com.example.desktop;
 
 import com.example.desktop.entities.Employee;
 import com.example.desktop.entities.Order;
-//import com.example.desktop.entities.Recipe;
+import com.example.desktop.entities.Recipe;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,6 +23,6 @@ public interface InterfaceApi {
     @GET("api/orders/status/1")
     Call<List<Order>> getOrdersStatus1();
 
-//    @GET("api/recipes/all")
-//    Call<List<Recipe>> getRecipe();
+    @GET("api/recipes/all")
+    Call<List<Recipe>> getRecipe();
 }
