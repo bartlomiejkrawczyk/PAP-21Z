@@ -6,22 +6,24 @@ classDiagram
     class InterfaceApi
     class Utils
     class Entities
+    class PojoEntities
     class UI
-    class Database
+    class LocalDatabase
     class Dao
 
+    PojoEntities <--> App
+    UI <--> PojoEntities
+    Utils <--> PojoEntities
+
     App -- InterfaceApi
-    Utils <-- InterfaceApi
     Utils --> Dao
     Utils <--> PhoneMemory
 
-    Database <--> Entities
+    LocalDatabase <--> Entities
     Dao <--> Entities
 
     UI <--> Dao
     UI <--> Utils
-    UI <--> InterfaceApi
-    App -- Utils
 
     InterfaceApi <--> Server
 ```
