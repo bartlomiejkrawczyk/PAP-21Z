@@ -73,7 +73,7 @@ classDiagram
 
     OracleDatabase <--> Entities
     Repositories <--> Entities
-    Controllers --> Repositories
+    Controllers <-- Repositories
 
     Entities o-- Projections
     OracleDatabase --> Projections
