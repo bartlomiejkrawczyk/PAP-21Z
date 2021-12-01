@@ -333,6 +333,25 @@ public class GUI {
 
             orderPanel.add(dish_name);
 
+            buttonRecipe.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JFrame frameOneRecipe = new JFrame("Recipe of current dish ");
+                    JTextField field = new JTextField(getUndividedRecipes(Math.toIntExact((order.getDish().getId()))).getRecipe());
+
+                    frameOneRecipe.add(field);
+
+                    frameOneRecipe.setMinimumSize(new Dimension(300, 300));
+                    frameOneRecipe.setResizable(true);
+                    frameOneRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                    frameOneRecipe.pack();
+                    frameOneRecipe.setLocationRelativeTo(null);
+                    frameOneRecipe.setVisible(true);
+
+                }
+            });
+
             buttonAssign.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -453,9 +472,16 @@ public class GUI {
             }
             undividedRecipes.add(currRecipe);
         }
-
         return undividedRecipes;
+    }
 
+    public Recipe getUndividedRecipes(int i){
+        List<String> smallRecipesList = getOneRecipe(i);
+        Recipe currRecipe = new Recipe(i);
+        for (String line: smallRecipesList){
+            currRecipe.extendRecipe(line);
+        }
+        return currRecipe;
     }
 
 
