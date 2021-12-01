@@ -1,6 +1,7 @@
 package com.example.desktop.ui;
 
 import com.example.desktop.App;
+import com.example.desktop.entities.Cook;
 import com.example.desktop.entities.Employee;
 import com.example.desktop.entities.Order;
 import com.example.desktop.entities.SpecialRequest;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class GUI {
+    private Vector<Cook> vecCooks = new Vector<Cook>();
 
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -42,12 +44,35 @@ public class GUI {
     }
 
     public void buttonCooksOnClick() {
-        JFrame frameCooks = new JFrame("Kitchen Cooks");
+        JFrame frameCooks = new JFrame("Cooks");
         JPanel panelCooks = new JPanel();
         JPanel panelOptions = new JPanel();
+        JButton buttonAdd = new JButton("Add cook");
+        JButton buttonRemove = new JButton("Remove cook");
+        JPanel panelTitle = new JPanel();
+        JLabel labelTitle = new JLabel("Current Cooks: ");
+        JPanel scrollableCooks = new JPanel();
+
+        scrollableCooks.setPreferredSize(new Dimension(300, 240));
+        scrollableCooks.setLayout(new BoxLayout(scrollableCooks, BoxLayout.Y_AXIS));
+        scrollableCooks.setAutoscrolls(true);
+
+        panelTitle.setBackground(Color.DARK_GRAY);
+        panelTitle.setBounds(1, 1, 300, 30);
+        labelTitle.setForeground(Color.WHITE);
+        panelTitle.add(labelTitle);
+        panelCooks.add(panelTitle);
+        panelCooks.add(scrollableCooks);
+
+        buttonAdd.setBounds(1, 1, 150, 24);
+        panelOptions.add(buttonAdd);
+
+        buttonRemove.setBounds(150, 1, 150, 24);
+        panelOptions.add(buttonRemove);
 
         panelCooks.setBorder(blackline);
-        panelCooks.setPreferredSize(new Dimension(300, 275));
+        panelCooks.setPreferredSize(new Dimension(300, 30));
+        panelCooks.setLayout(new BoxLayout(panelCooks, BoxLayout.Y_AXIS));
 
         panelOptions.setBorder(blackline);
         panelOptions.setPreferredSize(new Dimension(300, 25));
@@ -59,7 +84,7 @@ public class GUI {
         frameCooks.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frameCooks.add(panelOptions, BorderLayout.NORTH);
-        frameCooks.add(panelCooks, BorderLayout.SOUTH);
+        frameCooks.add(panelCooks, BorderLayout.LINE_START);
 
         frameCooks.pack();
         frameCooks.setLocationRelativeTo(null);

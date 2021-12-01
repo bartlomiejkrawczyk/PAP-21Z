@@ -4,6 +4,9 @@ public class Cook {
     private Long id;
     private String name;
 
+    public Cook() {
+    }
+
     public Cook(String name) {
         this.name = name;
     }
