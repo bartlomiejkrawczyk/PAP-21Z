@@ -1,10 +1,7 @@
 package com.example.desktop.ui;
 
 import com.example.desktop.App;
-import com.example.desktop.entities.Cook;
-import com.example.desktop.entities.Employee;
-import com.example.desktop.entities.Order;
-import com.example.desktop.entities.SpecialRequest;
+import com.example.desktop.entities.*;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -247,6 +244,33 @@ public class GUI {
             public void onFailure(Call<List<Order>> call, Throwable throwable) {
             }
         });
+    }
+
+    public Vector<Recipe> downloadAllRecipes(){
+        Call<List<Recipe>> call = App.interfaceApi.getRecipe();
+        Vector<Recipe> recipes = new Vector<Recipe>();
+        call.enqueue(new Callback<List<Recipe>>() {
+            @Override
+            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    recipes.addAll(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Recipe>> call, Throwable throwable) {}
+        });
+        return recipes;
+    }
+
+    public Vector<String> getOneRecipe(int dishId, Vector<Recipe> allRecipes){
+        Vector<String> currentRecipe = new Vector<String>();
+        for (Recipe recipe: allRecipes){
+            if (recipe.getDishId() == dishId){
+                currentRecipe.add(recipe.getRecipe());
+            }
+        }
+        return currentRecipe;
     }
 
     private void addOrdersToLeftPanel(Response<List<Order>> response) {
