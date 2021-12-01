@@ -17,10 +17,20 @@ public class Recipe {
 
     public void setRecipe(String recipe) {this.recipe = recipe;}
 
-    public Recipe(int step, int dishId, String recipe){
+    public Recipe(int dishId, String recipe, int step){
         this.step = step;
         this.dishId = dishId;
         this.recipe = recipe;
+    }
+
+    public Recipe(int dishId){
+        this.step = 0;
+        this.dishId = dishId;
+        this.recipe = "";
+    }
+
+    public void extendRecipe(String line){
+        this.recipe += (line + '\n');
     }
 
 

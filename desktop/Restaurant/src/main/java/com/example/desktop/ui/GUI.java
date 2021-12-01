@@ -8,19 +8,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 public class GUI {
     private Vector<Cook> vecCooks = new Vector<Cook>();
+    private List<Recipe> allRecipes;
 
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -31,6 +31,7 @@ public class GUI {
     private JPanel scrollablePanelRight = new JPanel();
     private JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
     private JButton buttonCooks = new JButton("Cooks");
+    private JButton buttonRecipes = new JButton("Recipes");
 
     public void setButtonCooks(){
         buttonCooks.setBounds(1, 1, 100, 23);
@@ -41,6 +42,56 @@ public class GUI {
                 buttonCooksOnClick();
             }
         });
+    }
+
+    public void setButtonRecipes(){
+        buttonRecipes.setBounds(101, 1, 100, 23);
+        panelTop.add(buttonRecipes);
+        buttonRecipes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayAllRecipes();
+            }
+        });
+    }
+
+    public void displayAllRecipes(){                                //////////!!!!!!!!!!!!!!!!!!!!!!!!
+        JFrame frameAllRecipes = new JFrame("All recipes");
+        //JLabel labelTitle = new JLabel("Recipes");
+        //frameAllRecipes.add(labelTitle);
+        JPanel panelRecipes = new JPanel();
+        List<Recipe> undividedRecipes = getUndividedRecipes();
+
+        for (Recipe recipe : undividedRecipes){
+            JButton buttonDisplayRecipe = new JButton(Integer.toString(recipe.getDishId()));
+            buttonDisplayRecipe.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JFrame frameCurrRecipe = new JFrame("Current recipe id: " + Integer.toString(recipe.getDishId()));
+                    JTextField field = new JTextField();
+                    field.setText(recipe.getRecipe());
+
+                    frameCurrRecipe.add(field);
+
+                    frameCurrRecipe.setMinimumSize(new Dimension(300, 300));
+                    frameCurrRecipe.setResizable(false);
+                    frameCurrRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                    frameCurrRecipe.pack();
+                    frameCurrRecipe.setLocationRelativeTo(null);
+                    frameCurrRecipe.setVisible(true);
+                }
+            });
+            panelRecipes.add(buttonDisplayRecipe);
+        }
+        frameAllRecipes.add(panelRecipes);
+
+        frameAllRecipes.setMinimumSize(new Dimension(500, 500));
+        frameAllRecipes.setResizable(false);
+        frameAllRecipes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frameAllRecipes.pack();
+        frameAllRecipes.setLocationRelativeTo(null);
+        frameAllRecipes.setVisible(true);
     }
 
     public void buttonCooksOnClick() {
@@ -280,21 +331,45 @@ public class GUI {
         return new ArrayList<>();
     }
 
-    public Vector<String> getOneRecipe(int dishId, List<Recipe> allRecipes){
-        Vector<String> currentRecipe = new Vector<String>();
-        for (Recipe recipe: allRecipes){
-            if (recipe.getDishId() == dishId){
+
+    public List<String> getOneRecipe(int dishId){
+        List<String> currentRecipe = new ArrayList<>();
+        for (Recipe recipe: this.allRecipes)
+            if (recipe.getDishId() == dishId) {
                 currentRecipe.add(recipe.getRecipe());
             }
-        }
         return currentRecipe;
     }
+
+
+    public List<Recipe> getUndividedRecipes(){
+
+        Set<Integer> dishIds = new HashSet<Integer>();
+        for (Recipe recipe: this.allRecipes){
+            dishIds.add(recipe.getDishId());        //zbiór samych pojedynczych dishId
+        }
+
+        List<Recipe> undividedRecipes = new ArrayList<>();
+        for (int id: dishIds){
+            List<String> currentRecipe = getOneRecipe(id);
+            Recipe currRecipe = new Recipe(id);
+            for (String line: currentRecipe){
+                currRecipe.extendRecipe(line);
+            }
+            undividedRecipes.add(currRecipe);
+        }
+
+        return undividedRecipes;
+
+    }
+
+
 
 
     public void run() {
         SwingUtilities.invokeLater(() -> {
 
-            List<Recipe> allRecipes = downloadAllRecipes();
+            this.allRecipes = downloadAllRecipes();
 
             JFrame frame = new JFrame("Kitchen application");
             frame.setMinimumSize(new Dimension(800, 450));
@@ -352,7 +427,9 @@ public class GUI {
             frame.add(panelRight, BorderLayout.LINE_END);
             frame.add(panelTop, BorderLayout.NORTH);
 
+            setButtonRecipes();
             setButtonCooks();
+
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

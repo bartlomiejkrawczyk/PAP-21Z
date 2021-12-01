@@ -30,7 +30,7 @@ public class GUITest {
     @Test
     public void testGetOneRecipe(){
         List<Recipe> recipes = gui.downloadAllRecipes();
-        Vector<String> currRecipe = gui.getOneRecipe(1, recipes);
+        List<String> currRecipe = gui.getOneRecipe(1);
 
         assertEquals(8, currRecipe.size());
     }
