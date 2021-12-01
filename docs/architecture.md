@@ -62,6 +62,35 @@ Wydzielamy kilka rodzajów plików xml, każdy definiuje inne dane:
 
 # Aplikacja Desktopowa
 
+```mermaid
+classDiagram
+    class App
+    class InterfaceApi
+    class Entities
+    class GUI
+
+    App -- InterfaceApi
+    GUI <--> Entities
+    App <--> GUI
+
+    InterfaceApi <--> Server
+```
+
+W głównym pakiecie znajduje się:
+- klasa App
+    - która pozwala na wykonywanie akcji w czasie odpalania m.in:
+        - zainicjowanie komunikacji sieciowej
+        - pobranie podstawowych danych
+- interfejs InterfaceApi
+    - który definiuje metody zaaonotowane odpowiednimi urlami
+    - biblioteka Retrofit wykorzystuje je do wygenerowania odpowiednich metod do wyciągania danych z serwera
+
+Wydzielone są również inne pakiety:
+- entities:
+    - zawierają klasy wymagane przez aplikację, a udostępniane przez serwer
+- ui:
+    - zawiera klasę GUI odpowiedzialną za aplikację okienkową
+
 # Serwer
 
 ```mermaid
