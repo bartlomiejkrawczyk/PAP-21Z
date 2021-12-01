@@ -1,6 +1,6 @@
 from typing import List, Dict
 from random import choice, randint
-import lorem
+import lorem  # type: ignore
 
 EMPLOYEE_KINDS: List[str] = ['waiter', 'cook']
 
@@ -16,8 +16,8 @@ class EmployeeKind:
     @staticmethod
     def generate_employee_kinds() -> List['EmployeeKind']:
         kinds: List['EmployeeKind'] = []
-        for i, kind in enumerate(EMPLOYEE_KINDS, start=1):
-            kinds.append(EmployeeKind(i, kind))
+        for i, kind in enumerate(EMPLOYEE_KINDS, start=1):  # type: ignore
+            kinds.append(EmployeeKind(i, kind))  # type: ignore
         return kinds
 
 
@@ -52,7 +52,7 @@ class Employee:
         return employees
 
 
-TABLES = ['pod oknem', 'przy drzwiach', 'przy barze']
+TABLES = ['Near the Window', 'Near the Doors', 'Over the Bar']
 
 
 class Table:
@@ -66,8 +66,8 @@ class Table:
     @staticmethod
     def generate_tables() -> List['Table']:
         tables: List['Table'] = []
-        for i, name in enumerate(TABLES, start=1):
-            tables.append(Table(i, name))
+        for i, name in enumerate(TABLES, start=1):  # type: ignore
+            tables.append(Table(i, name))  # type: ignore
         return tables
 
 
@@ -85,8 +85,8 @@ class ProductCategory:
     @staticmethod
     def generate_product_categories() -> List['ProductCategory']:
         categories: List['ProductCategory'] = []
-        for i, category in enumerate(PRODUCT_CATEGORIES, start=1):
-            categories.append(ProductCategory(i, category))
+        for i, category in enumerate(PRODUCT_CATEGORIES, start=1):  # type: ignore
+            categories.append(ProductCategory(i, category))  # type: ignore
         return categories
 
 
@@ -216,14 +216,21 @@ class Receipt:
                        for _ in range(randint(1, 10))]
 
     def __str__(self) -> str:
-        result = f'INSERT INTO receipts VALUES ({self.id}, {self.payment}, {self.employee}, {self.table});\n'
+        result = f'INSERT INTO receipts VALUES ({self.id}, {self.payment}, {self.employee}, {self.table});\n\n'
+        for order in self.orders:
+            result += str(order)
+        result += '\n'
         return result
 
     @staticmethod
     def generate_receipts(employees: List[Employee], tables: List[Table], dishes: List[Dish]) -> List['Receipt']:
         waiters = [
             employee for employee in employees if employee.employee_kind == 1]
-        return [Receipt(choice(waiters).employee_kind, table.id, dishes) for table in tables]
+        receipts: List[Receipt] = []
+        for waiter in waiters:
+            receipts.extend(
+                [Receipt(waiter.id, table.id, dishes) for table in tables])
+        return receipts
 
 
 class Order:
@@ -235,7 +242,7 @@ class Order:
         self.date = '21/01/01'
         self.dish = dish
         self.receipt = receipt
-        self.status = 1
+        self.status = randint(1, 3)
 
     def __str__(self) -> str:
         return f'INSERT INTO orders VALUES ({self.id}, \'{self.date}\', {self.dish}, {self.receipt}, {self.status}, NULL);\n'

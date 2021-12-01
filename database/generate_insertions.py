@@ -1,6 +1,5 @@
 from typing import List, Callable
-from classes import EmployeeKind, Employee, Table, ProductCategory, Product, DishCategory, Receipt
-from random import choice
+from classes import EmployeeKind, Employee, Table, ProductCategory, Product, DishCategory, Receipt, Dish
 
 EMPLOYEE_KINDS = EmployeeKind.generate_employee_kinds()
 
@@ -41,8 +40,13 @@ def insert_dish_categories() -> List[str]:
     return [str(category) for category in CATEGORIES]
 
 
+DISHES: List[Dish] = []
+for category in CATEGORIES:
+    DISHES.extend(category.dishes)
+
+
 def insert_receipts() -> List[str]:
-    return [str(receipt) for receipt in Receipt.generate_receipts(EMPLOYEES, TABLES, choice(CATEGORIES).dishes)]
+    return [str(receipt) for receipt in Receipt.generate_receipts(EMPLOYEES, TABLES, DISHES)]
 
 
 def write_lines(lines: List[str]) -> None:
