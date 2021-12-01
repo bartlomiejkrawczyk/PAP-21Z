@@ -166,7 +166,7 @@ public class GUI {
                         if (cooksNumber == 0)
                             cookId = 1;
                         else {
-                            int lastCookId = vecCooks.get(cooksNumber - 1).getId();
+                            int lastCookId = vecCooks.get(cooksNumber - 1).getIdInt();
                             cookId = lastCookId + 1;
                         }
                         String cookName = textCookName.getText();
@@ -181,7 +181,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id: " + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -260,7 +260,7 @@ public class GUI {
                             panelCook.setMinimumSize(new Dimension(300, 30));
                             panelCook.setMaximumSize(new Dimension(300, 30));
 
-                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getId()) + ".    Name: " +c.getName());
+                            JLabel labelCookDescription = new JLabel("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
                             panelCook.add(labelCookDescription);
 
                             cooks.add(panelCook);
@@ -291,7 +291,7 @@ public class GUI {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    addOrdersToLeftPanel(response);
+                    addOrdersToPanels(response);
                 }
             }
             @Override
@@ -300,24 +300,103 @@ public class GUI {
         });
     }
 
-    private void addOrdersToLeftPanel(Response<List<Order>> response) {
+    private void addOrdersToPanels(Response<List<Order>> response) {
+        JPanel scrollableCooksAssign = new JPanel();
+        JScrollPane scrollCooksAssign = new JScrollPane(scrollableCooksAssign);
 
         Vector<JPanel> orders = new Vector<JPanel>();
+        Vector<JPanel> ordersInProgress = new Vector<JPanel>();
 
         for (Order order : response.body()) {
             JPanel orderPanel = new JPanel();
             orderPanel.setBorder(blackline);
-            orderPanel.setPreferredSize(new Dimension(200, 30));
+            orderPanel.setPreferredSize(new Dimension(200, 28));
+            orderPanel.setLayout(null);
 //                JLabel date = new JLabel(order.getDate().toString());
             JLabel dish_name = new JLabel(order.getDish().getName());
+            dish_name.setBounds(25, 0, 250, 28);
 //                orderPanel.add(date);
+
+            String name = "Name";
+            if (order.getEmployee() != null)
+                name = order.getEmployee().getFirstName();
+
+            JLabel cooksName = new JLabel("Assigned to: " + name);
+            cooksName.setBounds(200, 0, 190, 28);
+
+            JButton buttonAssign = new JButton("Assign");
+            JButton buttonRecipe = new JButton("Recipe");
+
+            buttonAssign.setBounds(200, 0, 90, 28);
+            buttonRecipe.setBounds(290, 0, 90, 28);
+
             orderPanel.add(dish_name);
+
+            buttonAssign.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JFrame frameAssign = new JFrame("Assign a cook");
+                    JPanel panelAssign = new JPanel();
+
+                    panelAssign.setPreferredSize(new Dimension(200, 400));
+
+                    frameAssign.setPreferredSize(new Dimension(200, 400));
+                    frameAssign.setResizable(false);
+                    frameAssign.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                    scrollCooksAssign.setPreferredSize(new Dimension(200, 400));
+                    scrollableCooksAssign.setLayout(new BoxLayout(scrollableCooksAssign, BoxLayout.Y_AXIS));
+                    scrollableCooksAssign.setAutoscrolls(true);
+
+                    panelAssign.add(scrollCooksAssign);
+                    frameAssign.add(panelAssign);
+
+                    Vector<JPanel> cooks = new Vector<JPanel>();
+
+                    for (Cook c : vecCooks){
+                        JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+                        panelCook.setBorder(blackline);
+                        panelCook.setMinimumSize(new Dimension(200, 30));
+                        panelCook.setMaximumSize(new Dimension(200, 30));
+                        panelCook.setLayout(null);
+
+                        JButton buttonCookDescription = new JButton("Id:" + Integer.toString(c.getIdInt()) + ".    Name: " +c.getFirstName());
+                        buttonCookDescription.setBounds(1, 1, 198, 28);
+                        panelCook.add(buttonCookDescription);
+
+                        cooks.add(panelCook);
+                    }
+                    scrollableCooksAssign.removeAll();
+                    for (JPanel ck : cooks) { scrollableCooksAssign.add(ck); }
+
+                    panelAssign.updateUI();;
+
+                    frameAssign.pack();
+                    frameAssign.setLocationRelativeTo(null);
+                    frameAssign.setVisible(true);
+                }
+            });
+
             for (SpecialRequest request: order.getRequests())
                 orderPanel.add(new JLabel(request.getRequest()));
-            orders.add(orderPanel);
+
+            if (order.getEmployee() == null) {
+                orderPanel.add(buttonAssign);
+                orderPanel.add(buttonRecipe);
+                orders.add(orderPanel);
+            }
+            else {
+                orderPanel.add(cooksName);
+                ordersInProgress.add(orderPanel);
+            }
         }
         scrollablePanel.removeAll();
-        for (JPanel order: orders) scrollablePanel.add(order);
+        scrollablePanelRight.removeAll();
+
+        for (JPanel order: orders)
+            scrollablePanel.add(order);
+        for (JPanel order : ordersInProgress)
+            scrollablePanelRight.add(order);
 
         panelLeft.updateUI();
     }

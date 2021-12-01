@@ -23,6 +23,9 @@ public interface InterfaceApi {
     @GET("api/orders/status/1")
     Call<List<Order>> getOrdersStatus1();
 
+    @GET("api/orders/Employee/notNull")
+    Call<List<Order>> getOrdersEmployeeNotNull();
+
     @GET("api/recipes/all")
     Call<List<Recipe>> getRecipe();
 }
