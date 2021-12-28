@@ -239,10 +239,10 @@ class Order:
     def __init__(self, dish: int, receipt: int) -> None:
         self.id = Order.i
         Order.i += 1
-        self.date = '21/01/01'
+        self.date = randint(1140693898347, 1640693898347)
         self.dish = dish
         self.receipt = receipt
         self.status = randint(1, 3)
 
     def __str__(self) -> str:
-        return f'INSERT INTO orders VALUES ({self.id}, \'{self.date}\', {self.dish}, {self.receipt}, {self.status}, NULL);\n'
+        return f'INSERT INTO orders VALUES ({self.id}, {self.date}, {self.dish}, {self.receipt}, {self.status}, NULL);\n'
