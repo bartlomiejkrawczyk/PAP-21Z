@@ -136,10 +136,16 @@ public class ReceiptsActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Order>> call, @NonNull Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    runOnUiThread(() -> {
-                        adapter.getReceipts().get(position).setOrders(response.body());
-                        adapter.notifyItemChanged(position);
-                    });
+                    List<Order> orders = response.body();
+                    new Thread(() -> {
+                        for (Order order : orders) {
+                            order.getDish().fetchData(ReceiptsActivity.this);
+                        }
+                        runOnUiThread(() -> {
+                            adapter.getReceipts().get(position).setOrders(orders);
+                            adapter.notifyItemChanged(position);
+                        });
+                    }).start();
                 }
             }
 

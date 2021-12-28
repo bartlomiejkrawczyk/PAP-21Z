@@ -15,6 +15,9 @@ public interface DishesDao {
     @Query("SELECT * FROM dishes WHERE dishCategoryId = :categoryId")
     List<Dish> getDishesByCategory(Long categoryId);
 
+    @Query("SELECT * FROM dishes WHERE id =:id")
+    Dish getDishById(Long id);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dish dish);
 }

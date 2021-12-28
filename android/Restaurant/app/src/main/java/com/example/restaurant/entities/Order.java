@@ -1,12 +1,13 @@
 package com.example.restaurant.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Order implements Serializable {
 
     private Long id;
+
+    private Long date;
 
     private Dish dish;
 
@@ -16,18 +17,17 @@ public class Order implements Serializable {
 
     private Integer status;
 
-    private Employee employee;
 
     public Order() {
     }
 
-    public Order(Long id, LocalDate date, Dish dish, Long receiptId, List<SpecialRequest> requests, Integer status, Employee employee) {
+    public Order(Long id, Long date, Dish dish, Long receiptId, List<SpecialRequest> requests, Integer status) {
         this.id = id;
+        this.date = date;
         this.dish = dish;
         this.receiptId = receiptId;
         this.requests = requests;
         this.status = status;
-        this.employee = employee;
     }
 
     public Long getId() {
@@ -36,6 +36,14 @@ public class Order implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
     }
 
     public Dish getDish() {
@@ -70,11 +78,4 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }

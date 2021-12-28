@@ -1,8 +1,12 @@
 package com.example.restaurant.entities;
 
+import android.content.Context;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.example.restaurant.db.AppDatabase;
 
 import java.io.Serializable;
 
@@ -68,6 +72,15 @@ public class Dish implements Serializable {
 
     public void setDishCategoryId(Long dishCategoryId) {
         this.dishCategoryId = dishCategoryId;
+    }
+
+    public void fetchData(Context context) {
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+        Dish dish = db.dishesDao().getDishById(this.id);
+        setName(dish.getName());
+        setImagePath(dish.getImagePath());
+        setPrice(dish.getPrice());
+        setDishCategoryId(dish.getDishCategoryId());
     }
 
 }
