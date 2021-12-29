@@ -7,7 +7,7 @@ public class Receipt implements Serializable {
 
     private Long id;
 
-    private Long payment;
+    private Integer payment;
 
     private Employee employee;
 
@@ -18,7 +18,7 @@ public class Receipt implements Serializable {
     public Receipt() {
     }
 
-    public Receipt(Long id, Long payment, Employee employee, Table table, List<Order> orders) {
+    public Receipt(Long id, Integer payment, Employee employee, Table table, List<Order> orders) {
         this.id = id;
         this.payment = payment;
         this.employee = employee;
@@ -34,11 +34,11 @@ public class Receipt implements Serializable {
         this.id = id;
     }
 
-    public Long getPayment() {
+    public Integer getPayment() {
         return payment;
     }
 
-    public void setPayment(Long payment) {
+    public void setPayment(Integer payment) {
         this.payment = payment;
     }
 

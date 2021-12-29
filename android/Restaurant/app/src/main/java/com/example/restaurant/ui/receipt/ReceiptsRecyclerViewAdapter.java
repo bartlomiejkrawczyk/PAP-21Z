@@ -66,7 +66,10 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReceiptsViewHolder) {
             Receipt receipt = receipts.get(position);
-            ((ReceiptsViewHolder) holder).textViewTable.setText(receipt.getTable().toString());
+            if (receipt.getTable() != null)
+                ((ReceiptsViewHolder) holder).textViewTable.setText(receipt.getTable().toString());
+            else
+                ((ReceiptsViewHolder) holder).textViewTable.setText(R.string.spinner_item_takeaway);
             int total = 0;
             ((ReceiptsViewHolder) holder).linearLayout.removeAllViews();
             if (receipt.getOrders() != null)

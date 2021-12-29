@@ -30,12 +30,20 @@
     <string name="button_add_receipt_recycler_item_add_receipt">Add Receipt</string>
 
 
+    <!-- Receipt Activity -->
+    <string name="spinner_item_takeaway">Takeaway</string>
+    <string name="button_add_order_receipt">Add Order</string>
+
+
     <string name="divider">Divider</string>
     <string name="content_description_status">Status</string>
     <string name="text_view_table_receipt">Table</string>
     <string name="text_view_orders_receipt">Orders</string>
-    <string name="button_add_order_receipt">Add Order</string>
     <string name="content_description_delete_order_button">Delete Order Button</string>
+    <string name="receipt_activity_adding_receipt_failed">Adding Receipt Failed! Try again!</string>
+    <string name="receipt_activity_internet_error">Check your internet connection!</string>
+    <string name="menu_delete_receipt">Delete Receipt</string>
+    <string name="menu_close_receipt">Close Receipt</string>
 
 
 </resources>

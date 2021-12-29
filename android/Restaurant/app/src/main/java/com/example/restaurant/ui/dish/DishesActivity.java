@@ -44,7 +44,9 @@ public class DishesActivity extends AppCompatActivity {
 
             adapter.setOnClickListener(dish -> {
                 Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                intent.putExtra("dish", dish.getId());
+                setResult(RESULT_OK, intent);
+                finish();
             });
 
             recyclerView.setAdapter(adapter);

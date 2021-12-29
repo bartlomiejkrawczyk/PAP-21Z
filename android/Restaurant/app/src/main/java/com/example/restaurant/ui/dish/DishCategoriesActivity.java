@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,10 +40,21 @@ public class DishCategoriesActivity extends AppCompatActivity {
 
         adapter = new DishCategoriesRecyclerViewAdapter();
 
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        setResult(RESULT_OK, data);
+                        finish();
+                    }
+                });
+
         adapter.setOnClickListener(category -> {
             Intent intent = new Intent(this, DishesActivity.class);
             intent.putExtra(DISH_CATEGORY_ID_KEY, category.getId());
-            startActivity(intent);
+//            startActivity(intent);
+            activityResultLauncher.launch(intent);
         });
 
         recyclerView.setAdapter(adapter);

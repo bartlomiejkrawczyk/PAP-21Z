@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,11 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ReceiptsRecyclerViewAdapter adapter;
+    private ProgressBar progressBar;
+
+    private Timer timer;
+
+    private int orderCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +69,31 @@ public class ReceiptsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        timer.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
+        getReceipts();
+    }
+
     private void initViews() {
+        progressBar = findViewById(R.id.progress_bar_receipts);
+
         recyclerView = findViewById(R.id.recycler_view_receipts);
         recyclerView.setHasFixedSize(true);
+
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -100,13 +129,11 @@ public class ReceiptsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Receipt> receipts = response.body();
 
-
                     adapter.setReceipts(receipts);
 
                     scheduleUpdates();
 
                     runOnUiThread(() -> adapter.notifyDataSetChanged());
-
                 }
             }
 
@@ -118,11 +145,15 @@ public class ReceiptsActivity extends AppCompatActivity {
     }
 
     private void scheduleUpdates() {
-        Timer t = new Timer();
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer();
 
-        t.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                orderCount = adapter.getItemCount() - 1;
                 for (int i = 0; i < adapter.getItemCount() - 1; i++) {
                     getOrders(i);
                 }
@@ -144,7 +175,12 @@ public class ReceiptsActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             adapter.getReceipts().get(position).setOrders(orders);
                             adapter.notifyItemChanged(position);
+                            if (--orderCount == 0) {
+                                progressBar.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
                         });
+
                     }).start();
                 }
             }
@@ -152,6 +188,12 @@ public class ReceiptsActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<List<Order>> call, @NonNull Throwable t) {
                 Log.e("ORDERS", t.getMessage());
+                runOnUiThread(() -> {
+                    if (--orderCount == 0) {
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         });
     }

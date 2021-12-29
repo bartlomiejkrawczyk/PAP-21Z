@@ -11,7 +11,11 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface InterfaceApi {
@@ -35,4 +39,19 @@ public interface InterfaceApi {
 
     @GET("api/tables/all")
     Call<List<Table>> getTables();
+
+    @POST("api/receipts")
+    Call<Receipt> addReceipt(@Body Receipt receipt);
+
+    @PUT("api/receipts/{receipt}")
+    Call<Receipt> updateReceipt(@Path("receipt") Long receiptId, @Body Receipt receipt);
+
+    @DELETE("api/receipts/{receipt}")
+    Call<Void> deleteReceipt(@Path("receipt") Long receiptId);
+
+    @POST("api/orders")
+    Call<Order> addOrder(@Body Order order);
+
+    @DELETE("api/orders/{order}")
+    Call<Void> deleteOrder(@Path("order") Long id);
 }

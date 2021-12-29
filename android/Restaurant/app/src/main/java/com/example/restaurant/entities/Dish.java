@@ -26,6 +26,11 @@ public class Dish implements Serializable {
     }
 
     @Ignore
+    public Dish(Long id) {
+        this.id = id;
+    }
+
+    @Ignore
     public Dish(Long id, String name, String imagePath, Long price, Long dishCategoryId) {
         this.id = id;
         this.name = name;
