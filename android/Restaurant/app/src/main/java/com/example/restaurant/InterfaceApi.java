@@ -53,6 +53,9 @@ public interface InterfaceApi {
     @POST("api/orders")
     Call<Order> addOrder(@Body Order order);
 
+    @PUT("api/orders/status/{order}/{status}")
+    Call<Order> advanceOrder(@Path("order") Long orderId, @Path("status") int status);
+
     @DELETE("api/orders/{order}")
     Call<Void> deleteOrder(@Path("order") Long id);
 

@@ -56,6 +56,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="edit_text_request_hint">Request</string>
     <string name="content_description_dish_image">Dish Image</string>
+    <string name="text_view_total_receipt">Total</string>
 
 
 </resources>

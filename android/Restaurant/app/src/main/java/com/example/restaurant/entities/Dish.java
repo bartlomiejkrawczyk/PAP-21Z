@@ -17,7 +17,7 @@ public class Dish implements Serializable {
 
     private String name;
     private String imagePath;
-    private Long price;
+    private Integer price;
 
     private Long dishCategoryId;
 
@@ -31,7 +31,7 @@ public class Dish implements Serializable {
     }
 
     @Ignore
-    public Dish(Long id, String name, String imagePath, Long price, Long dishCategoryId) {
+    public Dish(Long id, String name, String imagePath, Integer price, Long dishCategoryId) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
@@ -63,11 +63,11 @@ public class Dish implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

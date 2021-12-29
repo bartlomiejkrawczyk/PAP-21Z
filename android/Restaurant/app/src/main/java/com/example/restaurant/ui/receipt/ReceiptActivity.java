@@ -47,12 +47,15 @@ import retrofit2.Response;
 
 public class ReceiptActivity extends AppCompatActivity {
 
+    private TextView textViewTotal;
     private List<Table> tables;
     private Spinner spinner;
     private LinearLayout linearLayout;
     private Button button;
 
     private Receipt receipt;
+
+    private ActivityResultLauncher<Intent> requestActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,8 @@ public class ReceiptActivity extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (!response.isSuccessful())
                         Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+                    else
+                        finish();
                 }
 
                 @Override
@@ -154,6 +159,9 @@ public class ReceiptActivity extends AppCompatActivity {
     }
 
     private void initViews(Receipt receipt) {
+
+        textViewTotal = findViewById(R.id.text_view_total_receipt);
+        updateTotal(receipt);
 
         spinner = findViewById(R.id.spinner_tables_receipt);
         tables = new ArrayList<>();
@@ -239,6 +247,7 @@ public class ReceiptActivity extends AppCompatActivity {
                                         if (response.isSuccessful()) {
                                             displayOrder(order);
                                             receipt.getOrders().add(order);
+                                            updateTotal(receipt);
                                         } else
                                             Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
                                     }
@@ -253,6 +262,20 @@ public class ReceiptActivity extends AppCompatActivity {
                     }
                 });
 
+        requestActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            Order updatedOrder = (Order) data.getSerializableExtra("order");
+                            for (Order o : receipt.getOrders())
+                                if (o.getId().equals(updatedOrder.getId()))
+                                    o.setRequests(updatedOrder.getRequests());
+                        }
+                    }
+                });
+
         button.setOnClickListener(view -> {
             Intent intent = new Intent(this, DishCategoriesActivity.class);
 //            startActivity(intent);
@@ -262,53 +285,76 @@ public class ReceiptActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private void updateTotal(Receipt receipt) {
+        int total = 0;
+        if (receipt.getOrders() != null)
+            for (Order o : receipt.getOrders())
+                total += o.getDish().getPrice();
+        textViewTotal.setText(total / 100.0 + " PLN");
+    }
+
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void displayOrder(Order order) {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.list_view_order_receipt, null, false);
-        TextView textViewOrder = view.findViewById(R.id.text_view_order_list_view_order_receipt);
-        TextView textViewPrice = view.findViewById(R.id.text_view_price_list_view_order_receipt);
-        ImageView imageViewDelete = view.findViewById(R.id.image_view_delete_list_view_order_receipt);
-        ImageView imageViewEdit = view.findViewById(R.id.image_view_edit_list_view_order_receipt);
-        textViewOrder.setText(order.getDish().getName());
-        textViewPrice.setText(String.format("%.2f PLN", order.getDish().getPrice() / 100.0));
-        imageViewDelete.setClickable(true);
-        imageViewDelete.setFocusable(true);
-        imageViewDelete.setOnClickListener(view1 -> {
-            Call<Void> call = App.interfaceApi.deleteOrder(order.getId());
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        linearLayout.removeView(view);
-                    } else
-                        Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
+        if (order.getStatus() != 3) {
+            @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.list_view_order_receipt, linearLayout, false);
+            TextView textViewOrder = view.findViewById(R.id.text_view_order_list_view_order_receipt);
+            TextView textViewPrice = view.findViewById(R.id.text_view_price_list_view_order_receipt);
+            ImageView imageViewDelete = view.findViewById(R.id.image_view_delete_list_view_order_receipt);
+            ImageView imageViewEdit = view.findViewById(R.id.image_view_edit_list_view_order_receipt);
+            textViewOrder.setText(order.getDish().getName());
+            textViewPrice.setText(String.format("%.2f PLN", order.getDish().getPrice() / 100.0));
 
-                @Override
-                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                }
-            });
-        });
-
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            Order updatedOrder = (Order) data.getSerializableExtra("order");
-                            order.setRequests(updatedOrder.getRequests());
+            imageViewDelete.setClickable(true);
+            imageViewDelete.setFocusable(true);
+            if (order.getStatus() == 2) {
+                imageViewDelete.setImageResource(R.drawable.ic_check);
+                imageViewDelete.setOnClickListener(view1 -> {
+                    Call<Order> call = App.interfaceApi.advanceOrder(order.getId(), 3);
+                    call.enqueue(new Callback<Order>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
+                            if (response.isSuccessful()) {
+                                linearLayout.removeView(view);
+                            }
                         }
-                    }
+
+                        @Override
+                        public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
+                            // TODO: handle failure
+                        }
+                    });
+                });
+                imageViewEdit.setVisibility(View.INVISIBLE);
+            } else {
+                imageViewDelete.setOnClickListener(view1 -> {
+                    Call<Void> call = App.interfaceApi.deleteOrder(order.getId());
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                receipt.getOrders().remove(order);
+                                updateTotal(receipt);
+                                linearLayout.removeView(view);
+                            } else
+                                Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                            Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
+                        }
+                    });
                 });
 
-        imageViewEdit.setOnClickListener(view1 -> {
-            Intent intent = new Intent(ReceiptActivity.this, RequestsActivity.class);
-            intent.putExtra("order", order);
-//            startActivity(intent);
-            activityResultLauncher.launch(intent);
-        });
-        linearLayout.addView(view);
+                imageViewEdit.setOnClickListener(view1 -> {
+                    Intent intent = new Intent(ReceiptActivity.this, RequestsActivity.class);
+                    intent.putExtra("order", order);
+                    requestActivityResultLauncher.launch(intent);
+                });
+            }
+
+            linearLayout.addView(view);
+        }
     }
 }
