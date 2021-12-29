@@ -40,10 +40,22 @@
     <string name="text_view_table_receipt">Table</string>
     <string name="text_view_orders_receipt">Orders</string>
     <string name="content_description_delete_order_button">Delete Order Button</string>
+    <string name="content_description_edit_order_button">Edit Order Button</string>
     <string name="receipt_activity_adding_receipt_failed">Adding Receipt Failed! Try again!</string>
     <string name="receipt_activity_internet_error">Check your internet connection!</string>
     <string name="menu_delete_receipt">Delete Receipt</string>
     <string name="menu_close_receipt">Close Receipt</string>
+    <string name="title_activity_requests">RequestsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="edit_text_request_hint">Request</string>
+    <string name="content_description_dish_image">Dish Image</string>
 
 
 </resources>

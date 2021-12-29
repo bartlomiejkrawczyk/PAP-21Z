@@ -36,6 +36,7 @@ import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
 import com.example.restaurant.entities.Table;
 import com.example.restaurant.ui.dish.DishCategoriesActivity;
+import com.example.restaurant.ui.request.RequestsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -266,12 +267,13 @@ public class ReceiptActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.list_view_order_receipt, null, false);
         TextView textViewOrder = view.findViewById(R.id.text_view_order_list_view_order_receipt);
         TextView textViewPrice = view.findViewById(R.id.text_view_price_list_view_order_receipt);
-        ImageView imageView = view.findViewById(R.id.image_view_delete_list_view_order_receipt);
+        ImageView imageViewDelete = view.findViewById(R.id.image_view_delete_list_view_order_receipt);
+        ImageView imageViewEdit = view.findViewById(R.id.image_view_edit_list_view_order_receipt);
         textViewOrder.setText(order.getDish().getName());
         textViewPrice.setText(String.format("%.2f PLN", order.getDish().getPrice() / 100.0));
-        imageView.setClickable(true);
-        imageView.setFocusable(true);
-        imageView.setOnClickListener(view1 -> {
+        imageViewDelete.setClickable(true);
+        imageViewDelete.setFocusable(true);
+        imageViewDelete.setOnClickListener(view1 -> {
             Call<Void> call = App.interfaceApi.deleteOrder(order.getId());
             call.enqueue(new Callback<Void>() {
                 @Override
@@ -287,6 +289,25 @@ public class ReceiptActivity extends AppCompatActivity {
                     Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
                 }
             });
+        });
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            Order updatedOrder = (Order) data.getSerializableExtra("order");
+                            order.setRequests(updatedOrder.getRequests());
+                        }
+                    }
+                });
+
+        imageViewEdit.setOnClickListener(view1 -> {
+            Intent intent = new Intent(ReceiptActivity.this, RequestsActivity.class);
+            intent.putExtra("order", order);
+//            startActivity(intent);
+            activityResultLauncher.launch(intent);
         });
         linearLayout.addView(view);
     }

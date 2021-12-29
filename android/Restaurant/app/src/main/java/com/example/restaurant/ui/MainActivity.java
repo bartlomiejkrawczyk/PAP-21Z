@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageView imageView = findViewById(R.id.image_view_main);
-        new ImageUtils(this, this).setImage(imageView, "restaurant.png");
+        new ImageUtils(this).setImage(imageView, "restaurant.png");
     }
 
     @Override

@@ -31,4 +31,8 @@
         <item name="postSplashScreenTheme">@style/Theme.Restaurant</item>
         # Required.
     </style>
+
+    <style name="Theme.Restaurant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Restaurant.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

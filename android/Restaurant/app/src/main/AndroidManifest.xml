@@ -21,6 +21,9 @@
             android:name=".ui.receipt.ReceiptsActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.request.RequestsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.dish.DishesActivity"
             android:exported="false" />
         <activity

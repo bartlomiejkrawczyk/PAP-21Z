@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restaurant.R;
 import com.example.restaurant.db.AppDatabase;
 import com.example.restaurant.entities.Dish;
-import com.example.restaurant.ui.MainActivity;
 
 import java.util.List;
 
@@ -40,10 +39,10 @@ public class DishesActivity extends AppCompatActivity {
 
             RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(manager);
-            adapter = new DishesRecyclerViewAdapter();
+            adapter = new DishesRecyclerViewAdapter(this);
 
             adapter.setOnClickListener(dish -> {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent();
                 intent.putExtra("dish", dish.getId());
                 setResult(RESULT_OK, intent);
                 finish();

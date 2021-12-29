@@ -1,6 +1,5 @@
 package com.example.restaurant.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,12 +20,10 @@ import retrofit2.Response;
 
 public class ImageUtils {
     private final Context context;
-    private final Activity activity;
     private final String directory = "images";
 
-    public ImageUtils(Context context, Activity activity) {
+    public ImageUtils(Context context) {
         this.context = context;
-        this.activity = activity;
     }
 
     public void setImage(ImageView view, String fileName) {
