@@ -48,6 +48,11 @@ public class DishTest {
     }
 
     @Test
+    public void dishFetchData() {
+
+    }
+
+    @Test
     public void dishSerialize() {
         List<Dish> dishes = Arrays.asList(
                 new Dish(1L, "test", "file.png", 1234, 1L),

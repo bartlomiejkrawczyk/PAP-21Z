@@ -41,6 +41,7 @@ import com.example.restaurant.ui.request.RequestsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -265,12 +266,14 @@ public class ReceiptActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data != null) {
                             Order updatedOrder = (Order) data.getSerializableExtra(ORDER);
-                            for (Order o : receipt.getOrders()) {
-                                if (o.getId() != null && o.getId().equals(updatedOrder.getId())) {
-                                    o.setRequests(updatedOrder.getRequests());
-                                    break;
-                                }
-                            }
+
+                            Optional<Order> order = receipt
+                                    .getOrders()
+                                    .stream()
+                                    .filter(o -> o.getId() != null && o.getId().equals(updatedOrder.getId()))
+                                    .findFirst();
+
+                            order.ifPresent(value -> value.setRequests(updatedOrder.getRequests()));
                         }
                     }
                 });
