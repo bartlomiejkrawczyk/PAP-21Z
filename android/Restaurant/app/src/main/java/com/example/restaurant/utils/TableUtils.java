@@ -40,7 +40,7 @@ public class TableUtils {
 
             @Override
             public void onFailure(@NonNull Call<List<Table>> call, @NonNull Throwable t) {
-
+                // TODO: handle failure
             }
         });
     }

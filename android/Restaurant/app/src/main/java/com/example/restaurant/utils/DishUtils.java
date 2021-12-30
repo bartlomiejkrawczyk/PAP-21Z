@@ -44,7 +44,7 @@ public class DishUtils {
 
             @Override
             public void onFailure(@NonNull Call<List<DishCategory>> call, @NonNull Throwable t) {
-
+                // TODO: handle failure
             }
         });
     }

@@ -71,7 +71,8 @@ public class Receipt implements Serializable {
 
         if (orders != null) {
             for (Order o : orders)
-                total += o.getDish().getPrice();
+                if (o != null && o.getDish() != null && o.getDish().getPrice() != null)
+                    total += o.getDish().getPrice();
         }
 
         return total;
@@ -92,7 +93,7 @@ public class Receipt implements Serializable {
         boolean close = true;
         if (orders != null) {
             for (Order o : orders) {
-                if (o.getStatus() != 3) {
+                if (o != null && o.getStatus() != 3) {
                     close = false;
                     break;
                 }
@@ -105,7 +106,7 @@ public class Receipt implements Serializable {
         boolean close = true;
         if (orders != null) {
             for (Order o : orders) {
-                if (o.getStatus() == 3) {
+                if (o != null && o.getStatus() == 3) {
                     close = false;
                     break;
                 }

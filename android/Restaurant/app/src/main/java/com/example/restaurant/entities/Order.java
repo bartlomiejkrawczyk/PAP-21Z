@@ -79,7 +79,7 @@ public class Order implements Serializable {
     }
 
     public String formatPrice() {
-        if (dish != null) {
+        if (dish != null && dish.getPrice() != null) {
             int price = dish.getPrice();
             int bucks = price / 100;
             int pennies = price % 100;
