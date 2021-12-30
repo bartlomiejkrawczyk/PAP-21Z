@@ -1,12 +1,11 @@
 package com.example.api.projections;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderInfoCook {
     Long getId();
 
-    LocalDate getDate();
+    Long getDate();
 
     Integer getStatus();
 

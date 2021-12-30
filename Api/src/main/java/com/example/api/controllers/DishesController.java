@@ -1,7 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.Dish;
-import com.example.api.errors.DishNotFoundException;
+import com.example.api.errors.EntityNotFoundException;
 import com.example.api.repositories.DishesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class DishesController {
     @GetMapping("/{id}")
     public Dish findDishById(@PathVariable Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new DishNotFoundException(id));
+                .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @PostMapping

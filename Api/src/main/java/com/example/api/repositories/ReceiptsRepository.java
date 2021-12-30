@@ -12,5 +12,5 @@ public interface ReceiptsRepository extends CrudRepository<Receipt, Long> {
 
     List<Receipt> findReceiptsByEmployeeId(Long employeeId);
 
-    List<ReceiptInfo> findReceiptsByEmployeeIdAndPaymentEquals(Long employeeId, Long payment);
+    List<ReceiptInfo> findReceiptsByEmployeeIdAndPaymentEquals(Long employeeId, Integer payment);
 }
