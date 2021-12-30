@@ -52,6 +52,7 @@
 <createdBy>bartek</createdBy>
 <createdTime>2021-11-06 21:54:07 UTC</createdTime>
 <ownerDesignName>Restaurant</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>

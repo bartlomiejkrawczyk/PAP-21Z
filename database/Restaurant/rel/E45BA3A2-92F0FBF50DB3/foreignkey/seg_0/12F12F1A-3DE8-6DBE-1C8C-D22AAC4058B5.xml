@@ -5,7 +5,7 @@
 <generatorID>A4FFB7FF-C667-356A-7FFF-131AA700764E</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <referredTableLongName>Orders</referredTableLongName>
-<deleteRule>NO ACTION</deleteRule>
+<deleteRule>CASCADE</deleteRule>
 <referredTableID>88352BAD-AC9F-F41F-1504-D9C56E2CF99A</referredTableID>
 <keyObject>70C6C243-7511-168A-DD4E-3871017E62A8</keyObject>
 <referredKeyID>70C6C243-7511-168A-DD4E-3871017E62A8</referredKeyID>
