@@ -57,6 +57,11 @@
     <string name="edit_text_request_hint">Request</string>
     <string name="content_description_dish_image">Dish Image</string>
     <string name="text_view_total_receipt">Total</string>
+    <string name="toast_error_cannot_delete_receipt">Cannot delete receipt with ongoing orders</string>
+    <string name="toast_error_cannot_close_receipt">Cannot close receipt with ongoing orders</string>
+    <string name="toast_error_cannot_close_empty_receipt">Cannot close empty receipt</string>
+    <string name="toast_failure_error_internet_connection">\"Internet Connection Error! \"</string>
+    <string name="toast_error_empty_request">Cannot add empty request</string>
 
 
 </resources>

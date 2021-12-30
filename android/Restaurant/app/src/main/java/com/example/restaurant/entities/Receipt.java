@@ -65,4 +65,52 @@ public class Receipt implements Serializable {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+    public int getTotal() {
+        int total = 0;
+
+        if (orders != null) {
+            for (Order o : orders)
+                total += o.getDish().getPrice();
+        }
+
+        return total;
+    }
+
+    public String formatTotal() {
+        int total = getTotal();
+        int bucks = total / 100;
+        int pennies = total % 100;
+        String sPennies = String.valueOf(pennies);
+        if (pennies < 10)
+            sPennies = "0" + sPennies;
+
+        return bucks + "," + sPennies + " PLN";
+    }
+
+    public boolean canClose() {
+        boolean close = true;
+        if (orders != null) {
+            for (Order o : orders) {
+                if (o.getStatus() != 3) {
+                    close = false;
+                    break;
+                }
+            }
+        }
+        return close;
+    }
+
+    public boolean canDelete() {
+        boolean close = true;
+        if (orders != null) {
+            for (Order o : orders) {
+                if (o.getStatus() == 3) {
+                    close = false;
+                    break;
+                }
+            }
+        }
+        return close;
+    }
 }

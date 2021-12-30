@@ -29,6 +29,17 @@ public class App extends Application {
         updateData();
     }
 
+    /**
+     * Initialize Network System:
+     * logging interceptor,
+     * json converter,
+     * retrofit interface
+     *
+     * @see OkHttpClient
+     * @see Gson
+     * @see Retrofit
+     * @see InterfaceApi
+     */
     private void createNetworkSys() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

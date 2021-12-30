@@ -12,6 +12,7 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Retrofit;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -19,9 +20,14 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * Interface with defined functions,
+ * used by retrofit to generate methods,
+ * that fetch data from server
+ *
+ * @see Retrofit
+ */
 public interface InterfaceApi {
-    @GET("api")
-    Call<String> getHelloWorld();
 
     @GET("img/restaurant/{file}")
     Call<ResponseBody> getImage(@Path("file") String filePath);

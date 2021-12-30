@@ -1,5 +1,7 @@
 package com.example.restaurant.ui.request;
 
+import static com.example.restaurant.ui.receipt.ReceiptActivity.ORDER;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,8 @@ import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.SpecialRequest;
+import com.example.restaurant.handlers.FailureError;
+import com.example.restaurant.handlers.ResponseError;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +28,6 @@ import retrofit2.Response;
 
 public class RequestsActivity extends AppCompatActivity {
     private EditText editText;
-    private ImageView imageView;
     private LinearLayout linearLayout;
     private Order order;
 
@@ -37,12 +41,13 @@ public class RequestsActivity extends AppCompatActivity {
 
     private void initViews() {
         Intent previous = getIntent();
-        order = (Order) previous.getSerializableExtra("order");
+        order = (Order) previous.getSerializableExtra(ORDER);
 
         editText = findViewById(R.id.edit_text_request_requests);
-        imageView = findViewById(R.id.image_view_add_request_requests);
+
         linearLayout = findViewById(R.id.linear_layout_requests);
 
+        ImageView imageView = findViewById(R.id.image_view_add_request_requests);
         imageView.setOnClickListener(view -> addRequest());
 
         for (SpecialRequest request : order.getRequests()) {
@@ -53,15 +58,18 @@ public class RequestsActivity extends AppCompatActivity {
     @Override
     public void finish() {
         Intent intent = new Intent();
-        intent.putExtra("order", order);
+        intent.putExtra(ORDER, order);
         setResult(RESULT_OK, intent);
+
         super.finish();
     }
 
     private void addRequest() {
         String request = editText.getText().toString();
+
         if (request.length() > 0) {
             SpecialRequest specialRequest = new SpecialRequest(null, request, order.getId());
+
             Call<SpecialRequest> call = App.interfaceApi.addRequest(specialRequest);
             call.enqueue(new Callback<SpecialRequest>() {
                 @Override
@@ -71,15 +79,18 @@ public class RequestsActivity extends AppCompatActivity {
                         SpecialRequest responseRequest = response.body();
                         order.getRequests().add(responseRequest);
                         displayRequest(responseRequest);
+                    } else {
+                        new ResponseError<>(response, RequestsActivity.this).makeToast();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<SpecialRequest> call, @NonNull Throwable t) {
-
+                    new FailureError(RequestsActivity.this, t).makeToast();
                 }
             });
-
+        } else {
+            Toast.makeText(RequestsActivity.this, getString(R.string.toast_error_empty_request), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -90,24 +101,28 @@ public class RequestsActivity extends AppCompatActivity {
         textViewRequest.setText(specialRequest.getRequest());
 
         ImageView imageViewDelete = view.findViewById(R.id.image_view_delete_request_list_view_request);
-        imageViewDelete.setOnClickListener(view1 -> {
-            Call<Void> callDel = App.interfaceApi.deleteRequest(specialRequest.getId());
-            callDel.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        linearLayout.removeView(view);
-                        order.getRequests().remove(specialRequest);
-                    }
-                    // TODO: Handle failure
-                }
+        imageViewDelete.setOnClickListener(view1 -> deleteRequest(specialRequest, view));
 
-                @Override
-                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    // TODO: Handle failure
-                }
-            });
-        });
         linearLayout.addView(view);
+    }
+
+    private void deleteRequest(SpecialRequest specialRequest, View view) {
+        Call<Void> callDel = App.interfaceApi.deleteRequest(specialRequest.getId());
+        callDel.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    linearLayout.removeView(view);
+                    order.getRequests().remove(specialRequest);
+                } else {
+                    new ResponseError<>(response, RequestsActivity.this).makeToast();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                new FailureError(RequestsActivity.this, t).makeToast();
+            }
+        });
     }
 }

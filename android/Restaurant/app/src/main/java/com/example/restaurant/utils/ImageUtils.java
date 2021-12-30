@@ -18,15 +18,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class used to fetch images from memory or server
+ * and displaying it on given ImageView
+ */
 public class ImageUtils {
     private final Context context;
-    private final String directory = "images";
 
     public ImageUtils(Context context) {
         this.context = context;
     }
 
+    /**
+     * A method to fetch image from memory
+     * or if the image isn't available on the device
+     * to download it from the server
+     *
+     * @param view     - ImageView, where should be inserted requested image
+     * @param fileName - name of the image
+     */
     public void setImage(ImageView view, String fileName) {
+        String directory = "images";
         ImageSaver saver = new ImageSaver(context)
                 .setDirectoryName(directory)
                 .setFileName(fileName);
@@ -63,7 +75,13 @@ public class ImageUtils {
         }
     }
 
-    public static Bitmap byteArrayToBitmap(byte[] data) {
+    /**
+     * Convert byte array to bitmap
+     *
+     * @param data - Byte array with image data
+     * @return Bitmap Image
+     */
+    private Bitmap byteArrayToBitmap(byte[] data) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
         return BitmapFactory.decodeByteArray(data, 0, data.length, options);

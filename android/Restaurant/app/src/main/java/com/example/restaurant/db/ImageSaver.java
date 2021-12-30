@@ -19,11 +19,13 @@ import java.io.IOException;
  * setFileName("myImage.png").
  * setDirectoryName("images").
  * save(bitmap);
+ *
  * To Load:
  * Bitmap bitmap = new ImageSaver(context).
  * setFileName("myImage.png").
  * setDirectoryName("images").
  * load();
+ *
  * Optional external storage use:
  * ImageSaver.setExternal(boolean)
  */

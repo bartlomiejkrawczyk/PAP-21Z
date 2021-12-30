@@ -1,9 +1,8 @@
 package com.example.restaurant.ui.receipt;
 
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID_KEY;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 import static com.example.restaurant.ui.receipt.ReceiptsActivity.RECEIPT;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +34,8 @@ import com.example.restaurant.entities.Employee;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
 import com.example.restaurant.entities.Table;
+import com.example.restaurant.handlers.FailureError;
+import com.example.restaurant.handlers.ResponseError;
 import com.example.restaurant.ui.dish.DishCategoriesActivity;
 import com.example.restaurant.ui.request.RequestsActivity;
 
@@ -47,11 +48,13 @@ import retrofit2.Response;
 
 public class ReceiptActivity extends AppCompatActivity {
 
+    public static final String DISH = "dish";
+    public static final String ORDER = "order";
+
     private TextView textViewTotal;
     private List<Table> tables;
     private Spinner spinner;
     private LinearLayout linearLayout;
-    private Button button;
 
     private Receipt receipt;
 
@@ -68,13 +71,10 @@ public class ReceiptActivity extends AppCompatActivity {
         if (receipt == null) {
             initNewReceipt();
         } else {
-            SharedPreferences sharedPref = this.getSharedPreferences(
-                    getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-            long employeeId = sharedPref.getLong(EMPLOYEE_ID_KEY, -1L);
-            receipt.setEmployee(new Employee(employeeId));
+            signEmployeeToReceipt();
         }
 
-        initViews(receipt);
+        initViews();
     }
 
     @Override
@@ -88,132 +88,19 @@ public class ReceiptActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menu_close_receipt) {
-            int total = 0;
-            for (Order order : receipt.getOrders()) {
-                total += order.getDish().getPrice();
-            }
-            receipt.setPayment(total);
-            Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
-            call.enqueue(new Callback<Receipt>() {
-                @Override
-                public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
-                    if (response.isSuccessful()) {
-                        finish();
-                    } else
-                        Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                    Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                }
-            });
+            handleCloseReceipt();
         } else if (id == R.id.menu_delete_receipt) {
-            Call<Void> call = App.interfaceApi.deleteReceipt(receipt.getId());
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                    if (!response.isSuccessful())
-                        Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                    else
-                        finish();
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                }
-            });
+            handleDeleteReceipt();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void initNewReceipt() {
-        receipt = new Receipt();
-        receipt.setPayment(0);
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-        long employeeId = sharedPref.getLong(EMPLOYEE_ID_KEY, -1L);
-        receipt.setEmployee(new Employee(employeeId));
-        Call<Receipt> call = App.interfaceApi.addReceipt(receipt);
-        call.enqueue(new Callback<Receipt>() {
-            @Override
-            public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    receipt.setId(response.body().getId()); // TODO: Add loading indicator
-                } else {
-                    tryAgain();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                tryAgain();
-            }
-        });
-    }
-
-    private void tryAgain() {
-        Toast.makeText(this, getString(R.string.receipt_activity_adding_receipt_failed), Toast.LENGTH_LONG).show();
-        finish();
-    }
-
-    private void initViews(Receipt receipt) {
-
+    private void initViews() {
         textViewTotal = findViewById(R.id.text_view_total_receipt);
-        updateTotal(receipt);
+        textViewTotal.setText(receipt.formatTotal());
 
         spinner = findViewById(R.id.spinner_tables_receipt);
-        tables = new ArrayList<>();
-        tables.add(new Table(null, getString(R.string.spinner_item_takeaway)));
-        ArrayAdapter<Table> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tables);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapter);
-
-
-        new Thread(() -> {
-            AppDatabase db = AppDatabase.getAppDatabase(this);
-            List<Table> daoTables = db.tablesDao().getTables();
-            tables.addAll(daoTables);
-            adapter.notifyDataSetChanged();
-            Table table = receipt.getTable();
-            if (table != null)
-                for (int i = 0; i < daoTables.size(); i++) {
-                    if (daoTables.get(i).getId().equals(table.getId())) {
-                        spinner.setSelection(i + 1);
-                        break;
-                    }
-                }
-        }).start();
-
-        spinner.post(() -> spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                if (position != 0)
-                    receipt.setTable(tables.get(position));
-                else
-                    receipt.setTable(null);
-                Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
-                call.enqueue(new Callback<Receipt>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
-                        // Do nothing
-                        if (!response.isSuccessful())
-                            Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                        Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        }));
+        setupSpinner();
 
         linearLayout = findViewById(R.id.linear_layout_orders_receipt);
 
@@ -225,136 +112,303 @@ public class ReceiptActivity extends AppCompatActivity {
         for (Order order : orders)
             displayOrder(order);
 
-        button = findViewById(R.id.button_add_order_receipt);
+        Button button = findViewById(R.id.button_add_order_receipt);
 
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            long dishId = data.getLongExtra("dish", -1L);
-
-                            new Thread(() -> {
-                                Dish dish = AppDatabase.getAppDatabase(ReceiptActivity.this).dishesDao().getDishById(dishId);
-
-                                Order order = new Order(null, System.currentTimeMillis(), dish, receipt.getId(), new ArrayList<>(), 1);
-
-                                Call<Order> call = App.interfaceApi.addOrder(order);
-                                call.enqueue(new Callback<Order>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
-                                        if (response.isSuccessful()) {
-                                            displayOrder(order);
-                                            receipt.getOrders().add(order);
-                                            updateTotal(receipt);
-                                        } else
-                                            Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                                        Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }).start();
-                        }
-                    }
-                });
-
-        requestActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            Order updatedOrder = (Order) data.getSerializableExtra("order");
-                            for (Order o : receipt.getOrders())
-                                if (o.getId().equals(updatedOrder.getId()))
-                                    o.setRequests(updatedOrder.getRequests());
-                        }
-                    }
-                });
+        ActivityResultLauncher<Intent> dishActivityResultLauncher = registerForDishActivityResult();
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(this, DishCategoriesActivity.class);
-//            startActivity(intent);
-            activityResultLauncher.launch(intent);
+            dishActivityResultLauncher.launch(intent);
         });
 
-
+        requestActivityResultLauncher = registerForRequestsActivityResult();
     }
 
-    @SuppressLint("SetTextI18n")
-    private void updateTotal(Receipt receipt) {
-        int total = 0;
-        if (receipt.getOrders() != null)
-            for (Order o : receipt.getOrders())
-                total += o.getDish().getPrice();
-        textViewTotal.setText(total / 100.0 + " PLN");
+    private void handleCloseReceipt() {
+        if (receipt.canClose()) {
+            receipt.setPayment(receipt.getTotal());
+
+            if (receipt.getPayment() > 0) {
+                Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
+                call.enqueue(new Callback<Receipt>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
+                        if (response.isSuccessful()) {
+                            finish();
+                        } else {
+                            new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
+                        new FailureError(ReceiptActivity.this, t).makeToast();
+                    }
+                });
+            } else {
+                Toast.makeText(ReceiptActivity.this, getString(R.string.toast_error_cannot_close_empty_receipt), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(ReceiptActivity.this, getString(R.string.toast_error_cannot_close_receipt), Toast.LENGTH_LONG).show();
+        }
     }
 
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    private void handleDeleteReceipt() {
+        if (receipt.canDelete()) {
+            Call<Void> call = App.interfaceApi.deleteReceipt(receipt.getId());
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        finish();
+                    } else {
+                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                    new FailureError(ReceiptActivity.this, t).makeToast();
+                }
+            });
+        } else {
+            Toast.makeText(ReceiptActivity.this, getString(R.string.toast_error_cannot_delete_receipt), Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private void signEmployeeToReceipt() {
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
+        long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
+        receipt.setEmployee(new Employee(employeeId));
+    }
+
+    private void initNewReceipt() {
+        receipt = new Receipt();
+        receipt.setPayment(0);
+
+        signEmployeeToReceipt();
+
+        Call<Receipt> call = App.interfaceApi.addReceipt(receipt);
+        call.enqueue(new Callback<Receipt>() {
+            @Override
+            public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    receipt.setId(response.body().getId());
+                } else {
+                    new ResponseError<>(response, ReceiptActivity.this).makeToast(getString(R.string.receipt_activity_adding_receipt_failed));
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
+                new FailureError(ReceiptActivity.this, t).makeToast();
+                finish();
+            }
+        });
+    }
+
+
+    @NonNull
+    private ActivityResultLauncher<Intent> registerForDishActivityResult() {
+        return registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            long dishId = data.getLongExtra(DISH, -1L);
+
+                            addOrder(dishId);
+                        }
+                    }
+                });
+    }
+
+    private void addOrder(long dishId) {
+        new Thread(() -> {
+            Dish dish = AppDatabase.getAppDatabase(ReceiptActivity.this).dishesDao().getDishById(dishId);
+
+            Order order = new Order(null, System.currentTimeMillis(), dish, receipt.getId(), new ArrayList<>(), 1);
+
+            final Call<Order> call = App.interfaceApi.addOrder(order);
+            call.enqueue(new Callback<Order>() {
+                @Override
+                public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Order order = response.body();
+                        displayOrder(order);
+                        receipt.getOrders().add(order);
+                        textViewTotal.setText(receipt.formatTotal());
+                    } else {
+                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
+                    new FailureError(ReceiptActivity.this, t).makeToast();
+                }
+            });
+        }).start();
+    }
+
+
+    @NonNull
+    private ActivityResultLauncher<Intent> registerForRequestsActivityResult() {
+        return registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            Order updatedOrder = (Order) data.getSerializableExtra(ORDER);
+                            for (Order o : receipt.getOrders()) {
+                                if (o.getId() != null && o.getId().equals(updatedOrder.getId())) {
+                                    o.setRequests(updatedOrder.getRequests());
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void setupSpinner() {
+        tables = new ArrayList<>();
+        tables.add(new Table(null, getString(R.string.spinner_item_takeaway)));
+
+        ArrayAdapter<Table> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tables);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
+        new Thread(() -> retrieveTablesFromDatabase(adapter)).start();
+
+        spinner.post(() -> spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                updateTable(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        }));
+    }
+
+    private void retrieveTablesFromDatabase(ArrayAdapter<Table> adapter) {
+        AppDatabase db = AppDatabase.getAppDatabase(this);
+        List<Table> daoTables = db.tablesDao().getTables();
+        tables.addAll(daoTables);
+        adapter.notifyDataSetChanged();
+
+        Table table = receipt.getTable();
+        if (table != null)
+            for (int i = 0; i < daoTables.size(); i++) {
+                if (daoTables.get(i).getId().equals(table.getId())) {
+                    spinner.setSelection(i + 1);
+                    break;
+                }
+            }
+    }
+
+
+    private void updateTable(int position) {
+        if (position != 0)
+            receipt.setTable(tables.get(position));
+        else
+            receipt.setTable(null);
+        Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
+        call.enqueue(new Callback<Receipt>() {
+            @Override
+            public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
+                if (!response.isSuccessful())
+                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                // else Do nothing
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
+                new FailureError(ReceiptActivity.this, t).makeToast();
+            }
+        });
+    }
+
     private void displayOrder(Order order) {
         if (order.getStatus() != 3) {
-            @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.list_view_order_receipt, linearLayout, false);
+            View view = LayoutInflater.from(this).inflate(R.layout.list_view_order_receipt, linearLayout, false);
+
             TextView textViewOrder = view.findViewById(R.id.text_view_order_list_view_order_receipt);
             TextView textViewPrice = view.findViewById(R.id.text_view_price_list_view_order_receipt);
             ImageView imageViewDelete = view.findViewById(R.id.image_view_delete_list_view_order_receipt);
             ImageView imageViewEdit = view.findViewById(R.id.image_view_edit_list_view_order_receipt);
+
             textViewOrder.setText(order.getDish().getName());
-            textViewPrice.setText(String.format("%.2f PLN", order.getDish().getPrice() / 100.0));
+            textViewPrice.setText(order.formatPrice());
 
             imageViewDelete.setClickable(true);
             imageViewDelete.setFocusable(true);
+
             if (order.getStatus() == 2) {
                 imageViewDelete.setImageResource(R.drawable.ic_check);
-                imageViewDelete.setOnClickListener(view1 -> {
-                    Call<Order> call = App.interfaceApi.advanceOrder(order.getId(), 3);
-                    call.enqueue(new Callback<Order>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
-                            if (response.isSuccessful()) {
-                                linearLayout.removeView(view);
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                            // TODO: handle failure
-                        }
-                    });
-                });
+                imageViewDelete.setOnClickListener(view1 -> advanceOrder(order, view));
                 imageViewEdit.setVisibility(View.INVISIBLE);
             } else {
-                imageViewDelete.setOnClickListener(view1 -> {
-                    Call<Void> call = App.interfaceApi.deleteOrder(order.getId());
-                    call.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                            if (response.isSuccessful()) {
-                                receipt.getOrders().remove(order);
-                                updateTotal(receipt);
-                                linearLayout.removeView(view);
-                            } else
-                                Toast.makeText(ReceiptActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                            Toast.makeText(ReceiptActivity.this, getString(R.string.receipt_activity_internet_error), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                });
-
+                imageViewDelete.setOnClickListener(view1 -> deleteOrder(order, view));
                 imageViewEdit.setOnClickListener(view1 -> {
                     Intent intent = new Intent(ReceiptActivity.this, RequestsActivity.class);
-                    intent.putExtra("order", order);
+                    intent.putExtra(ORDER, order);
                     requestActivityResultLauncher.launch(intent);
                 });
             }
 
             linearLayout.addView(view);
         }
+    }
+
+    private void advanceOrder(Order order, View view) {
+        Call<Order> call = App.interfaceApi.advanceOrder(order.getId(), 3);
+        call.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
+                if (response.isSuccessful()) {
+                    order.setStatus(3);
+                    linearLayout.removeView(view);
+                } else {
+                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
+                new FailureError(ReceiptActivity.this, t).makeToast();
+            }
+        });
+    }
+
+
+    private void deleteOrder(Order order, View view) {
+        Call<Void> call = App.interfaceApi.deleteOrder(order.getId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    receipt.getOrders().remove(order);
+                    textViewTotal.setText(receipt.formatTotal());
+                    linearLayout.removeView(view);
+                } else {
+                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                new FailureError(ReceiptActivity.this, t).makeToast();
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.example.restaurant.ui.dish;
 
 import static com.example.restaurant.ui.dish.DishCategoriesActivity.DISH_CATEGORY_ID_KEY;
+import static com.example.restaurant.ui.receipt.ReceiptActivity.DISH;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,8 +19,8 @@ import java.util.List;
 
 public class DishesActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private DishesRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +36,27 @@ public class DishesActivity extends AppCompatActivity {
 
         if (id != -1L) {
             recyclerView = findViewById(R.id.recycler_view_dishes);
-            recyclerView.setHasFixedSize(true);
-
-            RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(manager);
-            adapter = new DishesRecyclerViewAdapter(this);
-
-            adapter.setOnClickListener(dish -> {
-                Intent intent = new Intent();
-                intent.putExtra("dish", dish.getId());
-                setResult(RESULT_OK, intent);
-                finish();
-            });
-
-            recyclerView.setAdapter(adapter);
+            setUpRecyclerView();
 
             new Thread(() -> getDishes(id)).start();
         }
+    }
+
+    private void setUpRecyclerView() {
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        adapter = new DishesRecyclerViewAdapter(this);
+
+        adapter.setOnClickListener(dish -> {
+            Intent intent = new Intent();
+            intent.putExtra(DISH, dish.getId());
+            setResult(RESULT_OK, intent);
+            finish();
+        });
+
+        recyclerView.setAdapter(adapter);
     }
 
     @SuppressLint("NotifyDataSetChanged")

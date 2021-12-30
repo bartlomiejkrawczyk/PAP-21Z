@@ -1,13 +1,12 @@
 package com.example.restaurant.ui.receipt;
 
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID_KEY;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +41,7 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     private Timer timer;
 
-    private int orderCount;
+    private int unhandledReceiptsCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +87,16 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     private void initViews() {
         progressBar = findViewById(R.id.progress_bar_receipts);
+        progressBar.setVisibility(View.VISIBLE);
 
         recyclerView = findViewById(R.id.recycler_view_receipts);
-        recyclerView.setHasFixedSize(true);
+        setUpRecyclerView();
 
-        progressBar.setVisibility(View.VISIBLE);
+        new Thread(this::getReceipts).start();
+    }
+
+    private void setUpRecyclerView() {
+        recyclerView.setHasFixedSize(true);
         recyclerView.setVisibility(View.GONE);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
@@ -112,15 +116,14 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
-
-        new Thread(this::getReceipts).start();
     }
 
 
     private void getReceipts() {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-        long employeeId = sharedPref.getLong(EMPLOYEE_ID_KEY, -1L);
+        long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
+
         Call<List<Receipt>> call = App.interfaceApi.getReceipts(employeeId);
         call.enqueue(new Callback<List<Receipt>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -135,11 +138,12 @@ public class ReceiptsActivity extends AppCompatActivity {
 
                     runOnUiThread(() -> adapter.notifyDataSetChanged());
                 }
+                // TODO: Handle failure
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
-
+                // TODO: Handle failure
             }
         });
     }
@@ -153,9 +157,17 @@ public class ReceiptsActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                orderCount = adapter.getItemCount() - 1;
-                for (int i = 0; i < adapter.getItemCount() - 1; i++) {
-                    getOrders(i);
+                unhandledReceiptsCount = adapter.getItemCount() - 1;
+
+                if (unhandledReceiptsCount == 0) {
+                    runOnUiThread(() -> {
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    });
+                } else {
+                    for (int i = 0; i < adapter.getItemCount() - 1; i++) {
+                        getOrders(i);
+                    }
                 }
             }
         }, 0, 20000);
@@ -175,26 +187,25 @@ public class ReceiptsActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             adapter.getReceipts().get(position).setOrders(orders);
                             adapter.notifyItemChanged(position);
-                            if (--orderCount == 0) {
-                                progressBar.setVisibility(View.GONE);
-                                recyclerView.setVisibility(View.VISIBLE);
-                            }
+                            tryShowRecyclerView();
                         });
-
                     }).start();
+                } else {
+                    runOnUiThread(() -> tryShowRecyclerView());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Order>> call, @NonNull Throwable t) {
-                Log.e("ORDERS", t.getMessage());
-                runOnUiThread(() -> {
-                    if (--orderCount == 0) {
-                        progressBar.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                    }
-                });
+                runOnUiThread(() -> tryShowRecyclerView());
             }
         });
+    }
+
+    private void tryShowRecyclerView() {
+        if (--unhandledReceiptsCount == 0) {
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }

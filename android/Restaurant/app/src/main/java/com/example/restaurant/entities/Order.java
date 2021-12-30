@@ -78,4 +78,18 @@ public class Order implements Serializable {
         this.status = status;
     }
 
+    public String formatPrice() {
+        if (dish != null) {
+            int price = dish.getPrice();
+            int bucks = price / 100;
+            int pennies = price % 100;
+            String sPennies = String.valueOf(pennies);
+            if (pennies < 10)
+                sPennies = "0" + sPennies;
+
+            return bucks + "," + sPennies + " PLN";
+        }
+        return "0,00 PLN";
+    }
+
 }

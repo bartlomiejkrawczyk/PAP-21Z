@@ -1,7 +1,7 @@
 package com.example.restaurant.ui.settings;
 
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID_KEY;
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_NAME_KEY;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_NAME;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +20,8 @@ import com.example.restaurant.R;
 import com.example.restaurant.ui.login.LoginActivity;
 
 public class SettingsActivity extends AppCompatActivity {
+    private static final String SIGN_OUT = "sign_out";
+    private static final String CREDENTIALS = "credentials";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,31 +56,44 @@ public class SettingsActivity extends AppCompatActivity {
 
             Context context = getContext();
             if (context != null) {
-                String name = context.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE)
-                        .getString(EMPLOYEE_NAME_KEY, getString(R.string.preference_employee_title));
-                Preference employeeName = findPreference("credentials");
-                if (employeeName != null)
-                    employeeName.setTitle(name);
+                setEmployeeTitle(context);
 
-                Preference signOut = findPreference("sign_out");
-                if (signOut != null)
-                    signOut.setOnPreferenceClickListener(preference -> {
-                        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putLong(EMPLOYEE_ID_KEY, -1L);
-                        editor.putString(EMPLOYEE_NAME_KEY, "");
-                        editor.apply();
-
-                        Intent intent = new Intent(context, LoginActivity.class);
-                        startActivity(intent);
-
-                        Activity activity = getActivity();
-                        if (activity != null) activity.finishAffinity();
-
-                        return true;
-                    });
+                addSignOutFunctionality(context);
             }
 
+        }
+
+        private void addSignOutFunctionality(Context context) {
+            Preference signOut = findPreference(SIGN_OUT);
+            if (signOut != null) {
+                signOut.setOnPreferenceClickListener(preference -> {
+                    SharedPreferences sharedPref = context
+                            .getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putLong(EMPLOYEE_ID, -1L);
+                    editor.putString(EMPLOYEE_NAME, "");
+                    editor.apply();
+
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    startActivity(intent);
+
+                    Activity activity = getActivity();
+                    if (activity != null)
+                        activity.finishAffinity();
+
+                    return true;
+                });
+            }
+        }
+
+        private void setEmployeeTitle(Context context) {
+            String name = context
+                    .getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE)
+                    .getString(EMPLOYEE_NAME, getString(R.string.preference_employee_title));
+            Preference employeeName = findPreference(CREDENTIALS);
+            if (employeeName != null)
+                employeeName.setTitle(name);
         }
     }
 

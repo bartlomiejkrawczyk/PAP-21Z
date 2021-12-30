@@ -33,6 +33,12 @@ public class DishCategoriesActivity extends AppCompatActivity {
 
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_view_dish_categories);
+        setUpRecyclerView();
+
+        new Thread(this::getDishCategories).start();
+    }
+
+    private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
@@ -53,13 +59,10 @@ public class DishCategoriesActivity extends AppCompatActivity {
         adapter.setOnClickListener(category -> {
             Intent intent = new Intent(this, DishesActivity.class);
             intent.putExtra(DISH_CATEGORY_ID_KEY, category.getId());
-//            startActivity(intent);
             activityResultLauncher.launch(intent);
         });
 
         recyclerView.setAdapter(adapter);
-
-        new Thread(this::getDishCategories).start();
     }
 
     @SuppressLint("NotifyDataSetChanged")

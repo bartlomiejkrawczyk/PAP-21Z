@@ -27,14 +27,12 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
 
-    public static final String EMPLOYEE_ID_KEY = "employee_id";
-    public static final String EMPLOYEE_NAME_KEY = "employee_name";
+    public static final String EMPLOYEE_ID = "employee_id";
+    public static final String EMPLOYEE_NAME = "employee_name";
 
     private Spinner spinner;
     private ArrayAdapter<Employee> adapter;
     private List<Employee> employees;
-
-    private Button button;
 
 
     @Override
@@ -47,9 +45,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initViews() {
         spinner = findViewById(R.id.spinner_login);
-        button = findViewById(R.id.button_login);
-
-        // Add adapter to spinner
 
         employees = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, employees);
@@ -59,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         new Thread(this::getWaiters).start();
 
-        // Add click listener to button
+        Button button = findViewById(R.id.button_login);
 
         button.setOnClickListener(view -> {
             if (login()) {
@@ -82,11 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                     employees.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 }
+                // TODO: Handle failure - reload
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Employee>> call, @NonNull Throwable t) {
-
+                // TODO: Handle failure - reload
             }
         });
     }
@@ -98,15 +94,12 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences sharedPref = this.getSharedPreferences(
                     getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putLong(EMPLOYEE_ID_KEY, employee.getId());
-            editor.putString(EMPLOYEE_NAME_KEY, employee.getName());
+            editor.putLong(EMPLOYEE_ID, employee.getId());
+            editor.putString(EMPLOYEE_NAME, employee.getName());
             editor.apply();
 
             return true;
         }
-
         return false;
     }
-
-
 }
