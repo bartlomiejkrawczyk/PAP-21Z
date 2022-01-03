@@ -1,6 +1,7 @@
 package com.example.desktop.ui;
 
 import com.example.desktop.App;
+import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Order;
 import com.example.desktop.entities.Recipe;
 import com.example.desktop.entities.SpecialRequest;
@@ -262,12 +263,21 @@ public class GUI {
             @Override
             public void onResponse(@NotNull Call<List<Order>> call, @NotNull Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    AppDatabase db = AppDatabase.getAppDatabase();
+                    response.body().forEach(order -> {
+                        if (order != null && order.getDish() != null)
+                            order.setDish(db.getDishById(order.getDish().getId()));
+                    });
                     addOrdersToPanels(response);
                 }
+                // else {
+                // TODO: else handle response error
+                // }
             }
 
             @Override
             public void onFailure(@NotNull Call<List<Order>> call, @NotNull Throwable throwable) {
+                // TODO: handle failure error
             }
         });
     }
