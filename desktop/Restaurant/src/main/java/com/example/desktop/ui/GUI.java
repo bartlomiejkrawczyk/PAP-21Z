@@ -1,23 +1,23 @@
 package com.example.desktop.ui;
 
 import com.example.desktop.App;
-import com.example.desktop.entities.*;
+import com.example.desktop.entities.Order;
+import com.example.desktop.entities.Recipe;
+import com.example.desktop.entities.SpecialRequest;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class GUI {
-    private Vector<Cook> vecCooks = new Vector<>();
+    //    private List<Employee> cooks = new ArrayList<>();
     private List<Recipe> allRecipes;
 
     private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -34,23 +34,13 @@ public class GUI {
     public void setButtonCooks(){
         buttonCooks.setBounds(1, 1, 100, 23);
         panelTop.add(buttonCooks);
-        buttonCooks.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buttonCooksOnClick();
-            }
-        });
+        buttonCooks.addActionListener(e -> buttonCooksOnClick());
     }
 
     public void setButtonRecipes(){
         buttonRecipes.setBounds(101, 1, 100, 23);
         panelTop.add(buttonRecipes);
-        buttonRecipes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                displayAllRecipes();
-            }
-        });
+        buttonRecipes.addActionListener(e -> displayAllRecipes());
     }
 
     public void displayAllRecipes(){
@@ -58,25 +48,22 @@ public class GUI {
         JPanel panelRecipes = new JPanel();
         List<Recipe> undividedRecipes = getUndividedRecipes();
 
-        for (Recipe recipe : undividedRecipes){
+        for (Recipe recipe : undividedRecipes) {
             JButton buttonDisplayRecipe = new JButton(Integer.toString(recipe.getDishId()));
-            buttonDisplayRecipe.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame frameCurrRecipe = new JFrame("Current recipe id: " + recipe.getDishId());
-                    JTextField field = new JTextField();
-                    field.setText(recipe.getRecipe());
+            buttonDisplayRecipe.addActionListener(e -> {
+                JFrame frameCurrRecipe = new JFrame("Current recipe id: " + recipe.getDishId());
+                JTextField field = new JTextField();
+                field.setText(recipe.getRecipe());
 
-                    frameCurrRecipe.add(field);
+                frameCurrRecipe.add(field);
 
-                    frameCurrRecipe.setMinimumSize(new Dimension(300, 300));
-                    frameCurrRecipe.setResizable(false);
-                    frameCurrRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frameCurrRecipe.setMinimumSize(new Dimension(300, 300));
+                frameCurrRecipe.setResizable(false);
+                frameCurrRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                    frameCurrRecipe.pack();
-                    frameCurrRecipe.setLocationRelativeTo(null);
-                    frameCurrRecipe.setVisible(true);
-                }
+                frameCurrRecipe.pack();
+                frameCurrRecipe.setLocationRelativeTo(null);
+                frameCurrRecipe.setVisible(true);
             });
             panelRecipes.add(buttonDisplayRecipe);
         }
@@ -134,146 +121,134 @@ public class GUI {
         frameCooks.add(panelOptions, BorderLayout.NORTH);
         frameCooks.add(panelCooks, BorderLayout.LINE_START);
 
-        buttonAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frameAdd = new JFrame("Add cook");
-                JTextField textCookName = new JTextField("name");
-                JButton buttonAddCook = new JButton("Add");
+        buttonAdd.addActionListener(e -> {
+            JFrame frameAdd = new JFrame("Add cook");
+            JTextField textCookName = new JTextField("name");
+            JButton buttonAddCook = new JButton("Add");
 
-                textCookName.setPreferredSize(new Dimension(130, 50));
-                textCookName.setBorder(blackline);
+            textCookName.setPreferredSize(new Dimension(130, 50));
+            textCookName.setBorder(blackline);
 
-                buttonAddCook.setPreferredSize(new Dimension(70, 50));
-                buttonAddCook.setBorder(blackline);
+            buttonAddCook.setPreferredSize(new Dimension(70, 50));
+            buttonAddCook.setBorder(blackline);
 
-                frameAdd.setPreferredSize(new Dimension(200, 50));
-                frameAdd.setResizable(false);
-                frameAdd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frameAdd.setPreferredSize(new Dimension(200, 50));
+            frameAdd.setResizable(false);
+            frameAdd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                frameAdd.add(textCookName, BorderLayout.LINE_START);
-                frameAdd.add(buttonAddCook, BorderLayout.LINE_END);
+            frameAdd.add(textCookName, BorderLayout.LINE_START);
+            frameAdd.add(buttonAddCook, BorderLayout.LINE_END);
 
-                buttonAddCook.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int cooksNumber = vecCooks.size();
-                        int cookId;
-                        if (cooksNumber == 0)
-                            cookId = 1;
-                        else {
-                            int lastCookId = vecCooks.get(cooksNumber - 1).getIdInt();
-                            cookId = lastCookId + 1;
-                        }
-                        String cookName = textCookName.getText();
-                        Cook cook = new Cook(cookId, cookName);
-                        vecCooks.add(cook);
+            buttonAddCook.addActionListener(e1 -> {
+//                int cooksNumber = cooks.size(); // FIXME: Cook id is stored in employee object from db - do not generate your own id
+//                int cookId;
+//                if (cooksNumber == 0)
+//                    cookId = 1;
+//                else {
+//                    int lastCookId = cooks.get(cooksNumber - 1).getIdInt();
+//                    cookId = lastCookId + 1;
+//                }
+//                String cookName = textCookName.getText();
+//                Cook cook = new Cook(cookId, cookName);
+//                cooks.add(cook);
+//
+//                Vector<JPanel> cooks = new Vector<>();
+//
+//                for (Cook c : GUI.this.cooks){
+//                    JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+//                    panelCook.setBorder(blackline);
+//                    panelCook.setMinimumSize(new Dimension(300, 30));
+//                    panelCook.setMaximumSize(new Dimension(300, 30));
+//
+//                    JLabel labelCookDescription = new JLabel("Id: " + c.getIdInt() + ".    Name: " +c.getFirstName());
+//                    panelCook.add(labelCookDescription);
+//
+//                    cooks.add(panelCook);
+//                }
+//                scrollableCooks.removeAll();
+//                for (JPanel ck : cooks) { scrollableCooks.add(ck); }
+//
+//                panelCooks.updateUI();
+//
+//                frameAdd.dispose();
+            });
 
-                        Vector<JPanel> cooks = new Vector<>();
-
-                        for (Cook c : vecCooks){
-                            JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
-                            panelCook.setBorder(blackline);
-                            panelCook.setMinimumSize(new Dimension(300, 30));
-                            panelCook.setMaximumSize(new Dimension(300, 30));
-
-                            JLabel labelCookDescription = new JLabel("Id: " + c.getIdInt() + ".    Name: " +c.getFirstName());
-                            panelCook.add(labelCookDescription);
-
-                            cooks.add(panelCook);
-                        }
-                        scrollableCooks.removeAll();
-                        for (JPanel ck : cooks) { scrollableCooks.add(ck); }
-
-                        panelCooks.updateUI();
-
-                        frameAdd.dispose();
-                    }
-                });
-
-                frameAdd.pack();
-                frameAdd.setLocationRelativeTo(null);
-                frameAdd.setVisible(true);
-            }
+            frameAdd.pack();
+            frameAdd.setLocationRelativeTo(null);
+            frameAdd.setVisible(true);
         });
 
-        buttonRemove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frameRemove = new JFrame("Remove cook");
-                JTextField textCookId = new JTextField("id");
-                JButton buttonRemoveCook = new JButton("Remove");
+        buttonRemove.addActionListener(e -> {
+            JFrame frameRemove = new JFrame("Remove cook");
+            JTextField textCookId = new JTextField("id");
+            JButton buttonRemoveCook = new JButton("Remove");
 
-                textCookId.setPreferredSize(new Dimension(130, 50));
-                textCookId.setBorder(blackline);
+            textCookId.setPreferredSize(new Dimension(130, 50));
+            textCookId.setBorder(blackline);
 
-                buttonRemoveCook.setPreferredSize(new Dimension(70, 50));
-                buttonRemoveCook.setBorder(blackline);
+            buttonRemoveCook.setPreferredSize(new Dimension(70, 50));
+            buttonRemoveCook.setBorder(blackline);
 
-                frameRemove.setPreferredSize(new Dimension(200, 50));
-                frameRemove.setResizable(false);
-                frameRemove.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frameRemove.setPreferredSize(new Dimension(200, 50));
+            frameRemove.setResizable(false);
+            frameRemove.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                frameRemove.add(textCookId, BorderLayout.LINE_START);
-                frameRemove.add(buttonRemoveCook, BorderLayout.LINE_END);
+            frameRemove.add(textCookId, BorderLayout.LINE_START);
+            frameRemove.add(buttonRemoveCook, BorderLayout.LINE_END);
 
-                buttonRemoveCook.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String stringCookId = textCookId.getText();
-                        int cookId = 0;
-                        int indexToRemove = 0;
-                        boolean remove = false;
-                        try {
-                            cookId = Integer.parseInt(stringCookId);
-                        }
-                        catch (NumberFormatException ex){
-                            frameRemove.dispose();
-                            JOptionPane.showMessageDialog(frameRemove, "Its not a number!");
-                            return;
-                        }
+            buttonRemoveCook.addActionListener(e12 -> {
+//                String stringCookId = textCookId.getText(); // FIXME: Refactor Cook to Employee
+//                int cookId = 0;
+//                int indexToRemove = 0;
+//                boolean remove = false;
+//                try {
+//                    cookId = Integer.parseInt(stringCookId);
+//                }
+//                catch (NumberFormatException ex){
+//                    frameRemove.dispose();
+//                    JOptionPane.showMessageDialog(frameRemove, "Its not a number!");
+//                    return;
+//                }
+//
+//                for (Cook c : cooks){
+//                    if (c.getIdInt() == cookId) {
+//                        indexToRemove = cooks.indexOf(c);
+//                        remove = true;
+//                        break;
+//                    }
+//                }
+//                if (remove)
+//                    cooks.remove(indexToRemove);
+//                else {
+//                    frameRemove.dispose();
+//                    JOptionPane.showMessageDialog(frameRemove, "Id not in the list!");
+//                    return;
+//                }
+//
+//                Vector<JPanel> cooks = new Vector<>();
+//
+//                for (Cook c : GUI.this.cooks){
+//                    JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+//                    panelCook.setBorder(blackline);
+//                    panelCook.setMinimumSize(new Dimension(300, 30));
+//                    panelCook.setMaximumSize(new Dimension(300, 30));
+//
+//                    JLabel labelCookDescription = new JLabel("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
+//                    panelCook.add(labelCookDescription);
+//
+//                    cooks.add(panelCook);
+//                }
+//                scrollableCooks.removeAll();
+//                for (JPanel ck : cooks) { scrollableCooks.add(ck); }
+//
+//                panelCooks.updateUI();
+//
+//                frameRemove.dispose();
+            });
 
-                        for (Cook c : vecCooks){
-                            if (c.getIdInt() == cookId) {
-                                indexToRemove = vecCooks.indexOf(c);
-                                remove = true;
-                                break;
-                            }
-                        }
-                        if (remove)
-                            vecCooks.remove(indexToRemove);
-                        else {
-                            frameRemove.dispose();
-                            JOptionPane.showMessageDialog(frameRemove, "Id not in the list!");
-                            return;
-                        }
-
-                        Vector<JPanel> cooks = new Vector<>();
-
-                        for (Cook c : vecCooks){
-                            JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
-                            panelCook.setBorder(blackline);
-                            panelCook.setMinimumSize(new Dimension(300, 30));
-                            panelCook.setMaximumSize(new Dimension(300, 30));
-
-                            JLabel labelCookDescription = new JLabel("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
-                            panelCook.add(labelCookDescription);
-
-                            cooks.add(panelCook);
-                        }
-                        scrollableCooks.removeAll();
-                        for (JPanel ck : cooks) { scrollableCooks.add(ck); }
-
-                        panelCooks.updateUI();
-
-                        frameRemove.dispose();
-                    }
-                });
-
-                frameRemove.pack();
-                frameRemove.setLocationRelativeTo(null);
-                frameRemove.setVisible(true);
-            }
+            frameRemove.pack();
+            frameRemove.setLocationRelativeTo(null);
+            frameRemove.setVisible(true);
         });
 
         frameCooks.pack();
@@ -282,23 +257,24 @@ public class GUI {
     }
 
     public void downloadOrders() {
-        Call<List<Order>> call = App.interfaceApi.getOrdersStatus1();
+        Call<List<Order>> call = App.interfaceApi.getOrdersPlaced();
         call.enqueue(new Callback<List<Order>>() {
             @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+            public void onResponse(@NotNull Call<List<Order>> call, @NotNull Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     addOrdersToPanels(response);
                 }
             }
+
             @Override
-            public void onFailure(Call<List<Order>> call, Throwable throwable) {
+            public void onFailure(@NotNull Call<List<Order>> call, @NotNull Throwable throwable) {
             }
         });
     }
 
     private void addOrdersToPanels(Response<List<Order>> response) {
         JPanel scrollableCooksAssign = new JPanel();
-        JScrollPane scrollCooksAssign = new JScrollPane(scrollableCooksAssign);
+//        JScrollPane scrollCooksAssign = new JScrollPane(scrollableCooksAssign);
 
         Vector<JPanel> orders = new Vector<>();
         Vector<JPanel> ordersInProgress = new Vector<>();
@@ -329,85 +305,79 @@ public class GUI {
 
             orderPanel.add(dish_name);
 
-            buttonRecipe.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame frameOneRecipe = new JFrame("Recipe of current dish ");
-                    JTextField field = new JTextField(getUndividedRecipes(Math.toIntExact((order.getDish().getId()))).getRecipe());
+            buttonRecipe.addActionListener(e -> {
+                JFrame frameOneRecipe = new JFrame("Recipe of current dish ");
+                JTextField field = new JTextField(getUndividedRecipes(Math.toIntExact((order.getDish().getId()))).getRecipe());
 
-                    frameOneRecipe.add(field);
+                frameOneRecipe.add(field);
 
-                    frameOneRecipe.setMinimumSize(new Dimension(300, 300));
-                    frameOneRecipe.setResizable(true);
-                    frameOneRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frameOneRecipe.setMinimumSize(new Dimension(300, 300));
+                frameOneRecipe.setResizable(true);
+                frameOneRecipe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                    frameOneRecipe.pack();
-                    frameOneRecipe.setLocationRelativeTo(null);
-                    frameOneRecipe.setVisible(true);
+                frameOneRecipe.pack();
+                frameOneRecipe.setLocationRelativeTo(null);
+                frameOneRecipe.setVisible(true);
 
-                }
             });
 
-            buttonAssign.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame frameAssign = new JFrame("Assign a cook");
-                    JPanel panelAssign = new JPanel();
-
-                    panelAssign.setPreferredSize(new Dimension(200, 400));
-
-                    frameAssign.setPreferredSize(new Dimension(200, 400));
-                    frameAssign.setResizable(false);
-                    frameAssign.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                    scrollCooksAssign.setPreferredSize(new Dimension(200, 400));
-                    scrollableCooksAssign.setLayout(new BoxLayout(scrollableCooksAssign, BoxLayout.Y_AXIS));
-                    scrollableCooksAssign.setAutoscrolls(true);
-
-                    panelAssign.add(scrollCooksAssign);
-                    frameAssign.add(panelAssign);
-
-                    Vector<JPanel> cooks = new Vector<>();
-
-                    for (Cook c : vecCooks){
-                        JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
-                        panelCook.setBorder(blackline);
-                        panelCook.setMinimumSize(new Dimension(200, 30));
-                        panelCook.setMaximumSize(new Dimension(200, 30));
-                        panelCook.setLayout(null);
-
-                        JButton buttonCookDescription = new JButton("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
-                        buttonCookDescription.setBounds(1, 1, 198, 28);
-                        panelCook.add(buttonCookDescription);
-
-                        buttonCookDescription.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                order.setEmployee(c);
-                                try {
-                                    App.interfaceApi.updateOrders(order, order.getId()).execute();
-                                }
-                                catch (IOException exc) {
-                                    System.err.println(exc);
-                                }
-                                frameAssign.dispose();
-                            }
-                        });
-
-                        cooks.add(panelCook);
-                    }
-                    scrollableCooksAssign.removeAll();
-                    for (JPanel ck : cooks) { scrollableCooksAssign.add(ck); }
-
-                    panelAssign.updateUI();
-
-                    frameAssign.pack();
-                    frameAssign.setLocationRelativeTo(null);
-                    frameAssign.setVisible(true);
-                }
+            buttonAssign.addActionListener(e -> {
+//                JFrame frameAssign = new JFrame("Assign a cook"); // FIXME: Refactor to use employee instead of cook
+//                JPanel panelAssign = new JPanel();
+//
+//                panelAssign.setPreferredSize(new Dimension(200, 400));
+//
+//                frameAssign.setPreferredSize(new Dimension(200, 400));
+//                frameAssign.setResizable(false);
+//                frameAssign.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//
+//                scrollCooksAssign.setPreferredSize(new Dimension(200, 400));
+//                scrollableCooksAssign.setLayout(new BoxLayout(scrollableCooksAssign, BoxLayout.Y_AXIS));
+//                scrollableCooksAssign.setAutoscrolls(true);
+//
+//                panelAssign.add(scrollCooksAssign);
+//                frameAssign.add(panelAssign);
+//
+//                Vector<JPanel> cooks = new Vector<>();
+//
+//                for (Cook c : GUI.this.cooks){
+//                    JPanel panelCook = new JPanel( new FlowLayout(FlowLayout.LEFT));
+//                    panelCook.setBorder(blackline);
+//                    panelCook.setMinimumSize(new Dimension(200, 30));
+//                    panelCook.setMaximumSize(new Dimension(200, 30));
+//                    panelCook.setLayout(null);
+//
+//                    JButton buttonCookDescription = new JButton("Id:" + c.getIdInt() + ".    Name: " +c.getFirstName());
+//                    buttonCookDescription.setBounds(1, 1, 198, 28);
+//                    panelCook.add(buttonCookDescription);
+//
+//                    buttonCookDescription.addActionListener(new ActionListener() {
+//                        @Override
+//                        public void actionPerformed(ActionEvent e) {
+//                            order.setEmployee(c);
+//                            try {
+//                                App.interfaceApi.updateOrders(order, order.getId()).execute();
+//                            }
+//                            catch (IOException exc) {
+//                                System.err.println(exc);
+//                            }
+//                            frameAssign.dispose();
+//                        }
+//                    });
+//
+//                    cooks.add(panelCook);
+//                }
+//                scrollableCooksAssign.removeAll();
+//                for (JPanel ck : cooks) { scrollableCooksAssign.add(ck); }
+//
+//                panelAssign.updateUI();
+//
+//                frameAssign.pack();
+//                frameAssign.setLocationRelativeTo(null);
+//                frameAssign.setVisible(true);
             });
 
-            for (SpecialRequest request: order.getRequests())
+            for (SpecialRequest request : order.getRequests())
                 orderPanel.add(new JLabel(request.getRequest()));
 
             if (order.getEmployee() == null) {
@@ -432,13 +402,13 @@ public class GUI {
     }
 
 
-    public List<Recipe> downloadAllRecipes(){
-        Call<List<Recipe>> call = App.interfaceApi.getRecipe();
-        try {
-            return call.execute().body();
-        } catch (IOException e) {
-            System.out.println("Download not successful ");
-        }   //można dodać okienko, że nie udało się
+    public List<Recipe> downloadAllRecipes() {
+//        Call<List<Recipe>> call = App.interfaceApi.getRecipe(); // FIXME: removed function getRecipe - information about recipe available in dish object
+//        try {
+//            return call.execute().body();
+//        } catch (IOException e) {
+//            System.out.println("Download not successful ");
+//        }   //można dodać okienko, że nie udało się
         return new ArrayList<>();
     }
 
