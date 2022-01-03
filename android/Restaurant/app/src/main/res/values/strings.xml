@@ -36,6 +36,7 @@
 
 
     <string name="divider">Divider</string>
+
     <string name="content_description_status">Status</string>
     <string name="text_view_table_receipt">Table</string>
     <string name="text_view_orders_receipt">Orders</string>
@@ -46,21 +47,15 @@
     <string name="menu_delete_receipt">Delete Receipt</string>
     <string name="menu_close_receipt">Close Receipt</string>
     <string name="title_activity_requests">RequestsActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="edit_text_request_hint">Request</string>
     <string name="content_description_dish_image">Dish Image</string>
     <string name="text_view_total_receipt">Total</string>
+
+    <!-- Error Handling -->
     <string name="toast_error_cannot_delete_receipt">Cannot delete receipt with ongoing orders</string>
     <string name="toast_error_cannot_close_receipt">Cannot close receipt with ongoing orders</string>
     <string name="toast_error_cannot_close_empty_receipt">Cannot close empty receipt</string>
-    <string name="toast_failure_error_internet_connection">\"Internet Connection Error! \"</string>
+    <string name="toast_failure_error_internet_connection">Internet Connection Error! </string>
     <string name="toast_error_empty_request">Cannot add empty request</string>
     <string name="error_try_again">Try Again</string>
     <string name="error_close_application">Close Application</string>
@@ -68,6 +63,9 @@
     <string name="error_downloading_tables">Error downloading tables</string>
     <string name="error_finish_activity">Finish Activity</string>
     <string name="error_downloading_receipts">Error Downloading Receipts</string>
+    <string name="error_unknown_error">Unknown Error</string>
+    <string name="error_response_body_is_empty">Error: Response Body is Empty</string>
+    <string name="error_error">Error: </string>
 
 
 </resources>

@@ -3,6 +3,8 @@ package com.example.restaurant.handlers;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.restaurant.R;
+
 import retrofit2.Response;
 
 public class ResponseError<T> {
@@ -15,9 +17,16 @@ public class ResponseError<T> {
     }
 
     public String getMessage() {
-        String message = "Error: " + response.code();
-        if (!response.message().equals(""))
-            message += " - " + response.message();
+        String message = context.getString(R.string.error_unknown_error);
+        if (response.isSuccessful()) {
+            if (response.body() == null)
+                message = context.getString(R.string.error_response_body_is_empty);
+        } else {
+            message = context.getString(R.string.error_error) + response.code();
+            if (!response.message().equals(""))
+                message += " - " + response.message();
+        }
+
         return message;
     }
 
