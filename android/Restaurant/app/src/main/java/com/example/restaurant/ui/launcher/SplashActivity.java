@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    public boolean isEmployeeLoggedIn() {
+    private boolean isEmployeeLoggedIn() {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
         long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);

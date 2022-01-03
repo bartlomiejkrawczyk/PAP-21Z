@@ -14,11 +14,15 @@ public class ResponseError<T> {
         this.context = context;
     }
 
-    public void makeToast() {
+    public String getMessage() {
         String message = "Error: " + response.code();
         if (!response.message().equals(""))
             message += " - " + response.message();
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        return message;
+    }
+
+    public void makeToast() {
+        Toast.makeText(context, getMessage(), Toast.LENGTH_LONG).show();
     }
 
     public void makeToast(String message) {

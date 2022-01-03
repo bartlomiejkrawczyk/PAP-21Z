@@ -4,6 +4,7 @@ import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 import static com.example.restaurant.ui.receipt.ReceiptsActivity.RECEIPT;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,7 @@ import com.example.restaurant.handlers.ResponseError;
 import com.example.restaurant.ui.dish.DishCategoriesActivity;
 import com.example.restaurant.ui.request.RequestsActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +57,7 @@ public class ReceiptActivity extends AppCompatActivity {
     private TextView textViewTotal;
     private List<Table> tables;
     private Spinner spinner;
+    private ArrayAdapter<Table> adapter;
     private LinearLayout linearLayout;
 
     private Receipt receipt;
@@ -283,12 +286,12 @@ public class ReceiptActivity extends AppCompatActivity {
         tables = new ArrayList<>();
         tables.add(new Table(null, getString(R.string.spinner_item_takeaway)));
 
-        ArrayAdapter<Table> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tables);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tables);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
 
-        new Thread(() -> retrieveTablesFromDatabase(adapter)).start();
+        new Thread(this::retrieveTablesFromDatabase).start();
 
         spinner.post(() -> spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -303,42 +306,91 @@ public class ReceiptActivity extends AppCompatActivity {
         }));
     }
 
-    private void retrieveTablesFromDatabase(ArrayAdapter<Table> adapter) {
+    private void retrieveTablesFromDatabase() {
         AppDatabase db = AppDatabase.getAppDatabase(this);
-        List<Table> daoTables = db.tablesDao().getTables();
-        tables.addAll(daoTables);
-        adapter.notifyDataSetChanged();
-
-        Table table = receipt.getTable();
-        if (table != null)
-            for (int i = 0; i < daoTables.size(); i++) {
-                if (daoTables.get(i).getId().equals(table.getId())) {
-                    spinner.setSelection(i + 1);
-                    break;
+        if (db.tablesDao().getTablesCount() > 0) {
+            List<Table> daoTables = db.tablesDao().getTables();
+            setTables(daoTables);
+        } else {
+            Call<List<Table>> call = App.interfaceApi.getTables();
+            try {
+                Response<List<Table>> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    setTables(response.body());
+                } else {
+                    errorDownloadingTables(new ResponseError<>(response, ReceiptActivity.this).getMessage());
                 }
+            } catch (IOException e) {
+                errorDownloadingTables(new FailureError(ReceiptActivity.this, e).getMessage());
             }
+        }
+    }
+
+    private void setTables(List<Table> tables) {
+        runOnUiThread(() -> {
+            this.tables.addAll(tables);
+            adapter.notifyDataSetChanged();
+
+            Table table = receipt.getTable();
+            if (table != null)
+                for (int i = 0; i < tables.size(); i++) {
+                    if (tables.get(i).getId().equals(table.getId())) {
+                        spinner.setSelection(i + 1);
+                        break;
+                    }
+                }
+        });
+    }
+
+    private void errorDownloadingTables(String message) {
+        runOnUiThread(() -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // Set properties
+            builder.setMessage(message)
+                    .setTitle(R.string.error_downloading_tables);
+
+            // Add the buttons
+            builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start());
+            builder.setPositiveButton(R.string.error_finish_activity, (dialog, id) -> finish());
+            builder.setCancelable(false);
+
+            AlertDialog dialog = builder.create();
+
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        });
     }
 
 
     private void updateTable(int position) {
-        if (position != 0)
+        boolean update = false;
+        Table table = receipt.getTable();
+        if (position != 0) {
+            if (table == null || !table.getId().equals(tables.get(position).getId()))
+                update = true;
             receipt.setTable(tables.get(position));
-        else
+        } else {
+            if (table != null)
+                update = true;
             receipt.setTable(null);
-        Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
-        call.enqueue(new Callback<Receipt>() {
-            @Override
-            public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
-                if (!response.isSuccessful())
-                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
-                // else Do nothing
-            }
+        }
+        if (update) {
+            Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
+            call.enqueue(new Callback<Receipt>() {
+                @Override
+                public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
+                    if (!response.isSuccessful())
+                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                    // else Do nothing
+                }
 
-            @Override
-            public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                new FailureError(ReceiptActivity.this, t).makeToast();
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
+                    new FailureError(ReceiptActivity.this, t).makeToast();
+                }
+            });
+        }
     }
 
     private void displayOrder(Order order) {

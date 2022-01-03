@@ -1,5 +1,6 @@
 package com.example.restaurant.ui.login;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Employee;
+import com.example.restaurant.handlers.FailureError;
+import com.example.restaurant.handlers.ResponseError;
 import com.example.restaurant.ui.receipt.ReceiptsActivity;
 
 import java.util.ArrayList;
@@ -76,15 +79,39 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     employees.addAll(response.body());
                     adapter.notifyDataSetChanged();
+                } else {
+                    errorDownloadingWaiters(new ResponseError<>(response, LoginActivity.this).getMessage());
                 }
-                // TODO: Handle failure - reload
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Employee>> call, @NonNull Throwable t) {
-                // TODO: Handle failure - reload
+                errorDownloadingWaiters(new FailureError(LoginActivity.this, t).getMessage());
             }
         });
+    }
+
+    private void errorDownloadingWaiters(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Set properties
+        builder.setMessage(message)
+                .setTitle(R.string.error_downloading_waiters);
+
+        // Add the buttons
+        builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> getWaiters());
+        builder.setPositiveButton(R.string.error_close_application, (dialog, id) -> {
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+        });
+        builder.setCancelable(false);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     private boolean login() {

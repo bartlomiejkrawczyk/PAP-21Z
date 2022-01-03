@@ -82,10 +82,16 @@ public class Dish implements Serializable {
     public void fetchData(Context context) {
         AppDatabase db = AppDatabase.getAppDatabase(context);
         Dish dish = db.dishesDao().getDishById(this.id);
-        setName(dish.getName());
-        setImagePath(dish.getImagePath());
-        setPrice(dish.getPrice());
-        setDishCategoryId(dish.getDishCategoryId());
+        if (dish != null) {
+            setName(dish.getName());
+            setImagePath(dish.getImagePath());
+            setPrice(dish.getPrice());
+            setDishCategoryId(dish.getDishCategoryId());
+        } else {
+            setName("Not Found");
+            setPrice(0);
+            setDishCategoryId(0L);
+        }
     }
 
 }

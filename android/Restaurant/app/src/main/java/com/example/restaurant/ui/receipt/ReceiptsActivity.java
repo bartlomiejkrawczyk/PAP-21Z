@@ -3,6 +3,7 @@ package com.example.restaurant.ui.receipt;
 import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,10 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurant.App;
 import com.example.restaurant.R;
+import com.example.restaurant.db.AppDatabase;
+import com.example.restaurant.entities.Dish;
+import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
+import com.example.restaurant.handlers.FailureError;
+import com.example.restaurant.handlers.ResponseError;
 import com.example.restaurant.ui.settings.SettingsActivity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -82,7 +89,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
 
-        getReceipts();
+        new Thread(this::getReceipts).start();
     }
 
     private void initViews() {
@@ -92,7 +99,6 @@ public class ReceiptsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_receipts);
         setUpRecyclerView();
 
-        new Thread(this::getReceipts).start();
     }
 
     private void setUpRecyclerView() {
@@ -124,6 +130,30 @@ public class ReceiptsActivity extends AppCompatActivity {
                 getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
         long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
 
+        // If there are no dishes download them first
+        AppDatabase db = AppDatabase.getAppDatabase(this);
+        if (db.dishesDao().getDishCount() == 0) {
+            Call<List<DishCategory>> call = App.interfaceApi.getDishes();
+
+            try {
+                Response<List<DishCategory>> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    List<DishCategory> categories = response.body();
+
+                    for (DishCategory category : categories) {
+                        db.dishCategoriesDao().insert(category);
+                        for (Dish dish : category.getDishes()) {
+                            db.dishesDao().insert(dish);
+                        }
+                    }
+                } else {
+                    errorDownloadingData("Error Downloading Dishes", new ResponseError<>(response, ReceiptsActivity.this).getMessage());
+                }
+            } catch (IOException e) {
+                errorDownloadingData("Error Downloading Dishes", new FailureError(ReceiptsActivity.this, e).getMessage());
+            }
+        }
+
         Call<List<Receipt>> call = App.interfaceApi.getReceipts(employeeId);
         call.enqueue(new Callback<List<Receipt>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -137,14 +167,40 @@ public class ReceiptsActivity extends AppCompatActivity {
                     scheduleUpdates();
 
                     runOnUiThread(() -> adapter.notifyDataSetChanged());
+                } else {
+                    errorDownloadingData(getString(R.string.error_downloading_receipts), new ResponseError<>(response, ReceiptsActivity.this).getMessage());
                 }
-                // TODO: Handle failure
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
-                // TODO: Handle failure
+                errorDownloadingData(getString(R.string.error_downloading_receipts), new FailureError(ReceiptsActivity.this, t).getMessage());
             }
+        });
+    }
+
+    private void errorDownloadingData(String error, String message) {
+        runOnUiThread(() -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // Set properties
+            builder.setMessage(message)
+                    .setTitle(error);
+
+            // Add the buttons
+            builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> new Thread(this::getReceipts).start());
+            builder.setPositiveButton(R.string.error_close_application, (dialog, id) -> {
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            });
+            builder.setCancelable(false);
+
+            AlertDialog dialog = builder.create();
+
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
         });
     }
 
@@ -184,6 +240,7 @@ public class ReceiptsActivity extends AppCompatActivity {
                         for (Order order : orders) {
                             order.getDish().fetchData(ReceiptsActivity.this);
                         }
+
                         runOnUiThread(() -> {
                             adapter.getReceipts().get(position).setOrders(orders);
                             adapter.notifyItemChanged(position);

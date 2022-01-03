@@ -14,9 +14,14 @@ public class FailureError {
         this.throwable = throwable;
     }
 
-    public void makeToast() {
+    public String getMessage() {
         String message = context.getString(R.string.toast_failure_error_internet_connection);
         message += throwable.getLocalizedMessage();
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+        return message;
+    }
+
+    public void makeToast() {
+        Toast.makeText(context, getMessage(), Toast.LENGTH_LONG).show();
     }
 }

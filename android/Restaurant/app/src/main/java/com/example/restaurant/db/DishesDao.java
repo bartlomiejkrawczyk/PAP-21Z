@@ -18,6 +18,9 @@ public interface DishesDao {
     @Query("SELECT * FROM dishes WHERE id =:id")
     Dish getDishById(Long id);
 
+    @Query("SELECT COUNT(*) FROM dishes")
+    int getDishCount();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dish dish);
 }

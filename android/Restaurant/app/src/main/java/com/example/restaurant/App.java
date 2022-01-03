@@ -24,7 +24,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO: For now skip the night mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Skip the night mode for now
         createNetworkSys();
         updateData();
     }
