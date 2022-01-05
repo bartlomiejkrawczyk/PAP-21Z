@@ -86,7 +86,7 @@ public class RequestsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<SpecialRequest> call, @NonNull Throwable t) {
-                    new FailureError(RequestsActivity.this, t).makeToast();
+                    new FailureError(t, RequestsActivity.this).makeToast();
                 }
             });
         } else {
@@ -121,7 +121,7 @@ public class RequestsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                new FailureError(RequestsActivity.this, t).makeToast();
+                new FailureError(t, RequestsActivity.this).makeToast();
             }
         });
     }

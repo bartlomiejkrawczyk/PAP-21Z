@@ -3,7 +3,6 @@ package com.example.restaurant.ui.receipt;
 import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -79,7 +78,8 @@ public class ReceiptsActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        timer.cancel();
+        if (timer != null)
+            timer.cancel();
     }
 
     @Override
@@ -131,6 +131,44 @@ public class ReceiptsActivity extends AppCompatActivity {
         long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
 
         // If there are no dishes download them first
+        downloadDishesIfNotAvailable();
+
+        Call<List<Receipt>> call = App.interfaceApi.getReceipts(employeeId);
+        call.enqueue(new Callback<List<Receipt>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onResponse(@NonNull Call<List<Receipt>> call, @NonNull Response<List<Receipt>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Receipt> receipts = response.body();
+
+                    adapter.setReceipts(receipts);
+
+                    scheduleUpdates();
+
+                    runOnUiThread(() -> adapter.notifyDataSetChanged());
+                } else {
+                    new ResponseError<>(response, ReceiptsActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_receipts),
+                                    (dialog, id) -> new Thread(() -> getReceipts()).start(),
+                                    true
+                            );
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
+                new FailureError(t, ReceiptsActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_receipts),
+                                (dialog, id) -> new Thread(() -> getReceipts()).start(),
+                                true
+                        );
+            }
+        });
+    }
+
+    private void downloadDishesIfNotAvailable() {
         AppDatabase db = AppDatabase.getAppDatabase(this);
         if (db.dishesDao().getDishCount() == 0) {
             Call<List<DishCategory>> call = App.interfaceApi.getDishes();
@@ -147,61 +185,22 @@ public class ReceiptsActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    errorDownloadingData("Error Downloading Dishes", new ResponseError<>(response, ReceiptsActivity.this).getMessage());
+                    new ResponseError<>(response, ReceiptsActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_dishes),
+                                    (dialog, id) -> new Thread(this::getReceipts).start(),
+                                    true
+                            );
                 }
             } catch (IOException e) {
-                errorDownloadingData("Error Downloading Dishes", new FailureError(ReceiptsActivity.this, e).getMessage());
+                new FailureError(e, ReceiptsActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_dishes),
+                                (dialog, id) -> new Thread(this::getReceipts).start(),
+                                true
+                        );
             }
         }
-
-        Call<List<Receipt>> call = App.interfaceApi.getReceipts(employeeId);
-        call.enqueue(new Callback<List<Receipt>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(@NonNull Call<List<Receipt>> call, @NonNull Response<List<Receipt>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Receipt> receipts = response.body();
-
-                    adapter.setReceipts(receipts);
-
-                    scheduleUpdates();
-
-                    runOnUiThread(() -> adapter.notifyDataSetChanged());
-                } else {
-                    errorDownloadingData(getString(R.string.error_downloading_receipts), new ResponseError<>(response, ReceiptsActivity.this).getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
-                errorDownloadingData(getString(R.string.error_downloading_receipts), new FailureError(ReceiptsActivity.this, t).getMessage());
-            }
-        });
-    }
-
-    private void errorDownloadingData(String error, String message) {
-        runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            // Set properties
-            builder.setMessage(message)
-                    .setTitle(error);
-
-            // Add the buttons
-            builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> new Thread(this::getReceipts).start());
-            builder.setPositiveButton(R.string.error_close_application, (dialog, id) -> {
-                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory(Intent.CATEGORY_HOME);
-                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
-            });
-            builder.setCancelable(false);
-
-            AlertDialog dialog = builder.create();
-
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-        });
     }
 
     private void scheduleUpdates() {
@@ -259,7 +258,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
     }
 
-    private void tryShowRecyclerView() {
+    private synchronized void tryShowRecyclerView() {
         if (--unhandledReceiptsCount == 0) {
             progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);

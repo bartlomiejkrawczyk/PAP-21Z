@@ -4,7 +4,6 @@ import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 import static com.example.restaurant.ui.receipt.ReceiptsActivity.RECEIPT;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -146,7 +145,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                        new FailureError(ReceiptActivity.this, t).makeToast();
+                        new FailureError(t, ReceiptActivity.this).makeToast();
                     }
                 });
             } else {
@@ -172,7 +171,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    new FailureError(ReceiptActivity.this, t).makeToast();
+                    new FailureError(t, ReceiptActivity.this).makeToast();
                 }
             });
         } else {
@@ -208,7 +207,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                new FailureError(ReceiptActivity.this, t).makeToast();
+                new FailureError(t, ReceiptActivity.this).makeToast();
                 finish();
             }
         });
@@ -253,7 +252,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                    new FailureError(ReceiptActivity.this, t).makeToast();
+                    new FailureError(t, ReceiptActivity.this).makeToast();
                 }
             });
         }).start();
@@ -318,10 +317,20 @@ public class ReceiptActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     setTables(response.body());
                 } else {
-                    errorDownloadingTables(new ResponseError<>(response, ReceiptActivity.this).getMessage());
+                    new ResponseError<>(response, ReceiptActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_tables),
+                                    (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start(),
+                                    false
+                            );
                 }
             } catch (IOException e) {
-                errorDownloadingTables(new FailureError(ReceiptActivity.this, e).getMessage());
+                new FailureError(e, ReceiptActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_tables),
+                                (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start(),
+                                false
+                        );
             }
         }
     }
@@ -342,30 +351,11 @@ public class ReceiptActivity extends AppCompatActivity {
         });
     }
 
-    private void errorDownloadingTables(String message) {
-        runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            // Set properties
-            builder.setMessage(message)
-                    .setTitle(R.string.error_downloading_tables);
-
-            // Add the buttons
-            builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start());
-            builder.setPositiveButton(R.string.error_finish_activity, (dialog, id) -> finish());
-            builder.setCancelable(false);
-
-            AlertDialog dialog = builder.create();
-
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-        });
-    }
-
 
     private void updateTable(int position) {
         boolean update = false;
         Table table = receipt.getTable();
+
         if (position != 0) {
             if (table == null || !table.getId().equals(tables.get(position).getId()))
                 update = true;
@@ -375,6 +365,7 @@ public class ReceiptActivity extends AppCompatActivity {
                 update = true;
             receipt.setTable(null);
         }
+
         if (update) {
             Call<Receipt> call = App.interfaceApi.updateReceipt(receipt.getId(), receipt);
             call.enqueue(new Callback<Receipt>() {
@@ -387,7 +378,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                    new FailureError(ReceiptActivity.this, t).makeToast();
+                    new FailureError(t, ReceiptActivity.this).makeToast();
                 }
             });
         }
@@ -440,7 +431,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                new FailureError(ReceiptActivity.this, t).makeToast();
+                new FailureError(t, ReceiptActivity.this).makeToast();
             }
         });
     }
@@ -462,7 +453,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                new FailureError(ReceiptActivity.this, t).makeToast();
+                new FailureError(t, ReceiptActivity.this).makeToast();
             }
         });
     }

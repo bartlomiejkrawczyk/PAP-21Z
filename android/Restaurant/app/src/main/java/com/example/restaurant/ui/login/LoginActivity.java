@@ -1,6 +1,5 @@
 package com.example.restaurant.ui.login;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -80,38 +79,25 @@ public class LoginActivity extends AppCompatActivity {
                     employees.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    errorDownloadingWaiters(new ResponseError<>(response, LoginActivity.this).getMessage());
+                    new ResponseError<>(response, LoginActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_waiters),
+                                    (dialog, id) -> getWaiters(),
+                                    true
+                            );
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Employee>> call, @NonNull Throwable t) {
-                errorDownloadingWaiters(new FailureError(LoginActivity.this, t).getMessage());
+                new FailureError(t, LoginActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_waiters),
+                                (dialog, id) -> getWaiters(),
+                                true
+                        );
             }
         });
-    }
-
-    private void errorDownloadingWaiters(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        // Set properties
-        builder.setMessage(message)
-                .setTitle(R.string.error_downloading_waiters);
-
-        // Add the buttons
-        builder.setNegativeButton(R.string.error_try_again, (dialog, id) -> getWaiters());
-        builder.setPositiveButton(R.string.error_close_application, (dialog, id) -> {
-            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-            homeIntent.addCategory(Intent.CATEGORY_HOME);
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(homeIntent);
-        });
-        builder.setCancelable(false);
-
-        AlertDialog dialog = builder.create();
-
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
     }
 
     private boolean login() {

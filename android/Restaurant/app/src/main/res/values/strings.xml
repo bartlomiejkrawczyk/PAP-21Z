@@ -66,6 +66,7 @@
     <string name="error_unknown_error">Unknown Error</string>
     <string name="error_response_body_is_empty">Error: Response Body is Empty</string>
     <string name="error_error">Error: </string>
+    <string name="error_downloading_dishes">Error Downloading Dishes</string>
 
 
 </resources>
