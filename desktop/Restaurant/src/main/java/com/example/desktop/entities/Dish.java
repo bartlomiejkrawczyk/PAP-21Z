@@ -16,7 +16,8 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(Long id, String name, String imagePath, Integer price, Long dishCategoryId, List<Ingredient> ingredients, List<Recipe> recipes) {
+    public Dish(Long id, String name, String imagePath, Integer price, Long dishCategoryId,
+                List<Ingredient> ingredients, List<Recipe> recipes) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
