@@ -11,7 +11,9 @@ import java.util.List;
 @Repository
 public interface OrdersRepository extends CrudRepository<Order, Long> {
 
-    List<OrderInfoWaiter> findOrdersByReceiptId(Long receiptId); //TODO: refactor this to retrieve only OrderInfoWaiter
+    List<OrderInfoWaiter> findOrdersByReceiptId(Long receiptId);
 
-    List<OrderInfoCook> findByStatus(int status);
+    List<OrderInfoCook> findByStatusAndEmployeeIsNull(int status);
+
+    List<OrderInfoCook> findByStatusAndEmployeeIsNotNull(int status);
 }

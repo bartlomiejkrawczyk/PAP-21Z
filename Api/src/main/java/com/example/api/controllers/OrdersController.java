@@ -1,5 +1,6 @@
 package com.example.api.controllers;
 
+import com.example.api.entities.Employee;
 import com.example.api.entities.Order;
 import com.example.api.errors.EntityNotFoundException;
 import com.example.api.projections.OrderInfoCook;
@@ -26,13 +27,29 @@ public class OrdersController {
     }
 
     @GetMapping("/receipt/{receipt}")
-    public List<OrderInfoWaiter> findOrdersByReceipt(@PathVariable Long receipt) { //TODO: refactor this to retrieve only OrderInfoWaiter
+    public List<OrderInfoWaiter> findOrdersByReceipt(@PathVariable Long receipt) {
         return repository.findOrdersByReceiptId(receipt);
     }
 
-    @GetMapping("/status/{status}")
-    public List<OrderInfoCook> findOrdersByStatus(@PathVariable int status) {
-        return repository.findByStatus(status);
+    @GetMapping("/desktop/placed/{status}")
+    public List<OrderInfoCook> findOrdersByStatusAndEmployeeIsNull(@PathVariable int status) {
+        return repository.findByStatusAndEmployeeIsNull(status);
+    }
+
+    @GetMapping("/desktop/progress/{status}")
+    public List<OrderInfoCook> findOrdersByStatusAndEmployeeIsNotNull(@PathVariable int status) {
+        return repository.findByStatusAndEmployeeIsNotNull(status);
+    }
+
+    @PutMapping("/employee/{orderId}/{employeeId}")
+    public Order setEmployee(@PathVariable Long orderId, @PathVariable Long employeeId) {
+        return repository.findById(orderId)
+                .map(order -> {
+                    Employee employee = new Employee();
+                    employee.setId(employeeId);
+                    order.setEmployee(employee);
+                    return repository.save(order);
+                }).orElseThrow(() -> new EntityNotFoundException(orderId));
     }
 
     @PutMapping("/status/{orderId}/{status}")
@@ -51,20 +68,6 @@ public class OrdersController {
     @PostMapping
     public Order saveOrder(@RequestBody Order order) {
         return repository.save(order);
-    }
-
-    @PutMapping("/{id}")
-    public Order updateOrder(@RequestBody Order newOrder, @PathVariable Long id) {
-        return repository.findById(id)
-                .map(order -> {
-                    order.setDate(null);
-                    order.setReceiptId(newOrder.getReceiptId());
-                    order.setDish(newOrder.getDish());
-                    return repository.save(order);
-                }).orElseGet(() -> {
-                    newOrder.setId(id);
-                    return repository.save(newOrder);
-                });
     }
 
     @DeleteMapping("/{id}")

@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "ORDERS")
 @Entity
@@ -56,4 +57,18 @@ public class Order {
     @JoinColumn(name = "EMPLOYEE_ID")
     private Employee employee;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (!Objects.equals(id, order.id)) return false;
+        if (!Objects.equals(date, order.date)) return false;
+        if (!Objects.equals(dish, order.dish)) return false;
+        if (!Objects.equals(receiptId, order.receiptId)) return false;
+        if (!Objects.equals(status, order.status)) return false;
+        return Objects.equals(employee, order.employee);
+    }
 }

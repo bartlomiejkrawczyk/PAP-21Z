@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "RECEIPTS")
 @Entity
@@ -45,5 +46,18 @@ public class Receipt {
 
     @OneToMany(mappedBy = "receiptId")
     private List<Order> orders;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Receipt receipt = (Receipt) o;
+
+        if (!Objects.equals(id, receipt.id)) return false;
+        if (!Objects.equals(payment, receipt.payment)) return false;
+        if (!Objects.equals(employee, receipt.employee)) return false;
+        return Objects.equals(table, receipt.table);
+    }
 
 }

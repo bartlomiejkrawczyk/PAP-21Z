@@ -9,6 +9,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "SPECIAL_REQUESTS")
@@ -41,4 +42,17 @@ public class SpecialRequest {
 
     @Column(name = "ORDER_ID", nullable = false)
     private Long orderId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpecialRequest that = (SpecialRequest) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(request, that.request)) return false;
+        return Objects.equals(orderId, that.orderId);
+    }
+
 }

@@ -27,20 +27,6 @@ public class SpecialRequestsController {
         return repository.save(request);
     }
 
-    @PutMapping("/{id}")
-    public SpecialRequest updateSpecialRequest(@RequestBody SpecialRequest newRequest, @PathVariable Long id) {
-        return repository.findById(id)
-                .map(request -> {
-                    request.setRequest(newRequest.getRequest());
-                    request.setOrderId(newRequest.getOrderId());
-                    return repository.save(request);
-                })
-                .orElseGet(() -> {
-                    newRequest.setId(id);
-                    return repository.save(newRequest);
-                });
-    }
-
 
     @DeleteMapping("/{id}")
     public void deleteSpecialRequest(@PathVariable Long id) {

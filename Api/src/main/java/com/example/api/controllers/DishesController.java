@@ -4,7 +4,10 @@ import com.example.api.entities.Dish;
 import com.example.api.errors.EntityNotFoundException;
 import com.example.api.repositories.DishesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -28,32 +31,4 @@ public class DishesController {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
     }
-
-    @PostMapping
-    public Dish saveDish(@RequestBody Dish dish) {
-        return repository.save(dish);
-    }
-
-    @PutMapping("/{id}")
-    public Dish updateDish(@RequestBody Dish newDish, @PathVariable Long id) {
-        return repository.findById(id)
-                .map(dish -> {
-                    dish.setName(newDish.getName());
-                    dish.setDishCategoryId(newDish.getDishCategoryId());
-                    dish.setImagePath(newDish.getImagePath());
-                    dish.setPrice(newDish.getPrice());
-                    return repository.save(dish);
-                })
-                .orElseGet(() -> {
-                    newDish.setId(id);
-                    return repository.save(newDish);
-                });
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteDish(@PathVariable Long id) {
-        repository.deleteById(id);
-    }
-
-
 }

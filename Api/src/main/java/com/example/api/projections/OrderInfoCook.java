@@ -17,10 +17,6 @@ public interface OrderInfoCook {
 
     interface DishInfo {
         Long getId();
-
-        String getName();
-
-        String getImagePath();
     }
 
     interface EmployeeInfo {
