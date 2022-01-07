@@ -63,47 +63,24 @@ public class CooksView {
         return frameCooks;
     }
 
-    public void setFrameCooks(JFrame frameCooks) {
-        this.frameCooks = frameCooks;
-    }
-
     public JPanel getPanelCooks() {
         return panelCooks;
-    }
-
-    public void setPanelCooks(JPanel panelCooks) {
-        this.panelCooks = panelCooks;
     }
 
     public JPanel getPanelTitle() {
         return panelTitle;
     }
 
-    public void setPanelTitle(JPanel panelTitle) {
-        this.panelTitle = panelTitle;
-    }
-
     public JLabel getLabelTitle() {
         return labelTitle;
-    }
-
-    public void setLabelTitle(JLabel labelTitle) {
-        this.labelTitle = labelTitle;
     }
 
     public JPanel getScrollableCooks() {
         return scrollableCooks;
     }
 
-    public void setScrollableCooks(JPanel scrollableCooks) {
-        this.scrollableCooks = scrollableCooks;
-    }
-
     public JScrollPane getScrollCooks() {
         return scrollCooks;
     }
 
-    public void setScrollCooks(JScrollPane scrollCooks) {
-        this.scrollCooks = scrollCooks;
-    }
 }
