@@ -17,7 +17,9 @@ public class AppDatabase {
 
     private final List<Product> products;
     private List<Employee> employees;
+    private final List<Employee> loggedInEmployees;
     private final List<Dish> dishes;
+
 
     public static synchronized AppDatabase getAppDatabase() {
         if (db == null) {
@@ -29,11 +31,20 @@ public class AppDatabase {
     private AppDatabase() {
         products = new ArrayList<>();
         employees = new ArrayList<>();
+        loggedInEmployees = new ArrayList<>();
         dishes = new ArrayList<>();
     }
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
+    public List<Employee> getEmployeesDownloadIfEmpty() {
+        if (employees.size() == 0)
+            downloadEmployees();
+        return employees;
     }
 
     public List<Employee> getEmployees() {
@@ -42,6 +53,18 @@ public class AppDatabase {
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    public List<Employee> getLoggedInEmployees() {
+        return loggedInEmployees;
+    }
+
+    public void logIn(Employee employee) {
+        loggedInEmployees.add(employee);
+    }
+
+    public void logOut(Employee employee) {
+        loggedInEmployees.remove(employee);
     }
 
     // Note: that this function should be called on separate thread!
@@ -72,7 +95,7 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
-    public Employee getEmployeeById(Long employeeId) {
+    public synchronized Employee getEmployeeById(Long employeeId) {
         if (employees.size() == 0) {
             downloadEmployees();
         }
@@ -84,7 +107,7 @@ public class AppDatabase {
         // TODO: Handle not found error when returned employee is null
     }
 
-    private void downloadEmployees() {
+    public void downloadEmployees() {
         try {
             Call<List<Employee>> call = App.interfaceApi.getCooks();
             Response<List<Employee>> response = call.execute();

@@ -2,6 +2,7 @@ package com.example.desktop.ui;
 
 import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
+import com.example.desktop.entities.Employee;
 import com.example.desktop.entities.Order;
 import com.example.desktop.entities.Recipe;
 import com.example.desktop.entities.SpecialRequest;
@@ -20,17 +21,22 @@ import java.util.*;
 public class GUI {
     //    private List<Employee> cooks = new ArrayList<>();
     private List<Recipe> allRecipes;
+    private List<Employee> cooks;
 
-//    private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//    private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-//    private final JPanel panelTop = new JPanel();
-//    private final Border blackline = BorderFactory.createLineBorder(Color.black);
-//    private final JPanel scrollablePanel = new JPanel();
-//    private final JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
-//    private final JPanel scrollablePanelRight = new JPanel();
-//    private final JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
-//    private final JButton buttonCooks = new JButton("Cooks");
-//    private final JButton buttonRecipes = new JButton("Recipes");
+    private JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    private JPanel panelTop = new JPanel();
+    private JPanel scrollablePanel = new JPanel();
+    private JPanel scrollablePanelRight = new JPanel();
+
+    private JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+    private JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
+    private Border blackline = BorderFactory.createLineBorder(Color.black);
+    // later change to blackLine
+
+    private JButton buttonCooks = new JButton("Cooks");
+    private JButton buttonRecipes = new JButton("Recipes");
+
 
     public void setButtonCooks(){
         buttonCooks.setBounds(1, 1, 100, 23);
@@ -122,6 +128,7 @@ public class GUI {
         frameCooks.add(panelOptions, BorderLayout.NORTH);
         frameCooks.add(panelCooks, BorderLayout.LINE_START);
 
+        //spps button to add cook
         buttonAdd.addActionListener(e -> {
             JFrame frameAdd = new JFrame("Add cook");
             JTextField textCookName = new JTextField("name");
@@ -141,6 +148,9 @@ public class GUI {
             frameAdd.add(buttonAddCook, BorderLayout.LINE_END);
 
             buttonAddCook.addActionListener(e1 -> {
+                Call<List<Employee>> cooksCall = App.interfaceApi.getCooks();
+
+
 //                int cooksNumber = cooks.size(); // FIXME: Cook id is stored in employee object from db - do not generate your own id
 //                int cookId;
 //                if (cooksNumber == 0)
