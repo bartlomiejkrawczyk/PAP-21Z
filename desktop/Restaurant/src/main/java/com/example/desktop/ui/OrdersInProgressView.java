@@ -6,59 +6,59 @@ import java.awt.*;
 
 public class OrdersInProgressView {
 
-    private JPanel panelRight;
-    private JPanel scrollablePanelRight;
-    private JPanel panelRightTitle;
+    private JPanel panel;
+    private JPanel scrollablePanel;
+    private JPanel panelTitle;
 
-    private JScrollPane scrollFrameRight;
-    private JLabel panelRightTitleText;
+    private JScrollPane scrollFrame;
+    private JLabel panelTitleText;
 
     private Border blackLine;
 
 
     public OrdersInProgressView(){
-        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        scrollablePanelRight = new JPanel();
-        scrollFrameRight = new JScrollPane(scrollablePanelRight);
-        panelRightTitle = new JPanel();
-        panelRightTitleText = new JLabel("Orders in progress:");
+        panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        scrollablePanel = new JPanel();
+        scrollFrame = new JScrollPane(scrollablePanel);
+        panelTitle = new JPanel();
+        panelTitleText = new JLabel("Orders in progress:");
         blackLine = BorderFactory.createLineBorder(Color.black);
 
-        panelRightTitleText.setForeground(Color.WHITE);
+        panelTitleText.setForeground(Color.WHITE);
 
-        panelRightTitle.setBorder(blackLine);
-        panelRightTitle.setBackground(Color.DARK_GRAY);
-        panelRightTitle.add(panelRightTitleText);
+        panelTitle.setBorder(blackLine);
+        panelTitle.setBackground(Color.DARK_GRAY);
+        panelTitle.add(panelTitleText);
 
-        scrollablePanelRight.setLayout(new BoxLayout(scrollablePanelRight, BoxLayout.Y_AXIS));
-        scrollablePanelRight.setAutoscrolls(true);
-        scrollFrameRight.setPreferredSize(new Dimension(400, 350));
+        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+        scrollablePanel.setAutoscrolls(true);
+        scrollFrame.setPreferredSize(new Dimension(400, 350));
 
-        panelRight.setBorder(blackLine);
-        panelRight.setPreferredSize(new Dimension(400, 150));
-        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-        panelRight.add(panelRightTitle);
-        panelRight.add(scrollFrameRight);
+        panel.setBorder(blackLine);
+        panel.setPreferredSize(new Dimension(400, 150));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(panelTitle);
+        panel.add(scrollFrame);
 
     }
 
-    public JPanel getPanelRight() {
-        return panelRight;
+    public JPanel getPanel() {
+        return panel;
     }
 
-    public JPanel getScrollablePanelRight() {
-        return scrollablePanelRight;
+    public JPanel getScrollablePanel() {
+        return scrollablePanel;
     }
 
-    public JPanel getPanelRightTitle() {
-        return panelRightTitle;
+    public JPanel getPanelTitle() {
+        return panelTitle;
     }
 
-    public JScrollPane getScrollFrameRight() {
-        return scrollFrameRight;
+    public JScrollPane getScrollFrame() {
+        return scrollFrame;
     }
 
-    public JLabel getPanelRightTitleText() {
-        return panelRightTitleText;
+    public JLabel getPanelTitleText() {
+        return panelTitleText;
     }
 }

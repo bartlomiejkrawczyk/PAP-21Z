@@ -38,5 +38,9 @@ public class OrderPlacedItemController {
     public void showDetails() {
         // co będzie się działo po wciśnięciu przycisku details
     }
+
+    //action listener
+    //zrobienie kodu do przycisku assign
+    //zrobienie kodu do przycisku details
 }
 
