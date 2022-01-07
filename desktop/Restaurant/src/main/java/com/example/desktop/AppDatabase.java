@@ -2,6 +2,7 @@ package com.example.desktop;
 
 import com.example.desktop.entities.Dish;
 import com.example.desktop.entities.Employee;
+import com.example.desktop.entities.Order;
 import com.example.desktop.entities.Product;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -19,6 +20,8 @@ public class AppDatabase {
     private List<Employee> employees;
     private final List<Employee> loggedInEmployees;
     private final List<Dish> dishes;
+    private List<Order> ordersPlaced;
+    private List<Order> ordersInProgress;
 
 
     public static synchronized AppDatabase getAppDatabase() {
@@ -65,6 +68,14 @@ public class AppDatabase {
 
     public void logOut(Employee employee) {
         loggedInEmployees.remove(employee);
+    }
+
+    public List<Order> getOrdersPlaced() {
+        return ordersPlaced;
+    }
+
+    public List<Order> getOrdersInProgress() {
+        return ordersInProgress;
     }
 
     // Note: that this function should be called on separate thread!
@@ -120,6 +131,35 @@ public class AppDatabase {
             // TODO: Handel failure error
         }
     }
+
+    public void downloadOrdersPlaced(){
+        try {
+            Call<List<Order>> call = App.interfaceApi.getOrdersPlaced();
+            Response<List<Order>> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+                ordersPlaced = res.body();
+            } //else {
+            // TODO: Handel response error
+            //}
+        } catch (IOException e) {
+            // TODO: Handel failure error
+        }
+    }
+
+    public void downloadOrdersInProgress(){
+        try {
+            Call<List<Order>> call = App.interfaceApi.getOrdersInProgress();
+            Response<List<Order>> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+                ordersInProgress = res.body();
+            } //else {
+            // TODO: Handel response error
+            //}
+        } catch (IOException e) {
+            // TODO: Handel failure error
+        }
+    }
+
 
 
     // Note: that this function should be called on separate thread!
