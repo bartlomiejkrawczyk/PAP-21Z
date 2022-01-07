@@ -132,6 +132,8 @@ public class AppDatabase {
         }
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void downloadOrdersPlaced(){
         try {
             Call<List<Order>> call = App.interfaceApi.getOrdersPlaced();
@@ -146,6 +148,8 @@ public class AppDatabase {
         }
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void downloadOrdersInProgress(){
         try {
             Call<List<Order>> call = App.interfaceApi.getOrdersInProgress();
@@ -160,6 +164,8 @@ public class AppDatabase {
         }
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void downloadOrders(){
         downloadOrdersPlaced();
         downloadOrdersInProgress();

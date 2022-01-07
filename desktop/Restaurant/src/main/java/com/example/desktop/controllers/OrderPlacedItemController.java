@@ -2,6 +2,7 @@ package com.example.desktop.controllers;
 
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Order;
+import com.example.desktop.ui.CooksView;
 import com.example.desktop.ui.ItemView;
 
 import java.awt.event.ActionListener;
@@ -32,7 +33,8 @@ public class OrderPlacedItemController {
     }
 
     public void assignToCook() {
-        // co będzie się działo po wciśnięciu przycisku assign
+        CooksView cooksView = new CooksView();
+        new AssignmentCookController(cooksView);
     }
 
     public void showDetails() {
