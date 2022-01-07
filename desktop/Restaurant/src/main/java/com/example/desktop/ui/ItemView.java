@@ -11,6 +11,25 @@ public class ItemView {
     private JButton button1;
     private JButton button2;
 
+    public ItemView() {
+
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
+
+        panel = new JPanel();
+        panel.setBorder(blackLine);
+        panel.setPreferredSize(new Dimension(200, 28));
+        panel.setLayout(null);
+
+        label = new JLabel();
+        label.setBounds(25, 0, 250, 28);
+
+        button1 = new JButton();
+        button1.setBounds(200, 0, 90, 28);
+
+        panel.add(label);
+        panel.add(button1);
+    }
+
     public ItemView(String buttonName) {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);

@@ -2,20 +2,20 @@ package com.example.desktop.controllers;
 
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
-import com.example.desktop.ui.CookItemView;
+import com.example.desktop.ui.ItemView;
 
 import java.awt.event.ActionListener;
 
 public class LogIOItemController {
 
     private final Employee employee;
-    private final CookItemView view;
+    private final ItemView view;
     private final AppDatabase db;
     private boolean loggedIn;
 
     private ActionListener actionListener;
 
-    public LogIOItemController(Employee employee, CookItemView view) {
+    public LogIOItemController(Employee employee, ItemView view) {
         this.employee = employee;
         this.view = view;
 
@@ -30,9 +30,9 @@ public class LogIOItemController {
     private void updateView() {
         view.getLabel().setText(employee.toString());
         if (loggedIn)
-            view.getButton().setText("Log Out");
+            view.getButton1().setText("Log Out");
         else
-            view.getButton().setText("Log In");
+            view.getButton1().setText("Log In");
     }
 
     private void updateActionListener() {
@@ -40,7 +40,7 @@ public class LogIOItemController {
             actionListener = e -> logOut();
         else
             actionListener = e -> logIn();
-        view.getButton().addActionListener(actionListener);
+        view.getButton1().addActionListener(actionListener);
     }
 
     private void logOut() {
@@ -48,7 +48,7 @@ public class LogIOItemController {
         db.logOut(employee);
         updateView();
 
-        view.getButton().removeActionListener(actionListener);
+        view.getButton1().removeActionListener(actionListener);
         updateActionListener();
     }
 
@@ -57,7 +57,7 @@ public class LogIOItemController {
         db.logIn(employee);
         updateView();
 
-        view.getButton().removeActionListener(actionListener);
+        view.getButton1().removeActionListener(actionListener);
         updateActionListener();
     }
 }

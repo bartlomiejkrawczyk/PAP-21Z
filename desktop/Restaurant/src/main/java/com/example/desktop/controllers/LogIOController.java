@@ -3,7 +3,7 @@ package com.example.desktop.controllers;
 import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
-import com.example.desktop.ui.CookItemView;
+import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.CooksView;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class LogIOController {
     private void addEmployees() {
         List<Employee> employees = db.getEmployeesDownloadIfEmpty();
         for (Employee e: employees) {
-            CookItemView itemView = new CookItemView();
+            ItemView itemView = new ItemView();
             new LogIOItemController(e, itemView);
             view.getScrollableCooks().add(itemView.getPanel());
         }
