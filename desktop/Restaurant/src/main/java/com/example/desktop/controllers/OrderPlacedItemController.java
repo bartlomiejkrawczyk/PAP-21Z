@@ -16,5 +16,9 @@ public class OrderPlacedItemController {
 
         db = AppDatabase.getAppDatabase();
     }
+
+    //action listener
+    //zrobienie kodu do przycisku assign
+    //zrobienie kodu do przycisku details
 }
 
