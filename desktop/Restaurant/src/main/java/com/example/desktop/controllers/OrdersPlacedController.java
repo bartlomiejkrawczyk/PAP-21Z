@@ -3,6 +3,7 @@ package com.example.desktop.controllers;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Dish;
 import com.example.desktop.entities.Order;
+import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.OrdersPlacedView;
 
 import java.util.List;
@@ -18,7 +19,6 @@ public class OrdersPlacedController {
         db = AppDatabase.getAppDatabase();
 
         initView();
-
     }
 
     private void initView() {
@@ -26,8 +26,11 @@ public class OrdersPlacedController {
     }
 
     private void addOrders() {
-        List<Dish> orders = db.;
-        for (Dish dish)
-
+        List<Order> ordersPlaced = db.getOrdersPlaced();
+        for (Order order: ordersPlaced) {
+            ItemView itemView = new ItemView("Assign", "Details");
+            new OrderPlacedItemController(order, itemView);
+            view.getScrollablePanel().add(itemView.getPanel());
+        }
     }
 }

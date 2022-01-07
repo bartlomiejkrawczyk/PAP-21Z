@@ -160,7 +160,10 @@ public class AppDatabase {
         }
     }
 
-
+    public void downloadOrders(){
+        downloadOrdersPlaced();
+        downloadOrdersInProgress();
+    }
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
