@@ -34,10 +34,6 @@ public class Product {
     @Column(name = "UNIT", nullable = false, length = 10)
     private String unit;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "PRODUCT_CATEGORY_ID", nullable = false)
-//    private ProductCategory productCategory;
-
     @Column(name = "PRODUCT_CATEGORY_ID", nullable = false)
     private Long productCategoryId;
 

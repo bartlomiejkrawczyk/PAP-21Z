@@ -25,16 +25,8 @@ public class Ingredient {
     @Column(name = "QUANTITY", nullable = false)
     private Long quantity;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "DISH_ID", nullable = false)
-//    private Dish dish;
-
     @Column(name = "DISH_ID", nullable = false)
     private Long dishId;
-
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "PRODUCT_ID", nullable = false)
-//    private Product product;
 
     @Column(name = "PRODUCT_ID", nullable = false)
     private Long productId;

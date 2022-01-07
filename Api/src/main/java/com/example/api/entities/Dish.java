@@ -30,10 +30,6 @@ public class Dish {
     @Column(name = "PRICE", nullable = false)
     private Integer price;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "DISH_CATEGORY_ID", nullable = false)
-//    private DishCategory dishCategory;
-
     @Column(name = "DISH_CATEGORY_ID", nullable = false)
     private Long dishCategoryId;
 

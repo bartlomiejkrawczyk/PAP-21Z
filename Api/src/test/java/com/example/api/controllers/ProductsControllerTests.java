@@ -90,4 +90,12 @@ public class ProductsControllerTests {
 
         assertEquals(new MockProductInfo(mockProduct.getId(), mockProduct.getName(), mockProduct.getUnit()), product);
     }
+
+    @Test
+    public void findByIdEntityNotFound() throws Exception {
+        mockMvc.perform(get("/products/id/-1"))
+                .andDo(print())
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().isNotFound());
+    }
 }

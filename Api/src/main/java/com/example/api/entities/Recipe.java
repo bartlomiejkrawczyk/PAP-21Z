@@ -22,11 +22,6 @@ public class Recipe {
     @Column(name = "STEP", nullable = false)
     private Long step;
 
-//    @Id
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "DISH_ID", nullable = false)
-//    private Dish dish;
-
     @Id
     @Column(name = "DISH_ID", nullable = false)
     private Long dishId;

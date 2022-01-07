@@ -40,10 +40,6 @@ public class Order {
     @JoinColumn(name = "DISH_ID", nullable = false)
     private Dish dish;
 
-//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "RECEIPT_ID", nullable = false)
-//    private Receipt receipt;
-
     @Column(name = "RECEIPT_ID", nullable = false)
     private Long receiptId;
 

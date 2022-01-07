@@ -36,10 +36,6 @@ public class SpecialRequest {
     @Column(name = "REQUEST", nullable = false)
     private String request;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "ORDER_ID", nullable = false)
-//    private Order order;
-
     @Column(name = "ORDER_ID", nullable = false)
     private Long orderId;
 
