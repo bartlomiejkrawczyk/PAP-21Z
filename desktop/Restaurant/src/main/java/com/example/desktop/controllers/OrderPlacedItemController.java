@@ -1,4 +1,4 @@
 package com.example.desktop.controllers;
 
-public class OrderPlacedController {
+public class OrderPlacedItemController {
 }
