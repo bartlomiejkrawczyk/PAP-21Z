@@ -19,6 +19,7 @@ import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.SpecialRequest;
+import com.example.restaurant.errors.InvalidData;
 import com.example.restaurant.handlers.FailureError;
 import com.example.restaurant.handlers.ResponseError;
 
@@ -67,9 +68,10 @@ public class RequestsActivity extends AppCompatActivity {
     private void addRequest() {
         String request = editText.getText().toString();
 
-        if (request.length() > 0) {
-            SpecialRequest specialRequest = new SpecialRequest(null, request, order.getId());
+        SpecialRequest specialRequest = new SpecialRequest(null, request, order.getId());
 
+        try {
+            specialRequest.validateData();
             Call<SpecialRequest> call = App.interfaceApi.addRequest(specialRequest);
             call.enqueue(new Callback<SpecialRequest>() {
                 @Override
@@ -89,8 +91,8 @@ public class RequestsActivity extends AppCompatActivity {
                     new FailureError(t, RequestsActivity.this).makeToast();
                 }
             });
-        } else {
-            Toast.makeText(RequestsActivity.this, getString(R.string.toast_error_empty_request), Toast.LENGTH_SHORT).show();
+        } catch (InvalidData e) {
+            Toast.makeText(RequestsActivity.this, getString(R.string.toast_error_request_invalid_data) + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

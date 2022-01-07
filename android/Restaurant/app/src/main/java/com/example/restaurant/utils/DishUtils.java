@@ -40,7 +40,7 @@ public class DishUtils {
                         }
                     }).start();
                 }
-                // else do nothing
+                // else do nothing -> updating data isn't necessary
             }
 
             @Override

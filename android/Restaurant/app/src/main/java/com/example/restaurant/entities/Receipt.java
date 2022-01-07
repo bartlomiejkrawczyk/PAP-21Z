@@ -66,6 +66,11 @@ public class Receipt implements Serializable {
         this.orders = orders;
     }
 
+    /**
+     * Sum all the prices of ordered dishes
+     *
+     * @return sum of the prices of the ordered dishes
+     */
     public int getTotal() {
         int total = 0;
 
@@ -78,6 +83,11 @@ public class Receipt implements Serializable {
         return total;
     }
 
+    /**
+     * Format total price - result of getTotal
+     *
+     * @return String with formatted price
+     */
     public String formatTotal() {
         int total = getTotal();
         int bucks = total / 100;
@@ -89,6 +99,12 @@ public class Receipt implements Serializable {
         return bucks + "," + sPennies + " PLN";
     }
 
+    /**
+     * Check whether there are any orders
+     * that haven't been brought to the table
+     *
+     * @return True when there are no orders with status different then 3, else false
+     */
     public boolean canClose() {
         boolean close = true;
         if (orders != null) {
@@ -102,6 +118,12 @@ public class Receipt implements Serializable {
         return close;
     }
 
+    /**
+     * Check whether there are any orders
+     * that have been brought to the table
+     *
+     * @return True when there are no orders with status 3, else false
+     */
     public boolean canDelete() {
         boolean close = true;
         if (orders != null) {

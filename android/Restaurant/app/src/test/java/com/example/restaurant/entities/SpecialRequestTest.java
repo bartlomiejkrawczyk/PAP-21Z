@@ -4,7 +4,10 @@ import static com.example.restaurant.utils.SerializeUtils.deserialize;
 import static com.example.restaurant.utils.SerializeUtils.serialize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
+
+import com.example.restaurant.errors.InvalidData;
 
 import org.junit.Test;
 
@@ -69,6 +72,25 @@ public class SpecialRequestTest {
                 fail();
             }
         });
+    }
+
+    @Test
+    public void specialRequestValidateData() {
+        List<SpecialRequest> requests = Arrays.asList(
+                new SpecialRequest(1L, null, 1L),
+                new SpecialRequest(1L, "", 1L),
+                new SpecialRequest(1L, "Test", null)
+        );
+
+        for (SpecialRequest request : requests)
+            assertThrows(InvalidData.class, request::validateData);
+
+        SpecialRequest request = new SpecialRequest(1L, "Test", 1L);
+        try {
+            request.validateData();
+        } catch (InvalidData invalidData) {
+            fail();
+        }
     }
 
 

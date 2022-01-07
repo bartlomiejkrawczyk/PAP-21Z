@@ -78,6 +78,11 @@ public class Order implements Serializable {
         this.status = status;
     }
 
+    /**
+     * Format price of the dish
+     *
+     * @return String with formatted price
+     */
     public String formatPrice() {
         if (dish != null && dish.getPrice() != null) {
             int price = dish.getPrice();

@@ -56,7 +56,7 @@
     <string name="toast_error_cannot_close_receipt">Cannot close receipt with ongoing orders</string>
     <string name="toast_error_cannot_close_empty_receipt">Cannot close empty receipt</string>
     <string name="toast_failure_error_internet_connection">Internet Connection Error! </string>
-    <string name="toast_error_empty_request">Cannot add empty request</string>
+    <string name="toast_error_request_invalid_data">Cannot add request: </string>
     <string name="error_try_again">Try Again</string>
     <string name="error_close_application">Close Application</string>
     <string name="error_downloading_waiters">Error Downloading Waiters</string>

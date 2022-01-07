@@ -220,7 +220,7 @@ public class ReceiptsActivity extends AppCompatActivity {
                         recyclerView.setVisibility(View.VISIBLE);
                     });
                 } else {
-                    for (int i = 0; i < adapter.getItemCount() - 1; i++) {
+                    for (int i = 0; i < unhandledReceiptsCount; i++) {
                         getOrders(i);
                     }
                 }
@@ -258,7 +258,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
     }
 
-    private synchronized void tryShowRecyclerView() {
+    private void tryShowRecyclerView() {
         if (--unhandledReceiptsCount == 0) {
             progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
