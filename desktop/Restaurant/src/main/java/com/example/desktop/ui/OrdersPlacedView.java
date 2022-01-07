@@ -44,6 +44,7 @@ public class OrdersPlacedView {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         OrdersPlacedView view = new OrdersPlacedView();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(view.getPanel());
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -52,5 +53,21 @@ public class OrdersPlacedView {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public JPanel getPanelTitle() {
+        return panelTitle;
+    }
+
+    public JLabel getPanelTitleText() {
+        return panelTitleText;
+    }
+
+    public JPanel getScrollablePanel() {
+        return scrollablePanel;
+    }
+
+    public JScrollPane getScrollFrame() {
+        return scrollFrame;
     }
 }
