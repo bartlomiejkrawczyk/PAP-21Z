@@ -21,16 +21,16 @@ public class GUI {
     //    private List<Employee> cooks = new ArrayList<>();
     private List<Recipe> allRecipes;
 
-    private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    private final JPanel panelTop = new JPanel();
-    private final Border blackline = BorderFactory.createLineBorder(Color.black);
-    private final JPanel scrollablePanel = new JPanel();
-    private final JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
-    private final JPanel scrollablePanelRight = new JPanel();
-    private final JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
-    private final JButton buttonCooks = new JButton("Cooks");
-    private final JButton buttonRecipes = new JButton("Recipes");
+//    private final JPanel panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//    private final JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//    private final JPanel panelTop = new JPanel();
+//    private final Border blackline = BorderFactory.createLineBorder(Color.black);
+//    private final JPanel scrollablePanel = new JPanel();
+//    private final JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
+//    private final JPanel scrollablePanelRight = new JPanel();
+//    private final JScrollPane scrollFrameRight = new JScrollPane(scrollablePanelRight);
+//    private final JButton buttonCooks = new JButton("Cooks");
+//    private final JButton buttonRecipes = new JButton("Recipes");
 
     public void setButtonCooks(){
         buttonCooks.setBounds(1, 1, 100, 23);
