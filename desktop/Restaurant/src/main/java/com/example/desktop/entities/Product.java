@@ -8,6 +8,9 @@ public class Product {
     private String unit;
 
     public Product() {
+        id = 0L;
+        name = "";
+        unit = "";
     }
 
     public Product(Long id, String name, String unit) {

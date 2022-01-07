@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class GuiView {
 
+    //JFrame?
     private JPanel panelLeft; // = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel panelRight; // = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private JPanel panelTop; // = new JPanel();
