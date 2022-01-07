@@ -35,6 +35,6 @@ public interface InterfaceApi {
     @PUT("api/orders/employee/{orderId}/{employeeId}")
     Call<Order> setEmployeePreparingOrder(@Path("orderId") Long orderId, @Path("employeeId") Long employeeId);
 
-    @PUT("api/orders/status/{orderId}/{status}")
-    Call<Order> advanceOrderStatus(@Path("orderId") Long orderId, @Path("status") int newStatus); // 1 - order placed 2 - Order is finished - ready to serve
+    @PUT("api/orders/status/{orderId}/2")
+    Call<Order> advanceOrderStatus(@Path("orderId") Long orderId);
 }
