@@ -3,6 +3,7 @@ package com.example.desktop.controllers;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Order;
 import com.example.desktop.ui.CooksView;
+import com.example.desktop.ui.DetailsView;
 import com.example.desktop.ui.ItemView;
 
 import java.awt.event.ActionListener;
@@ -38,7 +39,8 @@ public class OrderPlacedItemController {
     }
 
     public void showDetails() {
-        // co będzie się działo po wciśnięciu przycisku details
+        DetailsView detailsView = new DetailsView();
+        new DetailsController(orderPlaced, detailsView);
     }
 
     //action listener
