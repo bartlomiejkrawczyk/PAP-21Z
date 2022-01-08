@@ -6,48 +6,80 @@ import java.awt.*;
 
 public class GuiView {
 
-    //JFrame?
-    private JPanel panelLeft; // = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel panelRight; // = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    private JPanel panelTop; // = new JPanel();
-    private JPanel scrollablePanel; // = new JPanel();
-    private JPanel scrollablePanelRight; // = new JPanel();
+    private JFrame frame;
+    private JPanel panelLeft;
+    private JPanel panelRight;
+    private JPanel panelTop;
+//    private JPanel scrollablePanel;
+//    private JPanel scrollablePanelRight;
 
-    private JScrollPane scrollFrame; // = new JScrollPane(scrollablePanel);
-    private JScrollPane scrollFrameRight; // = new JScrollPane(scrollablePanelRight);
-    private Border blackline; // = BorderFactory.createLineBorder(Color.black);
-                // later change to blackLine
+//    private JScrollPane scrollFrame;
+//    private JScrollPane scrollFrameRight;
+    private Border blackLine;
 
-    private JButton buttonCooks; // = new JButton("Cooks");
-    private JButton buttonRecipes; // = new JButton("Recipes");
+    private JButton buttonCooks;
+    private JButton buttonRecipes;
 
     public GuiView(){
+        frame = new JFrame("Kitchen application");
         panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        scrollablePanel = new JPanel();
-        scrollablePanelRight = new JPanel();
+//        scrollablePanel = new JPanel();
+//        scrollablePanelRight = new JPanel();
         panelTop = new JPanel();
 
-        scrollFrame = new JScrollPane(scrollablePanel);
-        scrollFrameRight = new JScrollPane(scrollablePanelRight);
-        blackline = BorderFactory.createLineBorder(Color.black);
 
-        buttonCooks = new JButton("Cooks");
-        buttonRecipes = new JButton("Recipes");
+        panelLeft.setBorder(blackLine);
+        panelLeft.setPreferredSize(new Dimension(400, 150));
+        panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
+
+        panelRight.setBorder(blackLine);
+        panelRight.setPreferredSize(new Dimension(400, 150));
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+
+        panelTop.setBorder(blackLine);
+        panelTop.setPreferredSize(new Dimension(800, 25));
+        panelTop.setBackground(Color.GRAY);
+        panelTop.setLayout(null);
+
+        JPanel panelLeftTitle = new JPanel();
+        panelLeftTitle.setBorder(blackLine);
+        panelLeftTitle.setBackground(Color.DARK_GRAY);
+
+        JPanel panelRightTitle = new JPanel();
+        panelRightTitle.setBorder(blackLine);
+        panelRightTitle.setBackground(Color.DARK_GRAY);
+
+        JLabel panelLeftTitleText = new JLabel("Orders placed:");
+        panelLeftTitleText.setForeground(Color.WHITE);
+
+        panelLeftTitle.add(panelLeftTitleText);
+        panelLeft.add(panelLeftTitle);
+
+        JLabel panelRightTitleText = new JLabel("Orders in progress:");
+        panelRightTitleText.setForeground(Color.WHITE);
+
+        panelRightTitle.add(panelRightTitleText);
+        panelRight.add(panelRightTitle);
+
+//        scrollFrame = new JScrollPane(scrollablePanel);
+//        scrollFrameRight = new JScrollPane(scrollablePanelRight);
+        blackLine = BorderFactory.createLineBorder(Color.black);
+
 
         //buttonCooks.setBounds(1, 1, 100, 23); ?
         //buttonRecipes.setBounds(1, 1, 100, 23); ?
+
+        frame.setMinimumSize(new Dimension(800, 450));
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
     }
 
     public JPanel getPanelLeft(){
         return panelLeft;
     }
-
-    public void setPanelLeft(JPanel panelLeft){
-        this.panelLeft = panelLeft;
-    }
-
 
     public JPanel getPanelRight() {
         return panelRight;
@@ -57,24 +89,8 @@ public class GuiView {
         return panelTop;
     }
 
-    public JPanel getScrollablePanel() {
-        return scrollablePanel;
-    }
-
-    public JPanel getScrollablePanelRight() {
-        return scrollablePanelRight;
-    }
-
-    public JScrollPane getScrollFrame() {
-        return scrollFrame;
-    }
-
-    public JScrollPane getScrollFrameRight() {
-        return scrollFrameRight;
-    }
-
-    public Border getBlackline() {
-        return blackline;
+    public Border getBlackLine() {
+        return blackLine;
     }
 
     public JButton getButtonCooks() {
@@ -85,39 +101,19 @@ public class GuiView {
         return buttonRecipes;
     }
 
-    public void setPanelRight(JPanel panelRight) {
-        this.panelRight = panelRight;
-    }
-
-    public void setPanelTop(JPanel panelTop) {
-        this.panelTop = panelTop;
-    }
-
-    public void setScrollablePanel(JPanel scrollablePanel) {
-        this.scrollablePanel = scrollablePanel;
-    }
-
-    public void setScrollablePanelRight(JPanel scrollablePanelRight) {
-        this.scrollablePanelRight = scrollablePanelRight;
-    }
-
-    public void setScrollFrame(JScrollPane scrollFrame) {
-        this.scrollFrame = scrollFrame;
-    }
-
-    public void setScrollFrameRight(JScrollPane scrollFrameRight) {
-        this.scrollFrameRight = scrollFrameRight;
-    }
-
-    public void setBlackline(Border blackline) {
-        this.blackline = blackline;
-    }
-
-    public void setButtonCooks(JButton buttonCooks) {
-        this.buttonCooks = buttonCooks;
-    }
-
-    public void setButtonRecipes(JButton buttonRecipes) {
-        this.buttonRecipes = buttonRecipes;
-    }
+    //    public JPanel getScrollablePanel() {
+//        return scrollablePanel;
+//    }
+//
+//    public JPanel getScrollablePanelRight() {
+//        return scrollablePanelRight;
+//    }
+//
+//    public JScrollPane getScrollFrame() {
+//        return scrollFrame;
+//    }
+//
+//    public JScrollPane getScrollFrameRight() {
+//        return scrollFrameRight;
+//    }
 }

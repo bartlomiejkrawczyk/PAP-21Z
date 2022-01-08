@@ -1,6 +1,8 @@
 package com.example.desktop;
 
+import com.example.desktop.controllers.GuiController;
 import com.example.desktop.ui.GUI;
+import com.example.desktop.ui.GuiView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
@@ -18,7 +20,8 @@ public class App {
 
     public static void main(String[] args) {
         createNetworkSys();
-        new GUI().run();
+        GuiView view = new GuiView();
+        new GuiController(view);
     }
 
     public static void createNetworkSys() {
