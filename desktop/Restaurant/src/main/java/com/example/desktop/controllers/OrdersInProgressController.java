@@ -11,6 +11,7 @@ import java.util.List;
 public class OrdersInProgressController {
 
     private OrdersInProgressView view;
+
     private AppDatabase db;
 
     public OrdersInProgressController(OrdersInProgressView view){
@@ -32,5 +33,4 @@ public class OrdersInProgressController {
     private void initView(){
         new Thread(this::addOrders).start();
     }
-
 }
