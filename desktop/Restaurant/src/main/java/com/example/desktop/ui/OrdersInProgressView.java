@@ -6,6 +6,8 @@ import java.awt.*;
 
 public class OrdersInProgressView {
 
+    private Border blackLine = BorderFactory.createLineBorder(Color.black);
+
     private JPanel panel;
     private JPanel scrollablePanel;
     private JPanel panelTitle;
@@ -13,33 +15,31 @@ public class OrdersInProgressView {
     private JScrollPane scrollFrame;
     private JLabel panelTitleText;
 
-    private Border blackLine;
 
 
     public OrdersInProgressView(){
         panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        scrollablePanel = new JPanel();
-        scrollFrame = new JScrollPane(scrollablePanel);
-        panelTitle = new JPanel();
-        panelTitleText = new JLabel("Orders in progress:");
-        blackLine = BorderFactory.createLineBorder(Color.black);
-
-        panelTitleText.setForeground(Color.WHITE);
-
-        panelTitle.setBorder(blackLine);
-        panelTitle.setBackground(Color.DARK_GRAY);
-        panelTitle.add(panelTitleText);
-
-        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
-        scrollablePanel.setAutoscrolls(true);
-        scrollFrame.setPreferredSize(new Dimension(400, 350));
-
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(400, 150));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(panelTitle);
-        panel.add(scrollFrame);
 
+        panelTitle = new JPanel();
+        panelTitle.setBorder(blackLine);
+        panelTitle.setBackground(Color.DARK_GRAY);
+
+        panelTitleText = new JLabel("Orders in progress:");
+        panelTitleText.setForeground(Color.WHITE);
+        panelTitle.add(panelTitleText);
+
+        panel.add(panelTitle);
+
+        scrollablePanel = new JPanel();
+        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+        scrollablePanel.setAutoscrolls(true);
+
+        scrollFrame = new JScrollPane(scrollablePanel);
+        scrollFrame.setPreferredSize(new Dimension(400, 350));
+        panel.add(scrollFrame);
     }
 
     public JPanel getPanel() {

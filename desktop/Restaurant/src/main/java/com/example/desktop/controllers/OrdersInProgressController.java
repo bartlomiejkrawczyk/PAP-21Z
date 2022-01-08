@@ -24,7 +24,8 @@ public class OrdersInProgressController {
     private void addOrders() {
         List<Order> orders = db.getOrdersInProgress();
         for (Order order: orders) {
-            ItemView itemView = new ItemView("Assign", "Details");
+            ItemView itemView = new ItemView("Done!", "Details");
+            order.setDish((db.getDishFromOrder(order)));
             new OrderPlacedItemController(order, itemView);
             view.getScrollablePanel().add(itemView.getPanel());
         }

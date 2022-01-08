@@ -20,7 +20,7 @@ public class DetailsView {
         textArea.setFont(font);
         frame.setMinimumSize(new Dimension(400, 400));
         frame.setResizable(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(textArea);
 
