@@ -25,6 +25,8 @@ public class OrdersPlacedController {
         List<Order> ordersPlaced = db.getOrdersPlaced();
         for (Order order: ordersPlaced) {
             ItemView itemView = new ItemView("Assign", "Details");
+            //itemView.getLabel().setText(order.toString());
+            order.setDish(db.getDishFromOrder(order));
             new OrderPlacedItemController(order, itemView);
             view.getScrollablePanel().add(itemView.getPanel());
         }

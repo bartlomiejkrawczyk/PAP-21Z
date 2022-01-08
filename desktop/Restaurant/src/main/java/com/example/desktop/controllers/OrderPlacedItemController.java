@@ -25,7 +25,7 @@ public class OrderPlacedItemController {
     }
 
     public void updateView() {
-        view.getLabel().setText(orderPlaced.getDish().getName());
+        this.view.getLabel().setText(orderPlaced.getDish().getName());
     }
 
     public void updateActionListener() {

@@ -17,10 +17,14 @@ public class GuiController {
 
     public GuiController(GuiView view){
         this.view = view;
+
+        db = AppDatabase.getAppDatabase();
+        db.downloadOrders();
+
         taskBar = new TaskBarController(view.getPanelTop());
         ordersInProgress = new OrdersInProgressController(view.getPanelRight());
         ordersPlaced = new OrdersPlacedController(view.getPanelLeft());
-        db = AppDatabase.getAppDatabase();
+
 
         initView();
     }

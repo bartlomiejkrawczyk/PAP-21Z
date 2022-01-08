@@ -35,7 +35,7 @@ public class AssignmentCookController {
         List<Employee> employees = db.getLoggedInEmployees();
         for (Employee e: employees) {
             ItemView itemView = new ItemView("Assign");
-            new AssignmentCookItemController(e, itemView, orderToAssign);
+            new AssignmentCookItemController(e, itemView, orderToAssign, view);
             view.getScrollableCooks().add(itemView.getPanel());
         }
     }
