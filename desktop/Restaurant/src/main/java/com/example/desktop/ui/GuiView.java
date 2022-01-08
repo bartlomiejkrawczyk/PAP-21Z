@@ -35,6 +35,9 @@ public class GuiView {
         buttonCooks = new JButton("Cooks");
         buttonRecipes = new JButton("Recipes");
 
+        //buttonCooks.setBounds(1, 1, 100, 23); ?
+        //buttonRecipes.setBounds(1, 1, 100, 23); ?
+
     }
 
     public JPanel getPanelLeft(){
