@@ -21,10 +21,6 @@ public class OrdersPlacedController {
         initView();
     }
 
-    private void initView() {
-        new Thread(this::addOrders).start();
-    }
-
     private void addOrders() {
         List<Order> ordersPlaced = db.getOrdersPlaced();
         for (Order order: ordersPlaced) {
@@ -32,5 +28,9 @@ public class OrdersPlacedController {
             new OrderPlacedItemController(order, itemView);
             view.getScrollablePanel().add(itemView.getPanel());
         }
+    }
+
+    private void initView() {
+        new Thread(this::addOrders).start();
     }
 }
