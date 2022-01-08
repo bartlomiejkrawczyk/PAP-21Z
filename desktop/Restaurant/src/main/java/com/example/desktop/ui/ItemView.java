@@ -10,10 +10,12 @@ public class ItemView {
     private JLabel label;
     private JButton button1;
     private JButton button2;
+    private boolean toRemove;
 
     public ItemView() {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
+        toRemove = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -33,6 +35,7 @@ public class ItemView {
     public ItemView(String buttonName) {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
+        toRemove = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -52,6 +55,7 @@ public class ItemView {
     public ItemView(String firstButtonName, String secondButtonName) {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
+        toRemove = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -86,5 +90,13 @@ public class ItemView {
 
     public JButton getButton2() {
         return button2;
+    }
+
+    public boolean isToRemove() {
+        return toRemove;
+    }
+
+    public void setToRemove(boolean toRemove) {
+        this.toRemove = toRemove;
     }
 }

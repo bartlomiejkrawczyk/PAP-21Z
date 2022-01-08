@@ -35,7 +35,7 @@ public class GuiController {
 
     private void updateView(){
         db.downloadOrders();
-        Timer t = new Timer(20_000, e -> db.downloadOrders());
+        Timer t = new Timer(5_000, e -> db.downloadOrders());
         t.start();
 
     }

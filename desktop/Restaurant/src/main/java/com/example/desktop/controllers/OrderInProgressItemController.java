@@ -7,6 +7,8 @@ import com.example.desktop.entities.Order;
 import com.example.desktop.ui.DetailsView;
 import com.example.desktop.ui.ItemView;
 
+import javax.swing.*;
+
 public class OrderInProgressItemController {
 
     private Order orderInProgress;
@@ -78,7 +80,13 @@ public class OrderInProgressItemController {
 
     private void orderDone(){
         db.advanceOrderStatus(orderInProgress);
+        view.setToRemove(true);
+        //view.getPanel().removeAll();
     }
+//
+//    private void removeView(){
+//        JPanel panel = (JPanel) view.getPanel().getAccessibleContext().getAccessibleParent();
+//    }
 
     private void showDetails(){
         DetailsView view = new DetailsView();
