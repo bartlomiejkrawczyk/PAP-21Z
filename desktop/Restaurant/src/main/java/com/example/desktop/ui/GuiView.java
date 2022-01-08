@@ -10,68 +10,35 @@ public class GuiView {
     private JPanel panelLeft;
     private JPanel panelRight;
     private JPanel panelTop;
+
 //    private JPanel scrollablePanel;
 //    private JPanel scrollablePanelRight;
-
 //    private JScrollPane scrollFrame;
 //    private JScrollPane scrollFrameRight;
-    private Border blackLine;
 
-    private JButton buttonCooks;
-    private JButton buttonRecipes;
+    private Border blackLine;
 
     public GuiView(){
         frame = new JFrame("Kitchen application");
         blackLine = BorderFactory.createLineBorder(Color.black);
 
+        frame.setMinimumSize(new Dimension(800, 450));
+        frame.setResizable(false);
+
 //        scrollablePanel = new JPanel();
 //        scrollablePanelRight = new JPanel();
 //        scrollFrame = new JScrollPane(scrollablePanel);
 //        scrollFrameRight = new JScrollPane(scrollablePanelRight);
-        //buttonCooks.setBounds(1, 1, 100, 23); ?
-        //buttonRecipes.setBounds(1, 1, 100, 23); ?
+//        buttonCooks.setBounds(1, 1, 100, 23); ?
+//        buttonRecipes.setBounds(1, 1, 100, 23); ?
 
         addPanelLeft();
         addPanelRight();
         addPanelTop();
 
-        frame.setMinimumSize(new Dimension(800, 450));
-        frame.setResizable(false);
+        frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-
-    }
-
-    private void addPanelTop(){
-        panelTop = new JPanel();
-
-        panelTop.setBorder(blackLine);
-        panelTop.setPreferredSize(new Dimension(800, 25));
-        panelTop.setBackground(Color.GRAY);
-        panelTop.setLayout(null);
-
-        frame.add(panelTop);
-
-    }
-
-    private void addPanelRight(){
-        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JPanel panelRightTitle = new JPanel();
-        JLabel panelRightTitleText = new JLabel("Orders in progress:");
-
-        panelRight.setBorder(blackLine);
-        panelRight.setPreferredSize(new Dimension(400, 150));
-        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-
-        panelRightTitle.setBorder(blackLine);
-        panelRightTitle.setBackground(Color.DARK_GRAY);
-
-        panelRightTitleText.setForeground(Color.WHITE);
-
-        panelRightTitle.add(panelRightTitleText);
-        panelRight.add(panelRightTitle);
-
-        frame.add(panelRight);
     }
 
     private void addPanelLeft(){
@@ -94,6 +61,37 @@ public class GuiView {
         frame.add(panelLeft);
     }
 
+    private void addPanelRight(){
+        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel panelRightTitle = new JPanel();
+        JLabel panelRightTitleText = new JLabel("Orders in progress:");
+
+        panelRight.setBorder(blackLine);
+        panelRight.setPreferredSize(new Dimension(400, 150));
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+
+        panelRightTitle.setBorder(blackLine);
+        panelRightTitle.setBackground(Color.DARK_GRAY);
+
+        panelRightTitleText.setForeground(Color.WHITE);
+
+        panelRightTitle.add(panelRightTitleText);
+        panelRight.add(panelRightTitle);
+
+        frame.add(panelRight);
+    }
+
+    private void addPanelTop(){
+        panelTop = new JPanel();
+
+        panelTop.setBorder(blackLine);
+        panelTop.setPreferredSize(new Dimension(800, 25));
+        panelTop.setBackground(Color.GRAY);
+        panelTop.setLayout(null);
+
+        frame.add(panelTop);
+    }
+
     public JPanel getPanelLeft(){
         return panelLeft;
     }
@@ -108,14 +106,6 @@ public class GuiView {
 
     public Border getBlackLine() {
         return blackLine;
-    }
-
-    public JButton getButtonCooks() {
-        return buttonCooks;
-    }
-
-    public JButton getButtonRecipes() {
-        return buttonRecipes;
     }
 
     //    public JPanel getScrollablePanel() {
