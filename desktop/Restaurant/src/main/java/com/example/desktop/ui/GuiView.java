@@ -22,59 +22,76 @@ public class GuiView {
 
     public GuiView(){
         frame = new JFrame("Kitchen application");
-        panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-//        scrollablePanel = new JPanel();
-//        scrollablePanelRight = new JPanel();
-        panelTop = new JPanel();
-
-
-        panelLeft.setBorder(blackLine);
-        panelLeft.setPreferredSize(new Dimension(400, 150));
-        panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
-
-        panelRight.setBorder(blackLine);
-        panelRight.setPreferredSize(new Dimension(400, 150));
-        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-
-        panelTop.setBorder(blackLine);
-        panelTop.setPreferredSize(new Dimension(800, 25));
-        panelTop.setBackground(Color.GRAY);
-        panelTop.setLayout(null);
-
-        JPanel panelLeftTitle = new JPanel();
-        panelLeftTitle.setBorder(blackLine);
-        panelLeftTitle.setBackground(Color.DARK_GRAY);
-
-        JPanel panelRightTitle = new JPanel();
-        panelRightTitle.setBorder(blackLine);
-        panelRightTitle.setBackground(Color.DARK_GRAY);
-
-        JLabel panelLeftTitleText = new JLabel("Orders placed:");
-        panelLeftTitleText.setForeground(Color.WHITE);
-
-        panelLeftTitle.add(panelLeftTitleText);
-        panelLeft.add(panelLeftTitle);
-
-        JLabel panelRightTitleText = new JLabel("Orders in progress:");
-        panelRightTitleText.setForeground(Color.WHITE);
-
-        panelRightTitle.add(panelRightTitleText);
-        panelRight.add(panelRightTitle);
-
-//        scrollFrame = new JScrollPane(scrollablePanel);
-//        scrollFrameRight = new JScrollPane(scrollablePanelRight);
         blackLine = BorderFactory.createLineBorder(Color.black);
 
-
+//        scrollablePanel = new JPanel();
+//        scrollablePanelRight = new JPanel();
+//        scrollFrame = new JScrollPane(scrollablePanel);
+//        scrollFrameRight = new JScrollPane(scrollablePanelRight);
         //buttonCooks.setBounds(1, 1, 100, 23); ?
         //buttonRecipes.setBounds(1, 1, 100, 23); ?
+
+        addPanelLeft();
+        addPanelRight();
+        addPanelTop();
 
         frame.setMinimumSize(new Dimension(800, 450));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+    }
+
+    private void addPanelTop(){
+        panelTop = new JPanel();
+
+        panelTop.setBorder(blackLine);
+        panelTop.setPreferredSize(new Dimension(800, 25));
+        panelTop.setBackground(Color.GRAY);
+        panelTop.setLayout(null);
+
+        frame.add(panelTop);
+
+    }
+
+    private void addPanelRight(){
+        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel panelRightTitle = new JPanel();
+        JLabel panelRightTitleText = new JLabel("Orders in progress:");
+
+        panelRight.setBorder(blackLine);
+        panelRight.setPreferredSize(new Dimension(400, 150));
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+
+        panelRightTitle.setBorder(blackLine);
+        panelRightTitle.setBackground(Color.DARK_GRAY);
+
+        panelRightTitleText.setForeground(Color.WHITE);
+
+        panelRightTitle.add(panelRightTitleText);
+        panelRight.add(panelRightTitle);
+
+        frame.add(panelRight);
+    }
+
+    private void addPanelLeft(){
+        panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel panelLeftTitle = new JPanel();
+        JLabel panelLeftTitleText = new JLabel("Orders placed:");
+
+        panelLeft.setBorder(blackLine);
+        panelLeft.setPreferredSize(new Dimension(400, 150));
+        panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
+
+        panelLeftTitle.setBorder(blackLine);
+        panelLeftTitle.setBackground(Color.DARK_GRAY);
+
+        panelLeftTitleText.setForeground(Color.WHITE);
+
+        panelLeftTitle.add(panelLeftTitleText);
+        panelLeft.add(panelLeftTitle);
+
+        frame.add(panelLeft);
     }
 
     public JPanel getPanelLeft(){
