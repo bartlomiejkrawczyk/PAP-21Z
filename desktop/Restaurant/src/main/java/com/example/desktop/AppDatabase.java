@@ -232,11 +232,14 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
-    public void setEmployeePreparingOrder(Long orderId, Long employeeId) {
+    public void setEmployeePreparingOrder(Order order, Long employeeId) {
+        Long orderId = order.getId();
         try {
             Call<Order> call = App.interfaceApi.setEmployeePreparingOrder(orderId, employeeId);
             Response<Order> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
+                order.setEmployee(getEmployeeById(employeeId));
+                // TODO: Tylko tyle?
             } //else {
             // TODO: Handel response error
             //}
@@ -247,11 +250,14 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
-    public void advanceOrderStatus(Long orderId) {
+    public void advanceOrderStatus(Order order) {
+        Long orderId = order.getId();
         try {
             Call<Order> call = App.interfaceApi.advanceOrderStatus(orderId);
             Response<Order> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
+                order.setStatus(2);
+                // TODO: Tylko tyle i czy to jest dobrze? XD
             } //else {
             // TODO: Handel response error
             //}

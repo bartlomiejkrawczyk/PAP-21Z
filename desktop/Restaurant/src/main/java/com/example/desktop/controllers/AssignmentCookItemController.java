@@ -32,7 +32,7 @@ public class AssignmentCookItemController {
     }
 
     private void assignCook() {
-        db.setEmployeePreparingOrder(orderToAssign.getId(), employee.getId());
+        db.setEmployeePreparingOrder(orderToAssign, employee.getId());
         // TODO: Usuwanie orderu z listy po lewej od razu
         // TODO: Dodanie orderu do listy po prawej
     }
