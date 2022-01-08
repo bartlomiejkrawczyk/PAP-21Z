@@ -9,12 +9,11 @@ public class CooksView {
     private JFrame frameCooks;
     private JPanel panelCooks;
     private JPanel panelTitle;
-    private JLabel labelTitle;
     private JPanel scrollableCooks;
     private JScrollPane scrollCooks;
 
     public CooksView() {
-        frameCooks = new JFrame("Cooks");
+        frameCooks = new JFrame();
         // Set frame sizes
         frameCooks.setMinimumSize(new Dimension(300, 300));
         frameCooks.setResizable(false);
@@ -23,7 +22,6 @@ public class CooksView {
         // Create UI elements
         panelCooks = new JPanel();
         panelTitle = new JPanel();
-        labelTitle = new JLabel("Cooks: ");
         scrollableCooks = new JPanel();
         scrollCooks = new JScrollPane(scrollableCooks);
 
@@ -34,8 +32,6 @@ public class CooksView {
 
         panelTitle.setBackground(Color.DARK_GRAY);
         panelTitle.setBounds(1, 1, 300, 30);
-        labelTitle.setForeground(Color.WHITE);
-        panelTitle.add(labelTitle);
         panelCooks.add(panelTitle);
         panelCooks.add(scrollCooks);
 
@@ -69,10 +65,6 @@ public class CooksView {
 
     public JPanel getPanelTitle() {
         return panelTitle;
-    }
-
-    public JLabel getLabelTitle() {
-        return labelTitle;
     }
 
     public JPanel getScrollableCooks() {

@@ -22,6 +22,7 @@ public class LogIOController {
     }
 
     private void initView() {
+        view.getFrameCooks().setTitle("Cooks");
         new Thread(this::addEmployees).start();
     }
 

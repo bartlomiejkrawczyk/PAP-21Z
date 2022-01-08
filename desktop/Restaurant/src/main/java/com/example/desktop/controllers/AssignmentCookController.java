@@ -23,7 +23,12 @@ public class AssignmentCookController {
         this.orderToAssign = orderToAssign;
         db = AppDatabase.getAppDatabase();
 
+        updateView();
         addLoggedInEmployees();
+    }
+
+    public void updateView() {
+        view.getFrameCooks().setTitle("Assign a cook");
     }
 
     private void addLoggedInEmployees() {
