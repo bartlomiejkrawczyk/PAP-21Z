@@ -197,4 +197,33 @@ public class AppDatabase {
         }
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
+    public void setEmployeePreparingOrder(Long orderId, Long employeeId) {
+        try {
+            Call<Order> call = App.interfaceApi.setEmployeePreparingOrder(orderId, employeeId);
+            Response<Order> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+            } //else {
+            // TODO: Handel response error
+            //}
+        } catch (IOException e) {
+            // TODO: Handel failure error
+        }
+    }
+
+    public void advanceOrderStatus(Long orderId) {
+        try {
+            Call<Order> call = App.interfaceApi.advanceOrderStatus(orderId);
+            Response<Order> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+            } //else {
+            // TODO: Handel response error
+            //}
+        } catch (IOException e) {
+            // TODO: Handel failure error
+        }
+    }
+
 }
+
