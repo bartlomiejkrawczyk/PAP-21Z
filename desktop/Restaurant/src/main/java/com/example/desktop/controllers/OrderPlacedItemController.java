@@ -34,7 +34,7 @@ public class OrderPlacedItemController {
 
     public void assignToCook() {
         CooksView cooksView = new CooksView();
-        new AssignmentCookController(cooksView);
+        new AssignmentCookController(cooksView, orderPlaced);
     }
 
     public void showDetails() {

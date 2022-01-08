@@ -30,38 +30,6 @@ public class DetailsController {
         new Thread(this::addDetails).start();
     }
 
-    private Dish getDish(){
-
-        try {
-            Call<Dish> call = App.interfaceApi.getDishById(order.getDish().getId());
-            Response<Dish> res = call.execute();
-            if (res.isSuccessful() && res.body() != null) {
-                return res.body();
-            } //else {
-            // TODO: Handle response error
-            //}
-        } catch (IOException e){
-            // TODO: Handle response error
-        }
-
-        return order.getDish();
-    }
-
-    private Product getProduct(Ingredient ingr){
-        try {
-            Call<Product> cal = App.interfaceApi.getProductById(ingr.getProductId());
-            Response<Product> resp = cal.execute();
-            if (resp.isSuccessful() && resp.body() != null) {
-                return resp.body();
-            } //else {
-            // TODO: Handle response error
-            //}
-        } catch (IOException e) {
-            // TODO: Handle response error
-        }
-
-        return new Product();
-    }
 
     private void addDetails(){
         String name;
@@ -69,8 +37,8 @@ public class DetailsController {
         String recipe = new String("");
         String ingredients = new String("");
 
-        Dish dish = getDish();
         Product product;
+        Dish dish = db.getDishFromOrder(order);
 
         name = dish.getName();
 
@@ -83,7 +51,7 @@ public class DetailsController {
         }
 
         for (Ingredient ingr: dish.getIngredients()){
-            product = getProduct(ingr);
+            product = db.getProductFromIngredient(ingr);
             if (!product.getName().isEmpty()){
                 ingredients += product.getName() + "\n";
             }

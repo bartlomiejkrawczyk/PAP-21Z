@@ -1,9 +1,6 @@
 package com.example.desktop;
 
-import com.example.desktop.entities.Dish;
-import com.example.desktop.entities.Employee;
-import com.example.desktop.entities.Order;
-import com.example.desktop.entities.Product;
+import com.example.desktop.entities.*;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -199,6 +196,42 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+    public Dish getDishFromOrder(Order order){
+        try {
+            Call<Dish> call = App.interfaceApi.getDishById(order.getDish().getId());
+            Response<Dish> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+                return res.body();
+            } //else {
+            // TODO: Handle response error
+            //}
+        } catch (IOException e){
+            // TODO: Handle response error
+        }
+
+        return order.getDish();
+    }
+
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
+    public Product getProductFromIngredient(Ingredient ingr){
+        try {
+            Call<Product> cal = App.interfaceApi.getProductById(ingr.getProductId());
+            Response<Product> resp = cal.execute();
+            if (resp.isSuccessful() && resp.body() != null) {
+                return resp.body();
+            } //else {
+            // TODO: Handle response error
+            //}
+        } catch (IOException e) {
+            // TODO: Handle response error
+        }
+
+        return new Product();
+    }
+
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void setEmployeePreparingOrder(Long orderId, Long employeeId) {
         try {
             Call<Order> call = App.interfaceApi.setEmployeePreparingOrder(orderId, employeeId);
@@ -212,6 +245,8 @@ public class AppDatabase {
         }
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void advanceOrderStatus(Long orderId) {
         try {
             Call<Order> call = App.interfaceApi.advanceOrderStatus(orderId);
@@ -224,6 +259,4 @@ public class AppDatabase {
             // TODO: Handel failure error
         }
     }
-
 }
-
