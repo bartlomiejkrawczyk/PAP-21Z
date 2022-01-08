@@ -17,11 +17,14 @@ public class TaskBarView {
         blackLine = BorderFactory.createLineBorder(Color.black);
         button = new JButton("Cooks");
 
-        //button.setBounds(1, 1, 100, 23);   ?
+
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(800, 25));
         panel.setBackground(Color.GRAY);
         panel.setLayout(null);
+
+        button.setBounds(1, 1, 100, 23);
+        panel.add(button);
     }
 
     public JPanel getPanel() {

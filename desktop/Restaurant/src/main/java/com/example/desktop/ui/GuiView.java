@@ -28,7 +28,7 @@ public class GuiView {
         blackLine = BorderFactory.createLineBorder(Color.black);
 
         frame.setMinimumSize(new Dimension(800, 450));
-        frame.setResizable(false);
+        frame.setResizable(true);
 
 //        scrollablePanel = new JPanel();
 //        scrollablePanelRight = new JPanel();
