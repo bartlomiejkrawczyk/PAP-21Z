@@ -29,14 +29,13 @@ public class GuiView {
 //        scrollablePanelRight = new JPanel();
 //        scrollFrame = new JScrollPane(scrollablePanel);
 //        scrollFrameRight = new JScrollPane(scrollablePanelRight);
-//        buttonCooks.setBounds(1, 1, 100, 23); ?
-//        buttonRecipes.setBounds(1, 1, 100, 23); ?
 
         addPanelLeft();
         addPanelRight();
         addPanelTop();
 
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -58,7 +57,7 @@ public class GuiView {
         panelLeftTitle.add(panelLeftTitleText);
         panelLeft.add(panelLeftTitle);
 
-        frame.add(panelLeft);
+        frame.add(panelLeft, BorderLayout.LINE_START);
     }
 
     private void addPanelRight(){
@@ -78,7 +77,7 @@ public class GuiView {
         panelRightTitle.add(panelRightTitleText);
         panelRight.add(panelRightTitle);
 
-        frame.add(panelRight);
+        frame.add(panelRight, BorderLayout.LINE_END);
     }
 
     private void addPanelTop(){
@@ -89,7 +88,7 @@ public class GuiView {
         panelTop.setBackground(Color.GRAY);
         panelTop.setLayout(null);
 
-        frame.add(panelTop);
+        frame.add(panelTop, BorderLayout.NORTH);
     }
 
     public JPanel getPanelLeft(){
