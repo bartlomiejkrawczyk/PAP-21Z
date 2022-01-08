@@ -8,24 +8,24 @@ import java.awt.*;
 //button na cooks
 public class TaskBarView {
 
-    private JPanel panelTop;
+    private JPanel panel;
     private Border blackLine;
     private JButton button;
 
     public TaskBarView(){
-        panelTop = new JPanel();
+        panel = new JPanel();
         blackLine = BorderFactory.createLineBorder(Color.black);
         button = new JButton("Cooks");
 
         //button.setBounds(1, 1, 100, 23);   ?
-        panelTop.setBorder(blackLine);
-        panelTop.setPreferredSize(new Dimension(800, 25));
-        panelTop.setBackground(Color.GRAY);
-        panelTop.setLayout(null);
+        panel.setBorder(blackLine);
+        panel.setPreferredSize(new Dimension(800, 25));
+        panel.setBackground(Color.GRAY);
+        panel.setLayout(null);
     }
 
-    public JPanel getPanelTop() {
-        return panelTop;
+    public JPanel getPanel() {
+        return panel;
     }
 
     public Border getBlackLine() {

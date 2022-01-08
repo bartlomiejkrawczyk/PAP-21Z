@@ -1,5 +1,7 @@
 package com.example.desktop.ui;
 
+import com.example.desktop.controllers.TaskBarController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7,9 +9,9 @@ import java.awt.*;
 public class GuiView {
 
     private JFrame frame;
-    private JPanel panelLeft;
-    private JPanel panelRight;
-    private JPanel panelTop;
+    private OrdersPlacedView ordersPlaced;
+    private OrdersInProgressView ordersInProgress;
+    private TaskBarView taskBar;
 
 //    private JPanel scrollablePanel;
 //    private JPanel scrollablePanelRight;
@@ -20,6 +22,9 @@ public class GuiView {
 
     public GuiView(){
         frame = new JFrame("Kitchen application");
+        taskBar = new TaskBarView();
+        ordersPlaced = new OrdersPlacedView();
+        ordersInProgress = new OrdersInProgressView();
         blackLine = BorderFactory.createLineBorder(Color.black);
 
         frame.setMinimumSize(new Dimension(800, 450));
@@ -30,9 +35,9 @@ public class GuiView {
 //        scrollFrame = new JScrollPane(scrollablePanel);
 //        scrollFrameRight = new JScrollPane(scrollablePanelRight);
 
-        addPanelLeft();
-        addPanelRight();
-        addPanelTop();
+        frame.add(taskBar.getPanel(), BorderLayout.NORTH);
+        frame.add(ordersPlaced.getPanel(), BorderLayout.LINE_START);
+        frame.add(ordersInProgress.getPanel(), BorderLayout.LINE_END);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -40,67 +45,16 @@ public class GuiView {
         frame.setVisible(true);
     }
 
-    private void addPanelLeft(){
-        panelLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JPanel panelLeftTitle = new JPanel();
-        JLabel panelLeftTitleText = new JLabel("Orders placed:");
-
-        panelLeft.setBorder(blackLine);
-        panelLeft.setPreferredSize(new Dimension(400, 150));
-        panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
-
-        panelLeftTitle.setBorder(blackLine);
-        panelLeftTitle.setBackground(Color.DARK_GRAY);
-
-        panelLeftTitleText.setForeground(Color.WHITE);
-
-        panelLeftTitle.add(panelLeftTitleText);
-        panelLeft.add(panelLeftTitle);
-
-        frame.add(panelLeft, BorderLayout.LINE_START);
+    public OrdersPlacedView getPanelLeft(){
+        return ordersPlaced;
     }
 
-    private void addPanelRight(){
-        panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JPanel panelRightTitle = new JPanel();
-        JLabel panelRightTitleText = new JLabel("Orders in progress:");
-
-        panelRight.setBorder(blackLine);
-        panelRight.setPreferredSize(new Dimension(400, 150));
-        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-
-        panelRightTitle.setBorder(blackLine);
-        panelRightTitle.setBackground(Color.DARK_GRAY);
-
-        panelRightTitleText.setForeground(Color.WHITE);
-
-        panelRightTitle.add(panelRightTitleText);
-        panelRight.add(panelRightTitle);
-
-        frame.add(panelRight, BorderLayout.LINE_END);
+    public OrdersInProgressView getPanelRight() {
+        return ordersInProgress;
     }
 
-    private void addPanelTop(){
-        panelTop = new JPanel();
-
-        panelTop.setBorder(blackLine);
-        panelTop.setPreferredSize(new Dimension(800, 25));
-        panelTop.setBackground(Color.GRAY);
-        panelTop.setLayout(null);
-
-        frame.add(panelTop, BorderLayout.NORTH);
-    }
-
-    public JPanel getPanelLeft(){
-        return panelLeft;
-    }
-
-    public JPanel getPanelRight() {
-        return panelRight;
-    }
-
-    public JPanel getPanelTop() {
-        return panelTop;
+    public TaskBarView getPanelTop() {
+        return taskBar;
     }
 
     public Border getBlackLine() {
