@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface InterfaceApi {
 
-    @GET("img/{file}")
+    @GET("img/restaurant/{file}")
     Call<ResponseBody> getImage(@Path("file") String filePath);
 
     @GET("api/employees/kind/2")
