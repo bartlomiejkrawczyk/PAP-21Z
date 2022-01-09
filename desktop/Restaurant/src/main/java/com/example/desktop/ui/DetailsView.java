@@ -11,11 +11,15 @@ public class DetailsView {
     private JFrame frame;
     private JTextArea textArea;
     private Font font;
+    private JLabel label;
 
     public DetailsView(){
         frame = new JFrame("Order details");
         textArea = new JTextArea();
         font = new Font("Serif", Font.ITALIC, 15);
+        label = new JLabel();
+
+        label.setMinimumSize(new Dimension(100, 100));
 
         textArea.setFont(font);
         frame.setMinimumSize(new Dimension(400, 400));
@@ -23,6 +27,7 @@ public class DetailsView {
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(textArea);
+//        frame.add(label);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -45,6 +50,8 @@ public class DetailsView {
     public JTextArea getTextArea() {
         return textArea;
     }
+
+    public JLabel getLabel() { return label; }
 
     public void setFrame(JFrame frame) {
         this.frame = frame;

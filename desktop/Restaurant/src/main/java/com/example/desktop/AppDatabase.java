@@ -1,10 +1,16 @@
 package com.example.desktop;
 
 import com.example.desktop.entities.*;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -145,6 +151,7 @@ public class AppDatabase {
         }
     }
 
+
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
     public void downloadOrdersInProgress(){
@@ -166,6 +173,22 @@ public class AppDatabase {
     public void downloadOrders(){
         downloadOrdersPlaced();
         downloadOrdersInProgress();
+    }
+
+    public BufferedImage getImage(String imagePath){
+        BufferedImage bufferedImage = null;
+        try {
+            Call<ResponseBody> call = App.interfaceApi.getImage(imagePath);
+            Response<ResponseBody> response = call.execute();
+            if (response.isSuccessful() && response.body() != null) {
+                byte[] img = response.body().bytes();
+                InputStream is = new ByteArrayInputStream(img);
+                bufferedImage = ImageIO.read(is);
+            }
+        } catch (IOException e) {
+            // TODO: TODO: Handel failure error
+        }
+        return bufferedImage;
     }
 
     // Note: that this function should be called on separate thread!
