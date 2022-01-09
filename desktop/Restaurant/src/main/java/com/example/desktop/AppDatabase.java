@@ -6,7 +6,9 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -96,13 +98,25 @@ public class AppDatabase {
                 if (response.isSuccessful() && response.body() != null) {
                     products.add(response.body());
                     return response.body();
-                } //else {
-                // TODO: Handel response error
-                //}
+                } else {
+                    JOptionPane.showMessageDialog(
+                            new JFrame(),
+                            response.message(),
+                            "Response error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             } catch (IOException e) {
-                // TODO: Handel failure error
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        e,
+                        "Failure error",
+                        JOptionPane.ERROR_MESSAGE);
             }
-            // TODO: Handle not found error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    "File not found",
+                    "Not found error",
+                    JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -127,11 +141,19 @@ public class AppDatabase {
             Response<List<Employee>> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 employees = response.body();
-            } //else {
-            // TODO: Handel response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        response.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -143,11 +165,19 @@ public class AppDatabase {
             Response<List<Order>> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 ordersPlaced = res.body();
-            } //else {
-            // TODO: Handel response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -160,11 +190,19 @@ public class AppDatabase {
             Response<List<Order>> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 ordersInProgress = res.body();
-            } //else {
-            // TODO: Handel response error
-            //}
+            } else {
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    res.message(),
+                    "Response error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -185,10 +223,20 @@ public class AppDatabase {
                 InputStream is = new ByteArrayInputStream(img);
                 bufferedImage = ImageIO.read(is);
             } else {
-                // TODO: message error
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        response.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+                return null;
             }
         } catch (IOException e) {
-            // TODO: TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
+            return null;
         }
         return bufferedImage;
     }
@@ -208,13 +256,25 @@ public class AppDatabase {
                 if (response.isSuccessful() && response.body() != null) {
                     dishes.add(response.body());
                     return response.body();
-                } //else {
-                // TODO: Handel response error
-                //}
+                } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        response.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+                }
             } catch (IOException e) {
-                // TODO: Handel failure error
+                    JOptionPane.showMessageDialog(
+                            new JFrame(),
+                            e,
+                            "Failure error",
+                            JOptionPane.ERROR_MESSAGE);
             }
-            // TODO: Handle not found error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    "File not found",
+                    "Not found error",
+                    JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -227,11 +287,19 @@ public class AppDatabase {
             Response<Dish> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 return res.body();
-            } //else {
-            // TODO: Handle response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e){
-            // TODO: Handle response error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         return order.getDish();
@@ -245,11 +313,19 @@ public class AppDatabase {
             Response<Product> resp = cal.execute();
             if (resp.isSuccessful() && resp.body() != null) {
                 return resp.body();
-            } //else {
-            // TODO: Handle response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        resp.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handle response error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         return new Product();
@@ -264,12 +340,19 @@ public class AppDatabase {
             Response<Order> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 order.setEmployee(getEmployeeById(employeeId));
-                // TODO: Tylko tyle?
-            } //else {
-            // TODO: Handel response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -282,12 +365,19 @@ public class AppDatabase {
             Response<Order> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 order.setStatus(2);
-                // TODO: Tylko tyle i czy to jest dobrze? XD
-            } //else {
-            // TODO: Handel response error
-            //}
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException e) {
-            // TODO: Handel failure error
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 }

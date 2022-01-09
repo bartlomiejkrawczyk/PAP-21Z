@@ -38,9 +38,13 @@ public class DetailsController {
     private void addImage(String imagePath, JLabel label){
         BufferedImage img = null;
         img = db.getImage(imagePath);
-        Image dimg = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-        ImageIcon imageIcon = new ImageIcon(dimg);
-        label.setIcon(imageIcon);
+        if (img != null) {
+            Image dimg = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            label.setIcon(imageIcon);
+        } else {
+            label.setIcon(null);
+        }
     }
 
     private void addDetails(){
@@ -83,7 +87,11 @@ public class DetailsController {
         details += "Ingredients: " + ingredients + "\n";
 
         addImage(imagePath, view.getLabel());
-        view.getTextArea().append(details);
-        view.getFrame().pack();
+        if (view.getLabel().getIcon() != null) {
+            view.getTextArea().append(details);
+            view.getFrame().pack();
+        } else {
+            view.getFrame().setVisible(false);
+        }
     }
 }
