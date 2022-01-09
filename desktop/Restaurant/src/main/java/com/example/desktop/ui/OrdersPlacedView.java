@@ -23,6 +23,7 @@ public class OrdersPlacedView {
 
         panelTitle = new JPanel();
         panelTitle.setBorder(blackLine);
+        panelTitle.setMaximumSize(new Dimension(5000, 35));
         panelTitle.setBackground(Color.DARK_GRAY);
 
         panelTitleText = new JLabel("Orders placed:");

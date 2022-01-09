@@ -25,7 +25,7 @@ public class AssignmentCookController {
     }
 
     public void updateView() {
-        view.getFrameCooks().setTitle("Assign a cook");
+        view.getFrame().setTitle("Assign a cook");
     }
 
     private void addLoggedInEmployees() {
@@ -33,7 +33,7 @@ public class AssignmentCookController {
         for (Employee e: employees) {
             ItemView itemView = new ItemView("Assign");
             new AssignmentCookItemController(e, itemView, orderToAssign, view);
-            view.getScrollableCooks().add(itemView.getPanel());
+            view.getScrollablePanel().add(itemView.getPanel());
         }
     }
 }

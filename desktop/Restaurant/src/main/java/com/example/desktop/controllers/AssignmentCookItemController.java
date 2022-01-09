@@ -39,7 +39,7 @@ public class AssignmentCookItemController {
 
     private void assignCook() {
         db.setEmployeePreparingOrder(orderToAssign, employee.getId());
-        cooksView.getFrameCooks().dispatchEvent(new WindowEvent(
-                cooksView.getFrameCooks(), WindowEvent.WINDOW_CLOSING));
+        cooksView.getFrame().dispatchEvent(new WindowEvent(
+                cooksView.getFrame(), WindowEvent.WINDOW_CLOSING));
     }
 }

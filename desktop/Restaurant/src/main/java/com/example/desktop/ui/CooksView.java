@@ -6,47 +6,47 @@ import java.awt.*;
 
 public class CooksView {
 
-    private JFrame frameCooks;
-    private JPanel panelCooks;
-    private JPanel panelTitle;
-    private JPanel scrollableCooks;
-    private JScrollPane scrollCooks;
+    private JFrame frame;
+    private JPanel panel;
+//    private JPanel panelTitle;
+    private JPanel scrollablePanel;
+    private JScrollPane scrollFrame;
 
     public CooksView() {
-        frameCooks = new JFrame();
+        frame = new JFrame();
         // Set frame sizes
-        frameCooks.setMinimumSize(new Dimension(300, 300));
-        frameCooks.setResizable(false);
-        frameCooks.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(200, 200));
+        frame.setResizable(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create UI elements
-        panelCooks = new JPanel();
-        panelTitle = new JPanel();
-        scrollableCooks = new JPanel();
-        scrollCooks = new JScrollPane(scrollableCooks);
+        panel = new JPanel();
+//        panelTitle = new JPanel();
+        scrollablePanel = new JPanel();
+        scrollFrame = new JScrollPane(scrollablePanel);
 
         // Add UI element to frame
-        scrollCooks.setPreferredSize(new Dimension(300, 240));
-        scrollableCooks.setLayout(new BoxLayout(scrollableCooks, BoxLayout.Y_AXIS));
-        scrollableCooks.setAutoscrolls(true);
+        scrollFrame.setPreferredSize(new Dimension(300, 240));
+        scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
+        scrollablePanel.setAutoscrolls(true);
 
-        panelTitle.setBackground(Color.DARK_GRAY);
-        panelTitle.setBounds(1, 1, 300, 30);
-        panelCooks.add(panelTitle);
-        panelCooks.add(scrollCooks);
+//        panelTitle.setBackground(Color.DARK_GRAY);
+//        panelTitle.setBounds(1, 1, 300, 30);
+//        panel.add(panelTitle);
+        panel.add(scrollFrame);
 
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
 
-        panelCooks.setBorder(blackLine);
-        panelCooks.setPreferredSize(new Dimension(300, 30));
-        panelCooks.setLayout(new BoxLayout(panelCooks, BoxLayout.Y_AXIS));
+        panel.setBorder(blackLine);
+        panel.setPreferredSize(new Dimension(300, 30));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        frameCooks.add(panelCooks, BorderLayout.LINE_START);
+        frame.add(panel, BorderLayout.LINE_START);
 
-        frameCooks.pack();
-        frameCooks.setLocationRelativeTo(null);
-        frameCooks.setVisible(true);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
     }
 
@@ -55,24 +55,19 @@ public class CooksView {
         new CooksView();
     }
 
-    public JFrame getFrameCooks() {
-        return frameCooks;
+    public JFrame getFrame() {
+        return frame;
     }
 
-    public JPanel getPanelCooks() {
-        return panelCooks;
+    public JPanel getPanel() {
+        return panel;
     }
 
-    public JPanel getPanelTitle() {
-        return panelTitle;
+    public JPanel getScrollablePanel() {
+        return scrollablePanel;
     }
 
-    public JPanel getScrollableCooks() {
-        return scrollableCooks;
+    public JScrollPane getScrollFrame() {
+        return scrollFrame;
     }
-
-    public JScrollPane getScrollCooks() {
-        return scrollCooks;
-    }
-
 }

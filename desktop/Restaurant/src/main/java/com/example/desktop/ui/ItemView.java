@@ -26,6 +26,8 @@ public class ItemView {
         panel = new JPanel();
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(200, 28));
+        panel.setMaximumSize(new Dimension(5000, 28));
+        panel.setMinimumSize(new Dimension(100, 28));
         panel.setLayout(null);
 
         label = new JLabel();

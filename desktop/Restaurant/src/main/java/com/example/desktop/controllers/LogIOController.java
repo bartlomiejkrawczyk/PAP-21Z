@@ -22,7 +22,7 @@ public class LogIOController {
     }
 
     private void initView() {
-        view.getFrameCooks().setTitle("Cooks");
+        view.getFrame().setTitle("Cooks");
         new Thread(this::addEmployees).start();
     }
 
@@ -31,7 +31,7 @@ public class LogIOController {
         for (Employee e: employees) {
             ItemView itemView = new ItemView();
             new LogIOItemController(e, itemView);
-            view.getScrollableCooks().add(itemView.getPanel());
+            view.getScrollablePanel().add(itemView.getPanel());
         }
     }
 
