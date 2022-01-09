@@ -1,5 +1,7 @@
 package com.example.desktop.ui;
 
+import com.example.desktop.entities.Order;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -10,12 +12,16 @@ public class ItemView {
     private JLabel label;
     private JButton button1;
     private JButton button2;
+
     private boolean toRemove;
+    private boolean toAdd;
+    private Order order;
 
     public ItemView() {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         toRemove = false;
+        toAdd = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -36,6 +42,7 @@ public class ItemView {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         toRemove = false;
+        toAdd = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -56,6 +63,7 @@ public class ItemView {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
         toRemove = false;
+        toAdd = false;
 
         panel = new JPanel();
         panel.setBorder(blackLine);
@@ -98,5 +106,21 @@ public class ItemView {
 
     public void setToRemove(boolean toRemove) {
         this.toRemove = toRemove;
+    }
+
+    public boolean isToAdd() {
+        return toAdd;
+    }
+
+    public void setToAdd(boolean toAdd) {
+        this.toAdd = toAdd;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

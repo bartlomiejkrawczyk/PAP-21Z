@@ -15,6 +15,7 @@ public class OrdersInProgressController {
     private OrdersInProgressView view;
     private AppDatabase db;
     private Vector<ItemView> itemViews = new Vector<>();
+    private Vector<ItemView> itemViewsToAdd = new Vector<>();
 
     public OrdersInProgressController(OrdersInProgressView view){
         this.view = view;
@@ -24,15 +25,20 @@ public class OrdersInProgressController {
     }
 
     private void updateView(){
-        Timer t1 = new Timer(4000, e -> removeNeedlessItems());
-        Timer t2  = new Timer(5000, e -> renewPanel());
+        Timer t1 = new Timer(500, e -> removeNeedlessItems());
+        Timer t2 = new Timer(500, e -> addNewItemViews());
+        Timer t3  = new Timer(500, e -> renewPanel());
         t1.start();
         t2.start();
+        t3.start();
     }
 
     private void renewPanel(){
+        view.getScrollablePanel().revalidate();
+        view.getScrollablePanel().repaint();
         view.getPanel().revalidate();
         view.getPanel().repaint();
+
     }
 
     private void addOrders() {
@@ -42,6 +48,7 @@ public class OrdersInProgressController {
             order.setDish((db.getDishFromOrder(order)));
             new OrderInProgressItemController(order, itemView);
             itemViews.addElement(itemView); //add views to vector
+            itemView.setOrder(order);
             view.getScrollablePanel().add(itemView.getPanel());
         }
     }
@@ -54,13 +61,41 @@ public class OrdersInProgressController {
                 toRemove.addElement(itemView);
             }
         }
-        for (ItemView itemView: toRemove){
-            itemViews.removeElement(itemView);
+//        for (ItemView itemView: toRemove){
+//            itemViews.removeElement(itemView);
+//        }
+    }
+
+    private void addNewItemViews(){
+        for (ItemView itemView: itemViewsToAdd){
+            ItemView newItemView = new ItemView("Done!", "Details");
+            new OrderInProgressItemController(itemView.getOrder(), newItemView);
+            newItemView.setToAdd(false);
+            newItemView.setToRemove(false);
+            itemViews.addElement(newItemView);
+            view.getScrollablePanel().add(newItemView.getPanel());
         }
+        itemViewsToAdd.clear();
     }
 
     private void initView(){
         new Thread(this::addOrders).start();
         new Thread(this::updateView).start();
+    }
+
+    public OrdersInProgressView getView() {
+        return view;
+    }
+
+    public AppDatabase getDb() {
+        return db;
+    }
+
+    public Vector<ItemView> getItemViews() {
+        return itemViews;
+    }
+
+    public Vector<ItemView> getItemViewsToAdd() {
+        return itemViewsToAdd;
     }
 }
