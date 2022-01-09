@@ -57,18 +57,18 @@ public class DetailsController {
             }
         }
 
-        if (name.isBlank()){
-        name = "null \n";
-        }
-        if (requests.isBlank()) {
-            requests = "null \n";
-        }
-        if (recipe.isBlank()){
-            recipe = "null \n";
-        }
-        if (ingredients.isBlank()){
-            ingredients = "null \n";
-        }
+//        if (name.isBlank()){
+//        name = "null \n";
+//        }
+//        if (requests.isBlank()) {
+//            requests = "null \n";
+//        }
+//        if (recipe.isBlank()){
+//            recipe = "null \n";
+//        }
+//        if (ingredients.isBlank()){
+//            ingredients = "null \n";
+//        }
 
         details += "Name: " + name + "\n\n";
         details += "Special requests: " + requests + "\n";
