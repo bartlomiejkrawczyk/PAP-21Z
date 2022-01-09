@@ -12,6 +12,7 @@ public class GuiView {
     private OrdersPlacedView ordersPlaced;
     private OrdersInProgressView ordersInProgress;
     private TaskBarView taskBar;
+    private JPanel panel;
 
     private Border blackLine;
 
@@ -22,12 +23,20 @@ public class GuiView {
         ordersInProgress = new OrdersInProgressView();
         blackLine = BorderFactory.createLineBorder(Color.black);
 
-        frame.setMinimumSize(new Dimension(800, 450));
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setPreferredSize(new Dimension(800, 400));
+        panel.add(ordersPlaced.getPanel());
+        panel.add(ordersInProgress.getPanel());
+
+        frame.setPreferredSize(new Dimension(800, 450));
         frame.setResizable(true);
+//        frame.setLayout(new GridLayout(1, 2));
 
         frame.add(taskBar.getPanel(), BorderLayout.NORTH);
-        frame.add(ordersPlaced.getPanel(), BorderLayout.LINE_START);
-        frame.add(ordersInProgress.getPanel(), BorderLayout.LINE_END);
+//        frame.add(ordersPlaced.getPanel(), BorderLayout.LINE_START);
+//        frame.add(ordersInProgress.getPanel(), BorderLayout.LINE_END);
+        frame.add(panel);
 
         frame.pack();
         frame.setLocationRelativeTo(null);

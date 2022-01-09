@@ -184,6 +184,8 @@ public class AppDatabase {
                 byte[] img = response.body().bytes();
                 InputStream is = new ByteArrayInputStream(img);
                 bufferedImage = ImageIO.read(is);
+            } else {
+                // TODO: message error
             }
         } catch (IOException e) {
             // TODO: TODO: Handel failure error
