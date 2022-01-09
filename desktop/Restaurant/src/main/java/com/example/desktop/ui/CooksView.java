@@ -24,6 +24,7 @@ public class CooksView {
 //        panelTitle = new JPanel();
         scrollablePanel = new JPanel();
         scrollFrame = new JScrollPane(scrollablePanel);
+        scrollFrame.getVerticalScrollBar().setUnitIncrement(16);
 
         // Add UI element to frame
         scrollFrame.setPreferredSize(new Dimension(300, 240));

@@ -13,11 +13,6 @@ public class GuiView {
     private OrdersInProgressView ordersInProgress;
     private TaskBarView taskBar;
 
-//    private JPanel scrollablePanel;
-//    private JPanel scrollablePanelRight;
-//    private JScrollPane scrollFrame;
-//    private JScrollPane scrollFrameRight;
-
     private Border blackLine;
 
     public GuiView(){
@@ -29,11 +24,6 @@ public class GuiView {
 
         frame.setMinimumSize(new Dimension(800, 450));
         frame.setResizable(true);
-
-//        scrollablePanel = new JPanel();
-//        scrollablePanelRight = new JPanel();
-//        scrollFrame = new JScrollPane(scrollablePanel);
-//        scrollFrameRight = new JScrollPane(scrollablePanelRight);
 
         frame.add(taskBar.getPanel(), BorderLayout.NORTH);
         frame.add(ordersPlaced.getPanel(), BorderLayout.LINE_START);
@@ -60,20 +50,4 @@ public class GuiView {
     public Border getBlackLine() {
         return blackLine;
     }
-
-    //    public JPanel getScrollablePanel() {
-//        return scrollablePanel;
-//    }
-//
-//    public JPanel getScrollablePanelRight() {
-//        return scrollablePanelRight;
-//    }
-//
-//    public JScrollPane getScrollFrame() {
-//        return scrollFrame;
-//    }
-//
-//    public JScrollPane getScrollFrameRight() {
-//        return scrollFrameRight;
-//    }
 }

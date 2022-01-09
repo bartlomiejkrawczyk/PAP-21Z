@@ -33,9 +33,9 @@ public class DetailsController {
 
     private void addDetails(){
         String name;
-        String requests = new String("");
-        String recipe = new String("");
-        String ingredients = new String("");
+        String requests = new String(" ");
+        String recipe = new String(" ");
+        String ingredients = new String("  ");
 
         Product product;
         Dish dish = db.getDishFromOrder(order);
@@ -43,22 +43,37 @@ public class DetailsController {
         name = dish.getName();
 
         for (SpecialRequest req: order.getRequests()){
-            requests += req.getRequest() + "\n";
+            requests += req.getRequest() + "\n\t";
         }
 
         for (Recipe rec: dish.getRecipes()){
-            recipe += rec.getRecipe() + "\n";
+            recipe += rec.getRecipe() + "\n\t";
         }
 
         for (Ingredient ingr: dish.getIngredients()){
             product = db.getProductFromIngredient(ingr);
             if (!product.getName().isEmpty()){
-                ingredients += product.getName() + "\n";
+                ingredients += product.getName() + "\n\t";
             }
         }
 
-        details += "Name: " + name + "Special requests: " + requests;
-        details += "Recipe: " + recipe + "Ingredients: " + ingredients;
+        if (name.isBlank()){
+        name = "null \n";
+        }
+        if (requests.isBlank()) {
+            requests = "null \n";
+        }
+        if (recipe.isBlank()){
+            recipe = "null \n";
+        }
+        if (ingredients.isBlank()){
+            ingredients = "null \n";
+        }
+
+        details += "Name: " + name + "\n\n";
+        details += "Special requests: " + requests + "\n";
+        details += "Recipe: " + recipe + "\n";
+        details += "Ingredients: " + ingredients + "\n";
 
         view.getTextArea().append(details);
     }

@@ -38,6 +38,7 @@ public class OrdersPlacedView {
 
         scrollFrame = new JScrollPane(scrollablePanel);
         scrollFrame.setPreferredSize(new Dimension(400, 350));
+        scrollFrame.getVerticalScrollBar().setUnitIncrement(16);
         panel.add(scrollFrame);
     }
 
