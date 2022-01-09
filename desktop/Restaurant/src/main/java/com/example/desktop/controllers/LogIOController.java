@@ -29,7 +29,7 @@ public class LogIOController {
     private void addEmployees() {
         List<Employee> employees = db.getEmployeesDownloadIfEmpty();
         for (Employee e: employees) {
-            ItemView itemView = new ItemView();
+            ItemView itemView = new ItemView("Log In");
             new LogIOItemController(e, itemView);
             view.getScrollablePanel().add(itemView.getPanel());
         }
