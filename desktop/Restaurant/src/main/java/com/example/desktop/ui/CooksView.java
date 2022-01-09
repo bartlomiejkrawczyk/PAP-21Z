@@ -18,6 +18,7 @@ public class CooksView {
         frame.setMinimumSize(new Dimension(200, 200));
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new GridLayout(1, 0));
 
         // Create UI elements
         panel = new JPanel();
