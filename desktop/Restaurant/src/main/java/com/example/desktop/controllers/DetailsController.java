@@ -47,8 +47,8 @@ public class DetailsController {
         String name;
         String requests = new String(" ");
         String recipe = new String(" ");
-        String ingredients = new String("  ");
-        String imagePath;
+        String ingredients = new String(" ");
+        String imagePath = new String(" ");
 
         Product product;
         Dish dish = db.getDishFromOrder(order);
@@ -71,18 +71,11 @@ public class DetailsController {
             }
         }
 
-//        if (name.isBlank()){
-//        name = "null \n";
-//        }
-//        if (requests.isBlank()) {
-//            requests = "null \n";
-//        }
-//        if (recipe.isBlank()){
-//            recipe = "null \n";
-//        }
-//        if (ingredients.isBlank()){
-//            ingredients = "null \n";
-//        }
+        if (name.isEmpty() || name.equals(" ")) name = "null \n";
+        if (requests.isEmpty() || requests.equals(" ")) requests = "null \n";
+        if (recipe.isEmpty() || recipe.equals(" ")) recipe = "null \n";
+        if (ingredients.isEmpty() || ingredients.equals(" ")) ingredients = "null \n";
+        if (imagePath.isEmpty() || imagePath.equals(" ")) imagePath = "null \n";
 
         details += "Name: " + name + "\n\n";
         details += "Special requests: " + requests + "\n";
