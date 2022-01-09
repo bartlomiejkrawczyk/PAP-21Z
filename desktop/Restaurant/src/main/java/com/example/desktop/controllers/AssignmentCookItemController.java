@@ -41,7 +41,5 @@ public class AssignmentCookItemController {
         db.setEmployeePreparingOrder(orderToAssign, employee.getId());
         cooksView.getFrameCooks().dispatchEvent(new WindowEvent(
                 cooksView.getFrameCooks(), WindowEvent.WINDOW_CLOSING));
-        // TODO: Usuwanie orderu z listy po lewej od razu
-        // TODO: Dodanie orderu do listy po prawej
     }
 }

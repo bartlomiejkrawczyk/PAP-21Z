@@ -53,17 +53,15 @@ public class OrdersInProgressController {
         }
     }
 
-    private void removeNeedlessItems(){
+    private void removeNeedlessItems() {
         Vector<ItemView> toRemove = new Vector<>();
-        for (ItemView itemView : itemViews){
-            if (itemView.isToRemove()){
+        for (ItemView itemView : itemViews) {
+            if (itemView.isToRemove()) {
                 view.getScrollablePanel().remove(itemView.getPanel());
                 toRemove.addElement(itemView);
             }
         }
-//        for (ItemView itemView: toRemove){
-//            itemViews.removeElement(itemView);
-//        }
+        ;
     }
 
     private void addNewItemViews(){

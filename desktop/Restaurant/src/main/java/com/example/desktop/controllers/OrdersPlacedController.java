@@ -53,7 +53,8 @@ public class OrdersPlacedController {
     private void removeNeedlessItems(){
         Vector<ItemView> toRemove = new Vector<>();
         for (ItemView itemView : itemViews){
-            if (itemView.isToRemove()){
+            if (itemView.isToRemove() && itemView.getOrder().getEmployee() != null){
+                itemView.setToAdd(true);
                 view.getScrollablePanel().remove(itemView.getPanel());
                 toRemove.addElement(itemView);
             }

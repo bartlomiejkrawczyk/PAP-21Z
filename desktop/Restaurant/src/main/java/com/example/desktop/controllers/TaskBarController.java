@@ -4,7 +4,7 @@ import com.example.desktop.AppDatabase;
 import com.example.desktop.ui.CooksView;
 import com.example.desktop.ui.TaskBarView;
 
-//dodanie action listenera do buttona w view,
+
 public class TaskBarController {
 
     private TaskBarView view;

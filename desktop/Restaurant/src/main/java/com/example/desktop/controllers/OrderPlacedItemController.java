@@ -36,17 +36,13 @@ public class OrderPlacedItemController {
     public void assignToCook() {
         CooksView cooksView = new CooksView();
         new AssignmentCookController(cooksView, orderPlaced);
+        boolean isAssigned;
         view.setToRemove(true);
-        view.setToAdd(true);
     }
 
     public void showDetails() {
         DetailsView detailsView = new DetailsView();
         new DetailsController(orderPlaced, detailsView);
     }
-
-    //action listener
-    //zrobienie kodu do przycisku assign
-    //zrobienie kodu do przycisku details
 }
 
