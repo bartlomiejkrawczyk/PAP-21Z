@@ -49,16 +49,21 @@ public class ItemView {
         panel = new JPanel();
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(200, 28));
-        panel.setLayout(null);
+        panel.setLayout(new BorderLayout());
 
         label = new JLabel();
         label.setBounds(25, 0, 250, 28);
 
         button1 = new JButton(buttonName);
+        button1.setPreferredSize(new Dimension(90, 28));
         button1.setBounds(200, 0, 90, 28);
 
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(1, 0));
+        buttons.add(button1);
+
         panel.add(label);
-        panel.add(button1);
+        panel.add(buttons, BorderLayout.LINE_END);
     }
 
     public ItemView(String firstButtonName, String secondButtonName) {

@@ -15,8 +15,6 @@ public class OrdersInProgressView {
     private JScrollPane scrollFrame;
     private JLabel panelTitleText;
 
-
-
     public OrdersInProgressView(){
         panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel.setBorder(blackLine);

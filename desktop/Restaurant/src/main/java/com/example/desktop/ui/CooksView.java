@@ -15,7 +15,7 @@ public class CooksView {
     public CooksView() {
         frame = new JFrame();
         // Set frame sizes
-        frame.setMinimumSize(new Dimension(200, 200));
+        frame.setMinimumSize(new Dimension(300, 240));
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new GridLayout(1, 0));

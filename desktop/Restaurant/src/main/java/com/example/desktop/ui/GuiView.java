@@ -30,6 +30,7 @@ public class GuiView {
         panel.add(ordersInProgress.getPanel());
 
         frame.setPreferredSize(new Dimension(800, 450));
+        frame.setMinimumSize(new Dimension(800, 450));
         frame.setResizable(true);
 //        frame.setLayout(new GridLayout(1, 2));
 
