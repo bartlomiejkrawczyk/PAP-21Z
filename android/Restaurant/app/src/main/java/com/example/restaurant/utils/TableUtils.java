@@ -36,11 +36,12 @@ public class TableUtils {
                             db.tablesDao().insert(table);
                     }).start();
                 }
+                // else do nothing -> updating data isn't necessary
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Table>> call, @NonNull Throwable t) {
-
+                // do nothing -> updating data isn't necessary
             }
         });
     }

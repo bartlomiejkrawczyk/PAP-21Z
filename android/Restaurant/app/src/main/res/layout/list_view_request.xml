@@ -16,38 +16,17 @@
         android:paddingVertical="8dp">
 
         <TextView
-            android:id="@+id/text_view_order_list_view_order_receipt"
+            android:id="@+id/text_view_request_list_view_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Coca-Cola"
+            tools:text="Without Tomato"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/text_view_price_list_view_order_receipt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="10.00 PLN"
-            app:layout_constraintEnd_toStartOf="@id/image_view_edit_list_view_order_receipt"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginHorizontal="8dp" />
 
         <ImageView
-            android:id="@+id/image_view_edit_list_view_order_receipt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            app:layout_constraintEnd_toStartOf="@id/image_view_delete_list_view_order_receipt"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@string/content_description_delete_order_button"
-            android:background="?selectableItemBackgroundBorderless"
-            android:layout_marginHorizontal="8dp" />
-
-        <ImageView
-            android:id="@+id/image_view_delete_list_view_order_receipt"
+            android:id="@+id/image_view_delete_request_list_view_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close"
@@ -55,8 +34,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="@string/content_description_delete_order_button"
-            android:background="?selectableItemBackgroundBorderless"
-            android:layout_marginStart="8dp" />
+            android:background="?selectableItemBackgroundBorderless" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

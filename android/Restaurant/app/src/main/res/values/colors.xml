@@ -10,4 +10,8 @@
     <color name="yellow">#FFAC07</color>
     <color name="yellowDark">#F09000</color>
     <color name="grey">#7F7F7F</color>
+    <color name="greenLight">#8bc34a</color>
+    <color name="greenDark">#689f38</color>
+    <color name="orange">#ff9800</color>
+    <color name="orangeDark">#f57c00</color>
 </resources>

@@ -1,8 +1,12 @@
 package com.example.restaurant.entities;
 
+import android.content.Context;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.example.restaurant.db.AppDatabase;
 
 import java.io.Serializable;
 
@@ -13,7 +17,7 @@ public class Dish implements Serializable {
 
     private String name;
     private String imagePath;
-    private Long price;
+    private Integer price;
 
     private Long dishCategoryId;
 
@@ -22,7 +26,12 @@ public class Dish implements Serializable {
     }
 
     @Ignore
-    public Dish(Long id, String name, String imagePath, Long price, Long dishCategoryId) {
+    public Dish(Long id) {
+        this.id = id;
+    }
+
+    @Ignore
+    public Dish(Long id, String name, String imagePath, Integer price, Long dishCategoryId) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
@@ -54,11 +63,11 @@ public class Dish implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -68,6 +77,21 @@ public class Dish implements Serializable {
 
     public void setDishCategoryId(Long dishCategoryId) {
         this.dishCategoryId = dishCategoryId;
+    }
+
+    public void fetchData(Context context) {
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+        Dish dish = db.dishesDao().getDishById(this.id);
+        if (dish != null) {
+            setName(dish.getName());
+            setImagePath(dish.getImagePath());
+            setPrice(dish.getPrice());
+            setDishCategoryId(dish.getDishCategoryId());
+        } else {
+            setName("Not Found");
+            setPrice(0);
+            setDishCategoryId(0L);
+        }
     }
 
 }

@@ -1,8 +1,10 @@
 package com.example.restaurant.ui.dish;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Dish;
+import com.example.restaurant.utils.ImageUtils;
 
 import java.util.List;
 
@@ -17,8 +20,10 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     private List<Dish> dishes;
     private OnClickListener onClickListener;
+    private final Context context;
 
-    public DishesRecyclerViewAdapter() {
+    public DishesRecyclerViewAdapter(Context context) {
+        this.context = context;
     }
 
     public void setDishes(List<Dish> dishes) {
@@ -43,6 +48,8 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         Dish dish = dishes.get(position);
         if (holder instanceof DishesViewHolder) {
             ((DishesViewHolder) holder).textViewDish.setText(dish.getName());
+            if (dish.getImagePath() != null)
+                new ImageUtils(context).setImage(((DishesViewHolder) holder).imageViewDish, dish.getImagePath());
         }
     }
 
@@ -59,10 +66,12 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class DishesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView textViewDish;
+        public final ImageView imageViewDish;
 
         public DishesViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textViewDish = itemView.findViewById(R.id.text_view_dishes);
+            this.imageViewDish = itemView.findViewById(R.id.image_view_dishes);
             itemView.setOnClickListener(this);
         }
 

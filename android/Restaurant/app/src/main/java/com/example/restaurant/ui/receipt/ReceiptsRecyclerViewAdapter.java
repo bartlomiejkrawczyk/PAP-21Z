@@ -61,27 +61,25 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         throw new UnsupportedOperationException("Unsupported type exception");
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReceiptsViewHolder) {
             Receipt receipt = receipts.get(position);
-            ((ReceiptsViewHolder) holder).textViewTable.setText(receipt.getTable().toString());
-            int total = 0;
+            if (receipt.getTable() != null)
+                ((ReceiptsViewHolder) holder).textViewTable.setText(receipt.getTable().toString());
+            else
+                ((ReceiptsViewHolder) holder).textViewTable.setText(R.string.spinner_item_takeaway);
+
             ((ReceiptsViewHolder) holder).linearLayout.removeAllViews();
-            if (receipt.getOrders() != null)
+            if (receipt.getOrders() != null) {
                 for (Order order : receipt.getOrders()) {
-                    total += order.getDish().getPrice();
                     ((ReceiptsViewHolder) holder).linearLayout.addView(getOrderView(order, holder.itemView.getContext()));
                 }
-            ((ReceiptsViewHolder) holder).textViewTotal.setText(String.format("%.2f PLN", total / 100.0));
+            }
+            ((ReceiptsViewHolder) holder).textViewTotal.setText(receipt.formatTotal());
         }
-//        else if (holder instanceof AddReceiptViewHolder) {
-//            // Do nothing for now
-//        }
     }
 
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private View getOrderView(Order order, Context context) {
         @SuppressLint("InflateParams") View convertView = LayoutInflater.from(context).inflate(R.layout.list_view_order_receipts, null, false);
 
@@ -90,7 +88,7 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         ImageView imageView = convertView.findViewById(R.id.image_view_list_view_order_receipts);
 
         textViewOrder.setText(order.getDish().getName());
-        textViewPrice.setText(String.format("%.2f PLN", order.getDish().getPrice() / 100.0));
+        textViewPrice.setText(order.formatPrice());
 
         switch (order.getStatus()) {
             case 1:

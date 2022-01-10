@@ -24,11 +24,22 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // TODO: For now skip the night mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Skip the night mode for now
         createNetworkSys();
         updateData();
     }
 
+    /**
+     * Initialize Network System:
+     * logging interceptor,
+     * json converter,
+     * retrofit interface
+     *
+     * @see OkHttpClient
+     * @see Gson
+     * @see Retrofit
+     * @see InterfaceApi
+     */
     private void createNetworkSys() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
