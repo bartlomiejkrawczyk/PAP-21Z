@@ -10,9 +10,6 @@ public class Ingredient {
 
     private Long productId;
 
-    public Ingredient() {
-    }
-
     public Ingredient(Long id, Long quantity, Long dishId, Long productId) {
         this.id = id;
         this.quantity = quantity;

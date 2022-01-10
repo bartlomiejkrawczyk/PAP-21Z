@@ -6,13 +6,11 @@ import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.OrdersPlacedView;
 
 import java.util.List;
-import java.util.Vector;
 
 public class OrdersPlacedController {
 
     private final OrdersPlacedView view;
     private final AppDatabase db;
-    private final Vector<ItemView> itemViews = new Vector<>();
     private final OrdersInProgressController ordersInProgressController;
 
     public OrdersPlacedController(OrdersPlacedView view, OrdersInProgressController ordersInProgressController) {
@@ -31,7 +29,6 @@ public class OrdersPlacedController {
             order.setDish(db.getDishById(order.getDish().getId()));
             itemView.setOrder(order);
             new OrderPlacedItemController(order, itemView, this, ordersInProgressController);
-            itemViews.addElement(itemView); //add views to vector
             view.getScrollablePanel().add(itemView.getPanel());
         }
     }
@@ -51,6 +48,7 @@ public class OrdersPlacedController {
     }
 
     public void removeItemView(ItemView itemView) {
+        db.getOrdersPlaced().remove(itemView.getOrder());
         view.getScrollablePanel().remove(itemView.getPanel());
         renewPanel();
     }
@@ -68,7 +66,4 @@ public class OrdersPlacedController {
         return db;
     }
 
-    public Vector<ItemView> getItemViews() {
-        return itemViews;
-    }
 }

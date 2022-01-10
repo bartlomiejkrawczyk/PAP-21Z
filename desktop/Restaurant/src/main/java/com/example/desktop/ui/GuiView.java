@@ -16,7 +16,6 @@ public class GuiView {
         taskBar = new TaskBarView();
         ordersPlaced = new OrdersPlacedView();
         ordersInProgress = new OrdersInProgressView();
-//        Border blackLine = BorderFactory.createLineBorder(Color.black);
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0));
@@ -27,11 +26,8 @@ public class GuiView {
         frame.setPreferredSize(new Dimension(800, 450));
         frame.setMinimumSize(new Dimension(800, 450));
         frame.setResizable(true);
-//        frame.setLayout(new GridLayout(1, 2));
 
         frame.add(taskBar.getPanel(), BorderLayout.NORTH);
-//        frame.add(ordersPlaced.getPanel(), BorderLayout.LINE_START);
-//        frame.add(ordersInProgress.getPanel(), BorderLayout.LINE_END);
         frame.add(panel);
 
         frame.pack();
@@ -40,9 +36,6 @@ public class GuiView {
         frame.setVisible(true);
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
 
     public OrdersPlacedView getPanelLeft() {
         return ordersPlaced;

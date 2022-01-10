@@ -8,9 +8,7 @@ public class CooksView {
 
     private final JFrame frame;
     private final JPanel panel;
-    //    private JPanel panelTitle;
     private final JPanel scrollablePanel;
-    private final JScrollPane scrollFrame;
 
     public CooksView() {
         frame = new JFrame();
@@ -22,9 +20,8 @@ public class CooksView {
 
         // Create UI elements
         panel = new JPanel();
-//        panelTitle = new JPanel();
         scrollablePanel = new JPanel();
-        scrollFrame = new JScrollPane(scrollablePanel);
+        JScrollPane scrollFrame = new JScrollPane(scrollablePanel);
         scrollFrame.getVerticalScrollBar().setUnitIncrement(16);
 
         // Add UI element to frame
@@ -32,11 +29,7 @@ public class CooksView {
         scrollablePanel.setLayout(new BoxLayout(scrollablePanel, BoxLayout.Y_AXIS));
         scrollablePanel.setAutoscrolls(true);
 
-//        panelTitle.setBackground(Color.DARK_GRAY);
-//        panelTitle.setBounds(1, 1, 300, 30);
-//        panel.add(panelTitle);
         panel.add(scrollFrame);
-
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
 
@@ -69,7 +62,4 @@ public class CooksView {
         return scrollablePanel;
     }
 
-    public JScrollPane getScrollFrame() {
-        return scrollFrame;
-    }
 }

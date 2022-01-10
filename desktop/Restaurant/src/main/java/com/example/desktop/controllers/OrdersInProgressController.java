@@ -11,6 +11,7 @@ public class OrdersInProgressController {
 
     private final OrdersInProgressView view;
     private final AppDatabase db;
+
     public OrdersInProgressController(OrdersInProgressView view) {
         this.view = view;
         db = AppDatabase.getAppDatabase();
@@ -28,7 +29,14 @@ public class OrdersInProgressController {
 
     private void addOrders() {
         List<Order> orders = db.getOrdersInProgress();
+        Long employeeId = -1L;
         for (Order order : orders) {
+            if (!employeeId.equals(order.getEmployee().getId())) {
+                ItemView employeeView = new ItemView();
+                employeeView.getLabel().setText(order.getEmployee().toString());
+                view.getScrollablePanel().add(employeeView.getPanel());
+                employeeId = order.getEmployee().getId();
+            }
             ItemView itemView = new ItemView("Done!", "Details");
             order.setDish((db.getDishById(order.getDish().getId())));
             new OrderInProgressItemController(order, itemView, this);
@@ -44,15 +52,13 @@ public class OrdersInProgressController {
     }
 
     public void removeItem(ItemView itemView) {
-        view.getScrollablePanel().remove(itemView.getPanel());
-        renewPanel();
+        db.getOrdersInProgress().remove(itemView.getOrder());
+        reloadOrders();
     }
 
     public void addItemView(ItemView itemView) {
-        ItemView newItemView = new ItemView("Done!", "Details");
-        new OrderInProgressItemController(itemView.getOrder(), newItemView, this);
-        view.getScrollablePanel().add(newItemView.getPanel());
-        renewPanel();
+        db.addOrderInProgress(itemView.getOrder());
+        reloadOrders();
     }
 
     private void initView() {

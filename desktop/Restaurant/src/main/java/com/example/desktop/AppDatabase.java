@@ -14,11 +14,12 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * A pseudo database class - class that stores values of current session in one place with convenient access
+ */
 public class AppDatabase {
     private static AppDatabase db;
 
@@ -44,24 +45,12 @@ public class AppDatabase {
         dishes = new ArrayList<>();
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
     public List<Employee> getEmployeesDownloadIfEmpty() {
         if (employees.size() == 0)
             downloadEmployees();
         return employees;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public List<Dish> getDishes() {
-        return dishes;
     }
 
     public List<Employee> getLoggedInEmployees() {
@@ -82,6 +71,11 @@ public class AppDatabase {
 
     public List<Order> getOrdersInProgress() {
         return ordersInProgress;
+    }
+
+    public void addOrderInProgress(Order order) {
+        ordersInProgress.add(order);
+        ordersInProgress.sort(Comparator.comparing(o -> o.getEmployee().getId()));
     }
 
     // Note: that this function should be called on separate thread!
@@ -133,7 +127,6 @@ public class AppDatabase {
                 .findFirst();
 
         return employeeOptional.orElse(null);
-        // TODO: Handle not found error when returned employee is null
     }
 
     public void downloadEmployees() {
@@ -190,13 +183,19 @@ public class AppDatabase {
             Call<List<Order>> call = App.interfaceApi.getOrdersInProgress();
             Response<List<Order>> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
-                ordersInProgress = res.body();
+                ordersInProgress = res.body()
+                        .stream()
+                        .sorted(Comparator.comparing(o -> o.getEmployee().getId()))
+                        .collect(Collectors.toList());
+                for (Order order : ordersInProgress) {
+                    order.setEmployee(getEmployeeById(order.getEmployee().getId()));
+                }
             } else {
-            JOptionPane.showMessageDialog(
-                    new JFrame(),
-                    res.message(),
-                    "Response error",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(
@@ -258,18 +257,18 @@ public class AppDatabase {
                     dishes.add(response.body());
                     return response.body();
                 } else {
-                JOptionPane.showMessageDialog(
-                        new JFrame(),
-                        response.message(),
-                        "Response error",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (IOException e) {
                     JOptionPane.showMessageDialog(
                             new JFrame(),
-                            e,
-                            "Failure error",
+                            response.message(),
+                            "Response error",
                             JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        e,
+                        "Failure error",
+                        JOptionPane.ERROR_MESSAGE);
             }
             JOptionPane.showMessageDialog(
                     new JFrame(),

@@ -1,12 +1,9 @@
 package com.example.desktop.ui;
 
-// horizontal strip with Cooks button
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-//button na cooks
 public class TaskBarView {
 
     private final JPanel panel;

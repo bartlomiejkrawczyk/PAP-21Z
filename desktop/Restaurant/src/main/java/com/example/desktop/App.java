@@ -1,7 +1,6 @@
 package com.example.desktop;
 
 import com.example.desktop.controllers.GuiController;
-import com.example.desktop.ui.GUI;
 import com.example.desktop.ui.GuiView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
