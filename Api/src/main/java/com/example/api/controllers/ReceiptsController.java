@@ -25,7 +25,7 @@ public class ReceiptsController {
 
     @GetMapping("/employee/{employee}")
     public List<ReceiptInfo> findReceiptsByEmployee(@PathVariable Long employee) {
-        return repository.findReceiptsByEmployeeIdAndPaymentEquals(employee, 0L);
+        return repository.findReceiptsByEmployeeIdAndPaymentEquals(employee, 0);
     }
 
     @PostMapping

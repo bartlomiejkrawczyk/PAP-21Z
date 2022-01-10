@@ -3,7 +3,7 @@ package com.example.api.projections;
 public interface ReceiptInfo {
     Long getId();
 
-    Long getPayment();
+    Integer getPayment();
 
     TableInfo getTable();
 
