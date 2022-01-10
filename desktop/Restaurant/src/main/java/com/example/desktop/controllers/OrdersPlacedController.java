@@ -13,9 +13,11 @@ public class OrdersPlacedController {
     private final OrdersPlacedView view;
     private final AppDatabase db;
     private final Vector<ItemView> itemViews = new Vector<>();
+    private final OrdersInProgressController ordersInProgressController;
 
-    public OrdersPlacedController(OrdersPlacedView view) {
+    public OrdersPlacedController(OrdersPlacedView view, OrdersInProgressController ordersInProgressController) {
         this.view = view;
+        this.ordersInProgressController = ordersInProgressController;
         db = AppDatabase.getAppDatabase();
 
         initView();
@@ -24,14 +26,20 @@ public class OrdersPlacedController {
 
     private void addOrders() {
         List<Order> ordersPlaced = db.getOrdersPlaced();
-        for (Order order: ordersPlaced) {
+        for (Order order : ordersPlaced) {
             ItemView itemView = new ItemView("Assign", "Details");
             order.setDish(db.getDishById(order.getDish().getId()));
             itemView.setOrder(order);
-            new OrderPlacedItemController(order, itemView, this);
+            new OrderPlacedItemController(order, itemView, this, ordersInProgressController);
             itemViews.addElement(itemView); //add views to vector
             view.getScrollablePanel().add(itemView.getPanel());
         }
+    }
+
+    public void reloadOrders() {
+        view.getScrollablePanel().removeAll();
+        addOrders();
+        renewPanel();
     }
 
 
@@ -44,7 +52,6 @@ public class OrdersPlacedController {
 
     public void removeItemView(ItemView itemView) {
         view.getScrollablePanel().remove(itemView.getPanel());
-        itemView.setToAdd(true);
         renewPanel();
     }
 

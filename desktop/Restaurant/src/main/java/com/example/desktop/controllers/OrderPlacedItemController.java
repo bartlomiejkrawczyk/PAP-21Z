@@ -10,11 +10,13 @@ public class OrderPlacedItemController {
     private final Order orderPlaced;
     private final ItemView view;
     private final OrdersPlacedController parentController;
+    private final OrdersInProgressController ordersInProgressController;
 
-    public OrderPlacedItemController(Order orderPlaced, ItemView view, OrdersPlacedController parentController) {
+    public OrderPlacedItemController(Order orderPlaced, ItemView view, OrdersPlacedController parentController, OrdersInProgressController ordersInProgressController) {
         this.orderPlaced = orderPlaced;
         this.view = view;
         this.parentController = parentController;
+        this.ordersInProgressController = ordersInProgressController;
 
         updateView();
         updateActionListener();
@@ -31,7 +33,10 @@ public class OrderPlacedItemController {
 
     public void assignToCook() {
         CooksView cooksView = new CooksView();
-        new AssignmentCookController(cooksView, orderPlaced, () -> parentController.removeItemView(view));
+        new AssignmentCookController(cooksView, orderPlaced, () -> {
+            parentController.removeItemView(view);
+            ordersInProgressController.addItemView(view);
+        });
     }
 
     public void showDetails() {

@@ -2,10 +2,8 @@ package com.example.desktop.controllers;
 
 import com.example.desktop.AppDatabase;
 import com.example.desktop.ui.GuiView;
-import com.example.desktop.ui.ItemView;
 
 import javax.swing.*;
-import java.util.Vector;
 
 public class GuiController {
 
@@ -23,7 +21,7 @@ public class GuiController {
 
         taskBar = new TaskBarController(view.getPanelTop());
         ordersInProgress = new OrdersInProgressController(view.getPanelRight());
-        ordersPlaced = new OrdersPlacedController(view.getPanelLeft());
+        ordersPlaced = new OrdersPlacedController(view.getPanelLeft(), ordersInProgress);
 
 
         initView();
@@ -33,27 +31,15 @@ public class GuiController {
         new Thread(this::updateView).start();
     }
 
-    private void updateView(){
+    private void updateView() {
         db.downloadOrders();
-        Timer t1 = new Timer(10_000, e -> db.downloadOrders());
-        Timer t2 = new Timer(5000, e -> changeSide());
-        t1.start();
-        t2.start();
 
-    }
-
-    private void changeSide(){
-        Vector<ItemView> itemViews = new Vector<>();
-        for (ItemView item: ordersPlaced.getItemViews()){
-            if (item.isToAdd()){
-                itemViews.addElement(item);
-            }
-        }
-
-        for (ItemView item: itemViews){
-            ordersPlaced.getItemViews().removeElement(item);
-            ordersInProgress.addItemView(item);
-        }
+        Timer t = new Timer(20_000, e -> {
+            db.downloadOrders();
+            ordersInProgress.reloadOrders();
+            ordersPlaced.reloadOrders();
+        });
+        t.start();
     }
 
     public static void main(String[] args){

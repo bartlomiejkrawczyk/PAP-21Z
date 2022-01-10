@@ -37,6 +37,12 @@ public class OrdersInProgressController {
         }
     }
 
+    public void reloadOrders() {
+        view.getScrollablePanel().removeAll();
+        addOrders();
+        renewPanel();
+    }
+
     public void removeItem(ItemView itemView) {
         view.getScrollablePanel().remove(itemView.getPanel());
         renewPanel();
@@ -45,8 +51,6 @@ public class OrdersInProgressController {
     public void addItemView(ItemView itemView) {
         ItemView newItemView = new ItemView("Done!", "Details");
         new OrderInProgressItemController(itemView.getOrder(), newItemView, this);
-        newItemView.setToAdd(false);
-        newItemView.setToRemove(false);
         view.getScrollablePanel().add(newItemView.getPanel());
         renewPanel();
     }
