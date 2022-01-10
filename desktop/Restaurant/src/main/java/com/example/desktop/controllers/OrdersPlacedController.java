@@ -5,7 +5,6 @@ import com.example.desktop.entities.Order;
 import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.OrdersPlacedView;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,43 +28,29 @@ public class OrdersPlacedController {
             ItemView itemView = new ItemView("Assign", "Details");
             order.setDish(db.getDishById(order.getDish().getId()));
             itemView.setOrder(order);
-            new OrderPlacedItemController(order, itemView);
+            new OrderPlacedItemController(order, itemView, this);
             itemViews.addElement(itemView); //add views to vector
             view.getScrollablePanel().add(itemView.getPanel());
         }
     }
 
-    private void updateView(){
-        Timer t1 = new Timer(500, e -> removeNeedlessItems());
-        Timer t2  = new Timer(500, e -> renewPanel());
-        t1.start();
-        t2.start();
-    }
 
-    private void renewPanel(){
+    private void renewPanel() {
         view.getScrollablePanel().revalidate();
         view.getScrollablePanel().repaint();
         view.getPanel().revalidate();
         view.getPanel().repaint();
     }
 
-    private void removeNeedlessItems(){
-        Vector<ItemView> toRemove = new Vector<>();
-        for (ItemView itemView : itemViews){
-            if (itemView.isToRemove() && itemView.getOrder().getEmployee() != null){
-                itemView.setToAdd(true);
-                view.getScrollablePanel().remove(itemView.getPanel());
-                toRemove.addElement(itemView);
-            }
-        }
-//        for (ItemView itemView: toRemove){
-//            itemViews.removeElement(itemView);
-//        }
+    public void removeItemView(ItemView itemView) {
+        view.getScrollablePanel().remove(itemView.getPanel());
+        itemView.setToAdd(true);
+        renewPanel();
     }
+
 
     private void initView() {
         new Thread(this::addOrders).start();
-        new Thread(this::updateView).start();
     }
 
     public OrdersPlacedView getView() {

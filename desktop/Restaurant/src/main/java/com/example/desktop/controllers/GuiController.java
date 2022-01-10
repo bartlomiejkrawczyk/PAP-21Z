@@ -3,8 +3,6 @@ package com.example.desktop.controllers;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.ui.GuiView;
 import com.example.desktop.ui.ItemView;
-import com.example.desktop.ui.OrdersInProgressView;
-import com.example.desktop.ui.OrdersPlacedView;
 
 import javax.swing.*;
 import java.util.Vector;
@@ -54,7 +52,7 @@ public class GuiController {
 
         for (ItemView item: itemViews){
             ordersPlaced.getItemViews().removeElement(item);
-            ordersInProgress.getItemViewsToAdd().addElement(item);
+            ordersInProgress.addItemView(item);
         }
     }
 

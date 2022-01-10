@@ -14,15 +14,17 @@ public class AssignmentCookItemController {
     private final Employee employee;
     private final Order orderToAssign;
     private final CooksView cooksView;
+    private final Runnable moveOrderRunnable;
 
     private final AppDatabase db;
 
     public AssignmentCookItemController(Employee employee, ItemView view,
-                                        Order orderToAssign, CooksView cooksView) {
+                                        Order orderToAssign, CooksView cooksView, Runnable moveOrderRunnable) {
         this.employee = employee;
         this.view = view;
         this.orderToAssign = orderToAssign;
         this.cooksView = cooksView;
+        this.moveOrderRunnable = moveOrderRunnable;
 
         db = AppDatabase.getAppDatabase();
         updateView();
@@ -41,5 +43,6 @@ public class AssignmentCookItemController {
         db.setEmployeePreparingOrder(orderToAssign, employee.getId());
         cooksView.getFrame().dispatchEvent(new WindowEvent(
                 cooksView.getFrame(), WindowEvent.WINDOW_CLOSING));
+        moveOrderRunnable.run();
     }
 }

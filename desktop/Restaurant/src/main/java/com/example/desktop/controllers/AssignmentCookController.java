@@ -12,12 +12,14 @@ public class AssignmentCookController {
 
     private final CooksView view;
     private final Order orderToAssign;
+    private final Runnable moveOrderRunnable;
 
     private final AppDatabase db;
 
-    public AssignmentCookController(CooksView view, Order orderToAssign) {
+    public AssignmentCookController(CooksView view, Order orderToAssign, Runnable moveOrderRunnable) {
         this.view = view;
         this.orderToAssign = orderToAssign;
+        this.moveOrderRunnable = moveOrderRunnable;
         db = AppDatabase.getAppDatabase();
 
         updateView();
@@ -32,7 +34,7 @@ public class AssignmentCookController {
         List<Employee> employees = db.getLoggedInEmployees();
         for (Employee e: employees) {
             ItemView itemView = new ItemView("Assign");
-            new AssignmentCookItemController(e, itemView, orderToAssign, view);
+            new AssignmentCookItemController(e, itemView, orderToAssign, view, moveOrderRunnable);
             view.getScrollablePanel().add(itemView.getPanel());
         }
     }

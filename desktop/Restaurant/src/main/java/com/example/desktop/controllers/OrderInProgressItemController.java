@@ -12,9 +12,12 @@ public class OrderInProgressItemController {
     private final ItemView view;
     private final AppDatabase db;
 
-    public OrderInProgressItemController(Order order, ItemView view) {
+    private final OrdersInProgressController parentController;
+
+    public OrderInProgressItemController(Order order, ItemView view, OrdersInProgressController parentController) {
         this.orderInProgress = order;
         this.view = view;
+        this.parentController = parentController;
 
         db = AppDatabase.getAppDatabase();
 
@@ -77,7 +80,7 @@ public class OrderInProgressItemController {
 
     private void orderDone(){
         db.advanceOrderStatus(orderInProgress);
-        view.setToRemove(true);
+        parentController.removeItem(view);
     }
 
     private void showDetails(){
