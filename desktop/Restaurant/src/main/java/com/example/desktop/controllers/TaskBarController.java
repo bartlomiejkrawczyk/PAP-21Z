@@ -1,20 +1,16 @@
 package com.example.desktop.controllers;
 
-import com.example.desktop.AppDatabase;
 import com.example.desktop.ui.CooksView;
 import com.example.desktop.ui.TaskBarView;
 
 
 public class TaskBarController {
 
-    private TaskBarView view;
-
-    private AppDatabase db;
+    private final TaskBarView view;
 
     public TaskBarController(TaskBarView view){
         this.view = view;
 
-        db = AppDatabase.getAppDatabase();
         updateActionListener();
     }
 

@@ -10,16 +10,13 @@ import java.awt.*;
 
 public class EmployeeController {
 
-    private Employee employee;
-    private EmployeeView view;
-
-    private AppDatabase db;
+    private final Employee employee;
+    private final EmployeeView view;
 
     public EmployeeController(Employee employee, EmployeeView view) {
         this.employee = employee;
         this.view = view;
 
-        db = AppDatabase.getAppDatabase();
         updateView();
     }
 

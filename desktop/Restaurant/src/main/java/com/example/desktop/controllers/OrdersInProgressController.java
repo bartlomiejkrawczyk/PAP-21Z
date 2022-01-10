@@ -1,6 +1,5 @@
 package com.example.desktop.controllers;
 
-import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Order;
 import com.example.desktop.ui.ItemView;
@@ -12,19 +11,19 @@ import java.util.Vector;
 
 public class OrdersInProgressController {
 
-    private OrdersInProgressView view;
-    private AppDatabase db;
-    private Vector<ItemView> itemViews = new Vector<>();
-    private Vector<ItemView> itemViewsToAdd = new Vector<>();
+    private final OrdersInProgressView view;
+    private final AppDatabase db;
+    private final Vector<ItemView> itemViews = new Vector<>();
+    private final Vector<ItemView> itemViewsToAdd = new Vector<>();
 
-    public OrdersInProgressController(OrdersInProgressView view){
+    public OrdersInProgressController(OrdersInProgressView view) {
         this.view = view;
         db = AppDatabase.getAppDatabase();
 
         initView();
     }
 
-    private void updateView(){
+    private void updateView() {
         Timer t1 = new Timer(500, e -> removeNeedlessItems());
         Timer t2 = new Timer(500, e -> addNewItemViews());
         Timer t3  = new Timer(500, e -> renewPanel());
@@ -45,7 +44,7 @@ public class OrdersInProgressController {
         List<Order> orders = db.getOrdersInProgress();
         for (Order order: orders) {
             ItemView itemView = new ItemView("Done!", "Details");
-            order.setDish((db.getDishFromOrder(order)));
+            order.setDish((db.getDishById(order.getDish().getId())));
             new OrderInProgressItemController(order, itemView);
             itemViews.addElement(itemView); //add views to vector
             itemView.setOrder(order);
@@ -61,7 +60,6 @@ public class OrdersInProgressController {
                 toRemove.addElement(itemView);
             }
         }
-        ;
     }
 
     private void addNewItemViews(){

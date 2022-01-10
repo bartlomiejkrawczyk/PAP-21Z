@@ -6,11 +6,11 @@ import java.awt.*;
 
 public class CooksView {
 
-    private JFrame frame;
-    private JPanel panel;
-//    private JPanel panelTitle;
-    private JPanel scrollablePanel;
-    private JScrollPane scrollFrame;
+    private final JFrame frame;
+    private final JPanel panel;
+    //    private JPanel panelTitle;
+    private final JPanel scrollablePanel;
+    private final JScrollPane scrollFrame;
 
     public CooksView() {
         frame = new JFrame();

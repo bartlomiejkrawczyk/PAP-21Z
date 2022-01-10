@@ -9,20 +9,18 @@ import java.awt.*;
 
 public class DetailsView {
 
-    private JFrame frame;
-    private JTextArea textArea;
-    private Font font;
-    private JLabel label;
-    private JPanel panel;
-    private Border blackLine;
+    private final JFrame frame;
+    private final JTextArea textArea;
+    private final JLabel label;
+    private final JPanel panel;
 
-    public DetailsView(){
+    public DetailsView() {
         frame = new JFrame("Order details");
         textArea = new JTextArea();
-        font = new Font("Serif", Font.ITALIC, 15);
+        Font font = new Font("Serif", Font.ITALIC, 15);
         label = new JLabel();
         panel = new JPanel();
-        blackLine = BorderFactory.createLineBorder(Color.black);
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
 
 //        label.setPreferredSize(new Dimension(200, 200));
         textArea.setMinimumSize(new Dimension(100, 300));
@@ -45,7 +43,7 @@ public class DetailsView {
     }
 
     public static void main(String[] args){
-        String infos = new String("");
+        String infos;
         infos = "Name: lazania" + "\n";
         infos = infos + "Requests: sthsth" + "\n";
         infos = infos + "   sthsth" + "\n";
@@ -64,13 +62,5 @@ public class DetailsView {
     public JLabel getLabel() { return label; }
 
     public JPanel getPanel() { return panel; }
-
-    public void setFrame(JFrame frame) {
-        this.frame = frame;
-    }
-
-    public void setTextArea(JTextArea textArea) {
-        this.textArea = textArea;
-    }
 
 }

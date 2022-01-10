@@ -6,17 +6,16 @@ import java.awt.*;
 
 public class OrdersInProgressView {
 
-    private Border blackLine = BorderFactory.createLineBorder(Color.black);
+    private final JPanel panel;
+    private final JPanel scrollablePanel;
+    private final JPanel panelTitle;
 
-    private JPanel panel;
-    private JPanel scrollablePanel;
-    private JPanel panelTitle;
+    private final JScrollPane scrollFrame;
+    private final JLabel panelTitleText;
 
-    private JScrollPane scrollFrame;
-    private JLabel panelTitleText;
-
-    public OrdersInProgressView(){
+    public OrdersInProgressView() {
         panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(400, 150));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

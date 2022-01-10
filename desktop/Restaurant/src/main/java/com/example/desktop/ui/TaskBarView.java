@@ -1,20 +1,20 @@
 package com.example.desktop.ui;
 
-//to jest ten poziomy pasek z Cooks i Recipes
+// horizontal strip with Cooks button
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+
 //button na cooks
 public class TaskBarView {
 
-    private JPanel panel;
-    private Border blackLine;
-    private JButton button;
+    private final JPanel panel;
+    private final JButton button;
 
-    public TaskBarView(){
+    public TaskBarView() {
         panel = new JPanel();
-        blackLine = BorderFactory.createLineBorder(Color.black);
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
         button = new JButton("Cooks");
 
 
@@ -31,15 +31,8 @@ public class TaskBarView {
         return panel;
     }
 
-    public Border getBlackLine() {
-        return blackLine;
-    }
-
     public JButton getButton() {
         return button;
     }
 
-    public void setButton(JButton button) {
-        this.button = button;
-    }
 }

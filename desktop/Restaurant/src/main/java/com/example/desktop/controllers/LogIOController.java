@@ -3,16 +3,16 @@ package com.example.desktop.controllers;
 import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
-import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.CooksView;
+import com.example.desktop.ui.ItemView;
 
 import java.util.List;
 
 public class LogIOController {
 
-    private CooksView view;
+    private final CooksView view;
 
-    private AppDatabase db;
+    private final AppDatabase db;
 
     public LogIOController(CooksView view) {
         this.view = view;
@@ -35,13 +35,9 @@ public class LogIOController {
         }
     }
 
-    public void initController() {
-    }
-
     public static void main(String[] args) {
         App.createNetworkSys();
         CooksView view = new CooksView();
-        LogIOController controller = new LogIOController(view);
-        controller.initController();
+        new LogIOController(view);
     }
 }

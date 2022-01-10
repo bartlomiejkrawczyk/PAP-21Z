@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class ItemView {
 
-    private JPanel panel;
-    private JLabel label;
-    private JButton button1;
+    private final JPanel panel;
+    private final JLabel label;
+    private final JButton button1;
     private JButton button2;
 
     private boolean toRemove;

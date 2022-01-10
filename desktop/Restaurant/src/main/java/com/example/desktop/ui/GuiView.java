@@ -1,27 +1,22 @@
 package com.example.desktop.ui;
 
-import com.example.desktop.controllers.TaskBarController;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class GuiView {
 
-    private JFrame frame;
-    private OrdersPlacedView ordersPlaced;
-    private OrdersInProgressView ordersInProgress;
-    private TaskBarView taskBar;
-    private JPanel panel;
+    private final JFrame frame;
+    private final OrdersPlacedView ordersPlaced;
+    private final OrdersInProgressView ordersInProgress;
+    private final TaskBarView taskBar;
+    private final JPanel panel;
 
-    private Border blackLine;
-
-    public GuiView(){
+    public GuiView() {
         frame = new JFrame("Kitchen application");
         taskBar = new TaskBarView();
         ordersPlaced = new OrdersPlacedView();
         ordersInProgress = new OrdersInProgressView();
-        blackLine = BorderFactory.createLineBorder(Color.black);
+//        Border blackLine = BorderFactory.createLineBorder(Color.black);
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0));
@@ -45,7 +40,11 @@ public class GuiView {
         frame.setVisible(true);
     }
 
-    public OrdersPlacedView getPanelLeft(){
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public OrdersPlacedView getPanelLeft() {
         return ordersPlaced;
     }
 
@@ -57,7 +56,7 @@ public class GuiView {
         return taskBar;
     }
 
-    public Border getBlackLine() {
-        return blackLine;
+    public JPanel getPanel() {
+        return panel;
     }
 }

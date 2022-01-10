@@ -10,10 +10,10 @@ import java.util.List;
 
 public class AssignmentCookController {
 
-    private CooksView view;
-    private Order orderToAssign;
+    private final CooksView view;
+    private final Order orderToAssign;
 
-    private AppDatabase db;
+    private final AppDatabase db;
 
     public AssignmentCookController(CooksView view, Order orderToAssign) {
         this.view = view;

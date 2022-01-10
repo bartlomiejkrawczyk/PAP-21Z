@@ -8,7 +8,7 @@ public class Order {
 
     private Long date;
 
-    private Dish dish; // TODO: Note that when downloading from server you only get id of the dish - rest is null
+    private Dish dish; // Note: that when downloading from server you only get id of the dish - rest is null
 
     private Long receiptId;
 
@@ -16,7 +16,7 @@ public class Order {
 
     private Integer status;
 
-    private Employee employee; // TODO: Note that when downloading from server you only get id of the employee - rest is null
+    private Employee employee; // Note: that when downloading from server you only get id of the employee - rest is null
 
     public Order() {
     }

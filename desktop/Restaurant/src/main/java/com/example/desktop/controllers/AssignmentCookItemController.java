@@ -11,9 +11,9 @@ import java.awt.event.WindowEvent;
 public class AssignmentCookItemController {
 
     private final ItemView view;
-    private Employee employee;
-    private Order orderToAssign;
-    private CooksView cooksView;
+    private final Employee employee;
+    private final Order orderToAssign;
+    private final CooksView cooksView;
 
     private final AppDatabase db;
 

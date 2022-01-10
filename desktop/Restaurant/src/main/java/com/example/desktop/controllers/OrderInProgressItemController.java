@@ -1,21 +1,18 @@
 package com.example.desktop.controllers;
 
-import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
 import com.example.desktop.entities.Order;
 import com.example.desktop.ui.DetailsView;
 import com.example.desktop.ui.ItemView;
 
-import javax.swing.*;
-
 public class OrderInProgressItemController {
 
-    private Order orderInProgress;
-    private ItemView view;
-    private AppDatabase db;
+    private final Order orderInProgress;
+    private final ItemView view;
+    private final AppDatabase db;
 
-    public OrderInProgressItemController(Order order, ItemView view){
+    public OrderInProgressItemController(Order order, ItemView view) {
         this.orderInProgress = order;
         this.view = view;
 

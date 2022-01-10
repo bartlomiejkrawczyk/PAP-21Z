@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class EmployeeView {
 
-    private JPanel panel;
-    private JLabel label;
+    private final JPanel panel;
+    private final JLabel label;
 
     public EmployeeView() {
 

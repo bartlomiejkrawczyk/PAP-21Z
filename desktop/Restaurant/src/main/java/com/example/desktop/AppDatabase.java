@@ -1,14 +1,15 @@
 package com.example.desktop;
 
-import com.example.desktop.entities.*;
+import com.example.desktop.entities.Dish;
+import com.example.desktop.entities.Employee;
+import com.example.desktop.entities.Order;
+import com.example.desktop.entities.Product;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -214,7 +215,7 @@ public class AppDatabase {
     }
 
     public BufferedImage getImage(String imagePath){
-        BufferedImage bufferedImage = null;
+        BufferedImage bufferedImage;
         try {
             Call<ResponseBody> call = App.interfaceApi.getImage(imagePath);
             Response<ResponseBody> response = call.execute();
@@ -277,58 +278,6 @@ public class AppDatabase {
                     JOptionPane.ERROR_MESSAGE);
             return null;
         }
-    }
-
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-    public Dish getDishFromOrder(Order order){
-        try {
-            Call<Dish> call = App.interfaceApi.getDishById(order.getDish().getId());
-            Response<Dish> res = call.execute();
-            if (res.isSuccessful() && res.body() != null) {
-                return res.body();
-            } else {
-                JOptionPane.showMessageDialog(
-                        new JFrame(),
-                        res.message(),
-                        "Response error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (IOException e){
-            JOptionPane.showMessageDialog(
-                    new JFrame(),
-                    e,
-                    "Failure error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-
-        return order.getDish();
-    }
-
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-    public Product getProductFromIngredient(Ingredient ingr){
-        try {
-            Call<Product> cal = App.interfaceApi.getProductById(ingr.getProductId());
-            Response<Product> resp = cal.execute();
-            if (resp.isSuccessful() && resp.body() != null) {
-                return resp.body();
-            } else {
-                JOptionPane.showMessageDialog(
-                        new JFrame(),
-                        resp.message(),
-                        "Response error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(
-                    new JFrame(),
-                    e,
-                    "Failure error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-
-        return new Product();
     }
 
     // Note: that this function should be called on separate thread!

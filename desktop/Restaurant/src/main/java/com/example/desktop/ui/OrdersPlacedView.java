@@ -6,8 +6,6 @@ import java.awt.*;
 
 public class OrdersPlacedView {
 
-    private final Border blackLine = BorderFactory.createLineBorder(Color.black);
-
     private final JPanel panel;
     private final JPanel panelTitle;
     private final JLabel panelTitleText;
@@ -17,6 +15,7 @@ public class OrdersPlacedView {
     public OrdersPlacedView() {
 
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
         panel.setBorder(blackLine);
         panel.setPreferredSize(new Dimension(400, 150));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
