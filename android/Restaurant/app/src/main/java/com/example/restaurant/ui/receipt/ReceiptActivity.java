@@ -34,8 +34,8 @@ import com.example.restaurant.entities.Employee;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
 import com.example.restaurant.entities.Table;
-import com.example.restaurant.handlers.FailureError;
-import com.example.restaurant.handlers.ResponseError;
+import com.example.restaurant.handlers.FailureErrorHandler;
+import com.example.restaurant.handlers.ResponseErrorHandler;
 import com.example.restaurant.ui.dish.DishCategoriesActivity;
 import com.example.restaurant.ui.request.RequestsActivity;
 
@@ -139,13 +139,13 @@ public class ReceiptActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             finish();
                         } else {
-                            new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                            new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                        new FailureError(t, ReceiptActivity.this).makeToast();
+                        new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
                     }
                 });
             } else {
@@ -165,13 +165,13 @@ public class ReceiptActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         finish();
                     } else {
-                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                        new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    new FailureError(t, ReceiptActivity.this).makeToast();
+                    new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
                 }
             });
         } else {
@@ -200,14 +200,14 @@ public class ReceiptActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     receipt.setId(response.body().getId());
                 } else {
-                    new ResponseError<>(response, ReceiptActivity.this).makeToast(getString(R.string.receipt_activity_adding_receipt_failed));
+                    new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast(getString(R.string.receipt_activity_adding_receipt_failed));
                     finish();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                new FailureError(t, ReceiptActivity.this).makeToast();
+                new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
                 finish();
             }
         });
@@ -246,13 +246,13 @@ public class ReceiptActivity extends AppCompatActivity {
                         receipt.getOrders().add(order);
                         textViewTotal.setText(receipt.formatTotal());
                     } else {
-                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                        new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                    new FailureError(t, ReceiptActivity.this).makeToast();
+                    new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
                 }
             });
         }).start();
@@ -317,7 +317,7 @@ public class ReceiptActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     setTables(response.body());
                 } else {
-                    new ResponseError<>(response, ReceiptActivity.this)
+                    new ResponseErrorHandler<>(response, ReceiptActivity.this)
                             .errorDialog(
                                     getString(R.string.error_downloading_tables),
                                     (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start(),
@@ -325,7 +325,7 @@ public class ReceiptActivity extends AppCompatActivity {
                             );
                 }
             } catch (IOException e) {
-                new FailureError(e, ReceiptActivity.this)
+                new FailureErrorHandler(e, ReceiptActivity.this)
                         .errorDialog(
                                 getString(R.string.error_downloading_tables),
                                 (dialog, id) -> new Thread(this::retrieveTablesFromDatabase).start(),
@@ -372,13 +372,13 @@ public class ReceiptActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<Receipt> call, @NonNull Response<Receipt> response) {
                     if (!response.isSuccessful())
-                        new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                        new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                     // else Do nothing
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Receipt> call, @NonNull Throwable t) {
-                    new FailureError(t, ReceiptActivity.this).makeToast();
+                    new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
                 }
             });
         }
@@ -425,13 +425,13 @@ public class ReceiptActivity extends AppCompatActivity {
                     order.setStatus(3);
                     linearLayout.removeView(view);
                 } else {
-                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                    new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
-                new FailureError(t, ReceiptActivity.this).makeToast();
+                new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
             }
         });
     }
@@ -447,13 +447,13 @@ public class ReceiptActivity extends AppCompatActivity {
                     textViewTotal.setText(receipt.formatTotal());
                     linearLayout.removeView(view);
                 } else {
-                    new ResponseError<>(response, ReceiptActivity.this).makeToast();
+                    new ResponseErrorHandler<>(response, ReceiptActivity.this).makeToast();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                new FailureError(t, ReceiptActivity.this).makeToast();
+                new FailureErrorHandler(t, ReceiptActivity.this).makeToast();
             }
         });
     }

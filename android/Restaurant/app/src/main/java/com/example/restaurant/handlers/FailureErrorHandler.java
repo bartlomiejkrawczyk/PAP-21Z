@@ -7,10 +7,10 @@ import com.example.restaurant.R;
 /**
  * Class used to format error message and show it to user
  */
-public class FailureError extends ErrorHandler {
+public class FailureErrorHandler extends ErrorHandler {
     private final Throwable throwable;
 
-    public FailureError(Throwable throwable, Activity activity) {
+    public FailureErrorHandler(Throwable throwable, Activity activity) {
         super(activity);
         this.throwable = throwable;
     }

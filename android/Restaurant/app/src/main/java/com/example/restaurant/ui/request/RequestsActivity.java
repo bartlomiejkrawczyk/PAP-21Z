@@ -20,8 +20,8 @@ import com.example.restaurant.R;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.SpecialRequest;
 import com.example.restaurant.errors.InvalidData;
-import com.example.restaurant.handlers.FailureError;
-import com.example.restaurant.handlers.ResponseError;
+import com.example.restaurant.handlers.FailureErrorHandler;
+import com.example.restaurant.handlers.ResponseErrorHandler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,13 +82,13 @@ public class RequestsActivity extends AppCompatActivity {
                         order.getRequests().add(responseRequest);
                         displayRequest(responseRequest);
                     } else {
-                        new ResponseError<>(response, RequestsActivity.this).makeToast();
+                        new ResponseErrorHandler<>(response, RequestsActivity.this).makeToast();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<SpecialRequest> call, @NonNull Throwable t) {
-                    new FailureError(t, RequestsActivity.this).makeToast();
+                    new FailureErrorHandler(t, RequestsActivity.this).makeToast();
                 }
             });
         } catch (InvalidData e) {
@@ -117,13 +117,13 @@ public class RequestsActivity extends AppCompatActivity {
                     linearLayout.removeView(view);
                     order.getRequests().remove(specialRequest);
                 } else {
-                    new ResponseError<>(response, RequestsActivity.this).makeToast();
+                    new ResponseErrorHandler<>(response, RequestsActivity.this).makeToast();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                new FailureError(t, RequestsActivity.this).makeToast();
+                new FailureErrorHandler(t, RequestsActivity.this).makeToast();
             }
         });
     }

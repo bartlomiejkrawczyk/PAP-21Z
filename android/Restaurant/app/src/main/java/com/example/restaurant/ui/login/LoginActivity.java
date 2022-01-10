@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.restaurant.App;
 import com.example.restaurant.R;
 import com.example.restaurant.entities.Employee;
-import com.example.restaurant.handlers.FailureError;
-import com.example.restaurant.handlers.ResponseError;
+import com.example.restaurant.handlers.FailureErrorHandler;
+import com.example.restaurant.handlers.ResponseErrorHandler;
 import com.example.restaurant.ui.receipt.ReceiptsActivity;
 
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     employees.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    new ResponseError<>(response, LoginActivity.this)
+                    new ResponseErrorHandler<>(response, LoginActivity.this)
                             .errorDialog(
                                     getString(R.string.error_downloading_waiters),
                                     (dialog, id) -> getWaiters(),
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<Employee>> call, @NonNull Throwable t) {
-                new FailureError(t, LoginActivity.this)
+                new FailureErrorHandler(t, LoginActivity.this)
                         .errorDialog(
                                 getString(R.string.error_downloading_waiters),
                                 (dialog, id) -> getWaiters(),

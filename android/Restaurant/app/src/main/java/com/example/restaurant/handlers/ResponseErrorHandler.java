@@ -9,10 +9,10 @@ import retrofit2.Response;
 /**
  * Class used to format response error message and show it to user
  */
-public class ResponseError<T> extends ErrorHandler {
+public class ResponseErrorHandler<T> extends ErrorHandler {
     private final Response<T> response;
 
-    public ResponseError(Response<T> response, Activity activity) {
+    public ResponseErrorHandler(Response<T> response, Activity activity) {
         super(activity);
         this.response = response;
     }

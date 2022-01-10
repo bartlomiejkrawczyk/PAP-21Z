@@ -24,8 +24,8 @@ import com.example.restaurant.entities.Dish;
 import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
-import com.example.restaurant.handlers.FailureError;
-import com.example.restaurant.handlers.ResponseError;
+import com.example.restaurant.handlers.FailureErrorHandler;
+import com.example.restaurant.handlers.ResponseErrorHandler;
 import com.example.restaurant.ui.settings.SettingsActivity;
 
 import java.io.IOException;
@@ -147,7 +147,7 @@ public class ReceiptsActivity extends AppCompatActivity {
 
                     runOnUiThread(() -> adapter.notifyDataSetChanged());
                 } else {
-                    new ResponseError<>(response, ReceiptsActivity.this)
+                    new ResponseErrorHandler<>(response, ReceiptsActivity.this)
                             .errorDialog(
                                     getString(R.string.error_downloading_receipts),
                                     (dialog, id) -> new Thread(() -> getReceipts()).start(),
@@ -158,7 +158,7 @@ public class ReceiptsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
-                new FailureError(t, ReceiptsActivity.this)
+                new FailureErrorHandler(t, ReceiptsActivity.this)
                         .errorDialog(
                                 getString(R.string.error_downloading_receipts),
                                 (dialog, id) -> new Thread(() -> getReceipts()).start(),
@@ -185,7 +185,7 @@ public class ReceiptsActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    new ResponseError<>(response, ReceiptsActivity.this)
+                    new ResponseErrorHandler<>(response, ReceiptsActivity.this)
                             .errorDialog(
                                     getString(R.string.error_downloading_dishes),
                                     (dialog, id) -> new Thread(this::getReceipts).start(),
@@ -193,7 +193,7 @@ public class ReceiptsActivity extends AppCompatActivity {
                             );
                 }
             } catch (IOException e) {
-                new FailureError(e, ReceiptsActivity.this)
+                new FailureErrorHandler(e, ReceiptsActivity.this)
                         .errorDialog(
                                 getString(R.string.error_downloading_dishes),
                                 (dialog, id) -> new Thread(this::getReceipts).start(),
