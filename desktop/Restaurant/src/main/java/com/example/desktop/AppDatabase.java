@@ -208,12 +208,27 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
-    public void downloadOrders(){
+    public void downloadOrders() {
         downloadOrdersPlaced();
         downloadOrdersInProgress();
     }
 
-    public BufferedImage getImage(String imagePath){
+    public void loginEmployeesWithOrders() {
+        List<Employee> employees = ordersInProgress.stream()
+                .map(Order::getEmployee)
+                .distinct()
+                .collect(Collectors.toList());
+
+        loggedInEmployees.addAll(employees);
+    }
+
+    public boolean employeeCanLogOut(Employee employee) {
+        return ordersInProgress.stream()
+                .map(Order::getEmployee)
+                .noneMatch(employee1 -> employee == employee1);
+    }
+
+    public BufferedImage getImage(String imagePath) {
         BufferedImage bufferedImage;
         try {
             Call<ResponseBody> call = App.interfaceApi.getImage(imagePath);

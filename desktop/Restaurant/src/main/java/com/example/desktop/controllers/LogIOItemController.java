@@ -4,6 +4,7 @@ import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
 import com.example.desktop.ui.ItemView;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class LogIOItemController {
@@ -44,12 +45,20 @@ public class LogIOItemController {
     }
 
     private void logOut() {
-        loggedIn = false;
-        db.logOut(employee);
-        updateView();
+        if (db.employeeCanLogOut(employee)) {
+            loggedIn = false;
+            db.logOut(employee);
+            updateView();
 
-        view.getButton1().removeActionListener(actionListener);
-        updateActionListener();
+            view.getButton1().removeActionListener(actionListener);
+            updateActionListener();
+        } else {
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    "Employee hasn't finished his orders!",
+                    "Cannot Log Out",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void logIn() {

@@ -33,6 +33,7 @@ public class GuiController {
 
     private void updateView() {
         db.downloadOrders();
+        db.loginEmployeesWithOrders();
 
         Timer t = new Timer(20_000, e -> {
             db.downloadOrders();
