@@ -38,10 +38,10 @@ public class EmployeeTest {
     @Test
     public void testToString(){
         Employee emp = new Employee((long) 22, "Karol", "Sulkowski", (long) 1);
-        assertEquals(emp.toString(), "Karol");
+        assertEquals(emp.toString(), "Karol Sulkowski");
 
         emp.setFirstName(null);
-        assertEquals(emp.toString(), "Unnamed employee");
+        assertEquals(emp.toString(), "Sulkowski");
 
     }
 }
