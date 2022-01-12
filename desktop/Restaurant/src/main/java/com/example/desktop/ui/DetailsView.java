@@ -14,9 +14,11 @@ public class DetailsView {
     public DetailsView() {
         frame = new JFrame("Order details");
         textArea = new JTextArea();
+        textArea.setMargin(new Insets(10, 10, 10, 10));
         Font font = new Font("Serif", Font.ITALIC, 15);
         label = new JLabel();
         panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         Border blackLine = BorderFactory.createLineBorder(Color.black);
 
         textArea.setMinimumSize(new Dimension(100, 300));

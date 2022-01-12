@@ -43,7 +43,7 @@ public class DetailsController {
     private void addDetails() {
         Dish dish = db.getDishById(order.getDish().getId());
 
-        String details = "\n\nName:\t" + dish.getName() + "\n\n";
+        String details = "\nName:\t" + dish.getName() + "\n\n";
 
         if (order.getRequests().size() > 0) {
             StringBuilder requests = new StringBuilder();
@@ -63,7 +63,7 @@ public class DetailsController {
                         .append(rec.getRecipe());
                 step++;
             }
-            details += "Recipe:" + recipe + "\n";
+            details += "Recipe:" + recipe + "\n\n";
         }
 
         if (dish.getIngredients().size() > 0) {
@@ -76,7 +76,7 @@ public class DetailsController {
                             .append(String.format("%1$15s", ingredient.getQuantity() + " " + product.getUnit()));
                 }
             }
-            details += "Ingredients:    " + ingredients + "\n";
+            details += "Ingredients:    " + ingredients;
         }
 
         String imagePath = dish.getImagePath();
@@ -92,7 +92,10 @@ public class DetailsController {
         details += "\n";
 
         view.getTextArea().append(details);
-        view.getTextArea().setFont(new Font("Consolas", Font.PLAIN, 14));
+        if (System.getProperty("os.name").equals("Windows 10"))
+            view.getTextArea().setFont(new Font("Consolas", Font.PLAIN, 14));
+        else
+            view.getTextArea().setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
         view.getFrame().pack();
     }
 }
