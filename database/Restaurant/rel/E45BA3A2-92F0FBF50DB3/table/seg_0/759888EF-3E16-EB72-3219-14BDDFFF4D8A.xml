@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="759888EF-3E16-EB72-3219-14BDDFFF4D8A" name="Products">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>E4F43030-78F8-29F2-9BE1-C1991BBE002F</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="2E0464C0-779F-33A7-F07A-50946046CF9E">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isSurrogateColumn>true</isSurrogateColumn>
+</Column>
+<Column name="name" id="84B227C4-EEC8-A533-5AAA-80FFF0C0B8DD">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>984BD2C0-0E48-BD56-4C1C-77C0C4FC5AE0</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>63 BYTE</dataTypeSize>
+<ownDataTypeParameters>63 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="quantity" id="E79B1C26-1129-D30F-A2C6-CA854A1BA97A">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>941C4064-411D-A605-C646-14ECFE2046C1</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>16</dataTypePrecision>
+<ownDataTypeParameters>,16,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="min_quantity" id="3E4D83DE-DE2F-601D-2650-A2F25B893216">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>79EC3E03-489F-874F-95F4-6F7F671E7167</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>16</dataTypePrecision>
+<ownDataTypeParameters>,16,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="unit" id="C8DD3AC1-ECA2-5DB5-84CF-4A1C92A799AF">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>57A1F8F8-E319-A26B-4B42-DAAC4D689775</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="product_category_id" id="F8F08FB1-48F9-8968-9988-2595EED56A21">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8C19C5DD-6710-059A-A14C-E0C55E7F0B5D" referredColumn="48B7FC9A-A9B4-C50B-9FBA-B35950383F76"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F00997C9-8BD4-EA70-F9B8-3CD1F838EA60" name="Products_PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<indexColumnUsage>
+<colUsage columnID="2E0464C0-779F-33A7-F07A-50946046CF9E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CF15308A-8D8D-561B-4B0F-0647044C17DB" name="Products_Product_Categories_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-12 11:53:16 UTC</createdTime>
+<generatorID>B1D46B6B-132E-741A-8D80-E74EA983F06F</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F8F08FB1-48F9-8968-9988-2595EED56A21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

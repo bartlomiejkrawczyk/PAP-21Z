@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1C024AD4-072D-249A-C82F-AEE0C28C86A7" name="Ingredients">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:32:25 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="AC3F819D-9E9F-505A-CBAA-09CABF0E2449">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:05:32 UTC</createdTime>
+<generatorID>3F8BC026-DB40-8AFB-DFB5-BF23A648B681</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="quantity" id="E4A22AF4-379B-922B-94A5-4792AA7603C3">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:32:34 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>16</dataTypePrecision>
+<ownDataTypeParameters>,16,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="9D3E75BF-89B3-EC7D-890E-A0B24B030023" name="Ingredients PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:05:32 UTC</createdTime>
+<generatorID>AF5A9B80-093A-DAF9-BFD7-50F05C87E368</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E45BA3A2-C4DA-47FC-A2AB-92F0FBF50DB3" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>AC3F819D-9E9F-505A-CBAA-09CABF0E2449</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

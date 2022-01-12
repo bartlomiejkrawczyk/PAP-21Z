@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Restaurant</string>
+
+    <!-- Shared Preferences -->
+    <string name="shared_preference_file_key">com.example.Restaurant.PREFERENCE_FILE_KEY</string>
+
+    <!-- Internet-->
+    <string name="base_url" translatable="false">https://taskeeapp.com:8443/</string>
+
+    <!-- Login Activity-->
+    <string name="button_login">Login</string>
+    <string name="text_view_employee_login">Employee</string>
+    <string name="toast_login_no_one_chosen">You haven\'t chosen anyone!</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Setting Activity -->
+    <string name="preference_category_employee">Employee</string>
+    <string name="preference_employee_credentials">Employee Credentials</string>
+    <string name="preference_sign_out_title">Sign Out</string>
+    <string name="preference_sign_out_summary">Sign out and switch to Login Screen</string>
+    <string name="preference_employee_title">Employee</string>
+
+    <!-- Menu -->
+    <string name="menu_settings">Settings</string>
+
+    <!-- Receipts Item -->
+    <string name="text_view_table_receipts_item">Table</string>
+    <string name="text_view_total_receipts_item">Total</string>
+
+    <string name="button_add_receipt_recycler_item_add_receipt">Add Receipt</string>
+
+
+    <!-- Receipt Activity -->
+    <string name="spinner_item_takeaway">Takeaway</string>
+    <string name="button_add_order_receipt">Add Order</string>
+
+
+    <string name="divider">Divider</string>
+
+    <string name="content_description_status">Status</string>
+    <string name="text_view_table_receipt">Table</string>
+    <string name="text_view_orders_receipt">Orders</string>
+    <string name="content_description_delete_order_button">Delete Order Button</string>
+    <string name="content_description_edit_order_button">Edit Order Button</string>
+    <string name="receipt_activity_adding_receipt_failed">Adding Receipt Failed! Try again!</string>
+    <string name="receipt_activity_internet_error">Check your internet connection!</string>
+    <string name="menu_delete_receipt">Delete Receipt</string>
+    <string name="menu_close_receipt">Close Receipt</string>
+    <string name="title_activity_requests">RequestsActivity</string>
+    <string name="edit_text_request_hint">Request</string>
+    <string name="content_description_dish_image">Dish Image</string>
+    <string name="text_view_total_receipt">Total</string>
+
+    <!-- Error Handling -->
+    <string name="toast_error_cannot_delete_receipt">Cannot delete receipt with ongoing orders</string>
+    <string name="toast_error_cannot_close_receipt">Cannot close receipt with ongoing orders</string>
+    <string name="toast_error_cannot_close_empty_receipt">Cannot close empty receipt</string>
+    <string name="toast_failure_error_internet_connection">Internet Connection Error! </string>
+    <string name="toast_error_request_invalid_data">Cannot add request: </string>
+    <string name="error_try_again">Try Again</string>
+    <string name="error_close_application">Close Application</string>
+    <string name="error_downloading_waiters">Error Downloading Waiters</string>
+    <string name="error_downloading_tables">Error downloading tables</string>
+    <string name="error_finish_activity">Finish Activity</string>
+    <string name="error_downloading_receipts">Error Downloading Receipts</string>
+    <string name="error_unknown_error">Unknown Error</string>
+    <string name="error_response_body_is_empty">Error: Response Body is Empty</string>
+    <string name="error_error">Error: </string>
+    <string name="error_downloading_dishes">Error Downloading Dishes</string>
+
+
+</resources>

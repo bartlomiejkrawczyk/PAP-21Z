@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B2565D00-61AC-BE12-4AD3-90AD7D17424C" name="Ingredients">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>1C024AD4-072D-249A-C82F-AEE0C28C86A7</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="3F8BC026-DB40-8AFB-DFB5-BF23A648B681">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:04:23 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="quantity" id="AB548F27-E54E-7AED-7B3F-7F14EFF726D5">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>E4A22AF4-379B-922B-94A5-4792AA7603C3</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>16</dataTypePrecision>
+<ownDataTypeParameters>,16,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="dish_id" id="1FB2E268-21B2-B677-01E6-609383000014">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E7CA1C02-A6C2-8DD1-AA15-29A8599DDCC1" referredColumn="2EBA8BFB-047F-EB5B-298A-87A164CEACB2"/>
+</associations>
+</Column>
+<Column name="product_id" id="7A411DDC-AB38-3BD2-5404-C93F03A0C1E1">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="72A2AF06-8DF0-F1B4-129F-66D00EC1EB78" referredColumn="2E0464C0-779F-33A7-F07A-50946046CF9E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AF5A9B80-093A-DAF9-BFD7-50F05C87E368" name="Ingredients_PK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 22:04:23 UTC</createdTime>
+<ownerDesignName>Restaurant</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3F8BC026-DB40-8AFB-DFB5-BF23A648B681"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C71B0340-E458-5A80-B65E-C2124C3155AE" name="Ingredients_Dishes_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>FE755DB6-DE2E-148A-7C7C-A66663404078</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1FB2E268-21B2-B677-01E6-609383000014"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="284BC57D-704E-58A1-98F5-E3C9DCD8108A" name="Ingredients_Products_FK">
+<createdBy>bartek</createdBy>
+<createdTime>2021-11-06 21:54:07 UTC</createdTime>
+<generatorID>8BF32B61-E24A-A46C-F8E2-ED713898C1EA</generatorID>
+<ownerDesignName>Restaurant</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7A411DDC-AB38-3BD2-5404-C93F03A0C1E1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
