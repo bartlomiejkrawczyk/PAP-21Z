@@ -1,16 +1,22 @@
 INSERT INTO employee_kinds VALUES (1, 'waiter');
 INSERT INTO employee_kinds VALUES (2, 'cook');
 
-INSERT INTO employees VALUES (1, 'Adam', 'Sulkowski', 1);
-INSERT INTO employees VALUES (2, 'Karol', 'Sudol', 1);
-INSERT INTO employees VALUES (3, 'Kamil', 'Sudol', 1);
-INSERT INTO employees VALUES (4, 'Adam', 'Sudol', 1);
-INSERT INTO employees VALUES (5, 'Kamil', 'Rogozinski', 1);
-INSERT INTO employees VALUES (6, 'Kamil', 'Rogozinski', 2);
-INSERT INTO employees VALUES (7, 'Adam', 'Sulkowski', 2);
-INSERT INTO employees VALUES (8, 'Kamil', 'Krawczyk', 2);
-INSERT INTO employees VALUES (9, 'Adam', 'Krawczyk', 2);
-INSERT INTO employees VALUES (10, 'Bartlomiej', 'Krawczyk', 2);
+INSERT INTO employees VALUES (1, 'Kamil', 'Rogozinski', 1);
+INSERT INTO employees VALUES (2, 'Karol', 'Sulkowski', 1);
+INSERT INTO employees VALUES (3, 'Kamil', 'Rogozinski', 1);
+INSERT INTO employees VALUES (4, 'Adam', 'Sulkowski', 1);
+INSERT INTO employees VALUES (5, 'Adam', 'Rogozinski', 1);
+INSERT INTO employees VALUES (6, 'Adam', 'Sulkowski', 1);
+INSERT INTO employees VALUES (7, 'Kamil', 'Rogozinski', 1);
+INSERT INTO employees VALUES (8, 'Bartlomiej', 'Sulkowski', 2);
+INSERT INTO employees VALUES (9, 'Karol', 'Sulkowski', 2);
+INSERT INTO employees VALUES (10, 'Kamil', 'Rogozinski', 2);
+INSERT INTO employees VALUES (11, 'Adam', 'Sulkowski', 2);
+INSERT INTO employees VALUES (12, 'Kamil', 'Sulkowski', 2);
+INSERT INTO employees VALUES (13, 'Karol', 'Rogozinski', 2);
+INSERT INTO employees VALUES (14, 'Adam', 'Sudol', 2);
+INSERT INTO employees VALUES (15, 'Kamil', 'Krawczyk', 2);
+INSERT INTO employees VALUES (16, 'Bartlomiej', 'Rogozinski', 2);
 
 INSERT INTO tables VALUES (1, 'Near the Window');
 INSERT INTO tables VALUES (2, 'Near the Doors');
@@ -38,348 +44,391 @@ INSERT INTO products VALUES (12, 'Apple', 999999, 100, 'fruit', 4);
 
 INSERT INTO dish_categories VALUES (1, 'Soups', NULL);
 
-INSERT INTO dishes VALUES (1, 'Tomato', 'tomato.jpg', 8370, '1');
+INSERT INTO dishes VALUES (1, 'Tomato', 'tomato.jpg', 5699, '1');
 
-INSERT INTO recipes VALUES (1, 'Aliquam magnam dolor voluptatem aliquam neque aliquam.', 1);
-INSERT INTO recipes VALUES (2, 'Consectetur quaerat dolor dolore amet.', 1);
-INSERT INTO recipes VALUES (3, 'Ut labore magnam neque.', 1);
-INSERT INTO recipes VALUES (4, 'Neque modi consectetur quiquia sed quisquam labore sit.', 1);
-INSERT INTO recipes VALUES (5, 'Amet ut dolorem eius.', 1);
-INSERT INTO recipes VALUES (6, 'Aliquam est dolorem magnam voluptatem dolorem aliquam etincidunt.', 1);
+INSERT INTO recipes VALUES (1, 'Ipsum neque etincidunt etincidunt.', 1);
+INSERT INTO recipes VALUES (2, 'Voluptatem est neque neque quisquam est quaerat.', 1);
+INSERT INTO recipes VALUES (3, 'Consectetur est dolor velit ipsum dolor quisquam consectetur.', 1);
 
-INSERT INTO ingredients VALUES (1, 831, 1, 6);
+INSERT INTO ingredients VALUES (1, 70, 1, 9);
+INSERT INTO ingredients VALUES (2, 19, 1, 12);
+INSERT INTO ingredients VALUES (3, 45, 1, 1);
+INSERT INTO ingredients VALUES (4, 65, 1, 5);
+INSERT INTO ingredients VALUES (5, 47, 1, 6);
+INSERT INTO ingredients VALUES (6, 10, 1, 10);
+INSERT INTO ingredients VALUES (7, 46, 1, 4);
+INSERT INTO ingredients VALUES (8, 94, 1, 11);
+INSERT INTO ingredients VALUES (9, 69, 1, 8);
 
-INSERT INTO dishes VALUES (2, 'Chicken', 'chicken.jpg', 6200, '1');
+INSERT INTO dishes VALUES (2, 'Chicken', 'chicken.jpg', 8586, '1');
 
-INSERT INTO recipes VALUES (1, 'Numquam neque non quaerat dolor numquam etincidunt labore.', 2);
-INSERT INTO recipes VALUES (2, 'Amet tempora numquam neque quisquam magnam.', 2);
-INSERT INTO recipes VALUES (3, 'Non non quiquia sit numquam porro.', 2);
-INSERT INTO recipes VALUES (4, 'Porro adipisci quaerat etincidunt magnam labore.', 2);
-INSERT INTO recipes VALUES (5, 'Ut modi ipsum aliquam quaerat dolore.', 2);
-INSERT INTO recipes VALUES (6, 'Magnam consectetur amet eius neque modi quiquia.', 2);
-INSERT INTO recipes VALUES (7, 'Ipsum velit labore magnam.', 2);
-INSERT INTO recipes VALUES (8, 'Sit magnam neque magnam ut aliquam magnam quaerat.', 2);
+INSERT INTO recipes VALUES (1, 'Quaerat eius magnam etincidunt sit quisquam eius aliquam.', 2);
+INSERT INTO recipes VALUES (2, 'Adipisci porro labore ut porro.', 2);
+INSERT INTO recipes VALUES (3, 'Velit sed est voluptatem neque.', 2);
+INSERT INTO recipes VALUES (4, 'Quisquam ipsum etincidunt sit eius magnam sit dolor.', 2);
+INSERT INTO recipes VALUES (5, 'Ut aliquam labore eius neque porro quaerat.', 2);
+INSERT INTO recipes VALUES (6, 'Porro est quiquia tempora dolorem.', 2);
+INSERT INTO recipes VALUES (7, 'Quaerat voluptatem sed quaerat.', 2);
+INSERT INTO recipes VALUES (8, 'Etincidunt etincidunt aliquam porro dolor non quisquam labore.', 2);
+INSERT INTO recipes VALUES (9, 'Porro sit quaerat neque labore tempora dolorem porro.', 2);
 
-INSERT INTO ingredients VALUES (2, 713, 2, 9);
-INSERT INTO ingredients VALUES (3, 797, 2, 11);
-INSERT INTO ingredients VALUES (4, 701, 2, 5);
-INSERT INTO ingredients VALUES (5, 968, 2, 6);
-INSERT INTO ingredients VALUES (6, 156, 2, 11);
-INSERT INTO ingredients VALUES (7, 709, 2, 1);
-INSERT INTO ingredients VALUES (8, 76, 2, 4);
-INSERT INTO ingredients VALUES (9, 12, 2, 1);
-INSERT INTO ingredients VALUES (10, 751, 2, 10);
+INSERT INTO ingredients VALUES (10, 82, 2, 1);
+INSERT INTO ingredients VALUES (11, 17, 2, 11);
+INSERT INTO ingredients VALUES (12, 15, 2, 12);
+INSERT INTO ingredients VALUES (13, 85, 2, 4);
+INSERT INTO ingredients VALUES (14, 56, 2, 3);
+INSERT INTO ingredients VALUES (15, 89, 2, 10);
+INSERT INTO ingredients VALUES (16, 16, 2, 6);
+INSERT INTO ingredients VALUES (17, 53, 2, 2);
+INSERT INTO ingredients VALUES (18, 43, 2, 5);
 
-INSERT INTO dishes VALUES (3, 'Pumpkin', 'pumpkin.jpg', 1463, '1');
+INSERT INTO dishes VALUES (3, 'Pumpkin', 'pumpkin.jpg', 3099, '1');
 
-INSERT INTO recipes VALUES (1, 'Quiquia voluptatem neque dolorem tempora sit.', 3);
-INSERT INTO recipes VALUES (2, 'Etincidunt neque labore consectetur porro amet sed labore.', 3);
-INSERT INTO recipes VALUES (3, 'Adipisci porro modi sed ipsum eius sed.', 3);
-INSERT INTO recipes VALUES (4, 'Dolore voluptatem sit non dolor ipsum numquam.', 3);
-INSERT INTO recipes VALUES (5, 'Dolore est porro numquam quisquam sed.', 3);
-INSERT INTO recipes VALUES (6, 'Eius quiquia dolorem eius dolorem ut quisquam modi.', 3);
-INSERT INTO recipes VALUES (7, 'Dolore etincidunt porro dolorem voluptatem modi voluptatem.', 3);
-INSERT INTO recipes VALUES (8, 'Eius ut aliquam dolore eius.', 3);
+INSERT INTO recipes VALUES (1, 'Dolor sit quiquia velit porro voluptatem velit modi.', 3);
+INSERT INTO recipes VALUES (2, 'Velit est ut ipsum sit quiquia dolor labore.', 3);
+INSERT INTO recipes VALUES (3, 'Aliquam est aliquam tempora aliquam sit ut consectetur.', 3);
+INSERT INTO recipes VALUES (4, 'Quiquia sed ut velit sit sit sit velit.', 3);
+INSERT INTO recipes VALUES (5, 'Sed amet est porro velit amet adipisci dolor.', 3);
 
-INSERT INTO ingredients VALUES (11, 761, 3, 4);
-INSERT INTO ingredients VALUES (12, 121, 3, 4);
-INSERT INTO ingredients VALUES (13, 663, 3, 6);
-INSERT INTO ingredients VALUES (14, 697, 3, 10);
-INSERT INTO ingredients VALUES (15, 287, 3, 5);
-INSERT INTO ingredients VALUES (16, 937, 3, 2);
-INSERT INTO ingredients VALUES (17, 493, 3, 8);
-INSERT INTO ingredients VALUES (18, 549, 3, 10);
-INSERT INTO ingredients VALUES (19, 938, 3, 7);
+INSERT INTO ingredients VALUES (19, 22, 3, 3);
+INSERT INTO ingredients VALUES (20, 93, 3, 5);
 
-INSERT INTO dishes VALUES (4, 'Cream', 'cream.jpg', 1303, '1');
+INSERT INTO dishes VALUES (4, 'Cream', 'cream.jpg', 1384, '1');
 
-INSERT INTO recipes VALUES (1, 'Aliquam eius voluptatem etincidunt porro sit.', 4);
-INSERT INTO recipes VALUES (2, 'Sed consectetur velit sed tempora dolore etincidunt porro.', 4);
-INSERT INTO recipes VALUES (3, 'Non quiquia eius modi.', 4);
-INSERT INTO recipes VALUES (4, 'Quaerat numquam voluptatem sed.', 4);
-INSERT INTO recipes VALUES (5, 'Modi non adipisci eius adipisci sed amet sit.', 4);
-INSERT INTO recipes VALUES (6, 'Eius est amet aliquam sed dolore.', 4);
+INSERT INTO recipes VALUES (1, 'Aliquam numquam dolore labore.', 4);
+INSERT INTO recipes VALUES (2, 'Dolor etincidunt magnam tempora neque.', 4);
+INSERT INTO recipes VALUES (3, 'Dolore tempora eius consectetur sit velit porro ipsum.', 4);
+INSERT INTO recipes VALUES (4, 'Consectetur modi voluptatem amet est.', 4);
 
-INSERT INTO ingredients VALUES (20, 736, 4, 1);
-INSERT INTO ingredients VALUES (21, 640, 4, 2);
-INSERT INTO ingredients VALUES (22, 830, 4, 12);
-INSERT INTO ingredients VALUES (23, 405, 4, 8);
-INSERT INTO ingredients VALUES (24, 799, 4, 7);
+INSERT INTO ingredients VALUES (21, 33, 4, 1);
+INSERT INTO ingredients VALUES (22, 97, 4, 3);
+INSERT INTO ingredients VALUES (23, 60, 4, 9);
+INSERT INTO ingredients VALUES (24, 39, 4, 6);
+INSERT INTO ingredients VALUES (25, 9, 4, 11);
+INSERT INTO ingredients VALUES (26, 34, 4, 4);
+INSERT INTO ingredients VALUES (27, 65, 4, 5);
 
-INSERT INTO dishes VALUES (5, 'Carrot', 'carrot.jpg', 9284, '1');
+INSERT INTO dishes VALUES (5, 'Carrot', 'carrot.jpg', 6568, '1');
 
-INSERT INTO recipes VALUES (1, 'Non quisquam porro eius est etincidunt modi.', 5);
-INSERT INTO recipes VALUES (2, 'Quaerat etincidunt ipsum dolor amet aliquam.', 5);
-INSERT INTO recipes VALUES (3, 'Consectetur sed aliquam amet neque ut adipisci adipisci.', 5);
-INSERT INTO recipes VALUES (4, 'Velit dolor porro numquam est quaerat sed aliquam.', 5);
-INSERT INTO recipes VALUES (5, 'Est adipisci quiquia labore numquam modi.', 5);
-INSERT INTO recipes VALUES (6, 'Aliquam labore amet eius velit.', 5);
-INSERT INTO recipes VALUES (7, 'Neque ut voluptatem velit labore.', 5);
-INSERT INTO recipes VALUES (8, 'Etincidunt quisquam numquam velit velit.', 5);
-INSERT INTO recipes VALUES (9, 'Etincidunt neque consectetur ipsum eius.', 5);
+INSERT INTO recipes VALUES (1, 'Quaerat dolore dolor tempora consectetur.', 5);
+INSERT INTO recipes VALUES (2, 'Neque adipisci etincidunt voluptatem.', 5);
+INSERT INTO recipes VALUES (3, 'Porro numquam modi dolorem non magnam numquam magnam.', 5);
+INSERT INTO recipes VALUES (4, 'Modi neque sed quisquam voluptatem quaerat sit ipsum.', 5);
+INSERT INTO recipes VALUES (5, 'Sit quaerat neque dolore.', 5);
+INSERT INTO recipes VALUES (6, 'Est neque quisquam quisquam.', 5);
+INSERT INTO recipes VALUES (7, 'Magnam eius dolore est voluptatem consectetur consectetur ut.', 5);
+INSERT INTO recipes VALUES (8, 'Modi porro est magnam velit quiquia dolorem tempora.', 5);
 
-INSERT INTO ingredients VALUES (25, 833, 5, 1);
-INSERT INTO ingredients VALUES (26, 334, 5, 3);
-INSERT INTO ingredients VALUES (27, 983, 5, 11);
-INSERT INTO ingredients VALUES (28, 98, 5, 4);
-INSERT INTO ingredients VALUES (29, 530, 5, 12);
-INSERT INTO ingredients VALUES (30, 839, 5, 7);
-INSERT INTO ingredients VALUES (31, 332, 5, 9);
+INSERT INTO ingredients VALUES (28, 52, 5, 9);
+INSERT INTO ingredients VALUES (29, 98, 5, 2);
 
 INSERT INTO dish_categories VALUES (2, 'Main Course', NULL);
 
-INSERT INTO dishes VALUES (6, 'Beef', 'beef.jpg', 4418, '2');
+INSERT INTO dishes VALUES (6, 'Beef', 'beef.jpg', 9647, '2');
 
-INSERT INTO recipes VALUES (1, 'Labore tempora tempora labore porro.', 6);
-INSERT INTO recipes VALUES (2, 'Ut modi eius magnam non aliquam ipsum.', 6);
-INSERT INTO recipes VALUES (3, 'Consectetur neque dolorem adipisci quaerat ipsum magnam sed.', 6);
-INSERT INTO recipes VALUES (4, 'Porro amet velit aliquam eius ipsum.', 6);
-INSERT INTO recipes VALUES (5, 'Ipsum voluptatem quiquia dolor.', 6);
-INSERT INTO recipes VALUES (6, 'Voluptatem dolore neque sed etincidunt dolore dolore.', 6);
-INSERT INTO recipes VALUES (7, 'Non ut ut est ipsum.', 6);
-INSERT INTO recipes VALUES (8, 'Quiquia eius ut ut magnam etincidunt.', 6);
+INSERT INTO recipes VALUES (1, 'Non voluptatem sit dolore quaerat modi.', 6);
+INSERT INTO recipes VALUES (2, 'Dolore voluptatem dolore amet.', 6);
+INSERT INTO recipes VALUES (3, 'Voluptatem aliquam sed sit neque quiquia amet voluptatem.', 6);
+INSERT INTO recipes VALUES (4, 'Sed aliquam adipisci consectetur eius.', 6);
 
-INSERT INTO ingredients VALUES (32, 338, 6, 2);
-INSERT INTO ingredients VALUES (33, 575, 6, 9);
+INSERT INTO ingredients VALUES (30, 79, 6, 12);
+INSERT INTO ingredients VALUES (31, 97, 6, 9);
+INSERT INTO ingredients VALUES (32, 63, 6, 5);
+INSERT INTO ingredients VALUES (33, 96, 6, 3);
+INSERT INTO ingredients VALUES (34, 9, 6, 1);
+INSERT INTO ingredients VALUES (35, 76, 6, 2);
+INSERT INTO ingredients VALUES (36, 88, 6, 8);
+INSERT INTO ingredients VALUES (37, 77, 6, 11);
+INSERT INTO ingredients VALUES (38, 12, 6, 10);
 
-INSERT INTO dishes VALUES (7, 'Hamburger', 'hamburger.jpg', 9664, '2');
+INSERT INTO dishes VALUES (7, 'Hamburger', 'hamburger.jpg', 9634, '2');
 
-INSERT INTO recipes VALUES (1, 'Eius adipisci ut amet ipsum numquam est sit.', 7);
-INSERT INTO recipes VALUES (2, 'Sed voluptatem quisquam eius est.', 7);
-INSERT INTO recipes VALUES (3, 'Neque eius modi eius voluptatem.', 7);
+INSERT INTO recipes VALUES (1, 'Neque adipisci est ut voluptatem.', 7);
+INSERT INTO recipes VALUES (2, 'Sed quaerat labore eius adipisci voluptatem dolore voluptatem.', 7);
+INSERT INTO recipes VALUES (3, 'Consectetur tempora tempora voluptatem eius est.', 7);
+INSERT INTO recipes VALUES (4, 'Sit numquam numquam dolorem consectetur consectetur.', 7);
+INSERT INTO recipes VALUES (5, 'Porro dolore modi est sit magnam consectetur.', 7);
+INSERT INTO recipes VALUES (6, 'Voluptatem voluptatem ipsum aliquam dolorem porro.', 7);
+INSERT INTO recipes VALUES (7, 'Quaerat velit modi velit sit amet neque.', 7);
 
-INSERT INTO ingredients VALUES (34, 262, 7, 6);
-INSERT INTO ingredients VALUES (35, 490, 7, 5);
-INSERT INTO ingredients VALUES (36, 811, 7, 12);
-INSERT INTO ingredients VALUES (37, 306, 7, 6);
-INSERT INTO ingredients VALUES (38, 846, 7, 12);
-INSERT INTO ingredients VALUES (39, 913, 7, 1);
-INSERT INTO ingredients VALUES (40, 590, 7, 5);
-INSERT INTO ingredients VALUES (41, 125, 7, 7);
-INSERT INTO ingredients VALUES (42, 467, 7, 6);
+INSERT INTO ingredients VALUES (39, 82, 7, 7);
+INSERT INTO ingredients VALUES (40, 19, 7, 6);
+INSERT INTO ingredients VALUES (41, 53, 7, 9);
+INSERT INTO ingredients VALUES (42, 82, 7, 1);
+INSERT INTO ingredients VALUES (43, 89, 7, 12);
+INSERT INTO ingredients VALUES (44, 23, 7, 4);
+INSERT INTO ingredients VALUES (45, 19, 7, 2);
+INSERT INTO ingredients VALUES (46, 28, 7, 8);
 
-INSERT INTO dishes VALUES (8, 'Spaghetti', 'spaghetti.jpg', 1278, '2');
+INSERT INTO dishes VALUES (8, 'Spaghetti', 'spaghetti.jpg', 7596, '2');
 
-INSERT INTO recipes VALUES (1, 'Quaerat porro ipsum sed.', 8);
-INSERT INTO recipes VALUES (2, 'Magnam neque quiquia numquam est labore.', 8);
+INSERT INTO recipes VALUES (1, 'Dolor ipsum adipisci numquam.', 8);
+INSERT INTO recipes VALUES (2, 'Numquam velit dolore dolore ut quiquia velit.', 8);
+INSERT INTO recipes VALUES (3, 'Amet numquam porro quiquia consectetur.', 8);
+INSERT INTO recipes VALUES (4, 'Quaerat est quiquia aliquam numquam dolorem.', 8);
+INSERT INTO recipes VALUES (5, 'Dolor ut sit porro quaerat quiquia amet magnam.', 8);
+INSERT INTO recipes VALUES (6, 'Dolorem amet dolore consectetur magnam sed ut ut.', 8);
+INSERT INTO recipes VALUES (7, 'Neque consectetur dolore amet.', 8);
+INSERT INTO recipes VALUES (8, 'Non sit adipisci consectetur etincidunt sed.', 8);
+INSERT INTO recipes VALUES (9, 'Velit tempora voluptatem porro quaerat eius etincidunt ut.', 8);
 
-INSERT INTO ingredients VALUES (43, 293, 8, 6);
-INSERT INTO ingredients VALUES (44, 769, 8, 11);
+INSERT INTO ingredients VALUES (47, 15, 8, 9);
+INSERT INTO ingredients VALUES (48, 54, 8, 12);
+INSERT INTO ingredients VALUES (49, 11, 8, 3);
+INSERT INTO ingredients VALUES (50, 40, 8, 4);
+INSERT INTO ingredients VALUES (51, 82, 8, 11);
+INSERT INTO ingredients VALUES (52, 7, 8, 5);
+INSERT INTO ingredients VALUES (53, 94, 8, 1);
+INSERT INTO ingredients VALUES (54, 20, 8, 8);
 
-INSERT INTO dishes VALUES (9, 'Pizza', 'pizza.jpg', 2775, '2');
+INSERT INTO dishes VALUES (9, 'Pizza', 'pizza.jpg', 2080, '2');
 
-INSERT INTO recipes VALUES (1, 'Aliquam labore numquam etincidunt dolore non.', 9);
-INSERT INTO recipes VALUES (2, 'Sed dolorem quaerat porro quisquam sed est dolorem.', 9);
-INSERT INTO recipes VALUES (3, 'Dolore dolorem modi adipisci.', 9);
-INSERT INTO recipes VALUES (4, 'Dolore modi velit dolorem non neque.', 9);
-INSERT INTO recipes VALUES (5, 'Sed etincidunt dolore velit quiquia quisquam.', 9);
+INSERT INTO recipes VALUES (1, 'Est magnam dolore neque dolore velit porro labore.', 9);
+INSERT INTO recipes VALUES (2, 'Voluptatem quaerat etincidunt dolorem.', 9);
+INSERT INTO recipes VALUES (3, 'Magnam ut etincidunt dolore voluptatem.', 9);
+INSERT INTO recipes VALUES (4, 'Quisquam consectetur magnam porro.', 9);
+INSERT INTO recipes VALUES (5, 'Etincidunt tempora aliquam tempora quisquam ipsum numquam amet.', 9);
+INSERT INTO recipes VALUES (6, 'Consectetur modi voluptatem adipisci dolor aliquam.', 9);
+INSERT INTO recipes VALUES (7, 'Modi adipisci sit neque eius quisquam velit neque.', 9);
+INSERT INTO recipes VALUES (8, 'Ipsum modi ipsum ut voluptatem etincidunt labore.', 9);
 
-INSERT INTO ingredients VALUES (45, 160, 9, 3);
-INSERT INTO ingredients VALUES (46, 191, 9, 5);
-INSERT INTO ingredients VALUES (47, 21, 9, 7);
-INSERT INTO ingredients VALUES (48, 28, 9, 5);
+INSERT INTO ingredients VALUES (55, 39, 9, 12);
+INSERT INTO ingredients VALUES (56, 13, 9, 3);
+INSERT INTO ingredients VALUES (57, 8, 9, 4);
+INSERT INTO ingredients VALUES (58, 12, 9, 7);
+INSERT INTO ingredients VALUES (59, 29, 9, 6);
 
 INSERT INTO dish_categories VALUES (3, 'Drinks', NULL);
 
-INSERT INTO dishes VALUES (10, 'Coca-Cola', 'coca-cola.jpg', 8995, '3');
+INSERT INTO dishes VALUES (10, 'Coca-Cola', 'coca-cola.jpg', 6300, '3');
 
-INSERT INTO recipes VALUES (1, 'Adipisci magnam consectetur voluptatem velit neque neque.', 10);
-INSERT INTO recipes VALUES (2, 'Non neque eius tempora.', 10);
-INSERT INTO recipes VALUES (3, 'Non tempora dolor amet ipsum sed.', 10);
-INSERT INTO recipes VALUES (4, 'Ut labore tempora quaerat sit numquam.', 10);
-INSERT INTO recipes VALUES (5, 'Labore velit sit voluptatem dolore etincidunt quaerat.', 10);
-INSERT INTO recipes VALUES (6, 'Aliquam ipsum sit sed amet ipsum.', 10);
+INSERT INTO recipes VALUES (1, 'Dolor neque dolorem sit labore.', 10);
+INSERT INTO recipes VALUES (2, 'Sit sed dolor est quaerat neque.', 10);
 
-INSERT INTO ingredients VALUES (49, 729, 10, 4);
+INSERT INTO ingredients VALUES (60, 11, 10, 12);
+INSERT INTO ingredients VALUES (61, 100, 10, 6);
+INSERT INTO ingredients VALUES (62, 35, 10, 10);
+INSERT INTO ingredients VALUES (63, 6, 10, 1);
+INSERT INTO ingredients VALUES (64, 68, 10, 5);
+INSERT INTO ingredients VALUES (65, 93, 10, 7);
+INSERT INTO ingredients VALUES (66, 32, 10, 4);
+INSERT INTO ingredients VALUES (67, 98, 10, 2);
+INSERT INTO ingredients VALUES (68, 18, 10, 9);
+INSERT INTO ingredients VALUES (69, 79, 10, 11);
 
-INSERT INTO dishes VALUES (11, 'Fanta', 'fanta.jpg', 2669, '3');
+INSERT INTO dishes VALUES (11, 'Fanta', 'fanta.jpg', 3416, '3');
 
-INSERT INTO recipes VALUES (1, 'Velit dolorem adipisci sit porro ut numquam.', 11);
-INSERT INTO recipes VALUES (2, 'Etincidunt quisquam velit quiquia aliquam dolore.', 11);
-INSERT INTO recipes VALUES (3, 'Quisquam ut ipsum ipsum est ipsum.', 11);
-INSERT INTO recipes VALUES (4, 'Dolorem quaerat aliquam sed quisquam sit consectetur.', 11);
-INSERT INTO recipes VALUES (5, 'Ipsum non numquam sit adipisci ipsum ipsum quiquia.', 11);
-INSERT INTO recipes VALUES (6, 'Modi non porro voluptatem.', 11);
-INSERT INTO recipes VALUES (7, 'Amet adipisci ipsum sed quisquam numquam modi adipisci.', 11);
+INSERT INTO recipes VALUES (1, 'Quisquam dolorem quaerat quisquam.', 11);
+INSERT INTO recipes VALUES (2, 'Consectetur porro ut ipsum labore modi modi.', 11);
+INSERT INTO recipes VALUES (3, 'Ipsum etincidunt quisquam eius sed.', 11);
 
-INSERT INTO ingredients VALUES (50, 231, 11, 8);
-INSERT INTO ingredients VALUES (51, 528, 11, 3);
-INSERT INTO ingredients VALUES (52, 467, 11, 4);
-INSERT INTO ingredients VALUES (53, 178, 11, 5);
-INSERT INTO ingredients VALUES (54, 373, 11, 8);
-INSERT INTO ingredients VALUES (55, 752, 11, 7);
+INSERT INTO ingredients VALUES (70, 90, 11, 6);
+INSERT INTO ingredients VALUES (71, 76, 11, 9);
+INSERT INTO ingredients VALUES (72, 61, 11, 1);
 
-INSERT INTO dishes VALUES (12, 'Sprite', 'sprite.jpg', 2905, '3');
+INSERT INTO dishes VALUES (12, 'Sprite', 'sprite.jpg', 7576, '3');
 
-INSERT INTO recipes VALUES (1, 'Ipsum tempora porro modi ipsum.', 12);
-INSERT INTO recipes VALUES (2, 'Sit quisquam neque quisquam labore labore.', 12);
-INSERT INTO recipes VALUES (3, 'Labore dolor dolor ut labore sit dolorem quaerat.', 12);
+INSERT INTO recipes VALUES (1, 'Porro neque magnam modi quaerat tempora.', 12);
 
-INSERT INTO ingredients VALUES (56, 951, 12, 4);
-INSERT INTO ingredients VALUES (57, 982, 12, 10);
-INSERT INTO ingredients VALUES (58, 491, 12, 9);
-INSERT INTO ingredients VALUES (59, 118, 12, 3);
+INSERT INTO ingredients VALUES (73, 2, 12, 10);
+INSERT INTO ingredients VALUES (74, 90, 12, 6);
+INSERT INTO ingredients VALUES (75, 46, 12, 7);
 
-INSERT INTO dishes VALUES (13, 'Beer', 'beer.jpg', 3240, '3');
+INSERT INTO dishes VALUES (13, 'Beer', 'beer.jpg', 1317, '3');
 
-INSERT INTO recipes VALUES (1, 'Quiquia amet velit dolorem velit labore.', 13);
-INSERT INTO recipes VALUES (2, 'Ut sit voluptatem velit tempora numquam labore quaerat.', 13);
-INSERT INTO recipes VALUES (3, 'Dolore dolorem ut tempora modi labore.', 13);
-INSERT INTO recipes VALUES (4, 'Voluptatem modi est modi dolor dolorem.', 13);
-INSERT INTO recipes VALUES (5, 'Velit magnam eius etincidunt ipsum quiquia sed.', 13);
+INSERT INTO recipes VALUES (1, 'Amet velit neque consectetur voluptatem numquam quisquam est.', 13);
+INSERT INTO recipes VALUES (2, 'Quisquam amet neque quisquam.', 13);
+INSERT INTO recipes VALUES (3, 'Etincidunt ut quaerat dolor modi velit.', 13);
+INSERT INTO recipes VALUES (4, 'Dolor velit modi etincidunt non neque numquam.', 13);
+INSERT INTO recipes VALUES (5, 'Labore magnam dolor dolor voluptatem voluptatem ipsum dolor.', 13);
+INSERT INTO recipes VALUES (6, 'Non modi est modi.', 13);
+INSERT INTO recipes VALUES (7, 'Aliquam eius quaerat neque eius ut tempora ut.', 13);
+INSERT INTO recipes VALUES (8, 'Dolor dolor eius ut amet etincidunt velit.', 13);
 
-INSERT INTO ingredients VALUES (60, 476, 13, 12);
-INSERT INTO ingredients VALUES (61, 465, 13, 1);
-INSERT INTO ingredients VALUES (62, 137, 13, 8);
-INSERT INTO ingredients VALUES (63, 489, 13, 8);
-INSERT INTO ingredients VALUES (64, 601, 13, 3);
+INSERT INTO ingredients VALUES (76, 44, 13, 4);
+INSERT INTO ingredients VALUES (77, 55, 13, 3);
+INSERT INTO ingredients VALUES (78, 11, 13, 7);
+INSERT INTO ingredients VALUES (79, 63, 13, 9);
+INSERT INTO ingredients VALUES (80, 85, 13, 1);
+INSERT INTO ingredients VALUES (81, 80, 13, 12);
+INSERT INTO ingredients VALUES (82, 18, 13, 10);
+INSERT INTO ingredients VALUES (83, 99, 13, 6);
+INSERT INTO ingredients VALUES (84, 6, 13, 5);
+INSERT INTO ingredients VALUES (85, 16, 13, 2);
 
 INSERT INTO receipts VALUES (1, 0, 1, 1);
 
-INSERT INTO orders VALUES (1, 1392710591777, 3, 1, 3, 6);
-INSERT INTO orders VALUES (2, 1315183363679, 12, 1, 2, 6);
-INSERT INTO orders VALUES (3, 1251833553304, 11, 1, 2, 10);
-INSERT INTO orders VALUES (4, 1234620887549, 11, 1, 2, 8);
-INSERT INTO orders VALUES (5, 1254764535365, 8, 1, 1, NULL);
-INSERT INTO orders VALUES (6, 1160538898591, 2, 1, 2, 6);
-INSERT INTO orders VALUES (7, 1427610300806, 2, 1, 1, NULL);
-INSERT INTO orders VALUES (8, 1476084710464, 11, 1, 3, 10);
+INSERT INTO orders VALUES (1, 1297811848087, 5, 1, 3, 15);
+INSERT INTO orders VALUES (2, 1566989836037, 11, 1, 1, NULL);
+INSERT INTO orders VALUES (3, 1609679704562, 8, 1, 2, 9);
+INSERT INTO orders VALUES (4, 1353918604327, 7, 1, 3, 11);
 
 INSERT INTO receipts VALUES (2, 0, 1, 2);
 
-INSERT INTO orders VALUES (9, 1443653686758, 12, 2, 2, 7);
-INSERT INTO orders VALUES (10, 1378735192997, 8, 2, 3, 8);
-INSERT INTO orders VALUES (11, 1485043972496, 12, 2, 3, 10);
-INSERT INTO orders VALUES (12, 1538856214576, 11, 2, 1, 7);
-INSERT INTO orders VALUES (13, 1617159788162, 9, 2, 3, 9);
-INSERT INTO orders VALUES (14, 1423162167039, 3, 2, 1, 9);
-INSERT INTO orders VALUES (15, 1317994743617, 8, 2, 3, 10);
-INSERT INTO orders VALUES (16, 1457613166472, 11, 2, 2, 7);
-INSERT INTO orders VALUES (17, 1546912762486, 8, 2, 3, 9);
+INSERT INTO orders VALUES (5, 1374417253668, 12, 2, 3, 16);
+INSERT INTO orders VALUES (6, 1197913176508, 10, 2, 1, NULL);
+INSERT INTO orders VALUES (7, 1506213553408, 3, 2, 2, 14);
+INSERT INTO orders VALUES (8, 1253849137650, 6, 2, 2, 14);
+INSERT INTO orders VALUES (9, 1343937707454, 13, 2, 2, 10);
+INSERT INTO orders VALUES (10, 1512515024413, 11, 2, 2, 9);
+INSERT INTO orders VALUES (11, 1403627944119, 4, 2, 3, 12);
+INSERT INTO orders VALUES (12, 1511927187895, 13, 2, 1, NULL);
+INSERT INTO orders VALUES (13, 1419887209652, 12, 2, 1, NULL);
+INSERT INTO orders VALUES (14, 1537491303985, 10, 2, 1, NULL);
 
 INSERT INTO receipts VALUES (3, 0, 1, 3);
 
-INSERT INTO orders VALUES (18, 1362911599919, 5, 3, 2, 8);
-INSERT INTO orders VALUES (19, 1586665718260, 9, 3, 3, 10);
-INSERT INTO orders VALUES (20, 1350770953204, 11, 3, 2, 7);
-INSERT INTO orders VALUES (21, 1604902053940, 8, 3, 3, 9);
-INSERT INTO orders VALUES (22, 1272374776144, 6, 3, 2, 8);
-INSERT INTO orders VALUES (23, 1413029631165, 5, 3, 2, 6);
-INSERT INTO orders VALUES (24, 1481021668236, 7, 3, 3, 10);
-INSERT INTO orders VALUES (25, 1281048588240, 10, 3, 3, 7);
-INSERT INTO orders VALUES (26, 1581972063736, 5, 3, 1, 8);
-INSERT INTO orders VALUES (27, 1584808960138, 5, 3, 3, 7);
+INSERT INTO orders VALUES (15, 1574870381738, 4, 3, 3, 16);
+INSERT INTO orders VALUES (16, 1487573913846, 2, 3, 2, 13);
+INSERT INTO orders VALUES (17, 1281701953438, 7, 3, 1, NULL);
 
 INSERT INTO receipts VALUES (4, 0, 2, 1);
 
-INSERT INTO orders VALUES (28, 1413703894195, 2, 4, 3, 10);
-INSERT INTO orders VALUES (29, 1371648368363, 13, 4, 1, 8);
-INSERT INTO orders VALUES (30, 1160975298417, 1, 4, 2, 8);
-INSERT INTO orders VALUES (31, 1214010606360, 8, 4, 1, NULL);
-INSERT INTO orders VALUES (32, 1525922424741, 2, 4, 1, NULL);
-INSERT INTO orders VALUES (33, 1341362569614, 5, 4, 1, 7);
-INSERT INTO orders VALUES (34, 1447869333366, 13, 4, 1, 9);
-INSERT INTO orders VALUES (35, 1214430358709, 11, 4, 2, 9);
-INSERT INTO orders VALUES (36, 1566573006626, 12, 4, 3, 9);
-INSERT INTO orders VALUES (37, 1375998659250, 5, 4, 3, 6);
+INSERT INTO orders VALUES (18, 1604875099219, 9, 4, 1, NULL);
 
 INSERT INTO receipts VALUES (5, 0, 2, 2);
 
-INSERT INTO orders VALUES (38, 1261849181323, 10, 5, 2, 8);
-INSERT INTO orders VALUES (39, 1537259449500, 8, 5, 1, 8);
+INSERT INTO orders VALUES (19, 1600463795089, 7, 5, 1, 16);
+INSERT INTO orders VALUES (20, 1332457102179, 7, 5, 2, 13);
+INSERT INTO orders VALUES (21, 1482354210749, 5, 5, 1, NULL);
+INSERT INTO orders VALUES (22, 1547179281449, 3, 5, 3, 9);
+INSERT INTO orders VALUES (23, 1368433150858, 5, 5, 2, 12);
+INSERT INTO orders VALUES (24, 1447078289515, 2, 5, 1, 14);
+INSERT INTO orders VALUES (25, 1308765615351, 7, 5, 2, 15);
 
 INSERT INTO receipts VALUES (6, 0, 2, 3);
 
-INSERT INTO orders VALUES (40, 1306092316409, 9, 6, 1, NULL);
-INSERT INTO orders VALUES (41, 1140952910547, 6, 6, 1, NULL);
-INSERT INTO orders VALUES (42, 1210988489659, 5, 6, 2, 9);
-INSERT INTO orders VALUES (43, 1345857960706, 11, 6, 3, 7);
-INSERT INTO orders VALUES (44, 1155063993147, 4, 6, 3, 8);
-INSERT INTO orders VALUES (45, 1351231324214, 13, 6, 2, 9);
-INSERT INTO orders VALUES (46, 1486480489454, 10, 6, 3, 9);
-INSERT INTO orders VALUES (47, 1237833661421, 12, 6, 3, 8);
-INSERT INTO orders VALUES (48, 1388108264674, 7, 6, 1, NULL);
+INSERT INTO orders VALUES (26, 1192678306335, 13, 6, 2, 8);
+INSERT INTO orders VALUES (27, 1351581876643, 6, 6, 1, 13);
+INSERT INTO orders VALUES (28, 1155542517952, 11, 6, 3, 10);
+INSERT INTO orders VALUES (29, 1316006181869, 2, 6, 1, 8);
+INSERT INTO orders VALUES (30, 1627731167854, 3, 6, 1, NULL);
+INSERT INTO orders VALUES (31, 1301361617037, 12, 6, 2, 11);
+INSERT INTO orders VALUES (32, 1271813226885, 10, 6, 1, NULL);
+INSERT INTO orders VALUES (33, 1192612209802, 2, 6, 3, 10);
+INSERT INTO orders VALUES (34, 1224499025614, 9, 6, 3, 12);
 
 INSERT INTO receipts VALUES (7, 0, 3, 1);
 
-INSERT INTO orders VALUES (49, 1292122566001, 7, 7, 3, 9);
-INSERT INTO orders VALUES (50, 1451610964356, 2, 7, 3, 8);
+INSERT INTO orders VALUES (35, 1327612446857, 1, 7, 3, 9);
 
 INSERT INTO receipts VALUES (8, 0, 3, 2);
 
-INSERT INTO orders VALUES (51, 1366102892453, 12, 8, 1, 8);
-INSERT INTO orders VALUES (52, 1322714974595, 13, 8, 2, 9);
-INSERT INTO orders VALUES (53, 1496941410049, 4, 8, 1, NULL);
-INSERT INTO orders VALUES (54, 1469658981907, 2, 8, 1, 10);
-INSERT INTO orders VALUES (55, 1331968913775, 10, 8, 3, 6);
-INSERT INTO orders VALUES (56, 1573572926027, 9, 8, 3, 9);
-INSERT INTO orders VALUES (57, 1300553485412, 5, 8, 2, 10);
-INSERT INTO orders VALUES (58, 1284126157058, 7, 8, 3, 10);
-INSERT INTO orders VALUES (59, 1404103452174, 7, 8, 3, 6);
-INSERT INTO orders VALUES (60, 1482419022783, 5, 8, 3, 8);
+INSERT INTO orders VALUES (36, 1211479512793, 13, 8, 3, 9);
+INSERT INTO orders VALUES (37, 1550596225515, 1, 8, 3, 12);
+INSERT INTO orders VALUES (38, 1634011400235, 5, 8, 1, 16);
+INSERT INTO orders VALUES (39, 1156936443001, 4, 8, 2, 13);
+INSERT INTO orders VALUES (40, 1344602286662, 7, 8, 3, 15);
+INSERT INTO orders VALUES (41, 1517624906835, 3, 8, 3, 15);
+INSERT INTO orders VALUES (42, 1331577520226, 5, 8, 3, 12);
+INSERT INTO orders VALUES (43, 1382041341462, 8, 8, 1, NULL);
+INSERT INTO orders VALUES (44, 1612584932769, 12, 8, 3, 12);
+INSERT INTO orders VALUES (45, 1630603737083, 13, 8, 3, 8);
 
 INSERT INTO receipts VALUES (9, 0, 3, 3);
 
-INSERT INTO orders VALUES (61, 1636388325797, 12, 9, 3, 8);
+INSERT INTO orders VALUES (46, 1156390873346, 5, 9, 3, 9);
 
 INSERT INTO receipts VALUES (10, 0, 4, 1);
 
-INSERT INTO orders VALUES (62, 1335038891343, 11, 10, 3, 8);
-INSERT INTO orders VALUES (63, 1527210391402, 9, 10, 1, NULL);
-INSERT INTO orders VALUES (64, 1342717523404, 9, 10, 1, NULL);
-INSERT INTO orders VALUES (65, 1285010787014, 8, 10, 3, 10);
-INSERT INTO orders VALUES (66, 1459638328148, 2, 10, 3, 8);
-INSERT INTO orders VALUES (67, 1144961865944, 13, 10, 3, 9);
-INSERT INTO orders VALUES (68, 1448062564530, 3, 10, 1, NULL);
-INSERT INTO orders VALUES (69, 1553124481352, 1, 10, 1, NULL);
-INSERT INTO orders VALUES (70, 1457684675178, 11, 10, 2, 7);
-INSERT INTO orders VALUES (71, 1211244234946, 12, 10, 1, NULL);
+INSERT INTO orders VALUES (47, 1317615569007, 2, 10, 1, NULL);
+INSERT INTO orders VALUES (48, 1556202922708, 5, 10, 1, 9);
+INSERT INTO orders VALUES (49, 1164582801669, 7, 10, 2, 14);
+INSERT INTO orders VALUES (50, 1187816819558, 9, 10, 3, 14);
+INSERT INTO orders VALUES (51, 1600379994314, 6, 10, 2, 15);
+INSERT INTO orders VALUES (52, 1154809952571, 9, 10, 3, 12);
+INSERT INTO orders VALUES (53, 1216388305921, 1, 10, 2, 11);
+INSERT INTO orders VALUES (54, 1433227280447, 8, 10, 1, NULL);
 
 INSERT INTO receipts VALUES (11, 0, 4, 2);
 
-INSERT INTO orders VALUES (72, 1583452611373, 5, 11, 1, 9);
-INSERT INTO orders VALUES (73, 1330497375005, 1, 11, 1, NULL);
-INSERT INTO orders VALUES (74, 1212292664979, 5, 11, 2, 10);
-INSERT INTO orders VALUES (75, 1502315601136, 13, 11, 1, 6);
-INSERT INTO orders VALUES (76, 1454340988253, 7, 11, 1, NULL);
-INSERT INTO orders VALUES (77, 1568569899254, 4, 11, 1, 10);
-INSERT INTO orders VALUES (78, 1463117209189, 7, 11, 3, 10);
+INSERT INTO orders VALUES (55, 1413413088694, 11, 11, 3, 13);
+INSERT INTO orders VALUES (56, 1172852702443, 12, 11, 3, 10);
+INSERT INTO orders VALUES (57, 1346660047202, 10, 11, 2, 12);
+INSERT INTO orders VALUES (58, 1519252272863, 1, 11, 1, 15);
+INSERT INTO orders VALUES (59, 1229276435649, 11, 11, 1, 15);
+INSERT INTO orders VALUES (60, 1318017332395, 5, 11, 2, 10);
 
 INSERT INTO receipts VALUES (12, 0, 4, 3);
 
-INSERT INTO orders VALUES (79, 1510709787035, 4, 12, 2, 6);
-INSERT INTO orders VALUES (80, 1315008965868, 2, 12, 2, 10);
-INSERT INTO orders VALUES (81, 1366396085344, 1, 12, 1, 8);
+INSERT INTO orders VALUES (61, 1195004947806, 8, 12, 2, 12);
 
 INSERT INTO receipts VALUES (13, 0, 5, 1);
 
-INSERT INTO orders VALUES (82, 1510378052842, 3, 13, 2, 7);
-INSERT INTO orders VALUES (83, 1405903602477, 6, 13, 2, 6);
-INSERT INTO orders VALUES (84, 1153759964653, 8, 13, 1, NULL);
-INSERT INTO orders VALUES (85, 1368168027904, 9, 13, 2, 6);
-INSERT INTO orders VALUES (86, 1196928881156, 10, 13, 2, 8);
-INSERT INTO orders VALUES (87, 1175534837820, 8, 13, 1, 8);
-INSERT INTO orders VALUES (88, 1413483909179, 7, 13, 2, 9);
-INSERT INTO orders VALUES (89, 1593196341268, 10, 13, 1, 7);
-INSERT INTO orders VALUES (90, 1508668859633, 1, 13, 2, 9);
+INSERT INTO orders VALUES (62, 1175254505065, 2, 13, 3, 16);
+INSERT INTO orders VALUES (63, 1640458388265, 7, 13, 1, NULL);
+INSERT INTO orders VALUES (64, 1594314921920, 3, 13, 3, 12);
+INSERT INTO orders VALUES (65, 1263426968832, 4, 13, 2, 10);
+INSERT INTO orders VALUES (66, 1477398959154, 1, 13, 3, 16);
 
 INSERT INTO receipts VALUES (14, 0, 5, 2);
 
-INSERT INTO orders VALUES (91, 1147290116477, 3, 14, 1, NULL);
-INSERT INTO orders VALUES (92, 1285893353987, 8, 14, 3, 9);
-INSERT INTO orders VALUES (93, 1462572996751, 2, 14, 1, NULL);
-INSERT INTO orders VALUES (94, 1178976520239, 7, 14, 2, 7);
-INSERT INTO orders VALUES (95, 1399578782745, 6, 14, 3, 7);
-INSERT INTO orders VALUES (96, 1582442575763, 8, 14, 2, 8);
+INSERT INTO orders VALUES (67, 1397288657319, 3, 14, 1, 11);
 
 INSERT INTO receipts VALUES (15, 0, 5, 3);
 
-INSERT INTO orders VALUES (97, 1209354557932, 6, 15, 3, 9);
-INSERT INTO orders VALUES (98, 1227111045464, 12, 15, 3, 8);
-INSERT INTO orders VALUES (99, 1245344968074, 2, 15, 1, NULL);
-INSERT INTO orders VALUES (100, 1415764969804, 6, 15, 3, 8);
-INSERT INTO orders VALUES (101, 1395709600393, 6, 15, 1, 8);
-INSERT INTO orders VALUES (102, 1254985046460, 12, 15, 1, 8);
+INSERT INTO orders VALUES (68, 1270582819331, 13, 15, 3, 12);
+INSERT INTO orders VALUES (69, 1245340729340, 12, 15, 1, 14);
+INSERT INTO orders VALUES (70, 1438304473243, 2, 15, 1, 13);
+INSERT INTO orders VALUES (71, 1171301412388, 10, 15, 1, 8);
+
+INSERT INTO receipts VALUES (16, 0, 6, 1);
+
+INSERT INTO orders VALUES (72, 1462121378468, 8, 16, 2, 12);
+INSERT INTO orders VALUES (73, 1456933407658, 6, 16, 3, 16);
+INSERT INTO orders VALUES (74, 1480411589678, 8, 16, 1, 16);
+INSERT INTO orders VALUES (75, 1424293414904, 8, 16, 2, 12);
+INSERT INTO orders VALUES (76, 1299718535166, 8, 16, 2, 12);
+INSERT INTO orders VALUES (77, 1297253316176, 10, 16, 3, 13);
+INSERT INTO orders VALUES (78, 1381920141790, 9, 16, 3, 13);
+INSERT INTO orders VALUES (79, 1497342417760, 1, 16, 1, 11);
+INSERT INTO orders VALUES (80, 1572665652469, 5, 16, 1, 12);
+
+INSERT INTO receipts VALUES (17, 0, 6, 2);
+
+INSERT INTO orders VALUES (81, 1254358918291, 4, 17, 3, 11);
+INSERT INTO orders VALUES (82, 1226204804556, 13, 17, 1, 9);
+
+INSERT INTO receipts VALUES (18, 0, 6, 3);
+
+INSERT INTO orders VALUES (83, 1494360084048, 5, 18, 3, 10);
+INSERT INTO orders VALUES (84, 1496238256226, 9, 18, 1, NULL);
+INSERT INTO orders VALUES (85, 1492368662204, 1, 18, 3, 13);
+INSERT INTO orders VALUES (86, 1528783189147, 1, 18, 3, 11);
+
+INSERT INTO receipts VALUES (19, 0, 7, 1);
+
+INSERT INTO orders VALUES (87, 1598484112331, 5, 19, 2, 15);
+INSERT INTO orders VALUES (88, 1248547715429, 7, 19, 1, 11);
+INSERT INTO orders VALUES (89, 1505018696311, 4, 19, 1, 12);
+INSERT INTO orders VALUES (90, 1215574302147, 3, 19, 3, 9);
+INSERT INTO orders VALUES (91, 1603384639767, 7, 19, 3, 9);
+INSERT INTO orders VALUES (92, 1564409298970, 7, 19, 1, NULL);
+INSERT INTO orders VALUES (93, 1436922106704, 4, 19, 1, NULL);
+INSERT INTO orders VALUES (94, 1416653677097, 10, 19, 1, NULL);
+INSERT INTO orders VALUES (95, 1608517817808, 7, 19, 1, 14);
+
+INSERT INTO receipts VALUES (20, 0, 7, 2);
+
+INSERT INTO orders VALUES (96, 1533663450681, 11, 20, 1, 14);
+INSERT INTO orders VALUES (97, 1219192491996, 10, 20, 2, 15);
+INSERT INTO orders VALUES (98, 1307406935931, 11, 20, 2, 10);
+INSERT INTO orders VALUES (99, 1205093334840, 2, 20, 1, NULL);
+INSERT INTO orders VALUES (100, 1151099150361, 7, 20, 3, 9);
+INSERT INTO orders VALUES (101, 1191231318332, 7, 20, 1, 9);
+INSERT INTO orders VALUES (102, 1347791405953, 11, 20, 2, 8);
+INSERT INTO orders VALUES (103, 1408640160991, 10, 20, 2, 15);
+INSERT INTO orders VALUES (104, 1206107884325, 2, 20, 1, NULL);
+
+INSERT INTO receipts VALUES (21, 0, 7, 3);
+
+INSERT INTO orders VALUES (105, 1295343537349, 4, 21, 2, 13);
+INSERT INTO orders VALUES (106, 1531036836496, 1, 21, 3, 10);
+INSERT INTO orders VALUES (107, 1292011212041, 9, 21, 2, 10);
+INSERT INTO orders VALUES (108, 1525576596453, 4, 21, 2, 16);
+INSERT INTO orders VALUES (109, 1537700893626, 10, 21, 1, 9);
+INSERT INTO orders VALUES (110, 1275904847865, 7, 21, 1, 10);
+INSERT INTO orders VALUES (111, 1244217359414, 13, 21, 2, 10);
 
 
 COMMIT;
