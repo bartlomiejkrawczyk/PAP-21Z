@@ -50,7 +50,7 @@ public class DetailsController {
             for (SpecialRequest req : order.getRequests()) {
                 requests.append("\n\t").append(req.getRequest());
             }
-            details += "Special requests:" + requests + "\n";
+            details += "Special requests:" + requests + "\n\n";
         }
 
         if (dish.getRecipes().size() > 0) {

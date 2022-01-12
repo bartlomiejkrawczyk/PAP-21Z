@@ -5,6 +5,7 @@ import com.example.desktop.entities.Order;
 import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.OrdersInProgressView;
 
+import java.awt.*;
 import java.util.List;
 
 public class OrdersInProgressController {
@@ -34,6 +35,7 @@ public class OrdersInProgressController {
             if (!employeeId.equals(order.getEmployee().getId())) {
                 ItemView employeeView = new ItemView();
                 employeeView.getLabel().setText(order.getEmployee().toString());
+                employeeView.getPanel().setBackground(Color.lightGray);
                 view.getScrollablePanel().add(employeeView.getPanel());
                 employeeId = order.getEmployee().getId();
             }
