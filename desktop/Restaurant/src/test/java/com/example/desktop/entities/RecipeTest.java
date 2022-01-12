@@ -7,17 +7,17 @@ public class RecipeTest {
     @Test
     public void testBiggerConstructor(){
         Recipe rec = new Recipe(2, "it certainly is", 10);
-        assertEquals(rec.getDishId(), 2);
-        assertEquals(rec.getRecipe(), "it certainly is");
-        assertEquals(rec.getStep(), 10);
+        assertEquals(2, rec.getDishId());
+        assertEquals("it certainly is", rec.getRecipe());
+        assertEquals(10, rec.getStep());
     }
 
     @Test
     public void testSmallerConstructor(){
         Recipe rec = new Recipe(8);
-        assertEquals(rec.getStep(), 0);
-        assertEquals(rec.getRecipe(), "");
-        assertEquals(rec.getDishId(), 8);
+        assertEquals(0, rec.getStep());
+        assertEquals("", rec.getRecipe());
+        assertEquals(8, rec.getDishId());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class RecipeTest {
         String recStr = "pierwsza linia";
         recStr = recStr + "\n" + "druga linia" + "\n" + "trzecia linia" + "\n";
 
-        assertEquals(rec.getRecipe(), recStr);
+        assertEquals(recStr, rec.getRecipe());
     }
 
     @Test
@@ -39,8 +39,8 @@ public class RecipeTest {
         rec.setRecipe("definitely not recipe");
         rec.setDishId(27);
         rec.setStep(94);
-        assertEquals(rec.getRecipe(), "definitely not recipe");
-        assertEquals(rec.getStep(), 94);
-        assertEquals(rec.getDishId(), 27);
+        assertEquals("definitely not recipe", rec.getRecipe());
+        assertEquals(94, rec.getStep());
+        assertEquals(27, rec.getDishId());
     }
 }
