@@ -54,8 +54,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        if (firstName != null)
+        if (firstName != null && familyName != null)
+            return firstName + " " + familyName;
+        else if (firstName != null)
             return firstName;
+        else if (familyName != null)
+            return familyName;
         return "Unnamed employee";
     }
 }

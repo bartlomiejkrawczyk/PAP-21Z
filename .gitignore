@@ -35,3 +35,5 @@
 **/*.rvi
 **/.#*
 **/CVS/**
+/desktop/images/
+/desktop/Restaurant/target/

@@ -1,23 +1,30 @@
 package com.example.desktop.entities;
 
-import java.util.Objects;
+import java.util.List;
 
 public class Dish {
     private Long id;
     private String name;
     private String imagePath;
-    private Long price;
+    private Integer price;
     private Long dishCategoryId;
+
+    private List<Ingredient> ingredients;
+
+    private List<Recipe> recipes;
 
     public Dish() {
     }
 
-    public Dish(Long id, String name, String imagePath, Long price, Long dishCategoryId) {
+    public Dish(Long id, String name, String imagePath, Integer price, Long dishCategoryId,
+                List<Ingredient> ingredients, List<Recipe> recipes) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.dishCategoryId = dishCategoryId;
+        this.ingredients = ingredients;
+        this.recipes = recipes;
     }
 
     public Long getId() {
@@ -44,11 +51,11 @@ public class Dish {
         this.imagePath = imagePath;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -60,4 +67,19 @@ public class Dish {
         this.dishCategoryId = dishCategoryId;
     }
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
 }
