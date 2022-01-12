@@ -7,21 +7,18 @@ import java.util.Vector;
 
 public class DishTest {
 
-    Ingredient ing1 = new Ingredient((long) -7777777, (long) 666666, (long) 1, (long) 22);
-    Ingredient ing2 = new Ingredient((long) 22, (long) 1, (long) 666666, (long) -7777777);
-
-    Long num1 = (long) -7777777;
-    Long num2 = (long) 666666;
-    Long num3 = (long) 1;
-    Long num4 = (long) 22;
-
-    Recipe rec1 = new Recipe(1, "it certainly is", 22);
-    Recipe rec2 = new Recipe(666666);
-
-
-
     @Test
     public void testConstructor(){
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+        Long num3 = 1L;
+        Long num4 = 22L;
+
+        Ingredient ing1 = new Ingredient(num1, num2, num3, num4);
+        Ingredient ing2 = new Ingredient(num4, num3, num2, num1);
+
+        Recipe rec1 = new Recipe(1, "it certainly is", 22);
+        Recipe rec2 = new Recipe(666666);
 
         List<Ingredient> ingList = new Vector<>();
 
@@ -33,20 +30,31 @@ public class DishTest {
         recList.add(rec1);
         recList.add(rec2);
 
-        Dish d = new Dish((long) -7777777, "lama", "dir1/dir2/file.jpg",
-                22, (long) 666666, ingList, recList);
+        Dish d = new Dish(-7777777L, "lama", "dir1/dir2/file.jpg",
+                22, 666666L, ingList, recList);
 
-        assertEquals(d.getId(), num1);
-        assertEquals(d.getName(), "lama");
-        assertEquals(d.getImagePath(), "dir1/dir2/file.jpg");
-        assertEquals(d.getPrice(), (Integer) 22);
-        assertEquals(d.getDishCategoryId(), num2);
-        assertEquals(d.getIngredients().get(1).getId(), num4);
-        assertEquals(d.getRecipes().get(0).getRecipe(), "it certainly is");
+        assertEquals(num1, d.getId());
+        assertEquals("lama", d.getName());
+        assertEquals("dir1/dir2/file.jpg", d.getImagePath());
+        assertEquals((Integer) 22, d.getPrice());
+        assertEquals(num2, d.getDishCategoryId());
+        assertEquals(num4, d.getIngredients().get(1).getId());
+        assertEquals("it certainly is", d.getRecipes().get(0).getRecipe());
     }
 
     @Test
     public void testSetters(){
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+        Long num3 = 1L;
+        Long num4 = 22L;
+
+        Ingredient ing1 = new Ingredient(num1, num2, num3, num4);
+        Ingredient ing2 = new Ingredient(num4, num3, num2, num1);
+
+        Recipe rec1 = new Recipe(1, "it certainly is", 22);
+        Recipe rec2 = new Recipe(666666);
+
         List<Ingredient> ingList = new Vector<>();
 
         ingList.add(ing1);
@@ -57,8 +65,8 @@ public class DishTest {
         recList.add(rec1);
         recList.add(rec2);
 
-        Dish d = new Dish((long) -7777777, "lama", "dir1/dir2/file.jpg",
-                22, (long) 666666, ingList, recList);
+        Dish d = new Dish(num1, "lama", "dir1/dir2/file.jpg",
+                22, num2, ingList, recList);
 
         ingList.remove(0);
         recList.remove(0);
@@ -71,13 +79,13 @@ public class DishTest {
         d.setIngredients(ingList);
         d.setRecipes(recList);
 
-        assertEquals(d.getId(), num3);
-        assertEquals(d.getName(), "nielama");
-        assertEquals(d.getImagePath(), "dir/file.jpg");
-        assertEquals(d.getPrice(), (Integer) 22);
-        assertEquals(d.getDishCategoryId(), num1);
-        assertEquals(d.getIngredients().get(0).getId(), num4);
-        assertEquals(d.getRecipes().get(0).getDishId(), 666666);
+        assertEquals(num3, d.getId());
+        assertEquals("nielama", d.getName());
+        assertEquals("dir/file.jpg", d.getImagePath());
+        assertEquals((Integer) 22, d.getPrice());
+        assertEquals(num1, d.getDishCategoryId());
+        assertEquals(num4, d.getIngredients().get(0).getId());
+        assertEquals(666666, d.getRecipes().get(0).getDishId());
 
     }
 }

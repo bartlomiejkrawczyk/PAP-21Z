@@ -5,27 +5,28 @@ import static org.junit.Assert.assertEquals;
 
 public class ProductTest {
 
-    Long num1 = (long) -7777777;
-    Long num2 = (long) 666666;
-
     @Test
     public void testConstructor(){
-        Product prod = new Product((long) -7777777, "kau", "napoje");
-        assertEquals(prod.getId(), num1);
-        assertEquals(prod.getName(), "kau");
-        assertEquals(prod.getUnit(), "napoje");
+        Long num1 = -7777777L;
+        Product prod = new Product(num1, "kau", "napoje");
+        assertEquals(num1, prod.getId());
+        assertEquals("kau", prod.getName());
+        assertEquals("napoje", prod.getUnit());
     }
 
     @Test
     public void testSetters(){
-        Product prod = new Product((long) -7777777, "kau", "napoje");
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
 
-        prod.setId((long) 666666);
+        Product prod = new Product(num1, "kau", "napoje");
+
+        prod.setId(num2);
         prod.setName("schabowy");
         prod.setUnit("danie główne");
 
-        assertEquals(prod.getId(), num2);
-        assertEquals(prod.getName(), "schabowy");
-        assertEquals(prod.getUnit(), "danie główne");
+        assertEquals(num2, prod.getId());
+        assertEquals("schabowy", prod.getName());
+        assertEquals("danie główne", prod.getUnit());
     }
 }

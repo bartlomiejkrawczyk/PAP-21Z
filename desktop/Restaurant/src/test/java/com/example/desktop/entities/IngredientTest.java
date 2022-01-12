@@ -5,31 +5,38 @@ import static org.junit.Assert.assertEquals;
 
 public class IngredientTest {
 
-    Long num1 = (long) -7777777;
-    Long num2 = (long) 666666;
-    Long num3 = (long) 1;
-    Long num4 = (long) 22;
-
     @Test
     public void testConstructor(){
-        Ingredient ing = new Ingredient((long) -7777777, (long) 666666, (long) 1, (long) 22);
-        assertEquals(ing.getId(), num1);
-        assertEquals(ing.getDishId(), num3);
-        assertEquals(ing.getProductId(), num4);
-        assertEquals(ing.getQuantity(), num2);
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+        Long num3 = 1L;
+        Long num4 = 22L;
+
+        Ingredient ing = new Ingredient(num1, num2, num3, num4);
+
+        assertEquals(num1, ing.getId());
+        assertEquals(num3, ing.getDishId());
+        assertEquals(num4, ing.getProductId());
+        assertEquals(num2, ing.getQuantity());
     }
 
     @Test
     public void testSetters(){
-        Ingredient ing = new Ingredient((long) -7777777, (long) 666666, (long) 1, (long) 22);
-        ing.setId((long) 22);
-        ing.setQuantity((long) 1);
-        ing.setDishId((long) 666666);
-        ing.setProductId((long) -7777777);
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+        Long num3 = 1L;
+        Long num4 = 22L;
 
-        assertEquals(ing.getId(), num4);
-        assertEquals(ing.getQuantity(), num3);
-        assertEquals(ing.getDishId(), num2);
-        assertEquals(ing.getProductId(), num1);
+        Ingredient ing = new Ingredient(num1, num2, num3, num4);
+
+        ing.setId(num4);
+        ing.setQuantity(num3);
+        ing.setDishId(num2);
+        ing.setProductId(num1);
+
+        assertEquals(num4, ing.getId());
+        assertEquals(num3, ing.getQuantity());
+        assertEquals(num2, ing.getDishId());
+        assertEquals(num1, ing.getProductId());
     }
 }
