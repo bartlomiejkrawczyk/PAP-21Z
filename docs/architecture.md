@@ -67,11 +67,16 @@ classDiagram
     class App
     class InterfaceApi
     class Entities
-    class GUI
+    class Views
+    class Controllers
 
     App -- InterfaceApi
-    GUI <--> Entities
-    App <--> GUI
+    Views <--> Entities
+    Controllers <--> Views
+    Controllers <--> Entities
+
+
+    App <--> Controllers
 
     InterfaceApi <--> Server
 ```
@@ -84,12 +89,17 @@ W głównym pakiecie znajduje się:
 - interfejs InterfaceApi
     - który definiuje metody zaaonotowane odpowiednimi urlami
     - biblioteka Retrofit wykorzystuje je do wygenerowania odpowiednich metod do wyciągania danych z serwera
+- klasa AppDatabase
+  - łączy się z serwerem i przetrzymuje dane z bazy danych
 
 Wydzielone są również inne pakiety:
 - entities:
-    - zawierają klasy wymagane przez aplikację, a udostępniane przez serwer
-- ui:
-    - zawiera klasę GUI odpowiedzialną za aplikację okienkową
+    - zawierają klasy wymagane przez aplikację, a udostępniane przez serwer (model w mvc)
+- views:
+    - zawiera klasy odpowiadające za widoki w modelu mvc w tym klasę GUIView odpowiedzialną za wygląd aplikacji okienkowej
+- controllers:
+    - zawiera klasy odpowiadające za kontrolery w modelu mvc
+
 
 # Serwer
 
