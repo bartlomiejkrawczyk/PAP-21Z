@@ -2,21 +2,20 @@
 
 ## Aplikacja Desktopowa
 
-Aplikacją desktopową zajmują się `Karol Rogoziński`, `Adam Sudoł` oraz `Kamil Sulkowski`. Do tej pory pracę podzieliliśmy na trzy części: kucharze, przepisy, zamówienia i odpowiednio się do nich przydzieliliśmy. W praktyce, przez dobrą współpracę, działaliśmy w systemie, w którym każdy robił to, co zasugerował poprzednik. Po skończeniu prac nad aplikacją dla kuchni, podzielimy się obowiązkami dotyczącymi aplikacji dla administratora oraz do kontroli zaopatrzenia restauracji.
+Aplikacją desktopową zajmowali się `Karol Rogoziński`, `Adam Sudoł` oraz `Kamil Sulkowski` z wsparciem merytorycznym `Bartłomieja Krawczyka`. Z początku pracę podzieliliśmy na trzy części: kucharze, przepisy, zamówienia i odpowiednio się do nich przydzieliliśmy. W praktyce, przez dobrą współpracę, działaliśmy w systemie, w którym każdy robił to, co zasugerował poprzednik. Podczas ostatecznych prac nad aplikacją często pracowaliśmy wspólnie pisząc kod razem.
 
 ## Aplikacja Mobilna
 
-Jako że jedyną osobą mającą doświadczenie z javą i androidem jest `Bartłomiej Krawczyk`, to on odpowiada za aplikację mobilną
+Jako że jedyną osobą mającą doświadczenie z javą i androidem jest `Bartłomiej Krawczyk`, to on odpowiadał za aplikację mobilną
 
 ## Serwer
 
-Jako że jedyną osobą mającą doświadczenie z javą i Spring Bootem jest `Bartłomiej Krawczyk`, to on w większości zajmie się serwerem
+Jako że jedyną osobą mającą doświadczenie z javą i Spring Bootem jest `Bartłomiej Krawczyk`, to on w większości zajmował się serwerem
 
 ## Baza Danych
 
-Baza danych jest częścią niezbędną do pracy i nią zajmuje się każdy z zespołu.
-Ciężko jest nam na razie doprecyzować poszczególne zadania i przypisać je do pojedynczych osób.
+Baza danych jest częścią niezbędną do pracy i nią zajmował się każdy z zespołu.
 
 ## Testy Jednostkowe
 
-Planujemy testy jednostkowe pisać każdy po trochu i na każdy system, tak aby każdy mógł spróbować swoich sił w danym środowisku.
+Testami jednostkowymi zajmowali się `Adam Sudoł` i `Karol Rogoziński` do aplikacji desktopowej oraz `Bartłomiej Krawczyk` do aplikacji mobilnej oraz serwera.
