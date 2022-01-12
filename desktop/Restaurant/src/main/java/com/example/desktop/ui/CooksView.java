@@ -45,11 +45,6 @@ public class CooksView {
 
     }
 
-
-    public static void main(String[] args) {
-        new CooksView();
-    }
-
     public JFrame getFrame() {
         return frame;
     }

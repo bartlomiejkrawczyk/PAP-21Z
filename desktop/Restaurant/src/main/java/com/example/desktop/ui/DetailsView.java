@@ -36,15 +36,6 @@ public class DetailsView {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args){
-        String infos;
-        infos = "Name: lasagne" + "\n";
-        infos = infos + "Requests: sthsth" + "\n";
-        infos = infos + "   sthsth" + "\n";
-        DetailsView sth = new DetailsView();
-        sth.getTextArea().append(infos);
-    }
-
     public JFrame getFrame() {
         return frame;
     }

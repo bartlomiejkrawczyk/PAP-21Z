@@ -242,7 +242,6 @@ public class AppDatabase {
 
         if (dirExists) {
             File file = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator + imagePath);
-            System.out.println(System.getProperty("user.dir") + File.separator + "images" + File.separator + imagePath);
 
             if (file.exists()) {
                 try {

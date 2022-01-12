@@ -38,17 +38,6 @@ public class OrdersPlacedView {
         panel.add(scrollFrame);
     }
 
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        OrdersPlacedView view = new OrdersPlacedView();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(view.getPanel());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
     public JPanel getPanel() {
         return panel;
     }

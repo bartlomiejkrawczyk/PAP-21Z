@@ -43,10 +43,6 @@ public class GuiController {
         t.start();
     }
 
-    public static void main(String[] args){
-        GuiView view = new GuiView();
-        new GuiController(view);
-    }
 }
 
 
