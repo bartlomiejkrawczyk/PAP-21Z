@@ -146,6 +146,30 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(c);
 END;
 /
+--------------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE increase_product_quantity(p_name VARCHAR2, p_quantity NUMBER)
+AS
+BEGIN
+    UPDATE products
+    SET quantity = quantity + p_quantity
+    WHERE LOWER(name) LIKE '%' || LOWER(p_name) || '%';
+    
+    IF SQL%ROWCOUNT != 1 THEN
+        RAISE_APPLICATION_ERROR(-20003, SQL%ROWCOUNT || ' rows affected! Abborting procedure!');
+    END IF;
+END;
+/
+
+SELECT * FROM products;
+
+EXEC increase_product_quantity('cola', 1);
+
+EXEC increase_product_quantity('apple', 1);
+
+SELECT * FROM products;
+
+ROLLBACK;
 
 --------------------------------------------------------------------------------
 
@@ -186,3 +210,4 @@ END;
 SELECT e.*, calculate_total_worth_of_prepared_dishes(e.id) worth 
 FROM employees e
 WHERE e.employee_kind_id = 2;
+
