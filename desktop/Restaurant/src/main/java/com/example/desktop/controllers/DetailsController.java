@@ -14,12 +14,9 @@ public class DetailsController {
     private final AppDatabase db;
     private final Order order;
 
-    private String details;
-
     public DetailsController(Order newOrder, DetailsView newView) {
         this.view = newView;
         this.order = newOrder;
-        details = "";
         db = AppDatabase.getAppDatabase();
 
         initView();
@@ -29,68 +26,73 @@ public class DetailsController {
         new Thread(this::addDetails).start();
     }
 
-    private void addImage(String imagePath, JLabel label){
+    private void addImage(String imagePath) {
         BufferedImage img;
         img = db.getImage(imagePath);
         if (img != null) {
             Image image = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(image);
-            label.setIcon(imageIcon);
+            view.getLabel().setIcon(imageIcon);
         } else {
-            label.setIcon(null);
+            view.getLabel().setIcon(null);
         }
+
+        view.getFrame().pack();
     }
 
     private void addDetails() {
-        String name;
-        StringBuilder requests = new StringBuilder(" ");
-        StringBuilder recipe = new StringBuilder(" ");
-        StringBuilder ingredients = new StringBuilder(" ");
-        String imagePath;
-
-        Product product;
         Dish dish = db.getDishById(order.getDish().getId());
 
-        name = dish.getName();
-        imagePath = dish.getImagePath();
+        String details = "\n\nName:\t" + dish.getName() + "\n\n";
 
-        for (SpecialRequest req : order.getRequests()) {
-            requests.append(req.getRequest()).append("\n\t");
-        }
-
-        int step = 1;
-        for (Recipe rec : dish.getRecipes()) {
-            recipe.append(step).append(". ");
-            recipe.append(rec.getRecipe()).append("\n\t");
-            step++;
-        }
-
-        for (Ingredient ingredient : dish.getIngredients()) {
-            product = db.getProductById(ingredient.getProductId());
-            if (!product.getName().isEmpty()) {
-                ingredients.append(ingredient.getQuantity()).append(" ");
-                ingredients.append(product.getUnit()).append(" ");
-                ingredients.append(product.getName()).append("\n\t");
+        if (order.getRequests().size() > 0) {
+            StringBuilder requests = new StringBuilder();
+            for (SpecialRequest req : order.getRequests()) {
+                requests.append("\n\t").append(req.getRequest());
             }
+            details += "Special requests:" + requests + "\n";
         }
 
-        if (name.isEmpty() || name.equals(" ")) name = "null \n";
-        if ((requests.length() == 0) || requests.toString().equals(" ")) requests = new StringBuilder("null \n");
-        if ((recipe.length() == 0) || recipe.toString().equals(" ")) recipe = new StringBuilder("null \n");
-        if ((ingredients.length() == 0) || ingredients.toString().equals(" ")) ingredients = new StringBuilder("null \n");
-        if (imagePath.isEmpty() || imagePath.equals(" ")) imagePath = "null \n";
-
-        details += "Name: " + name + "\n\n";
-        details += "Special requests: " + requests + "\n";
-        details += "Recipe:           " + recipe + "\n";
-        details += "Ingredients:    " + ingredients + "\n";
-
-        addImage(imagePath, view.getLabel());
-        if (view.getLabel().getIcon() != null) {
-            view.getTextArea().append(details);
-            view.getFrame().pack();
-        } else {
-            view.getFrame().setVisible(false);
+        if (dish.getRecipes().size() > 0) {
+            StringBuilder recipe = new StringBuilder();
+            int step = 1;
+            for (Recipe rec : dish.getRecipes()) {
+                recipe.append("\n\t")
+                        .append(step)
+                        .append(". ")
+                        .append(rec.getRecipe());
+                step++;
+            }
+            details += "Recipe:" + recipe + "\n";
         }
+
+        if (dish.getIngredients().size() > 0) {
+            StringBuilder ingredients = new StringBuilder();
+            for (Ingredient ingredient : dish.getIngredients()) {
+                Product product = db.getProductById(ingredient.getProductId());
+                if (product.getName() != null) {
+                    ingredients.append("\n\t")
+                            .append(String.format("%1$-28s", product.getName()))
+                            .append(String.format("%1$15s", ingredient.getQuantity() + " " + product.getUnit()));
+                }
+            }
+            details += "Ingredients:    " + ingredients + "\n";
+        }
+
+        String imagePath = dish.getImagePath();
+
+        if (imagePath != null) {
+            BufferedImage img = new BufferedImage(300, 300, 1);
+            Image image = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(image);
+            view.getLabel().setIcon(imageIcon);
+
+            new Thread(() -> addImage(imagePath)).start();
+        }
+        details += "\n";
+
+        view.getTextArea().append(details);
+        view.getTextArea().setFont(new Font("Consolas", Font.PLAIN, 14));
+        view.getFrame().pack();
     }
 }

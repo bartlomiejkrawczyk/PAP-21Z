@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -229,31 +230,76 @@ public class AppDatabase {
     }
 
     public BufferedImage getImage(String imagePath) {
-        BufferedImage bufferedImage;
-        try {
-            Call<ResponseBody> call = App.interfaceApi.getImage(imagePath);
-            Response<ResponseBody> response = call.execute();
-            if (response.isSuccessful() && response.body() != null) {
-                byte[] img = response.body().bytes();
-                InputStream is = new ByteArrayInputStream(img);
-                bufferedImage = ImageIO.read(is);
-            } else {
+        BufferedImage bufferedImage = null;
+
+        File directory = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator);
+        boolean dirExists = directory.exists();
+        if (!dirExists) {
+            dirExists = directory.mkdir();
+        }
+
+        boolean successful = false;
+
+        if (dirExists) {
+            File file = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator + imagePath);
+            System.out.println(System.getProperty("user.dir") + File.separator + "images" + File.separator + imagePath);
+
+            if (file.exists()) {
+                try {
+                    bufferedImage = ImageIO.read(file);
+                    successful = true;
+                } catch (IOException ignored) {
+                }
+            }
+        }
+
+        if (!successful) {
+            try {
+                Call<ResponseBody> call = App.interfaceApi.getImage(imagePath);
+                Response<ResponseBody> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    byte[] img = response.body().bytes();
+                    InputStream is = new ByteArrayInputStream(img);
+                    bufferedImage = ImageIO.read(is);
+
+                    saveBufferedImage(bufferedImage, imagePath);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            new JFrame(),
+                            response.message(),
+                            "Response error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(
                         new JFrame(),
-                        response.message(),
-                        "Response error",
+                        e,
+                        "Failure error",
                         JOptionPane.ERROR_MESSAGE);
                 return null;
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(
-                    new JFrame(),
-                    e,
-                    "Failure error",
-                    JOptionPane.ERROR_MESSAGE);
-            return null;
         }
+
         return bufferedImage;
+    }
+
+    private void saveBufferedImage(BufferedImage image, String imagePath) {
+        File directory = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator);
+        boolean dirExists = directory.exists();
+
+        if (!dirExists) {
+            dirExists = directory.mkdir();
+        }
+
+        if (dirExists) {
+            try {
+                File outputFile = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator + imagePath);
+                ImageIO.write(image, "jpg", outputFile);
+            } catch (IOException ignored) {
+            }
+        }
+
     }
 
     // Note: that this function should be called on separate thread!
