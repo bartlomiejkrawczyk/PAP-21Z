@@ -23,6 +23,7 @@ public class DetailsView {
         label.setBorder(blackLine);
 
         textArea.setFont(font);
+        textArea.setEditable(false);
         panel.setBackground(Color.white);
         frame.setResizable(false);
 
