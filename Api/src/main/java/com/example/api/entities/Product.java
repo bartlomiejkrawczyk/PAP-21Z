@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Table(name = "PRODUCTS")
 @Entity
@@ -33,11 +34,21 @@ public class Product {
     @Column(name = "UNIT", nullable = false, length = 10)
     private String unit;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "PRODUCT_CATEGORY_ID", nullable = false)
-//    private ProductCategory productCategory;
-
     @Column(name = "PRODUCT_CATEGORY_ID", nullable = false)
     private Long productCategoryId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (!Objects.equals(id, product.id)) return false;
+        if (!Objects.equals(name, product.name)) return false;
+        if (!Objects.equals(quantity, product.quantity)) return false;
+        if (!Objects.equals(minQuantity, product.minQuantity)) return false;
+        if (!Objects.equals(unit, product.unit)) return false;
+        return Objects.equals(productCategoryId, product.productCategoryId);
+    }
 }

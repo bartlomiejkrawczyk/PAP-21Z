@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "EMPLOYEE_KINDS")
 @Entity
@@ -26,4 +27,14 @@ public class EmployeeKind {
     @OneToMany(mappedBy = "employeeKindId")
     private List<Employee> employees;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EmployeeKind that = (EmployeeKind) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        return Objects.equals(name, that.name);
+    }
 }

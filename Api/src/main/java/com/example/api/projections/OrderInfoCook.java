@@ -1,12 +1,11 @@
 package com.example.api.projections;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderInfoCook {
     Long getId();
 
-    LocalDate getDate();
+    Long getDate();
 
     Integer getStatus();
 
@@ -18,10 +17,6 @@ public interface OrderInfoCook {
 
     interface DishInfo {
         Long getId();
-
-        String getName();
-
-        String getImagePath();
     }
 
     interface EmployeeInfo {

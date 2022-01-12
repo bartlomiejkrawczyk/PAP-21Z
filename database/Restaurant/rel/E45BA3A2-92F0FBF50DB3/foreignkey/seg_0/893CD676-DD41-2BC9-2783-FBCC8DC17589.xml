@@ -9,7 +9,7 @@
 <referredTableID>0E19EE20-DF7A-BF2E-CEB7-3296E4777AE4</referredTableID>
 <keyObject>18AD25AB-2806-573F-5C0F-F52BA518F389</keyObject>
 <referredKeyID>18AD25AB-2806-573F-5C0F-F52BA518F389</referredKeyID>
-<mandatory>true</mandatory>
+<mandatory>false</mandatory>
 <refColNames>id</refColNames>
 <transferable>true</transferable>
 <rely>false</rely>

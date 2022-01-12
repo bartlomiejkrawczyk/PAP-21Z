@@ -5,7 +5,7 @@
 <generatorID>9856541A-997B-69AE-98E2-8FE265B62603</generatorID>
 <ownerDesignName>Restaurant</ownerDesignName>
 <referredTableLongName>Receipts</referredTableLongName>
-<deleteRule>NO ACTION</deleteRule>
+<deleteRule>CASCADE</deleteRule>
 <referredTableID>1759A841-8158-0253-D9B6-25E327D938DB</referredTableID>
 <keyObject>E25A9AB5-A61D-2CBC-BB7A-73C51B5E1CBA</keyObject>
 <referredKeyID>E25A9AB5-A61D-2CBC-BB7A-73C51B5E1CBA</referredKeyID>

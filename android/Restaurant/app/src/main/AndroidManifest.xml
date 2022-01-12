@@ -21,6 +21,9 @@
             android:name=".ui.receipt.ReceiptsActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.request.RequestsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.dish.DishesActivity"
             android:exported="false" />
         <activity
@@ -43,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

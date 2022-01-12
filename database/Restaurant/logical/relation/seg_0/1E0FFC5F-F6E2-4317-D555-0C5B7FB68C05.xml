@@ -9,7 +9,7 @@
 <useSurrogateKey>true</useSurrogateKey>
 <identifying>false</identifying>
 <optionalSource>true</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>5331DE1F-331A-C9A2-0C7F-F005EBA4AC1F</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

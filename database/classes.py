@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple, Union
 from random import choice, randint
 import lorem  # type: ignore
 
@@ -111,39 +111,48 @@ class Product:
 
 
 PRODUCTS: List['Product'] = [
-    Product('Coca-Cola 500ml', 0, 100, 'bottle', 1),
-    Product('Coca-Cola 1l', 0, 50, 'bottle', 1),
-    Product('Sprite 500ml', 0, 50, 'bottle', 1),
-    Product('Fanta 500ml', 0, 50, 'bottle', 1),
-    Product('Chicken Breasts', 0, 10000, 'g', 2),
-    Product('Chicken Wings', 0, 10000, 'g', 2),
-    Product('Beef', 0, 10000, 'g', 2),
-    Product('Pork Chop', 0, 10000, 'g', 2),
-    Product('Onions', 0, 1000, 'g', 3),
-    Product('Pepper', 0, 1000, 'g', 3),
-    Product('Carrot', 0, 1000, 'g', 3),
-    Product('Apple', 0, 100, 'fruit', 4)
+    Product('Coca-Cola 500ml', 999999, 100, 'bottle', 1),
+    Product('Coca-Cola 1l', 999999, 50, 'bottle', 1),
+    Product('Sprite 500ml', 999999, 50, 'bottle', 1),
+    Product('Fanta 500ml', 999999, 50, 'bottle', 1),
+    Product('Chicken Breasts', 999999, 10000, 'g', 2),
+    Product('Chicken Wings', 999999, 10000, 'g', 2),
+    Product('Beef', 999999, 10000, 'g', 2),
+    Product('Pork Chop', 999999, 10000, 'g', 2),
+    Product('Onions', 999999, 1000, 'g', 3),
+    Product('Pepper', 999999, 1000, 'g', 3),
+    Product('Carrot', 999999, 1000, 'g', 3),
+    Product('Apple', 999999, 100, 'fruit', 4)
 ]
 
-DISHES: Dict[str, List[str]] = {
+DISHES: Dict[str, List[Tuple[str, str]]] = {
     'Soups': [
-        'Tomato',
-        'Chicken'
+        ('Tomato', '\'tomato.jpg\''),
+        ('Chicken',  '\'chicken.jpg\''),
+        ('Pumpkin', '\'pumpkin.jpg\''),
+        ('Cream', '\'cream.jpg\''),
+        ('Carrot', '\'carrot.jpg\'')
     ],
     'Main Course': [
-        'Beef',
+        ('Beef', '\'beef.jpg\''),
+        ('Hamburger', '\'hamburger.jpg\''),
+        ('Spaghetti', '\'spaghetti.jpg\''),
+        ('Pizza', '\'pizza.jpg\''),
     ],
     'Drinks': [
-        'A drink',
+        ('Coca-Cola', '\'coca-cola.jpg\''),
+        ('Fanta', '\'fanta.jpg\''),
+        ('Sprite', '\'sprite.jpg\''),
+        ('Beer', '\'beer.jpg\''),
     ]
 }
 
 
 class DishCategory:
-    def __init__(self, id: int, name: str, dishes: List[str]) -> None:
+    def __init__(self, id: int, name: str, dishes: List[Tuple[str, str]]) -> None:
         self.id = id
         self.name = name
-        self.dishes = [Dish(name, self.id) for name in dishes]
+        self.dishes = [Dish(name[0], self.id, name[1]) for name in dishes]
 
     def __str__(self) -> str:
         result = f'\nINSERT INTO dish_categories VALUES ({self.id}, \'{self.name}\', NULL);\n'
@@ -159,10 +168,11 @@ class DishCategory:
 class Dish:
     i: int = 1
 
-    def __init__(self, name: str, category: int) -> None:
+    def __init__(self, name: str, category: int, image_path: str = 'NULL') -> None:
         self.id = Dish.i
         Dish.i += 1
         self.name = name
+        self.image_path = image_path
         self.price = randint(1000, 10000)
         self.category = category
         self.recipe = [Recipe(i, self.id) for i in range(1, randint(2, 10))]
@@ -170,7 +180,7 @@ class Dish:
                             for _ in range(1, randint(2, 10))]
 
     def __str__(self) -> str:
-        result = f'\nINSERT INTO dishes VALUES ({self.id}, \'{self.name}\', NULL, {self.price}, \'{self.category}\');\n\n'
+        result = f'\nINSERT INTO dishes VALUES ({self.id}, \'{self.name}\', {self.image_path}, {self.price}, \'{self.category}\');\n\n'
         for recipe in self.recipe:
             result += str(recipe)
         result += '\n'
@@ -206,13 +216,13 @@ class Recipe:
 class Receipt:
     i: int = 1
 
-    def __init__(self, employee: int, table: int, dishes: List[Dish]) -> None:
+    def __init__(self, waiter: int, table: int, dishes: List[Dish], cooks: List[Employee]) -> None:
         self.id = Receipt.i
         Receipt.i += 1
         self.payment = 0
-        self.employee = employee
+        self.employee = waiter
         self.table = table
-        self.orders = [Order(choice(dishes).id, self.id)
+        self.orders = [Order(choice(dishes).id, self.id, choice(cooks))
                        for _ in range(randint(1, 10))]
 
     def __str__(self) -> str:
@@ -226,23 +236,29 @@ class Receipt:
     def generate_receipts(employees: List[Employee], tables: List[Table], dishes: List[Dish]) -> List['Receipt']:
         waiters = [
             employee for employee in employees if employee.employee_kind == 1]
+        cooks = [
+            employee for employee in employees if employee.employee_kind == 2]
         receipts: List[Receipt] = []
         for waiter in waiters:
             receipts.extend(
-                [Receipt(waiter.id, table.id, dishes) for table in tables])
+                [Receipt(waiter.id, table.id, dishes, cooks) for table in tables])
         return receipts
 
 
 class Order:
     i: int = 1
 
-    def __init__(self, dish: int, receipt: int) -> None:
+    def __init__(self, dish: int, receipt: int, cook: Employee) -> None:
         self.id = Order.i
         Order.i += 1
-        self.date = '21/01/01'
+        self.date = randint(1140693898347, 1640693898347)
         self.dish = dish
         self.receipt = receipt
         self.status = randint(1, 3)
+        if self.status == 1:
+            self.employee_id: Union[str, int] = choice(['NULL', cook.id])
+        else:
+            self.employee_id = cook.id
 
     def __str__(self) -> str:
-        return f'INSERT INTO orders VALUES ({self.id}, \'{self.date}\', {self.dish}, {self.receipt}, {self.status}, NULL);\n'
+        return f'INSERT INTO orders VALUES ({self.id}, {self.date}, {self.dish}, {self.receipt}, {self.status}, {self.employee_id});\n'

@@ -40,11 +40,12 @@ public class DishUtils {
                         }
                     }).start();
                 }
+                // else do nothing -> updating data isn't necessary
             }
 
             @Override
             public void onFailure(@NonNull Call<List<DishCategory>> call, @NonNull Throwable t) {
-
+                // do nothing -> updating data isn't necessary
             }
         });
     }

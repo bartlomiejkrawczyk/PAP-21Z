@@ -1,6 +1,6 @@
 package com.example.restaurant.ui.launcher;
 
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID_KEY;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,13 +25,12 @@ public class SplashActivity extends AppCompatActivity {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         splashScreen.setOnExitAnimationListener(splashScreenViewProvider -> {
             Intent intent;
-            if (ifEmployeeIsLoggedIn())
+            if (isEmployeeLoggedIn())
                 intent = new Intent(SplashActivity.this, ReceiptsActivity.class);
             else
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
 
             startActivity(intent);
-            overridePendingTransition(R.anim.foreground_activity_slide_in, R.anim.background_activity_slide_out);
 
             finish();
         });
@@ -39,10 +38,10 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    public boolean ifEmployeeIsLoggedIn() {
+    private boolean isEmployeeLoggedIn() {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-        long employeeId = sharedPref.getLong(EMPLOYEE_ID_KEY, -1L);
+        long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
         return employeeId != -1L;
     }
 }

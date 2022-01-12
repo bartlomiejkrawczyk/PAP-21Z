@@ -1,15 +1,16 @@
 package com.example.restaurant.ui.receipt;
 
-import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID_KEY;
+import static com.example.restaurant.ui.login.LoginActivity.EMPLOYEE_ID;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurant.App;
 import com.example.restaurant.R;
+import com.example.restaurant.db.AppDatabase;
+import com.example.restaurant.entities.Dish;
+import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Order;
 import com.example.restaurant.entities.Receipt;
+import com.example.restaurant.handlers.FailureErrorHandler;
+import com.example.restaurant.handlers.ResponseErrorHandler;
 import com.example.restaurant.ui.settings.SettingsActivity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +43,11 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ReceiptsRecyclerViewAdapter adapter;
+    private ProgressBar progressBar;
+
+    private Timer timer;
+
+    private int unhandledReceiptsCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +74,36 @@ public class ReceiptsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (timer != null)
+            timer.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
+        new Thread(this::getReceipts).start();
+    }
+
     private void initViews() {
+        progressBar = findViewById(R.id.progress_bar_receipts);
+        progressBar.setVisibility(View.VISIBLE);
+
         recyclerView = findViewById(R.id.recycler_view_receipts);
+        setUpRecyclerView();
+
+    }
+
+    private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
+        recyclerView.setVisibility(View.GONE);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -83,15 +122,17 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
-
-        new Thread(this::getReceipts).start();
     }
 
 
     private void getReceipts() {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-        long employeeId = sharedPref.getLong(EMPLOYEE_ID_KEY, -1L);
+        long employeeId = sharedPref.getLong(EMPLOYEE_ID, -1L);
+
+        // If there are no dishes download them first
+        downloadDishesIfNotAvailable();
+
         Call<List<Receipt>> call = App.interfaceApi.getReceipts(employeeId);
         call.enqueue(new Callback<List<Receipt>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -100,31 +141,88 @@ public class ReceiptsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Receipt> receipts = response.body();
 
-
                     adapter.setReceipts(receipts);
 
                     scheduleUpdates();
 
                     runOnUiThread(() -> adapter.notifyDataSetChanged());
-
+                } else {
+                    new ResponseErrorHandler<>(response, ReceiptsActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_receipts),
+                                    (dialog, id) -> new Thread(() -> getReceipts()).start(),
+                                    true
+                            );
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Receipt>> call, @NonNull Throwable t) {
-
+                new FailureErrorHandler(t, ReceiptsActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_receipts),
+                                (dialog, id) -> new Thread(() -> getReceipts()).start(),
+                                true
+                        );
             }
         });
     }
 
-    private void scheduleUpdates() {
-        Timer t = new Timer();
+    private void downloadDishesIfNotAvailable() {
+        AppDatabase db = AppDatabase.getAppDatabase(this);
+        if (db.dishesDao().getDishCount() == 0) {
+            Call<List<DishCategory>> call = App.interfaceApi.getDishes();
 
-        t.schedule(new TimerTask() {
+            try {
+                Response<List<DishCategory>> response = call.execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    List<DishCategory> categories = response.body();
+
+                    for (DishCategory category : categories) {
+                        db.dishCategoriesDao().insert(category);
+                        for (Dish dish : category.getDishes()) {
+                            db.dishesDao().insert(dish);
+                        }
+                    }
+                } else {
+                    new ResponseErrorHandler<>(response, ReceiptsActivity.this)
+                            .errorDialog(
+                                    getString(R.string.error_downloading_dishes),
+                                    (dialog, id) -> new Thread(this::getReceipts).start(),
+                                    true
+                            );
+                }
+            } catch (IOException e) {
+                new FailureErrorHandler(e, ReceiptsActivity.this)
+                        .errorDialog(
+                                getString(R.string.error_downloading_dishes),
+                                (dialog, id) -> new Thread(this::getReceipts).start(),
+                                true
+                        );
+            }
+        }
+    }
+
+    private void scheduleUpdates() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer();
+
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 0; i < adapter.getItemCount() - 1; i++) {
-                    getOrders(i);
+                unhandledReceiptsCount = adapter.getItemCount() - 1;
+
+                if (unhandledReceiptsCount == 0) {
+                    runOnUiThread(() -> {
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    });
+                } else {
+                    for (int i = 0; i < unhandledReceiptsCount; i++) {
+                        getOrders(i);
+                    }
                 }
             }
         }, 0, 20000);
@@ -136,17 +234,34 @@ public class ReceiptsActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Order>> call, @NonNull Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    runOnUiThread(() -> {
-                        adapter.getReceipts().get(position).setOrders(response.body());
-                        adapter.notifyItemChanged(position);
-                    });
+                    List<Order> orders = response.body();
+                    new Thread(() -> {
+                        for (Order order : orders) {
+                            order.getDish().fetchData(ReceiptsActivity.this);
+                        }
+
+                        runOnUiThread(() -> {
+                            adapter.getReceipts().get(position).setOrders(orders);
+                            adapter.notifyItemChanged(position);
+                            tryShowRecyclerView();
+                        });
+                    }).start();
+                } else {
+                    runOnUiThread(() -> tryShowRecyclerView());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Order>> call, @NonNull Throwable t) {
-                Log.e("ORDERS", t.getMessage());
+                runOnUiThread(() -> tryShowRecyclerView());
             }
         });
+    }
+
+    private void tryShowRecyclerView() {
+        if (--unhandledReceiptsCount == 0) {
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }

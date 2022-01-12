@@ -1,18 +1,19 @@
 package com.example.api.projections;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderInfoWaiter {
     Long getId();
 
-    LocalDate getDate();
-
-    Integer getStatus();
+    Long getDate();
 
     DishInfo getDish();
 
+    Long getReceiptId();
+
     List<SpecialRequestInfo> getRequests();
+
+    Integer getStatus();
 
     interface DishInfo {
         Long getId();

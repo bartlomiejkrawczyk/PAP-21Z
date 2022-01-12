@@ -15,6 +15,9 @@ public interface TablesDao {
     @Query("SELECT * FROM tables")
     List<Table> getTables();
 
+    @Query("SELECT COUNT(*) FROM tables")
+    int getTablesCount();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Table table);
 

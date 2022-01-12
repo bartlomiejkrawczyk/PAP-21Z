@@ -1,6 +1,8 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.Product;
+import com.example.api.errors.EntityNotFoundException;
+import com.example.api.projections.ProductInfoCook;
 import com.example.api.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +22,14 @@ public class ProductsController {
         this.repository = repository;
     }
 
+    @GetMapping("id/{id}")
+    public ProductInfoCook findById(@PathVariable Long id) {
+        return repository.findProductInfoCookById(id).orElseThrow(() -> new EntityNotFoundException(id));
+    }
+
     @GetMapping("all")
     public List<Product> findAll() {
         return (List<Product>) repository.findAll();
     }
 
-    @GetMapping("/category/{category}")
-    public List<Product> findProductsByCategory(@PathVariable Long category) {
-        return repository.findProductsByProductCategoryId(category);
-    }
 }

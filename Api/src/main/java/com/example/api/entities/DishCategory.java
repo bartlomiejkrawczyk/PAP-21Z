@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "DISH_CATEGORIES")
@@ -29,4 +30,15 @@ public class DishCategory {
     @OneToMany(mappedBy = "dishCategoryId")
     private List<Dish> dishes;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DishCategory category = (DishCategory) o;
+
+        if (!Objects.equals(id, category.id)) return false;
+        if (!Objects.equals(name, category.name)) return false;
+        return Objects.equals(imagePath, category.imagePath);
+    }
 }

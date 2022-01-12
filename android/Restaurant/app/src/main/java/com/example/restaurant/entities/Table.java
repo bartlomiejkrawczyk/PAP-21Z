@@ -43,8 +43,10 @@ public class Table implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        if (name != null)
+        if (name != null && id != null)
             return id + " - " + name;
+        else if (name != null)
+            return name;
         return "Table";
     }
 }
