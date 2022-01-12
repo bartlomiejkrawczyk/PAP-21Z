@@ -5,28 +5,31 @@ import static org.junit.Assert.assertEquals;
 
 public class SpecialRequestTest {
 
-    Long num1 = (long) -7777777;
-    Long num2 = (long) 666666;
-    Long num3 = (long) 1;
-    Long num4 = (long) 22;
-
     @Test
     public void testConstructor(){
-        SpecialRequest sr = new SpecialRequest((long) -7777777, "dej kamienia", (long) 666666);
-        assertEquals(sr.getId(), num1);
-        assertEquals(sr.getRequest(), "dej kamienia");
-        assertEquals(sr.getOrderId(), num2);
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+
+        SpecialRequest sr = new SpecialRequest(num1, "dej kamienia", num2);
+        assertEquals(num1, sr.getId());
+        assertEquals("dej kamienia", sr.getRequest());
+        assertEquals(num2, sr.getOrderId());
     }
 
     @Test
     public void testSetters(){
-        SpecialRequest sr = new SpecialRequest((long) -7777777, "dej kamienia", (long) 666666);
-        sr.setId((long) 1);
-        sr.setRequest("dej amu");
-        sr.setOrderId((long) 22);
+        Long num1 = -7777777L;
+        Long num2 = 666666L;
+        Long num3 = 1L;
+        Long num4 = 22L;
 
-        assertEquals(sr.getId(), num3);
-        assertEquals(sr.getRequest(), "dej amu");
-        assertEquals(sr.getOrderId(), num4);
+        SpecialRequest sr = new SpecialRequest(num1, "dej kamienia", num2);
+        sr.setId(num3);
+        sr.setRequest("dej amu");
+        sr.setOrderId(num4);
+
+        assertEquals(num3, sr.getId());
+        assertEquals("dej amu", sr.getRequest());
+        assertEquals(num4, sr.getOrderId());
     }
 }

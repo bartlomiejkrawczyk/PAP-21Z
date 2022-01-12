@@ -6,33 +6,33 @@ import static org.junit.Assert.assertSame;
 
 public class EmployeeTest {
 
-    Long num1 = (long) -7777777;
-    Long num2 = (long) 666666;
-    Long num3 = (long) 1;
-    Long num4 = (long) 22;
-
     @Test
     public void testConstructor(){
+        Long num3 = (long) 1;
+        Long num4 = (long) 22;
 
         Employee emp = new Employee((long) 22, "Karol", "Sulkowski", (long) 1);
-        assertEquals(emp.getId(), num4);
-        assertEquals(emp.getFirstName(), "Karol");
-        assertEquals(emp.getFamilyName(), "Sulkowski");
-        assertEquals(emp.getEmployeeKindId(), num3);
+        assertEquals(num4, emp.getId());
+        assertEquals("Karol", emp.getFirstName());
+        assertEquals("Sulkowski", emp.getFamilyName());
+        assertEquals(num3, emp.getEmployeeKindId());
     }
 
     @Test
     public void testSetters(){
+        Long num1 = (long) -7777777;
+        Long num2 = (long) 666666;
+
         Employee emp = new Employee((long) 22, "Karol", "Sulkowski", (long) 1);
-        emp.setId((long) -7777777);
+        emp.setId(num1);
         emp.setFirstName("Adam");
         emp.setFamilyName("Rogoziński");
-        emp.setEmployeeKindId((long) 666666);
+        emp.setEmployeeKindId((long) num2);
 
-        assertEquals(emp.getId(), num1);
-        assertEquals(emp.getFirstName(), "Adam");
-        assertSame(emp.getFamilyName(), "Rogoziński");
-        assertEquals(emp.getEmployeeKindId(), num2);
+        assertEquals(num1, emp.getId());
+        assertEquals("Adam", emp.getFirstName());
+        assertSame("Rogoziński", emp.getFamilyName());
+        assertEquals(num2, emp.getEmployeeKindId());
     }
 
     @Test
