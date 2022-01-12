@@ -1,5 +1,5 @@
 from typing import List, Dict, Tuple, Union
-from random import choice, randint
+from random import choice, randint, sample
 import lorem  # type: ignore
 
 EMPLOYEE_KINDS: List[str] = ['waiter', 'cook']
@@ -176,8 +176,8 @@ class Dish:
         self.price = randint(1000, 10000)
         self.category = category
         self.recipe = [Recipe(i, self.id) for i in range(1, randint(2, 10))]
-        self.ingredients = [Ingredient(self.id)
-                            for _ in range(1, randint(2, 10))]
+        self.ingredients = [Ingredient(self.id, product)
+                            for product in sample(PRODUCTS, randint(2, 10))]
 
     def __str__(self) -> str:
         result = f'\nINSERT INTO dishes VALUES ({self.id}, \'{self.name}\', {self.image_path}, {self.price}, \'{self.category}\');\n\n'
@@ -192,12 +192,12 @@ class Dish:
 class Ingredient:
     i: int = 1
 
-    def __init__(self, dish: int) -> None:
+    def __init__(self, dish: int, product: Product) -> None:
         self.id = Ingredient.i
         Ingredient.i += 1
-        self.quantity = randint(1, 1000)
+        self.quantity = randint(1, 100)
         self.dish = dish
-        self.product = choice(PRODUCTS).id
+        self.product = product.id
 
     def __str__(self) -> str:
         return f'INSERT INTO ingredients VALUES ({self.id}, {self.quantity}, {self.dish}, {self.product});\n'
