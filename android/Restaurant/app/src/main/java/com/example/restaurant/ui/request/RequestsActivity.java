@@ -27,6 +27,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class that controls what can happen on requests activity
+ */
 public class RequestsActivity extends AppCompatActivity {
     private EditText editText;
     private LinearLayout linearLayout;

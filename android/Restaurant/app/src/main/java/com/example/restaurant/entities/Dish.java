@@ -10,6 +10,13 @@ import com.example.restaurant.db.AppDatabase;
 
 import java.io.Serializable;
 
+/**
+ * Entity that holds information about the dish
+ * <p>
+ * It is divided into categories
+ *
+ * @see DishCategory
+ */
 @Entity(tableName = "dishes")
 public class Dish implements Serializable {
     @PrimaryKey
@@ -79,6 +86,11 @@ public class Dish implements Serializable {
         this.dishCategoryId = dishCategoryId;
     }
 
+    /**
+     * When only the id of the dish is set - fetch other data from the database
+     *
+     * @param context context used to get instance of the database
+     */
     public void fetchData(Context context) {
         AppDatabase db = AppDatabase.getAppDatabase(context);
         Dish dish = db.dishesDao().getDishById(this.id);

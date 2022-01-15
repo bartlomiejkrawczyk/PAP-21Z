@@ -10,6 +10,11 @@ import com.example.restaurant.entities.Dish;
 import com.example.restaurant.entities.DishCategory;
 import com.example.restaurant.entities.Table;
 
+/**
+ * Room database
+ *
+ * @see RoomDatabase
+ */
 @Database(entities = {DishCategory.class, Dish.class, Table.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "RESTAURANT_DATABASE";

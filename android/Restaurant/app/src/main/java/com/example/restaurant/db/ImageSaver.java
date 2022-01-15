@@ -35,20 +35,42 @@ public class ImageSaver {
         this.context = context;
     }
 
+    /**
+     * Set name of the file
+     *
+     * @param fileName file name
+     * @return self - allows to chain calls
+     */
     public ImageSaver setFileName(String fileName) {
         this.fileName = fileName;
         return this;
     }
 
+    /**
+     * Set name of the directory
+     *
+     * @param directoryName directory name
+     * @return self - allows to chain calls
+     */
     public ImageSaver setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
         return this;
     }
 
+    /**
+     * Check if file exists
+     *
+     * @return whether the file exists
+     */
     public boolean exists() {
         return createFile().exists();
     }
 
+    /**
+     * Save image
+     *
+     * @param bitmapImage image to save
+     */
     public void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
@@ -67,6 +89,11 @@ public class ImageSaver {
         }
     }
 
+    /**
+     * Create file
+     *
+     * @return file of specified in class name and path
+     */
     @NonNull
     private File createFile() {
         File directory = context.getDir(directoryName, Context.MODE_PRIVATE);
@@ -78,6 +105,11 @@ public class ImageSaver {
         return new File(directory, fileName);
     }
 
+    /**
+     * Load image file
+     *
+     * @return Bitmap with image
+     */
     public Bitmap load() {
         FileInputStream inputStream = null;
         try {

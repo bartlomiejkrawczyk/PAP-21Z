@@ -37,6 +37,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class that controls what can happen on receipts activity
+ */
 public class ReceiptsActivity extends AppCompatActivity {
 
     public static final String RECEIPT = "receipt";

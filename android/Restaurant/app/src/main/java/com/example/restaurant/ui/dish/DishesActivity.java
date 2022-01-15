@@ -17,6 +17,9 @@ import com.example.restaurant.entities.Dish;
 
 import java.util.List;
 
+/**
+ * Class that controls what can happen on dishes activity
+ */
 public class DishesActivity extends AppCompatActivity {
 
     private DishesRecyclerViewAdapter adapter;
