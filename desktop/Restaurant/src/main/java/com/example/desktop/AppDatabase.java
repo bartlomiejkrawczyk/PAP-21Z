@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class AppDatabase {
     private static AppDatabase db;
 
-    private final List<Product> products;
+    private List<Product> products;
     private List<Employee> employees;
     private final List<Employee> loggedInEmployees;
     private final List<Dish> dishes;
@@ -81,39 +81,36 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
-    public Product getProductById(Long productId) {
+    public synchronized Product getProductById(Long productId) {
+        if (products.size() == 0) {
+            downloadProducts();
+        }
         Optional<Product> productOptional = products.stream()
                 .filter(product -> product != null && Objects.equals(product.getId(), productId))
                 .findFirst();
-        if (productOptional.isPresent()) {
-            return productOptional.get();
-        } else {
-            try {
-                Call<Product> call = App.interfaceApi.getProductById(productId);
-                Response<Product> response = call.execute();
-                if (response.isSuccessful() && response.body() != null) {
-                    products.add(response.body());
-                    return response.body();
-                } else {
-                    JOptionPane.showMessageDialog(
-                            new JFrame(),
-                            response.message(),
-                            "Response error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (IOException e) {
+
+        return productOptional.orElse(null);
+    }
+
+    public void downloadProducts() {
+        try {
+            Call<List<Product>> call = App.interfaceApi.getProducts();
+            Response<List<Product>> response = call.execute();
+            if (response.isSuccessful() && response.body() != null) {
+                products = response.body();
+            } else {
                 JOptionPane.showMessageDialog(
                         new JFrame(),
-                        e,
-                        "Failure error",
+                        response.message(),
+                        "Response error",
                         JOptionPane.ERROR_MESSAGE);
             }
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(
                     new JFrame(),
-                    "File not found",
-                    "Not found error",
+                    e,
+                    "Failure error",
                     JOptionPane.ERROR_MESSAGE);
-            return null;
         }
     }
 

@@ -12,6 +12,7 @@ public class GuiController {
     TaskBarController taskBar;
     OrdersInProgressController ordersInProgress;
     OrdersPlacedController ordersPlaced;
+    // TODO: add here reference to products controller
 
     public GuiController(GuiView view){
         this.view = view;
@@ -39,6 +40,8 @@ public class GuiController {
             db.downloadOrders();
             ordersInProgress.reloadOrders();
             ordersPlaced.reloadOrders();
+            db.downloadProducts();
+            // TODO: call productsController.reloadProducts();
         });
         t.start();
     }
