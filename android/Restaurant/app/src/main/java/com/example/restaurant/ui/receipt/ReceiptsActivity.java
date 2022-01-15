@@ -39,6 +39,8 @@ import retrofit2.Response;
 
 /**
  * Class that controls what can happen on receipts activity
+ * <p>
+ * Window that displays open receipts assigned to logged in waiter
  */
 public class ReceiptsActivity extends AppCompatActivity {
 

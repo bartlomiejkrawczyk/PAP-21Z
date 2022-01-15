@@ -21,6 +21,8 @@ import com.example.restaurant.ui.login.LoginActivity;
 
 /**
  * Class that controls what can happen on settings activity
+ * <p>
+ * Window with settings
  */
 public class SettingsActivity extends AppCompatActivity {
     private static final String SIGN_OUT = "sign_out";

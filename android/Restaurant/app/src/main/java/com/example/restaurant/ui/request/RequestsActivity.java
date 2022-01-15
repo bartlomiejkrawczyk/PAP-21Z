@@ -29,6 +29,8 @@ import retrofit2.Response;
 
 /**
  * Class that controls what can happen on requests activity
+ * <p>
+ * Window that displays request added to the order
  */
 public class RequestsActivity extends AppCompatActivity {
     private EditText editText;

@@ -28,6 +28,8 @@ import retrofit2.Response;
 
 /**
  * Class that controls what can happen on login activity
+ * <p>
+ * Window that allows to login as a waiter
  */
 public class LoginActivity extends AppCompatActivity {
 
