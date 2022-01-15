@@ -11,6 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
+/**
+ * Employee represents an entity holding information about
+ * particular worker
+ * <p>
+ * Every employee has assigned position
+ *
+ * @see EmployeeKind
+ */
 @Entity
 @Table(name = "EMPLOYEES")
 @Getter
@@ -32,6 +40,12 @@ public class Employee {
     @Column(name = "EMPLOYEE_KIND_ID", nullable = false)
     private Long employeeKindId;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

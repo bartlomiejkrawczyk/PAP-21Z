@@ -4,6 +4,12 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * Special Recipe id that is combined of two values
+ * - it is needed by CrudRepository interface
+ *
+ * @see Recipe
+ */
 @Getter
 @Setter
 @NoArgsConstructor

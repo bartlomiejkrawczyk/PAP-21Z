@@ -11,6 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
+/**
+ * Product is an entity that stores information about particular product
+ * and how much of this product is in magazine
+ * <p>
+ * Furthermore it stores minimum quantity
+ * - when quantity drops below the minQuantity, there is dire need for new delivery
+ * <p>
+ * It is divided into categories
+ *
+ * @see ProductCategory
+ */
 @Table(name = "PRODUCTS")
 @Entity
 @Getter
@@ -37,6 +48,12 @@ public class Product {
     @Column(name = "PRODUCT_CATEGORY_ID", nullable = false)
     private Long productCategoryId;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

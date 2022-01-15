@@ -9,6 +9,11 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Stores information about one step in a recipe for preparing a dish
+ *
+ * @see Dish
+ */
 @Entity
 @Table(name = "RECIPES")
 @Getter
@@ -30,6 +35,12 @@ public class Recipe {
     private String recipe;
 
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

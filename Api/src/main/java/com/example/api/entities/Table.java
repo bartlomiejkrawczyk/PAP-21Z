@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Entity that holds information about the table available in restaurant
+ */
 @Entity
 @javax.persistence.Table(name = "TABLES")
 @Getter
@@ -24,6 +27,12 @@ public class Table {
     @Column(name = "NAME", nullable = false, length = 63)
     private String name;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -10,6 +10,13 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entity that holds information about the dish
+ * <p>
+ * It is divided into categories
+ *
+ * @see DishCategory
+ */
 @Entity
 @Table(name = "DISHES")
 @Getter
@@ -39,6 +46,12 @@ public class Dish {
     @OneToMany(mappedBy = "dishId")
     private List<Recipe> recipes;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
