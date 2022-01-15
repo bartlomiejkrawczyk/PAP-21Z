@@ -19,6 +19,11 @@ public class EmployeeKindsController {
         this.repository = repository;
     }
 
+    /**
+     * Retrieve all employee kinds available in the database with employees assigned to those positions
+     *
+     * @return List of employee kinds
+     */
     @GetMapping("all")
     public List<EmployeeKind> findAll() {
         return (List<EmployeeKind>) repository.findAll();

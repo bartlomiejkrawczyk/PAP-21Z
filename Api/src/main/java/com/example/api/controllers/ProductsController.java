@@ -24,11 +24,23 @@ public class ProductsController {
         return repository.findProductInfoCookById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
+    /**
+     * Retrieve all the products from the database
+     *
+     * @return List of products
+     */
     @GetMapping("all")
     public List<Product> findAll() {
         return (List<Product>) repository.findAll();
     }
 
+    /**
+     * Increase the quantity of given product by amount specified by quantity
+     *
+     * @param id       id of the product, quantity have to be increased
+     * @param quantity amount of product which was delivered
+     * @return Product with updated quantity
+     */
     @PutMapping("/{id}/{quantity}")
     public Product increaseQuantity(@PathVariable Long id, @PathVariable Long quantity) {
         return repository.findById(id)

@@ -19,6 +19,11 @@ public class IngredientsController {
         this.repository = repository;
     }
 
+    /**
+     * Retrieve all ingredients specified in the database
+     *
+     * @return List of ingredients
+     */
     @GetMapping("/all")
     public List<Ingredient> findAll() {
         return (List<Ingredient>) repository.findAll();
