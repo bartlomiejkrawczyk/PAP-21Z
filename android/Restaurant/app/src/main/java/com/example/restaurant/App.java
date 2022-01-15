@@ -17,6 +17,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+/**
+ * Base android application class
+ * - this is the starting class - defined in Android manifest
+ */
 public class App extends Application {
 
     public static InterfaceApi interfaceApi;
@@ -69,6 +73,11 @@ public class App extends Application {
         interfaceApi = retrofit.create(InterfaceApi.class);
     }
 
+    /**
+     * On startup download dishes and tables
+     * - it isn't necessary if the data hasn't changed between
+     * two separate application starts
+     */
     private void updateData() {
         new DishUtils(getApplicationContext()).downloadDishes();
         new TableUtils(getApplicationContext()).downloadTables();

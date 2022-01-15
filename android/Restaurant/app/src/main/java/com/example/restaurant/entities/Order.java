@@ -3,6 +3,27 @@ package com.example.restaurant.entities;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Order is an entity that connects two other entities:
+ * - Receipt
+ * - Dish
+ * <p>
+ * It holds information about what dish was ordered with which receipt
+ * <p>
+ * Cooks can get assigned to orders
+ * Order can have multiple specialRequests
+ * <p>
+ * Every order can be in four states (indicated by status and employee):
+ * status: 1, employee: null - order requested, but preparing hasn't started
+ * status: 1, employee: assigned - order is being prepared
+ * status: 2, employee: assigned - order is ready to be served
+ * status: 3, employee: assigned - order is served
+ *
+ * @see Receipt
+ * @see Dish
+ * @see Employee
+ * @see SpecialRequest
+ */
 public class Order implements Serializable {
 
     private Long id;

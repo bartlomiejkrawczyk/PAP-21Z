@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+/**
+ * Entity that holds information about the table available in restaurant
+ */
 @Entity(tableName = "tables")
 public class Table implements Serializable {
 

@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class used to download tables and save them into the local database
+ */
 public class TableUtils {
     private final Context context;
 
@@ -21,6 +24,10 @@ public class TableUtils {
         this.context = context;
     }
 
+    /**
+     * Download all the tables from the database and save them to the local database
+     * if there are those tables in the database already - replace them
+     */
     public void downloadTables() {
         Call<List<Table>> call = App.interfaceApi.getTables();
         call.enqueue(new Callback<List<Table>>() {

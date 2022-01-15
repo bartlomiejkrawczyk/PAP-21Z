@@ -9,6 +9,10 @@ import com.example.restaurant.entities.Dish;
 
 import java.util.List;
 
+/**
+ * Data Access Object
+ * - interface used to define methods needed to operate on dishes
+ */
 @Dao
 public interface DishesDao {
 

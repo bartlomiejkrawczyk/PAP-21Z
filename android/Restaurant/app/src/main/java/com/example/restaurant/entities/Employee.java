@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * Employee represents an entity holding information about
+ * particular worker
+ */
 public class Employee implements Serializable {
 
     private Long id;
