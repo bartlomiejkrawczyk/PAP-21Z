@@ -4,6 +4,12 @@ import com.example.restaurant.errors.InvalidData;
 
 import java.io.Serializable;
 
+/**
+ * Entity that stores information about customer's special request
+ * about the dish he ordered
+ *
+ * @see Order
+ */
 public class SpecialRequest implements Serializable {
     private Long id;
 

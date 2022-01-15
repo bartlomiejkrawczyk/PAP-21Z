@@ -11,6 +11,10 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Entity that stores information about customer's special request
+ * about the dish he ordered
+ */
 @Entity
 @Table(name = "SPECIAL_REQUESTS")
 @Getter
@@ -39,6 +43,12 @@ public class SpecialRequest {
     @Column(name = "ORDER_ID", nullable = false)
     private Long orderId;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

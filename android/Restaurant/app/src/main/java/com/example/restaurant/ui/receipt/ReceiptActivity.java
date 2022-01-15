@@ -48,6 +48,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class that controls what can happen on receipt activity
+ * <p>
+ * Window that displays information on receipt
+ */
 public class ReceiptActivity extends AppCompatActivity {
 
     public static final String DISH = "dish";

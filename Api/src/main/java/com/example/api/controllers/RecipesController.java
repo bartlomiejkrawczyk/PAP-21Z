@@ -19,6 +19,11 @@ public class RecipesController {
         this.repository = repository;
     }
 
+    /**
+     * Retrieve all the recipes available in the database
+     *
+     * @return List of recipes
+     */
     @GetMapping("all")
     public List<Recipe> findAll() {
         return (List<Recipe>) repository.findAll();

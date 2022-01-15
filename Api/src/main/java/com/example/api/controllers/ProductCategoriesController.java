@@ -19,6 +19,11 @@ public class ProductCategoriesController {
         this.repository = repository;
     }
 
+    /**
+     * Retrieve all the product categories available in the database, with products included in categories
+     *
+     * @return List of all product categories
+     */
     @GetMapping("all")
     public List<ProductCategory> findAll() {
         return (List<ProductCategory>) repository.findAll();

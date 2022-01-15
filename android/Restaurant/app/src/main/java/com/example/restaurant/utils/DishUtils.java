@@ -15,6 +15,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class used to download dishes and save them into the local database
+ */
 public class DishUtils {
     private final Context context;
 
@@ -22,6 +25,11 @@ public class DishUtils {
         this.context = context;
     }
 
+
+    /**
+     * Download all the dishes from the database and save them to the local database
+     * if there are those dishes in the database already - replace them
+     */
     public void downloadDishes() {
         Call<List<DishCategory>> call = App.interfaceApi.getDishes();
         call.enqueue(new Callback<List<DishCategory>>() {

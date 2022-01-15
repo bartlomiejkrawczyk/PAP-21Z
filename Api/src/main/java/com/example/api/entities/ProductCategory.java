@@ -10,6 +10,11 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entity used to divide products into categories
+ *
+ * @see Product
+ */
 @Table(name = "PRODUCT_CATEGORIES")
 @Entity
 @Getter
@@ -27,6 +32,12 @@ public class ProductCategory {
     @OneToMany(mappedBy = "productCategoryId")
     private List<Product> products;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

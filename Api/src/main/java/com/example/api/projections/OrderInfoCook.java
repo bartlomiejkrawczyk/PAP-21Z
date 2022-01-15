@@ -2,6 +2,12 @@ package com.example.api.projections;
 
 import java.util.List;
 
+
+/**
+ * Special interface used by Spring Boot to retrieve only needed information
+ *
+ * @see com.example.api.entities.Order
+ */
 public interface OrderInfoCook {
     Long getId();
 

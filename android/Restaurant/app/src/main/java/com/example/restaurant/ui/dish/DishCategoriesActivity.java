@@ -16,6 +16,11 @@ import com.example.restaurant.entities.DishCategory;
 
 import java.util.List;
 
+/**
+ * Class that controls what can happen on dish categories activity
+ * <p>
+ * Window that displays all the dish categories available in the restaurant
+ */
 public class DishCategoriesActivity extends AppCompatActivity {
 
     public static final String DISH_CATEGORY_ID_KEY = "dish_category_id";

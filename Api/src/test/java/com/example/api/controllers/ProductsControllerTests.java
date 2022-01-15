@@ -23,6 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -94,6 +95,28 @@ public class ProductsControllerTests {
     @Test
     public void findByIdEntityNotFound() throws Exception {
         mockMvc.perform(get("/products/id/-1"))
+                .andDo(print())
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void increaseQuantity() throws Exception {
+        MvcResult result = mockMvc.perform(put("/products/0/100"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Product product = gson.fromJson(result.getResponse().getContentAsString(), Product.class);
+        mockProduct.setQuantity(mockProduct.getQuantity() + 100);
+
+        assertEquals(mockProduct.getQuantity(), product.getQuantity());
+        assertEquals(mockProduct, product);
+    }
+
+    @Test
+    public void increaseQuantityEntityNotFound() throws Exception {
+        mockMvc.perform(put("/products/-1/100"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 .andExpect(status().isNotFound());

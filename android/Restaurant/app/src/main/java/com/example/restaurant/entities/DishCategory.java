@@ -8,6 +8,11 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Entity used to divide dishes into categories
+ *
+ * @see Dish
+ */
 @Entity(tableName = "categories")
 public class DishCategory implements Serializable {
 

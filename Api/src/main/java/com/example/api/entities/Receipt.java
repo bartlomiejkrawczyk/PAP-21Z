@@ -12,6 +12,23 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entity that stores information about receipt
+ * <p>
+ * Receipt can be in two states (indicated by payment):
+ * - payment == 0 - the receipt is open - waiter can add more orders to the receipt
+ * - payment != 0 - the receipt is closed - every order included in order must have status 3 - already served
+ * <p>
+ * Waiter can be assigned to receipt
+ * - employee will add orders for dishes
+ * and will handle every prepared order in this receipt
+ * <p>
+ * Every receipt is assigned to one table
+ *
+ * @see Order
+ * @see Employee
+ * @see com.example.api.entities.Table
+ */
 @Table(name = "RECEIPTS")
 @Entity
 @Getter
@@ -47,6 +64,12 @@ public class Receipt {
     @OneToMany(mappedBy = "receiptId")
     private List<Order> orders;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

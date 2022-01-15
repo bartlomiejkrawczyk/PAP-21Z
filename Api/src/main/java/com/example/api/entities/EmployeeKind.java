@@ -10,6 +10,14 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entity representing available in restaurant positions
+ * For now there are only two available positions
+ * 1 - waiter
+ * 2 - cook
+ *
+ * @see Employee
+ */
 @Table(name = "EMPLOYEE_KINDS")
 @Entity
 @Getter
@@ -27,6 +35,12 @@ public class EmployeeKind {
     @OneToMany(mappedBy = "employeeKindId")
     private List<Employee> employees;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

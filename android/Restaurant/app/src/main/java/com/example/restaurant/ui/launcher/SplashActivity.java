@@ -15,6 +15,10 @@ import com.example.restaurant.R;
 import com.example.restaurant.ui.login.LoginActivity;
 import com.example.restaurant.ui.receipt.ReceiptsActivity;
 
+/**
+ * Custom class that decides which activity to open
+ * (it checks whether employee has been logged in)
+ */
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 

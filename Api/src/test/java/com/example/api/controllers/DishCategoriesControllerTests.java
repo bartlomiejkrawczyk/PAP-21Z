@@ -57,7 +57,7 @@ public class DishCategoriesControllerTests {
 
     @Test
     public void getExample() throws Exception {
-        DishCategory dishCategory = new DishCategory(1L, "Kategoria", "img/kkn.gif", Collections.emptyList());
+        DishCategory dishCategory = new DishCategory(1L, "Category", "tomato.jpg", Collections.emptyList());
 
         mockMvc.perform(get("/dishCategories/example"))
                 .andDo(print())

@@ -3,6 +3,23 @@ package com.example.restaurant.entities;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Entity that stores information about receipt
+ * <p>
+ * Receipt can be in two states (indicated by payment):
+ * - payment == 0 - the receipt is open - waiter can add more orders to the receipt
+ * - payment != 0 - the receipt is closed - every order included in order must have status 3 - already served
+ * <p>
+ * Waiter can be assigned to receipt
+ * - employee will add orders for dishes
+ * and will handle every prepared order in this receipt
+ * <p>
+ * Every receipt is assigned to one table
+ *
+ * @see Order
+ * @see Employee
+ * @see Table
+ */
 public class Receipt implements Serializable {
 
     private Long id;

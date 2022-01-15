@@ -19,6 +19,11 @@ public class TablesController {
         this.repository = repository;
     }
 
+    /**
+     * Retrieve all the tables available in the database
+     *
+     * @return List of all the tables
+     */
     @GetMapping("all")
     public List<Table> findAll() {
         return (List<Table>) repository.findAll();
