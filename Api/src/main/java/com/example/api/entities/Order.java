@@ -12,6 +12,27 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Order is an entity that connects two other entities:
+ * - Receipt
+ * - Dish
+ * <p>
+ * It holds information about what dish was ordered with which receipt
+ * <p>
+ * Cooks can get assigned to orders
+ * Order can have multiple specialRequests
+ * <p>
+ * Every order can be in four states (indicated by status and employee):
+ * status: 1, employee: null - order requested, but preparing hasn't started
+ * status: 1, employee: assigned - order is being prepared
+ * status: 2, employee: assigned - order is ready to be served
+ * status: 3, employee: assigned - order is served
+ *
+ * @see Receipt
+ * @see Dish
+ * @see Employee
+ * @see SpecialRequest
+ */
 @Table(name = "ORDERS")
 @Entity
 @Getter
@@ -53,6 +74,12 @@ public class Order {
     @JoinColumn(name = "EMPLOYEE_ID")
     private Employee employee;
 
+    /**
+     * Method used for test purposes
+     *
+     * @param o object to which this object will be compared
+     * @return whether the objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
