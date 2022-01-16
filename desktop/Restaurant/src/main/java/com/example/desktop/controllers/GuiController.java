@@ -12,7 +12,7 @@ public class GuiController {
     TaskBarController taskBar;
     OrdersInProgressController ordersInProgress;
     OrdersPlacedController ordersPlaced;
-    // TODO: add here reference to products controller
+    ProductsController productsController;
 
     public GuiController(GuiView view){
         this.view = view;
@@ -23,7 +23,6 @@ public class GuiController {
         taskBar = new TaskBarController(view.getPanelTop());
         ordersInProgress = new OrdersInProgressController(view.getPanelRight());
         ordersPlaced = new OrdersPlacedController(view.getPanelLeft(), ordersInProgress);
-
 
         initView();
     }
@@ -41,7 +40,7 @@ public class GuiController {
             ordersInProgress.reloadOrders();
             ordersPlaced.reloadOrders();
             db.downloadProducts();
-            // TODO: call productsController.reloadProducts();
+            productsController.reloadProducts();
         });
         t.start();
     }

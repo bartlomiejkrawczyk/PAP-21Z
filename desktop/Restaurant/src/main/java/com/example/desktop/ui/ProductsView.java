@@ -11,10 +11,10 @@ public class ProductsView {
         private JPanel scrollablePanel;
 
     public ProductsView() {
-        frame = new JFrame("Products");
+        frame = new JFrame();
 
-        frame.setPreferredSize(new Dimension(800, 450));
-        frame.setMinimumSize(new Dimension(800, 450));
+        frame.setPreferredSize(new Dimension(600, 300));
+        frame.setMinimumSize(new Dimension(600, 300));
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new GridLayout(1, 0));
@@ -56,10 +56,6 @@ public class ProductsView {
         return scrollablePanel;
     }
 
-    public static void main(String[] args) {
-
-        ProductsView productsView = new ProductsView();
-    }
 }
 
 

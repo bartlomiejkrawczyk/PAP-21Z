@@ -79,6 +79,10 @@ public class AppDatabase {
         ordersInProgress.sort(Comparator.comparing(o -> o.getEmployee().getId()));
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
     public synchronized Product getProductById(Long productId) {

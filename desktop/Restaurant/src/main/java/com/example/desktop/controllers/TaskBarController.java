@@ -1,6 +1,7 @@
 package com.example.desktop.controllers;
 
 import com.example.desktop.ui.CooksView;
+import com.example.desktop.ui.ProductsView;
 import com.example.desktop.ui.TaskBarView;
 
 
@@ -15,11 +16,17 @@ public class TaskBarController {
     }
 
     private void updateActionListener(){
-        view.getButton().addActionListener(e -> showCooks());
+        view.getButton1().addActionListener(e -> showCooks());
+        view.getButton2().addActionListener(e -> showProducts());
     }
 
     private void showCooks(){
         CooksView cooksView = new CooksView();
         new LogIOController(cooksView);
+    }
+
+    private void showProducts() {
+        ProductsView productsView = new ProductsView();
+        new ProductsController(productsView);
     }
 }
