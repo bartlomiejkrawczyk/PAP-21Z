@@ -79,7 +79,11 @@ public class AppDatabase {
         ordersInProgress.sort(Comparator.comparing(o -> o.getEmployee().getId()));
     }
 
-    public List<Product> getProducts() {
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
+    public List<Product> getProductsDownloadIfEmpty() {
+        if (products.size() == 0)
+            downloadProducts();
         return products;
     }
 
@@ -96,6 +100,8 @@ public class AppDatabase {
         return productOptional.orElse(null);
     }
 
+    // Note: that this function should be called on separate thread!
+    // Because it may potentially lock UI
     public void downloadProducts() {
         try {
             Call<List<Product>> call = App.interfaceApi.getProducts();
