@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class CooksView {
+    /**
+     * Class creating and facilitating view of whole frame enabling us to
+     * see order de
+     */
 
     private final JFrame frame;
     private final JPanel panel;

@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class ProductsView {
+    /**
+     * Class creating and facilitating view of whole frame enabling us to
+     * update info about products quantity.
+     */
 
         private JFrame frame;
         private JPanel panel;

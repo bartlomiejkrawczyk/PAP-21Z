@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class OrdersPlacedView {
+    /**
+     * Class creating and facilitating view of whole panel enabling us to
+     * see order which are only placed.
+     */
 
     private final JPanel panel;
     private final JPanel scrollablePanel;

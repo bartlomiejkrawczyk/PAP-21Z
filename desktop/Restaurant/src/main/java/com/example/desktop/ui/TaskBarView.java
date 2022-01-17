@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class TaskBarView {
+    /**
+     * Class creating and facilitating view of whole task bar enabling us to
+     * use buttons logging cooks or showing products view.
+     */
 
     private final JPanel panel;
     private final JButton button1;

@@ -7,6 +7,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class ProductItemView {
+    /**
+     * Class creating and facilitating view of whole panel enabling us to
+     * see product and its quantity.
+     */
 
     private JPanel panel;
     private JLabel productName;
@@ -59,7 +63,7 @@ public class ProductItemView {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }
+    } //TODO: remove this
 
     public JPanel getPanel() {
         return panel;

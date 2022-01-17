@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class DetailsView {
+    /**
+     * Class creating and facilitating view of whole frame enabling us to
+     * see orders details.
+     */
 
     private final JFrame frame;
     private final JTextArea textArea;
