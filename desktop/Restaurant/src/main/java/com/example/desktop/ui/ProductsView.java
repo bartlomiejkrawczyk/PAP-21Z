@@ -4,11 +4,11 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole frame enabling us to
+ * update info about products quantity.
+ */
 public class ProductsView {
-    /**
-     * Class creating and facilitating view of whole frame enabling us to
-     * update info about products quantity.
-     */
 
         private JFrame frame;
         private JPanel panel;

@@ -7,11 +7,11 @@ import com.example.desktop.ui.OrdersPlacedView;
 
 import java.util.List;
 
+/**
+ * Class responsible for controlling panel in which are placed views
+ * of only placed orders.
+ */
 public class OrdersPlacedController {
-    /**
-     * Class responsible for controlling panel in which are placed views
-     * of only placed orders.
-     */
 
     private final OrdersPlacedView view;
     private final AppDatabase db;
@@ -37,31 +37,31 @@ public class OrdersPlacedController {
         }
     }
 
+    /**
+     * Reloads orders by: first, removing all, second, adding them again
+     * and then by refreshing whole panel.
+     */
     public void reloadOrders() {
-        /**
-         * Reloads orders by: first, removing all, second, adding them again
-         * and then by refreshing whole panel.
-         */
         view.getScrollablePanel().removeAll();
         addOrders();
         renewPanel();
     }
 
 
+    /**
+     * Refreshes whole panel.
+     */
     private void renewPanel() {
-        /**
-         * Refreshes whole panel.
-         */
         view.getScrollablePanel().revalidate();
         view.getScrollablePanel().repaint();
         view.getPanel().revalidate();
         view.getPanel().repaint();
     }
 
+    /**
+     * Removes itemView from list of placed orders and from panel.
+     */
     public void removeItemView(ItemView itemView) {
-        /**
-         * Removes itemView from list of placed orders and from panel.
-         */
         db.getOrdersPlaced().remove(itemView.getOrder());
         view.getScrollablePanel().remove(itemView.getPanel());
         renewPanel();

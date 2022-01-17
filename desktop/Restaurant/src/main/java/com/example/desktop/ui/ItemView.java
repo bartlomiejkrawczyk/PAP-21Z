@@ -6,11 +6,11 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of panel enabling us to
+ * f. e. see placed order or order in progress.
+ */
 public class ItemView {
-    /**
-     * Class creating and facilitating view of panel enabling us to
-     * f. e. see placed order or order in progress.
-     */
 
     private final JPanel panel;
     private final JLabel label;

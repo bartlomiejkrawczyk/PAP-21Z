@@ -3,11 +3,11 @@ package com.example.desktop.ui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole frame enabling us to
+ * see basic GUI.
+ */
 public class GuiView {
-    /**
-     * Class creating and facilitating view of whole frame enabling us to
-     * see basic GUI.
-     */
 
     private final JFrame frame;
     private final OrdersPlacedView ordersPlaced;

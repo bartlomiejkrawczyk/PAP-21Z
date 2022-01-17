@@ -8,10 +8,10 @@ import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+/**
+ * Class responsible for controlling view of particular product.
+ */
 public class ProductItemController {
-    /**
-     * Class responsible for controlling view of particular product.
-     */
 
     private final Product product;
     private final ProductItemView view;
@@ -27,10 +27,10 @@ public class ProductItemController {
         this.updateFocusListener();
     }
 
+    /**
+     * Set basic settings of view.
+     */
     public void updateView() {
-        /**
-         * Set basic settings of view.
-         */
         view.getInputTextField().setText("Enter amount");
         view.getButton().setText("Update quantity");
         view.getProductName().setText(product.getName());
@@ -42,10 +42,10 @@ public class ProductItemController {
         );
     }
 
+    /**
+     * Updates setting for text listeners in view.
+     */
     public void updateFocusListener() {
-        /**
-         * Updates setting for text listeners in view.
-         */
         view.getInputTextField().addFocusListener(new FocusListener() {
 
             @Override
@@ -60,17 +60,17 @@ public class ProductItemController {
         });
     }
 
+    /**
+     * Adds button which enable to change quantity of product.
+     */
     public void updateActionListener() {
-        /**
-         * Adds button which enable to change quantity of product.
-         */
         view.getButton().addActionListener(e -> new Thread(this::changeQuantity).start());
     }
 
+    /**
+     * Changes quantities of product in database and in view.
+     */
     public void changeQuantity() {
-        /**
-         * Changes quantities of product in database and in view.
-         */
         String text = view.getInputTextField().getText();
         long value;
         try {

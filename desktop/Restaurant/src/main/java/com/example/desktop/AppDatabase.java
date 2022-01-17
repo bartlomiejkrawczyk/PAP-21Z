@@ -31,7 +31,10 @@ public class AppDatabase {
     private List<Order> ordersPlaced;
     private List<Order> ordersInProgress;
 
-
+    /**
+     * if there is not local databes, downloads one
+     * @return database
+     */
     public static synchronized AppDatabase getAppDatabase() {
         if (db == null) {
             db = new AppDatabase();
@@ -50,6 +53,10 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+    /**
+     * Downloads employees if there is no downloaded.
+     * @return list of Employee objects
+     */
     public List<Employee> getEmployeesDownloadIfEmpty() {
         if (employees.size() == 0)
             downloadEmployees();
@@ -60,10 +67,18 @@ public class AppDatabase {
         return loggedInEmployees;
     }
 
+    /**
+     * Adds given employee to list of logged in.
+     * @param employee
+     */
     public void logIn(Employee employee) {
         loggedInEmployees.add(employee);
     }
 
+    /**
+     * Removes given employee from list of logged in.
+     * @param employee
+     */
     public void logOut(Employee employee) {
         loggedInEmployees.remove(employee);
     }
@@ -76,6 +91,10 @@ public class AppDatabase {
         return ordersInProgress;
     }
 
+    /**
+     * Add order to ordersInProgress and sort them by employee id.
+     * @param order
+     */
     public void addOrderInProgress(Order order) {
         ordersInProgress.add(order);
         ordersInProgress.sort(Comparator.comparing(o -> o.getEmployee().getId()));
@@ -83,6 +102,10 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+    /**
+     * Downloads list of products of there is none.
+     * @return
+     */
     public List<Product> getProductsDownloadIfEmpty() {
         if (products.size() == 0)
             downloadProducts();
@@ -91,6 +114,13 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * If there is no downloaded products, downloads all.
+     * Get product by its id.
+     * @param productId
+     * @return product of given id
+     */
     public synchronized Product getProductById(Long productId) {
         if (products.size() == 0) {
             downloadProducts();
@@ -104,6 +134,10 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Download products from real database. If error occurs, it's properly raised.
+     */
     public void downloadProducts() {
         try {
             Call<List<Product>> call = App.interfaceApi.getProducts();
@@ -128,6 +162,13 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * If there is no employees, downloads all.
+     * Get employee of given id.
+     * @param employeeId
+     * @return employee with given id
+     */
     public synchronized Employee getEmployeeById(Long employeeId) {
         if (employees.size() == 0) {
             downloadEmployees();
@@ -139,6 +180,9 @@ public class AppDatabase {
         return employeeOptional.orElse(null);
     }
 
+    /**
+     * Download all employees from real database. If error occurs, it's properly raised.
+     */
     public void downloadEmployees() {
         try {
             Call<List<Employee>> call = App.interfaceApi.getCooks();
@@ -163,6 +207,10 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Download placed orders from real database. If error occurs, it's properly raised.
+     */
     public void downloadOrdersPlaced(){
         try {
             Call<List<Order>> call = App.interfaceApi.getOrdersPlaced();
@@ -188,6 +236,10 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Download orders in progress from real database. If error occurs, it's properly raised.
+     */
     public void downloadOrdersInProgress(){
         try {
             Call<List<Order>> call = App.interfaceApi.getOrdersInProgress();
@@ -218,11 +270,18 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Uses other functions to download both placed and in progress orders.
+     */
     public void downloadOrders() {
         downloadOrdersPlaced();
         downloadOrdersInProgress();
     }
 
+    /**
+     * Automatically logs in employees with assigned orders.
+     */
     public void loginEmployeesWithOrders() {
         List<Employee> employees = ordersInProgress.stream()
                 .map(Order::getEmployee)
@@ -232,12 +291,22 @@ public class AppDatabase {
         loggedInEmployees.addAll(employees);
     }
 
+    /**
+     * Checks if employee can log out/doesn't have assigned order.
+     * @param employee
+     * @return result
+     */
     public boolean employeeCanLogOut(Employee employee) {
         return ordersInProgress.stream()
                 .map(Order::getEmployee)
                 .noneMatch(employee1 -> employee == employee1);
     }
 
+    /**
+     * Download order image from real database. If error occurs, it's properly raised.
+     * @param imagePath
+     * @return
+     */
     public BufferedImage getImage(String imagePath) {
         BufferedImage bufferedImage = null;
 
@@ -292,6 +361,11 @@ public class AppDatabase {
         return bufferedImage;
     }
 
+    /**
+     * Saves image to given path.
+     * @param image
+     * @param imagePath
+     */
     private void saveBufferedImage(BufferedImage image, String imagePath) {
         File directory = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator);
         boolean dirExists = directory.exists();
@@ -312,6 +386,12 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Get dish of given id.
+     * @param dishId
+     * @return
+     */
     public Dish getDishById(Long dishId) {
         Optional<Dish> dishOptional = dishes.stream()
                 .filter(dish -> dish != null && Objects.equals(dish.getId(), dishId))
@@ -350,6 +430,12 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Assign order to employee, set him as with assignment.
+     * @param order
+     * @param employeeId
+     */
     public void setEmployeePreparingOrder(Order order, Long employeeId) {
         Long orderId = order.getId();
         try {
@@ -375,6 +461,11 @@ public class AppDatabase {
 
     // Note: that this function should be called on separate thread!
     // Because it may potentially lock UI
+
+    /**
+     * Sets order status as advanced/in progress.
+     * @param order
+     */
     public void advanceOrderStatus(Order order) {
         Long orderId = order.getId();
         try {
@@ -398,6 +489,11 @@ public class AppDatabase {
         }
     }
 
+    /**
+     * Increase given product by given number.
+     * @param product
+     * @param quantity
+     */
     public void incrementProductQuantity(Product product, Long quantity) {
         Call<Product> call = App.interfaceApi.increaseProductQuantity(product.getId(), quantity);
         try {

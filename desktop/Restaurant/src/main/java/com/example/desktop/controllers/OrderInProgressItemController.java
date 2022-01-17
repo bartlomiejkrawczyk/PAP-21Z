@@ -5,11 +5,11 @@ import com.example.desktop.entities.Order;
 import com.example.desktop.ui.DetailsView;
 import com.example.desktop.ui.ItemView;
 
+/**
+ * Class responsible for controlling view of particular order which
+ * is in progress.
+ */
 public class OrderInProgressItemController {
-    /**
-     * Class responsible for controlling view of particular order which
-     * is in progress.
-     */
 
     private final Order orderInProgress;
     private final ItemView view;

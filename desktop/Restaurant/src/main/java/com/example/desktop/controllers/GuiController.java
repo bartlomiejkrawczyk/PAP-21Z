@@ -5,10 +5,10 @@ import com.example.desktop.ui.GuiView;
 
 import javax.swing.*;
 
+/**
+ * Class responsible for controlling whole basic GUI.
+ */
 public class GuiController {
-    /**
-     * Class responsible for controlling whole basic GUI.
-     */
 
     GuiView view;
     AppDatabase db;

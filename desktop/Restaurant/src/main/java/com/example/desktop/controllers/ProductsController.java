@@ -10,11 +10,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
+/**
+ * Class responsible for controlling whole frame which enables us
+ * to update products info.
+ */
 public class ProductsController {
-    /**
-     * Class responsible for controlling whole frame which enables us
-     * to update products info.
-     */
 
     private final ProductsView view;
 
@@ -55,10 +55,10 @@ public class ProductsController {
         }
     }
 
+    /**
+     * Reload view of products.
+     */
     public void reloadProducts() {
-        /**
-         * Reload view of products.
-         */
         view.getScrollablePanel().removeAll();
         addProducts();
         renewPanel();

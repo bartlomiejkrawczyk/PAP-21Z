@@ -8,8 +8,11 @@ import com.example.desktop.ui.ItemView;
 
 import java.util.List;
 
+/**
+ * Class responsible for controlling whole frame which enables us to
+ * assign orders to cooks.
+ */
 public class AssignmentCookController {
-    //TODO: docs
 
     private final CooksView view;
     private final Order orderToAssign;

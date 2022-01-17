@@ -4,12 +4,11 @@ import com.example.desktop.ui.CooksView;
 import com.example.desktop.ui.ProductsView;
 import com.example.desktop.ui.TaskBarView;
 
-
+/**
+ * Class responsible for controlling bar in which we place
+ * other buttons.
+ */
 public class TaskBarController {
-    /**
-     * Class responsible for controlling bar in which we place
-     * other buttons.
-     */
 
     private final TaskBarView view;
 

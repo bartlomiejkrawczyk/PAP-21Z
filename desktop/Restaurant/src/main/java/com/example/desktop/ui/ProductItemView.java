@@ -6,11 +6,11 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole panel enabling us to
+ * see product and its quantity.
+ */
 public class ProductItemView {
-    /**
-     * Class creating and facilitating view of whole panel enabling us to
-     * see product and its quantity.
-     */
 
     private JPanel panel;
     private JLabel productName;
