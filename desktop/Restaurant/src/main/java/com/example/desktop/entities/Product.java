@@ -1,5 +1,14 @@
 package com.example.desktop.entities;
 
+/**
+ * Product is an entity that stores information about particular product
+ * and how much of this product is in magazine
+ * <p>
+ * Furthermore, it stores minimum quantity
+ * - when quantity drops below the minQuantity, there is dire need for new delivery
+ * <p>
+ * It is divided into categories
+ */
 public class Product {
     private Long id;
 

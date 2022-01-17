@@ -1,6 +1,5 @@
 package com.example.desktop.controllers;
 
-import com.example.desktop.App;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Employee;
 import com.example.desktop.ui.CooksView;
@@ -35,9 +34,4 @@ public class LogIOController {
         }
     }
 
-    public static void main(String[] args) {
-        App.createNetworkSys();
-        CooksView view = new CooksView();
-        new LogIOController(view);
-    }
 }

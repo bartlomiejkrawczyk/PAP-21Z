@@ -1,5 +1,10 @@
 package com.example.desktop.entities;
 
+/**
+ * Stores information about one step in a recipe for preparing a dish
+ *
+ * @see Dish
+ */
 public class Recipe {
     private int step;
     private int dishId;

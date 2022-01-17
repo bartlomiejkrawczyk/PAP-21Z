@@ -12,6 +12,13 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
+/**
+ * Interface with defined functions,
+ * used by retrofit to generate methods,
+ * that fetch data from server
+ *
+ * @see retrofit2.Retrofit
+ */
 public interface InterfaceApi {
 
     @GET("img/restaurant/{file}")
