@@ -50,7 +50,8 @@ public class ProductItemController {
 
             @Override
             public void focusLost(FocusEvent e) {
-                view.getInputTextField().setText("Enter amount");
+                if (view.getInputTextField().getText().equals(""))
+                    view.getInputTextField().setText("Enter amount");
             }
 
             @Override
