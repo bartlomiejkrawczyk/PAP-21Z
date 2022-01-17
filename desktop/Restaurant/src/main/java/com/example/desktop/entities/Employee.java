@@ -1,5 +1,11 @@
 package com.example.desktop.entities;
 
+/**
+ * Employee represents an entity holding information about
+ * particular worker
+ * <p>
+ * On desktop every employee has assigned position - 2 - cook
+ */
 public class Employee {
 
     private Long id;

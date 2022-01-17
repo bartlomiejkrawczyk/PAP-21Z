@@ -8,6 +8,10 @@ import com.example.desktop.ui.ItemView;
 
 import java.util.List;
 
+/**
+ * Class responsible for controlling whole frame which enables us to
+ * assign orders to cooks.
+ */
 public class AssignmentCookController {
 
     private final CooksView view;
@@ -26,7 +30,7 @@ public class AssignmentCookController {
         addLoggedInEmployees();
     }
 
-    public void updateView() {
+    private void updateView() {
         view.getFrame().setTitle("Assign a cook");
     }
 

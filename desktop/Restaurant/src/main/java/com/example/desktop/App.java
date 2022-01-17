@@ -12,6 +12,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Base class for desktop application
+ * On start:
+ * - setups network connection
+ * - starts main gui view and controller
+ */
 public class App {
 
     private static final String BASE_URL = "https://taskeeapp.com:8443/";
@@ -23,7 +29,7 @@ public class App {
         new GuiController(view);
     }
 
-    public static void createNetworkSys() {
+    private static void createNetworkSys() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 

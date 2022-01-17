@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole panel enabling us to
+ * see orders which are in progress.
+ */
 public class OrdersInProgressView {
 
     private final JPanel panel;

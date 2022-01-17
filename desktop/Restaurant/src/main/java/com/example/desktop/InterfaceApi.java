@@ -12,6 +12,13 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
+/**
+ * Interface with defined functions,
+ * used by retrofit to generate methods,
+ * that fetch data from server
+ *
+ * @see retrofit2.Retrofit
+ */
 public interface InterfaceApi {
 
     @GET("img/restaurant/{file}")
@@ -29,8 +36,11 @@ public interface InterfaceApi {
     @GET("api/dishes/{id}")
     Call<Dish> getDishById(@Path("id") Long id);
 
-    @GET("api/products/id/{id}")
-    Call<Product> getProductById(@Path("id") Long productId);
+    @GET("api/products/all")
+    Call<List<Product>> getProducts();
+
+    @PUT("api/products/{id}/{quantity}")
+    Call<Product> increaseProductQuantity(@Path("id") Long id, @Path("quantity") Long quantity);
 
     @PUT("api/orders/employee/{orderId}/{employeeId}")
     Call<Order> setEmployeePreparingOrder(@Path("orderId") Long orderId, @Path("employeeId") Long employeeId);

@@ -5,35 +5,32 @@ import com.example.desktop.ui.GuiView;
 
 import javax.swing.*;
 
+/**
+ * Class responsible for controlling whole basic GUI.
+ */
 public class GuiController {
 
-    GuiView view;
-    AppDatabase db;
-    TaskBarController taskBar;
-    OrdersInProgressController ordersInProgress;
-    OrdersPlacedController ordersPlaced;
+    private final GuiView view;
+    private final AppDatabase db;
+    private OrdersInProgressController ordersInProgress;
+    private OrdersPlacedController ordersPlaced;
 
-    public GuiController(GuiView view){
+    public GuiController(GuiView view) {
         this.view = view;
 
         db = AppDatabase.getAppDatabase();
-        db.downloadOrders();
 
-        taskBar = new TaskBarController(view.getPanelTop());
+        new TaskBarController(view.getPanelTop());
+
+        new Thread(this::initView).start();
+    }
+
+    private void initView() {
+        db.downloadOrders();
         ordersInProgress = new OrdersInProgressController(view.getPanelRight());
         ordersPlaced = new OrdersPlacedController(view.getPanelLeft(), ordersInProgress);
-
-
-        initView();
-    }
-
-    private void initView(){
-        new Thread(this::updateView).start();
-    }
-
-    private void updateView() {
-        db.downloadOrders();
         db.loginEmployeesWithOrders();
+
 
         Timer t = new Timer(20_000, e -> {
             db.downloadOrders();
