@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class ProductView {
+public class ProductItemView {
 
     private JPanel panel;
     private JLabel productName;
@@ -17,7 +17,7 @@ public class ProductView {
 
     private Product product;
 
-    public ProductView() {
+    public ProductItemView() {
 
         Border blackLine = BorderFactory.createLineBorder(Color.black);
 
@@ -48,7 +48,7 @@ public class ProductView {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        ProductView view = new ProductView();
+        ProductItemView view = new ProductItemView();
         view.getButton().setText("Update quantity");
         view.getProductName().setText("Cola");
         view.getQuantityAndUnit().setText("18 Litres");

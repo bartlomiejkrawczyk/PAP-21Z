@@ -9,6 +9,10 @@ import java.awt.*;
 import java.util.List;
 
 public class OrdersInProgressController {
+    /**
+     * Class responsible for controlling whole panel in which are placed
+     * view of orders in progress.
+     */
 
     private final OrdersInProgressView view;
     private final AppDatabase db;
@@ -48,17 +52,29 @@ public class OrdersInProgressController {
     }
 
     public void reloadOrders() {
+        /**
+         * Reload orders by: first, removing them, second: adding them again
+         * and reloading whole panel.
+         */
         view.getScrollablePanel().removeAll();
         addOrders();
         renewPanel();
     }
 
     public void removeItem(ItemView itemView) {
+        /**
+         * Removes particular given itemView from ordersInProgress
+         * and reloads panel.
+         */
         db.getOrdersInProgress().remove(itemView.getOrder());
         reloadOrders();
     }
 
     public void addItemView(ItemView itemView) {
+        /**
+         * Adds given itemView to ordersInProgress
+         * and reloads panel.
+         */
         db.addOrderInProgress(itemView.getOrder());
         reloadOrders();
     }

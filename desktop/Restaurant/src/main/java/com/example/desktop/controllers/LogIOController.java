@@ -8,6 +8,10 @@ import com.example.desktop.ui.ItemView;
 import java.util.List;
 
 public class LogIOController {
+    /**
+     * Class responsible for controlling frame which enables us to
+     * log in/out cooks.
+     */
 
     private final CooksView view;
 

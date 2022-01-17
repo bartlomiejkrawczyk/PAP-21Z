@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class LogIOItemController {
+    /**
+     * Class responsible for controlling particular views enabling us to
+     * log in/out cook.
+     */
 
     private final Employee employee;
     private final ItemView view;

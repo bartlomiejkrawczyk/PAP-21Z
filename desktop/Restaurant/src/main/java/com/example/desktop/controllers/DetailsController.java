@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class DetailsController {
+    /**
+     * Class responsible for controlling frame with details.
+     */
 
     private final DetailsView view;
     private final AppDatabase db;

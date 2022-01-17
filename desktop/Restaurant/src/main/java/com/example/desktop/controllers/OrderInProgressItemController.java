@@ -6,6 +6,10 @@ import com.example.desktop.ui.DetailsView;
 import com.example.desktop.ui.ItemView;
 
 public class OrderInProgressItemController {
+    /**
+     * Class responsible for controlling view of particular order which
+     * is in progress.
+     */
 
     private final Order orderInProgress;
     private final ItemView view;

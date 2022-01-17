@@ -9,6 +9,7 @@ import com.example.desktop.ui.ItemView;
 import java.awt.event.WindowEvent;
 
 public class AssignmentCookItemController {
+    //TODO: docs
 
     private final ItemView view;
     private final Employee employee;

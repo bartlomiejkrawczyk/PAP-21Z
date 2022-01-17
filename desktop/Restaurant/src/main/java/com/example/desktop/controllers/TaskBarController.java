@@ -6,6 +6,10 @@ import com.example.desktop.ui.TaskBarView;
 
 
 public class TaskBarController {
+    /**
+     * Class responsible for controlling bar in which we place
+     * other buttons.
+     */
 
     private final TaskBarView view;
 

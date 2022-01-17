@@ -2,7 +2,7 @@ package com.example.desktop.controllers;
 
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Product;
-import com.example.desktop.ui.ProductView;
+import com.example.desktop.ui.ProductItemView;
 import com.example.desktop.ui.ProductsView;
 
 import javax.swing.*;
@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 
 public class ProductsController {
+    /**
+     * Class responsible for controlling whole frame which enables us
+     * to update products info.
+     */
 
     private final ProductsView view;
 
@@ -44,7 +48,7 @@ public class ProductsController {
     private void addProducts() {
         List<Product> products = db.getProductsDownloadIfEmpty();
         for (Product product: products) {
-            ProductView productView = new ProductView();
+            ProductItemView productView = new ProductItemView();
             productView.setProduct(product);
             new ProductItemController(product, productView);
             view.getScrollablePanel().add(productView.getPanel());
@@ -52,6 +56,9 @@ public class ProductsController {
     }
 
     public void reloadProducts() {
+        /**
+         * Reload view of products.
+         */
         view.getScrollablePanel().removeAll();
         addProducts();
         renewPanel();
