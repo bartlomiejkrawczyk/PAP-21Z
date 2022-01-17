@@ -44,6 +44,8 @@ public class AppDatabase {
         employees = new ArrayList<>();
         loggedInEmployees = new ArrayList<>();
         dishes = new ArrayList<>();
+        ordersPlaced = new ArrayList<>();
+        ordersInProgress = new ArrayList<>();
     }
 
     // Note: that this function should be called on separate thread!
@@ -380,6 +382,28 @@ public class AppDatabase {
             Response<Order> res = call.execute();
             if (res.isSuccessful() && res.body() != null) {
                 order.setStatus(2);
+            } else {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        res.message(),
+                        "Response error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Failure error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void incrementProductQuantity(Product product, Long quantity) {
+        Call<Product> call = App.interfaceApi.increaseProductQuantity(product.getId(), quantity);
+        try {
+            Response<Product> res = call.execute();
+            if (res.isSuccessful() && res.body() != null) {
+                product.setQuantity(res.body().getQuantity());
             } else {
                 JOptionPane.showMessageDialog(
                         new JFrame(),

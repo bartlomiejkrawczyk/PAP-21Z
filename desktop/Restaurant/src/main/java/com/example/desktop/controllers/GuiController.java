@@ -12,13 +12,12 @@ public class GuiController {
     TaskBarController taskBar;
     OrdersInProgressController ordersInProgress;
     OrdersPlacedController ordersPlaced;
-    ProductsController productsController;
 
     public GuiController(GuiView view){
         this.view = view;
 
         db = AppDatabase.getAppDatabase();
-        db.downloadOrders();
+        // db.downloadOrders();
 
         taskBar = new TaskBarController(view.getPanelTop());
         ordersInProgress = new OrdersInProgressController(view.getPanelRight());
@@ -33,14 +32,15 @@ public class GuiController {
 
     private void updateView() {
         db.downloadOrders();
+        ordersInProgress.reloadOrders();
+        ordersPlaced.reloadOrders();
         db.loginEmployeesWithOrders();
+
 
         Timer t = new Timer(20_000, e -> {
             db.downloadOrders();
             ordersInProgress.reloadOrders();
             ordersPlaced.reloadOrders();
-            db.downloadProducts();
-            productsController.reloadProducts();
         });
         t.start();
     }

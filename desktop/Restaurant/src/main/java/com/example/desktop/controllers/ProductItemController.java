@@ -1,23 +1,23 @@
 package com.example.desktop.controllers;
 
+import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Product;
-import com.example.desktop.ui.ItemView;
 import com.example.desktop.ui.ProductView;
-import com.example.desktop.ui.ProductsView;
 
+import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class ProductItemController {
 
-    private Product product;
-    private ProductView view;
-    private ProductsController parentController;
+    private final Product product;
+    private final ProductView view;
+    private final AppDatabase db;
 
-    public ProductItemController(Product product, ProductView view, ProductsController parentController) {
+    public ProductItemController(Product product, ProductView view) {
         this.product = product;
         this.view = view;
-        this.parentController = parentController;
+        db = AppDatabase.getAppDatabase();
 
         this.updateView();
         this.updateActionListener();
@@ -52,24 +52,29 @@ public class ProductItemController {
     }
 
     public void updateActionListener() {
-        view.getButton().addActionListener(e -> changeQuantity());
+        view.getButton().addActionListener(e -> new Thread(this::changeQuantity).start());
     }
 
     public void changeQuantity() {
         String text = view.getInputTextField().getText();
+        long value;
         try {
-            int value = Integer.parseInt(text);
+            value = Long.parseLong(text);
         } catch (NumberFormatException e) {
-//            @ TODO:   handle text is not int exception
+            JOptionPane.showMessageDialog(
+                    new JFrame(),
+                    e,
+                    "Invalid Number",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        //  (możliwe, że bez dwóch przypadków na increment i decrement)
-        if (Integer.parseInt(text) > 0) {
-//            @ TODO:   increment quantity
-        }
-        else {
-//            @ TODO:   decrement quantity
-//                      + check if quantity >= min_quantity
-        }
+        db.incrementProductQuantity(product, value);
+        view.getQuantityAndUnit().setText(
+                product.getQuantity()
+                        + " ("
+                        + product.getUnit()
+                        + ")"
+        );
     }
 }
