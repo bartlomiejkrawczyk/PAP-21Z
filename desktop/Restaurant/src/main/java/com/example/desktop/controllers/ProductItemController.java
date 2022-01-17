@@ -76,5 +76,6 @@ public class ProductItemController {
                         + product.getUnit()
                         + ")"
         );
+        view.getInputTextField().setText("Enter amount");
     }
 }
