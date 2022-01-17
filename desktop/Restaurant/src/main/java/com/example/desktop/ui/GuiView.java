@@ -9,14 +9,13 @@ import java.awt.*;
  */
 public class GuiView {
 
-    private final JFrame frame;
     private final OrdersPlacedView ordersPlaced;
     private final OrdersInProgressView ordersInProgress;
     private final TaskBarView taskBar;
     private final JPanel panel;
 
     public GuiView() {
-        frame = new JFrame("Kitchen application");
+        JFrame frame = new JFrame("Kitchen application");
         taskBar = new TaskBarView();
         ordersPlaced = new OrdersPlacedView();
         ordersInProgress = new OrdersInProgressView();

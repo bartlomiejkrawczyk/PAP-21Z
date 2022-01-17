@@ -49,7 +49,6 @@ public class ProductsController {
         List<Product> products = db.getProductsDownloadIfEmpty();
         for (Product product: products) {
             ProductItemView productView = new ProductItemView();
-            productView.setProduct(product);
             new ProductItemController(product, productView);
             view.getScrollablePanel().add(productView.getPanel());
         }
@@ -71,11 +70,4 @@ public class ProductsController {
         view.getPanel().repaint();
     }
 
-    public ProductsView getView() {
-        return view;
-    }
-
-    public AppDatabase getDb() {
-        return db;
-    }
 }

@@ -83,12 +83,4 @@ public class OrdersInProgressController {
         new Thread(this::addOrders).start();
     }
 
-    public OrdersInProgressView getView() {
-        return view;
-    }
-
-    public AppDatabase getDb() {
-        return db;
-    }
-
 }

@@ -72,12 +72,4 @@ public class OrdersPlacedController {
         new Thread(this::addOrders).start();
     }
 
-    public OrdersPlacedView getView() {
-        return view;
-    }
-
-    public AppDatabase getDb() {
-        return db;
-    }
-
 }

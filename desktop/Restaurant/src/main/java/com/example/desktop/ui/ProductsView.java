@@ -10,9 +10,9 @@ import java.awt.*;
  */
 public class ProductsView {
 
-        private JFrame frame;
-        private JPanel panel;
-        private JPanel scrollablePanel;
+    private final JFrame frame;
+    private final JPanel panel;
+    private final JPanel scrollablePanel;
 
     public ProductsView() {
         frame = new JFrame();

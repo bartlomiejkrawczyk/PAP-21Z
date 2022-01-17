@@ -19,7 +19,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * A pseudo database class - class that stores values of current session in one place with convenient access
+ * A pseudo database class
+ * - class that stores values of current session in one place with convenient access
  */
 public class AppDatabase {
     private static AppDatabase db;
@@ -32,8 +33,10 @@ public class AppDatabase {
     private List<Order> ordersInProgress;
 
     /**
-     * if there is not local databes, downloads one
-     * @return database
+     * Make sure there are only one instance of database at the same time
+     * Singleton pattern
+     *
+     * @return database instance
      */
     public static synchronized AppDatabase getAppDatabase() {
         if (db == null) {
@@ -51,10 +54,12 @@ public class AppDatabase {
         ordersInProgress = new ArrayList<>();
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
     /**
      * Downloads employees if there is no downloaded.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
      * @return list of Employee objects
      */
     public List<Employee> getEmployeesDownloadIfEmpty() {
@@ -69,7 +74,7 @@ public class AppDatabase {
 
     /**
      * Adds given employee to list of logged in.
-     * @param employee
+     * @param employee employee to log in
      */
     public void logIn(Employee employee) {
         loggedInEmployees.add(employee);
@@ -77,7 +82,7 @@ public class AppDatabase {
 
     /**
      * Removes given employee from list of logged in.
-     * @param employee
+     * @param employee employee to log out
      */
     public void logOut(Employee employee) {
         loggedInEmployees.remove(employee);
@@ -92,19 +97,21 @@ public class AppDatabase {
     }
 
     /**
-     * Add order to ordersInProgress and sort them by employee id.
-     * @param order
+     * Add order to ordersInProgress and then make sure they are sorted by employee id.
+     * @param order order adding to ordersInProgress
      */
     public void addOrderInProgress(Order order) {
         ordersInProgress.add(order);
         ordersInProgress.sort(Comparator.comparing(o -> o.getEmployee().getId()));
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
     /**
      * Downloads list of products of there is none.
-     * @return
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @return List of all products
      */
     public List<Product> getProductsDownloadIfEmpty() {
         if (products.size() == 0)
@@ -112,13 +119,14 @@ public class AppDatabase {
         return products;
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
      * If there is no downloaded products, downloads all.
      * Get product by its id.
-     * @param productId
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @param productId id of product that we want to retrieve
      * @return product of given id
      */
     public synchronized Product getProductById(Long productId) {
@@ -132,11 +140,11 @@ public class AppDatabase {
         return productOptional.orElse(null);
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
-     * Download products from real database. If error occurs, it's properly raised.
+     * Download products from server. If error occurs, it's properly raised.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
      */
     public void downloadProducts() {
         try {
@@ -160,13 +168,15 @@ public class AppDatabase {
         }
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
 
     /**
      * If there is no employees, downloads all.
      * Get employee of given id.
-     * @param employeeId
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @param employeeId id of employee to retrieve
      * @return employee with given id
      */
     public synchronized Employee getEmployeeById(Long employeeId) {
@@ -181,7 +191,10 @@ public class AppDatabase {
     }
 
     /**
-     * Download all employees from real database. If error occurs, it's properly raised.
+     * Download all employees from server. If error occurs, it's properly raised.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
      */
     public void downloadEmployees() {
         try {
@@ -205,11 +218,11 @@ public class AppDatabase {
         }
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
-     * Download placed orders from real database. If error occurs, it's properly raised.
+     * Download placed orders from server. If error occurs, it's properly raised.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
      */
     public void downloadOrdersPlaced(){
         try {
@@ -233,12 +246,11 @@ public class AppDatabase {
         }
     }
 
-
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
-     * Download orders in progress from real database. If error occurs, it's properly raised.
+     * Download orders in progress from server. If error occurs, it's properly raised.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
      */
     public void downloadOrdersInProgress(){
         try {
@@ -268,11 +280,11 @@ public class AppDatabase {
         }
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
      * Uses other functions to download both placed and in progress orders.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
      */
     public void downloadOrders() {
         downloadOrdersPlaced();
@@ -280,7 +292,7 @@ public class AppDatabase {
     }
 
     /**
-     * Automatically logs in employees with assigned orders.
+     * Automatically log in employees with assigned orders.
      */
     public void loginEmployeesWithOrders() {
         List<Employee> employees = ordersInProgress.stream()
@@ -293,8 +305,8 @@ public class AppDatabase {
 
     /**
      * Checks if employee can log out/doesn't have assigned order.
-     * @param employee
-     * @return result
+     * @param employee employee that we want to log out
+     * @return result whether employee can get logged out
      */
     public boolean employeeCanLogOut(Employee employee) {
         return ordersInProgress.stream()
@@ -303,9 +315,13 @@ public class AppDatabase {
     }
 
     /**
-     * Download order image from real database. If error occurs, it's properly raised.
-     * @param imagePath
-     * @return
+     * Download order image from server. If error occurs, it's properly raised.
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @param imagePath path to the image on server
+     * @return image
      */
     public BufferedImage getImage(String imagePath) {
         BufferedImage bufferedImage = null;
@@ -363,8 +379,8 @@ public class AppDatabase {
 
     /**
      * Saves image to given path.
-     * @param image
-     * @param imagePath
+     * @param image image to save
+     * @param imagePath file path to save
      */
     private void saveBufferedImage(BufferedImage image, String imagePath) {
         File directory = new File(System.getProperty("user.dir") + File.separator + "images" + File.separator);
@@ -384,13 +400,14 @@ public class AppDatabase {
 
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
      * Get dish of given id.
-     * @param dishId
-     * @return
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @param dishId id of dish to retrieve from database / server
+     * @return dish with given id
      */
     public Dish getDishById(Long dishId) {
         Optional<Dish> dishOptional = dishes.stream()
@@ -428,13 +445,13 @@ public class AppDatabase {
         }
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
      * Assign order to employee, set him as with assignment.
-     * @param order
-     * @param employeeId
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     * @param order order to which employee wants to get assigned
+     * @param employeeId id of employee that will prepare that order
      */
     public void setEmployeePreparingOrder(Order order, Long employeeId) {
         Long orderId = order.getId();
@@ -459,12 +476,14 @@ public class AppDatabase {
         }
     }
 
-    // Note: that this function should be called on separate thread!
-    // Because it may potentially lock UI
-
     /**
-     * Sets order status as advanced/in progress.
-     * @param order
+     * Sets order status as prepared.
+     * status = 2 (prepared)
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     *
+     * @param order order which status should be increased (from 1 to 2)
      */
     public void advanceOrderStatus(Order order) {
         Long orderId = order.getId();
@@ -491,8 +510,11 @@ public class AppDatabase {
 
     /**
      * Increase given product by given number.
-     * @param product
-     * @param quantity
+     * <p>
+     * Note: that this function should be called on separate thread!
+     * Because it may potentially lock UI
+     * @param product product which quantity should be updated
+     * @param quantity quantity of delivered product
      */
     public void incrementProductQuantity(Product product, Long quantity) {
         Call<Product> call = App.interfaceApi.increaseProductQuantity(product.getId(), quantity);

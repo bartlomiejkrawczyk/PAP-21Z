@@ -30,7 +30,7 @@ public class AssignmentCookController {
         addLoggedInEmployees();
     }
 
-    public void updateView() {
+    private void updateView() {
         view.getFrame().setTitle("Assign a cook");
     }
 
