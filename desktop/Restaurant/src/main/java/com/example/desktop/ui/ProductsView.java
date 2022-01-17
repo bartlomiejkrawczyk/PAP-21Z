@@ -13,7 +13,7 @@ public class ProductsView {
     public ProductsView() {
         frame = new JFrame();
 
-        frame.setPreferredSize(new Dimension(600, 300));
+        frame.setPreferredSize(new Dimension(700, 350));
         frame.setMinimumSize(new Dimension(600, 300));
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

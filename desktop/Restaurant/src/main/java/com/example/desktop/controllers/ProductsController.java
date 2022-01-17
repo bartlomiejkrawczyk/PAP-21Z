@@ -3,13 +3,12 @@ package com.example.desktop.controllers;
 import com.example.desktop.AppDatabase;
 import com.example.desktop.entities.Product;
 import com.example.desktop.ui.ItemView;
+import com.example.desktop.ui.ProductView;
 import com.example.desktop.ui.ProductsView;
 
 import java.util.List;
 
 public class ProductsController {
-    // TODO: Create view to display product list and one to display a product
-    //  - additionally there could be an indication whether product.getQuantity() > product.getMinQuantity();
     // TODO: implement method reloadOrders
     // TODO: implement method to increaseQuantity
     //  @see InterfaceApi increaseProductQuantity
@@ -31,11 +30,12 @@ public class ProductsController {
     }
 
     private void addProducts() {
-        List<Product> products = db.getProducts();
+        List<Product> products = db.getProductsDownloadIfEmpty();
         for (Product product: products) {
-            ItemView itemView = new ItemView("+", "-");
-            new ProductItemController(product, itemView, this);
-            view.getScrollablePanel().add(itemView.getPanel());
+            ProductView productView = new ProductView();
+            productView.setProduct(product);
+            new ProductItemController(product, productView, this);
+            view.getScrollablePanel().add(productView.getPanel());
         }
     }
 
