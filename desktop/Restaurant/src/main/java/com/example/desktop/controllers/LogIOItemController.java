@@ -7,6 +7,10 @@ import com.example.desktop.ui.ItemView;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Class responsible for controlling particular views enabling us to
+ * log in/out cook.
+ */
 public class LogIOItemController {
 
     private final Employee employee;

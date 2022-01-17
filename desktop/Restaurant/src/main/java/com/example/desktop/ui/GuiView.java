@@ -3,16 +3,19 @@ package com.example.desktop.ui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole frame enabling us to
+ * see basic GUI.
+ */
 public class GuiView {
 
-    private final JFrame frame;
     private final OrdersPlacedView ordersPlaced;
     private final OrdersInProgressView ordersInProgress;
     private final TaskBarView taskBar;
     private final JPanel panel;
 
     public GuiView() {
-        frame = new JFrame("Kitchen application");
+        JFrame frame = new JFrame("Kitchen application");
         taskBar = new TaskBarView();
         ordersPlaced = new OrdersPlacedView();
         ordersInProgress = new OrdersInProgressView();

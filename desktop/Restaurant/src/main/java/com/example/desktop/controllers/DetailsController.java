@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class responsible for controlling frame with details.
+ */
 public class DetailsController {
 
     private final DetailsView view;

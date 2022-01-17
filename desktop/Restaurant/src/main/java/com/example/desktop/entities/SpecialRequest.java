@@ -1,5 +1,11 @@
 package com.example.desktop.entities;
 
+/**
+ * Entity that stores information about customer's special request
+ * about the dish he ordered
+ *
+ * @see Order
+ */
 public class SpecialRequest {
     private Long id;
 

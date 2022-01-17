@@ -8,6 +8,9 @@ import com.example.desktop.ui.ItemView;
 
 import java.awt.event.WindowEvent;
 
+/**
+ * Class responsible for controlling each panel enabling us to assign order to cook.
+ */
 public class AssignmentCookItemController {
 
     private final ItemView view;

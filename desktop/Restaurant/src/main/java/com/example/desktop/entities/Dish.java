@@ -2,6 +2,9 @@ package com.example.desktop.entities;
 
 import java.util.List;
 
+/**
+ * Entity that holds information about the dish
+ */
 public class Dish {
     private Long id;
     private String name;

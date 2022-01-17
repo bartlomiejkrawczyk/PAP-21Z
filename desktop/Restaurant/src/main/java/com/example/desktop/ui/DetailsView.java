@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class creating and facilitating view of whole frame enabling us to
+ * see orders details.
+ */
 public class DetailsView {
 
     private final JFrame frame;

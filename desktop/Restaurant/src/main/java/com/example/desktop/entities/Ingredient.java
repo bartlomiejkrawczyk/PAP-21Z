@@ -1,5 +1,15 @@
 package com.example.desktop.entities;
 
+/**
+ * Entity that connects two other entities
+ * - Dish
+ * - Product
+ * <p>
+ * Ingredient holds information about how much of that product is needed to prepare a dish
+ *
+ * @see Dish
+ * @see Product
+ */
 public class Ingredient {
 
     private Long id;
