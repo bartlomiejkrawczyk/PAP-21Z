@@ -62,9 +62,9 @@ Aplikacja desktopowa dla kucharzy napisana w języku Java z interfejsem graficzn
 
 Aplikacja mobilna dla kelnerów napisana w języku Java na telefony Android.
 
-![Android](./android1.jpg)
-![Android](./android2.jpg)
-![Android](./android3.jpg)
+<img src="./android1.jpg" width="40%"/>
+<img src="./android2.jpg" width="40%"/>
+<img src="./android3.jpg" width="40%"/>
 
 ### Funkcjonalność:
 
