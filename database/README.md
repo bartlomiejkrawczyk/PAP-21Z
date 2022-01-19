@@ -16,6 +16,19 @@ Posiadamy jeden główny serwer, który komunikuje się z bazą danych oraz apli
 
 ### W ramach projektu stworzyliśmy:
 
+## Baza danych
+
+Centralna baza danych Oracle
+
+### Model ER:
+
+![Model ER](./er_model.png)
+
+### Model Relacyjny:
+
+![Model relacyjny](./relational_model.png)
+
+
 ## Api
 
 Serwer napisany w języku Java przy wykorzystaniu framework Spring Boot oraz technologii JPA.
@@ -43,9 +56,15 @@ Aplikacja desktopowa dla kucharzy napisana w języku Java z interfejsem graficzn
     - na jednym urządzeniu w tym samym czasie może być kilku kucharzy (nie wymagamy, aby każdy kucharz miał swój komputer)
     - wyświetlanie dań do przygotowania przez kucharzy na podzielonym oknie
 
+  ![Desktop](./desktop.png)
+
 ## Aplikacja mobilna
 
 Aplikacja mobilna dla kelnerów napisana w języku Java na telefony Android.
+
+![Android](./android1.jpg)
+![Android](./android2.jpg)
+![Android](./android3.jpg)
 
 ### Funkcjonalność:
 
@@ -59,19 +78,6 @@ Aplikacja mobilna dla kelnerów napisana w języku Java na telefony Android.
   - wyświetlanie otwartego rachunku przypisanego do danego kelnera
   - zamknięcie rachunku - wyświetlenie sumy do zapłaty
 
-
-## Baza danych
-
-Centralna baza danych Oracle
-
-### Model ER:
-
-![Model ER](./er_model.png)
-
-### Model Relacyjny:
-
-![Model relacyjny](./relational_model.png)
-
 ## Krytyczna ocena rozwiązania
 
 ### Znane ograniczenia:
@@ -80,13 +86,7 @@ Centralna baza danych Oracle
 
 ### Możliwości dalszego rozwoju:
 
-Aplikacja desktopowa dla zaopatrzycieli i adminów (w tej chwili funkcjonalności te można zastąpić bezpośrednim dostępem tych osób do bazy danych)
-
-- do inwentarzu
-
-  - wyświetlanie danych o zaopatrzeniu
-  - wyświetlanie czego jest mało
-  - aktualizacja ilości składników, gdy dotrze zaopatrzenie
+Aplikacja desktopowa dla adminów (w tej chwili funkcjonalności te można zastąpić bezpośrednim dostępem tych osób do bazy danych)
 
 - dla admina
 
